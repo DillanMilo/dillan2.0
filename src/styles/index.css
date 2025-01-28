@@ -1,8 +1,8 @@
-/* Import Tailwind CSS */
-@import "tailwindcss";
-
 /* Import Bebas Neue font */
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+/* Import Tailwind CSS */
+@import "tailwindcss";
 
 /* Set Bebas Neue as the default font */
 @layer base {
