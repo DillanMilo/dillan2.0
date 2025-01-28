@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../styles/globals.css"; // We'll set the font globally
-
 const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
 
