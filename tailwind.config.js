@@ -10,6 +10,7 @@ export default {
           fadeIn: "fadeIn 1.5s ease-in-out forwards", // Smooth fade-in animation
           expandText: "expandText 2.5s ease-in-out forwards", // Slower expand animation for the Info section title
           slideUp: "slideUp 1s ease-in-out forwards", // Slide up animation for Work section
+          rotateWord: "rotateWord 1.5s ease-in-out infinite", // Slot-machine animation for rotating words
         },
         keyframes: {
           fadeIn: {
@@ -24,6 +25,11 @@ export default {
             "0%": { opacity: "0", transform: "translateY(50px)" },
             "100%": { opacity: "1", transform: "translateY(0)" },
           },
+          rotateWord: {
+            "0%": { transform: "translateY(100%)", opacity: "0" },
+            "50%": { transform: "translateY(0%)", opacity: "1" },
+            "100%": { transform: "translateY(-100%)", opacity: "0" },
+          },
         },
       },
     },
@@ -31,6 +37,7 @@ export default {
       "animate-fadeIn",
       "animate-expandText",
       "animate-slideUp", // Safelist slideUp animation for Work section
+      "animate-rotateWord", // Safelist rotateWord animation for Contact section
       "delay-[300ms]",
       "delay-[700ms]",
       "delay-[1000ms]", // Added delay for smoother animations
