@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className="fixed top-4 right-5 z-50 flex justify-end opacity-0 animate-fadeIn delay-[3000ms]">
+    <nav className="fixed top-4 right-5 z-50 flex justify-end">
       <ul className="flex gap-4 sm:gap-2">
         {["info", "work", "contact"].map((section) => (
           <li key={section}>
