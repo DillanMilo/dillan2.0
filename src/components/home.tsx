@@ -1,4 +1,5 @@
 import React from "react";
+import bgImage from "../assets/IMG_07154.jpg"; // Import the image
 
 const Home: React.FC = () => {
   return (
@@ -9,7 +10,7 @@ const Home: React.FC = () => {
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn"
-        style={{ backgroundImage: "url('/src/assets/IMG_07154.jpg')" }}
+        style={{ backgroundImage: `url(${bgImage})` }}
       ></div>
 
       {/* Content */}
@@ -24,7 +25,7 @@ const Home: React.FC = () => {
             <span
               key={index}
               className="inline-block opacity-0 animate-slideUp"
-              style={{ animationDelay: `${index * 100}ms` }}
+              style={{ animationDelay: `${index * 250}ms` }}
             >
               {letter}
             </span>

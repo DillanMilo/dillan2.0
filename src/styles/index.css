@@ -1,4 +1,3 @@
-/* Import Bebas Neue font */
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
 /* Import Tailwind CSS */
@@ -17,3 +16,65 @@
     font-family: "Bebas Neue", sans-serif;
   }
 }
+
+/* Custom Animations */
+@layer utilities {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-in-out forwards;
+  }
+
+  .animate-slideUp {
+    animation: slideUp 1s ease-in-out forwards;
+  }
+
+  .animate-slideInLeft {
+    animation: slideInLeft 1s ease-in-out forwards;
+  }
+
+  .animate-slideInRight {
+    animation: slideInRight 1s ease-in-out forwards;
+  }
+}
+
