@@ -99,3 +99,6 @@ background-size: cover;
   animation: expandText 1.5s ease-in-out forwards;
   transform-origin: center; /* Expands from the center */
 }
+.text-slateGreen {
+  color:  #f5f5dc;
+}

@@ -4,7 +4,8 @@ export default {
     theme: {
       extend: {
         colors: {
-          beige: "#f5f5dc", // Custom beige color
+          beige: "#f5f5dc",
+          slateGreen: "#a8b2ac", // Custom beige color
         },
       },
     },
