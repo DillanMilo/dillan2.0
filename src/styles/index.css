@@ -41,6 +41,62 @@
     }
   }
 
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes expandText {
+    from {
+      transform: scaleY(0); /* Start collapsed vertically */
+      opacity: 0;
+    }
+    to {
+      transform: scaleY(1); /* Fully expanded */
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInLeftToCenter {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRightToCenter {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* ✅ Optimized Slot Machine Animation */
   @keyframes slotMachine {
     0% {
       transform: translateY(0);
@@ -54,8 +110,34 @@
     animation: fadeIn 1s ease-in-out forwards;
   }
 
+  .animate-slideUp {
+    animation: slideUp 1s ease-in-out forwards;
+  }
+
+  .animate-slideInLeft {
+    animation: slideInLeft 1s ease-in-out forwards;
+  }
+
+  .animate-slideInRight {
+    animation: slideInRight 1s ease-in-out forwards;
+  }
+
+  .animate-expandText {
+    animation: expandText 1.5s ease-in-out forwards;
+    transform-origin: center; /* Expands from the center */
+  }
+
+  .animate-slideInLeftToCenter {
+    animation: slideInLeftToCenter 1.5s ease-in-out forwards;
+  }
+
+  .animate-slideInRightToCenter {
+    animation: slideInRightToCenter 1.5s ease-in-out forwards;
+  }
+
+  /* ✅ Proper Slot Machine Animation */
   .animate-slotMachine {
-    animation: slotMachine 14s linear infinite;
+    animation: slotMachine 14s steps(7) infinite;
   }
 }
 

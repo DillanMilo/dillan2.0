@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
-const rotatingWords: string[] = [
+const rotatingWords = [
   "UI",
   "UX",
   "Design",
@@ -11,7 +11,16 @@ const rotatingWords: string[] = [
 ];
 
 const Contact: React.FC = () => {
+  const [currentWord, setCurrentWord] = useState(0);
   const handlesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord((prevWord) => (prevWord + 1) % rotatingWords.length);
+    }, 2000); // Change word every 2 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -53,16 +62,11 @@ const Contact: React.FC = () => {
         <h2 className="text-6xl font-bebas tracking-wide animate-fadeIn">
           Let’s connect and chat about
         </h2>
-        <div className="relative h-[6rem] w-auto flex justify-center items-center overflow-hidden">
-          <div className="animate-slotMachine flex flex-col">
-            {rotatingWords.concat(rotatingWords).map((word, index) => (
-              <span
-                key={index}
-                className="text-7xl font-bebas text-paleRed mb-4"
-              >
-                {word}
-              </span>
-            ))}
+        <div className="relative h-[6rem] flex justify-center items-center overflow-hidden">
+          <div className="h-full flex items-center justify-center animate-slotMachine">
+            <span className="text-7xl font-bebas text-paleRed">
+              {rotatingWords[currentWord]}
+            </span>
           </div>
         </div>
       </div>
