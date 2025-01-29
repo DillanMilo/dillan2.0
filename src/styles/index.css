@@ -96,13 +96,16 @@
     }
   }
 
-  /* ✅ Smoother Slot Machine Animation with 1s Pause Per Word */
+  /* ✅ Improved Slot Machine Animation with Proper Timing */
   @keyframes slotMachine {
-    0%, 20% { transform: translateY(0%); opacity: 1; }   /* Word 1 */
-    25%, 45% { transform: translateY(-100%); opacity: 1; } /* Word 2 */
-    50%, 70% { transform: translateY(-200%); opacity: 1; } /* Word 3 */
-    75%, 95% { transform: translateY(-300%); opacity: 1; } /* Word 4 */
-    100% { transform: translateY(-400%); opacity: 1; }     /* Word 5 */
+    0%, 12.5% { transform: translateY(0%); opacity: 1; }   /* Word 1 */
+    25%, 25% { transform: translateY(-100%); opacity: 1; } /* Word 2 */
+    37.5%, 37.5% { transform: translateY(-200%); opacity: 1; } /* Word 3 */
+    50%, 50% { transform: translateY(-300%); opacity: 1; } /* Word 4 */
+    62.5%, 62.5% { transform: translateY(-400%); opacity: 1; } /* Word 5 */
+    75%, 75% { transform: translateY(-500%); opacity: 1; } /* Word 6 */
+    87.5%, 87.5% { transform: translateY(-600%); opacity: 1; } /* Word 7 */
+    100% { transform: translateY(-700%); opacity: 1; } /* Loop */
   }
 
   .animate-fadeIn {
@@ -134,7 +137,7 @@
     animation: slideInRightToCenter 1.5s ease-in-out forwards;
   }
 
-  /* ✅ Smooth Slot Machine Effect */
+  /* ✅ Smooth Slot Machine Effect with 1s Hold per Word */
   .slot-machine {
     display: flex;
     flex-direction: column;
@@ -150,7 +153,7 @@
     color: rgb(239, 84, 84);
     display: block;
     text-align: center;
-    animation: slotMachine 5s ease-in-out infinite;
+    animation: slotMachine 8s ease-in-out infinite; /* Adjusted for 7 words */
   }
 }
 
