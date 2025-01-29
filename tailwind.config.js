@@ -6,47 +6,9 @@ export default {
         colors: {
           beige: "#f5f5dc", // Custom beige color
         },
-        animation: {
-          fadeIn: "fadeIn 1.5s ease-in-out forwards", 
-          expandText: "expandText 2.5s ease-in-out forwards", 
-          slideUp: "slideUp 1s ease-in-out forwards", 
-          slideInLeft: "slideInLeft 1.5s ease-in-out forwards",
-          slideInRight: "slideInRight 1.5s ease-in-out forwards",
-        },
-        keyframes: {
-          fadeIn: {
-            "0%": { opacity: "0" },
-            "100%": { opacity: "1" },
-          },
-          expandText: {
-            "0%": { transform: "scaleY(0)", opacity: "0" },
-            "100%": { transform: "scaleY(1)", opacity: "1" },
-          },
-          slideUp: {
-            "0%": { opacity: "0", transform: "translateY(50px)" },
-            "100%": { opacity: "1", transform: "translateY(0)" },
-          },
-          slideInLeft: {
-            "0%": { opacity: "0", transform: "translateX(-100%)" },
-            "100%": { opacity: "1", transform: "translateX(0)" },
-          },
-          slideInRight: {
-            "0%": { opacity: "0", transform: "translateX(100%)" },
-            "100%": { opacity: "1", transform: "translateX(0)" },
-          },
-        },
       },
     },
-    safelist: [
-      "animate-fadeIn",
-      "animate-expandText",
-      "animate-slideUp",
-      "animate-slideInLeft",
-      "animate-slideInRight",
-      "delay-[300ms]",
-      "delay-[700ms]",
-      "delay-[1000ms]",
-    ],
+    safelist: [], // No longer needed for animations since they're in index.css
     plugins: [],
   };
   

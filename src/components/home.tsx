@@ -9,23 +9,29 @@ const Home: React.FC = () => {
     >
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn delay-[200ms]"
-        style={{ backgroundImage: `url(${bgImage})` }}
+        className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn"
+        style={{ backgroundImage: `url(${bgImage})`, animationDelay: "2500ms" }}
       ></div>
 
       {/* Content */}
-      <div className="relative z-10 opacity-0 animate-fadeIn delay-[600ms]">
-        <h2 className="text-5xl text-white font-bebas opacity-0 animate-fadeIn delay-[900ms] mb-20">
+      <div
+        className="relative z-10 opacity-0 animate-fadeIn"
+        style={{ animationDelay: "200ms" }}
+      >
+        <h2
+          className="text-5xl text-white font-bebas opacity-0 animate-fadeIn mb-20"
+          style={{ animationDelay: "200ms" }}
+        >
           Heya, my name is
         </h2>
 
         {/* Name Animation */}
-        <h1 className="text-[15rem] font-bebas font-bold tracking-wide transform scale-y-200 opacity-0 animate-fadeIn delay-[1200ms] flex">
+        <h1 className="text-[15rem] font-bebas font-bold tracking-wide transform scale-y-200 opacity-0 animate-fadeIn flex">
           {"Dillan".split("").map((letter, index) => (
             <span
               key={index}
               className="inline-block opacity-0 animate-slideUp"
-              style={{ animationDelay: `${index * 150 + 1300}ms` }} // Stagger effect
+              style={{ animationDelay: `${index * 150 + 500}ms` }} // Adjusted stagger timing
             >
               {letter}
             </span>
@@ -33,13 +39,19 @@ const Home: React.FC = () => {
         </h1>
 
         {/* Description */}
-        <p className="text-3xl text-gray-300 font-bebas tracking-wide opacity-0 animate-slideInLeft delay-[1800ms]">
+        <p
+          className="text-3xl text-gray-300 font-bebas tracking-wide opacity-0 animate-slideInLeft"
+          style={{ animationDelay: "1200ms" }}
+        >
           I build stuff and make things look nice on the web.
         </p>
       </div>
 
       {/* Intro Description (Loads in Last) */}
-      <p className="absolute bottom-10 right-10 text-right text-4xl text-white font-bebas max-w-md opacity-0 animate-slideInRight delay-[3000ms]">
+      <p
+        className="absolute bottom-10 right-10 text-right text-4xl text-white font-bebas max-w-md opacity-0 animate-slideInRight"
+        style={{ animationDelay: "2000ms" }}
+      >
         I’m a creative UI and UX developer who loves crafting beautiful and
         functional websites. My passion lies in blending art with code to
         deliver engaging user experiences.
