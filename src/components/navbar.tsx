@@ -3,6 +3,18 @@ import React, { useState, useEffect } from "react";
 const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
 
+  // State to control navbar animation
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Delay navbar appearance by 2000ms (2s)
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleScroll = (id: string) => {
     setActiveSection(id);
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -27,7 +39,11 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className="fixed top-4 right-5 z-50 flex justify-end">
+    <nav
+      className={`fixed top-4 right-5 z-50 flex justify-end transform ${
+        isVisible ? "translate-x-0 opacity-100" : "translate-x-20 opacity-0"
+      } transition-all duration-1000 ease-out`}
+    >
       <ul className="flex gap-4 sm:gap-2">
         {["info", "work", "contact"].map((section) => (
           <li key={section}>
