@@ -8,9 +8,9 @@ const Work: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("animate-slideUp");
+            entry.target.classList.add("opacity-100", "translate-x-0");
           } else {
-            entry.target.classList.remove("animate-slideUp");
+            entry.target.classList.remove("opacity-100", "translate-x-0");
           }
         });
       },
@@ -34,17 +34,20 @@ const Work: React.FC = () => {
       title: "Game Hub",
       description: "A fun web app showcasing video games across platforms.",
       link: "https://github.com/DillanMilo/game-hub",
+      animation: "animate-slideInLeft",
     },
     {
       title: "Reddit Mini",
       description:
         "A bite-sized Reddit experience with dynamic content loading.",
       link: "https://github.com/DillanMilo/reddit-mini",
+      animation: "animate-slideInRight",
     },
     {
       title: "Spotify App",
       description: "A playlist builder with Spotify integration.",
       link: "https://github.com/DillanMilo/Jamming-With-Spotify",
+      animation: "animate-slideInLeft",
     },
   ];
 
@@ -57,7 +60,7 @@ const Work: React.FC = () => {
         <div
           key={index}
           ref={(el) => (projectRefs.current[index] = el)}
-          className="w-full max-w-3xl mb-8 opacity-0 transform translate-y-10 animate-slideUp"
+          className={`w-full max-w-3xl mb-8 opacity-0 transform ${project.animation}`}
         >
           <h2 className="text-6xl font-bebas text-red-600 mb-4 underline">
             <a href={project.link} target="_blank" rel="noreferrer">
