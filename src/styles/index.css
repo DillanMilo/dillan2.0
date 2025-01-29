@@ -102,3 +102,32 @@ background-size: cover;
 .text-slateGreen {
   color:  #f5f5dc;
 }
+@keyframes slideInLeftToCenter {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRightToCenter {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideInLeftToCenter {
+  animation: slideInLeftToCenter 1.5s ease-in-out forwards;
+}
+
+.animate-slideInRightToCenter {
+  animation: slideInRightToCenter 1.5s ease-in-out forwards;
+}

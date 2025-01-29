@@ -16,16 +16,22 @@ const Work: React.FC = () => {
             (project) => project === entry.target
           );
 
-          if (entry.isIntersecting && index !== -1) {
+          if (index !== -1) {
             setVisibleProjects((prev) => {
               const updatedVisibility = [...prev];
-              updatedVisibility[index] = true; // Mark project as visible
+
+              if (entry.isIntersecting) {
+                updatedVisibility[index] = true; // Animate when in view
+              } else {
+                updatedVisibility[index] = false; // Reset when out of view
+              }
+
               return updatedVisibility;
             });
           }
         });
       },
-      { threshold: 0.3 } // Adjust for better timing
+      { threshold: 0.3 }
     );
 
     projectRefs.current.forEach((project) => {
@@ -44,23 +50,26 @@ const Work: React.FC = () => {
     {
       title: "Game Hub",
       description:
-        "A fun web app showcasing video games across platforms-Like i said, I like video games.",
+        "A fun web app showcasing video games across platforms - Like I said, I like video games.",
       link: "https://github.com/DillanMilo/game-hub",
-      animation: "animate-slideInLeft",
+      animation: "animate-slideInLeftToCenter",
+      delay: "delay-[200ms]",
     },
     {
       title: "Reddit Mini",
       description:
-        "A bite-sized Reddit experience with dynamic content loading-cause dynamite comes in small packages.",
+        "A bite-sized Reddit experience with dynamic content loading—because dynamite comes in small packages.",
       link: "https://github.com/DillanMilo/reddit-mini",
-      animation: "animate-slideInRight",
+      animation: "animate-slideInRightToCenter",
+      delay: "delay-[600ms]",
     },
     {
       title: "Spotify App",
       description:
-        "A playlist builder with Spotify integration-Silence isnt always golden.",
+        "A playlist builder with Spotify integration—Silence isn't always golden.",
       link: "https://github.com/DillanMilo/Jamming-With-Spotify",
-      animation: "animate-slideInLeft",
+      animation: "animate-slideInLeftToCenter",
+      delay: "delay-[1000ms]",
     },
   ];
 
@@ -73,9 +82,11 @@ const Work: React.FC = () => {
         <div
           key={index}
           ref={(el) => (projectRefs.current[index] = el)}
-          className={`w-full max-w-3xl mb-8 opacity-0 transform ${
-            visibleProjects[index] ? project.animation + " opacity-100" : ""
-          } transition-all duration-1500`}
+          className={`w-full max-w-3xl mb-8 opacity-0 transform transition-all duration-1500 ${
+            visibleProjects[index]
+              ? `${project.animation} ${project.delay} opacity-100`
+              : "opacity-0"
+          }`}
         >
           <h2 className="text-6xl font-bebas text-red-600 mb-15 underline">
             <a href={project.link} target="_blank" rel="noreferrer">
