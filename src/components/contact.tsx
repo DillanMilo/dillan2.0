@@ -53,7 +53,7 @@ const Contact: React.FC = () => {
       }}
     >
       {/* Caption */}
-      <div className="mt-10">
+      <div className="mt-50">
         <h2 className="text-6xl font-bebas tracking-wide animate-fadeIn">
           Let’s connect and chat about
         </h2>
@@ -87,7 +87,7 @@ const Contact: React.FC = () => {
             href={handle.link}
             target="_blank"
             rel="noreferrer"
-            className="text-4xl font-bebas text-red-600 transition-all duration-300 hover:text-red-400"
+            className="text-5xl font-bebas text-red-600 transition-all duration-300 hover:text-red-400"
           >
             {handle.name}
           </a>
