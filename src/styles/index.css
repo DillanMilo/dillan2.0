@@ -41,73 +41,12 @@
     }
   }
 
-  @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(50px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes expandText {
-    from {
-      transform: scaleY(0); /* Start collapsed vertically */
-      opacity: 0;
-    }
-    to {
-      transform: scaleY(1); /* Fully expanded */
-      opacity: 1;
-    }
-  }
-
-  @keyframes slideInLeftToCenter {
-    from {
-      opacity: 0;
-      transform: translateX(-100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideInRightToCenter {
-    from {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
   @keyframes slotMachine {
     0% {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-    50% {
-      transform: translateY(0%);
-      opacity: 1;
+      transform: translateY(0);
     }
     100% {
       transform: translateY(-100%);
-      opacity: 0;
     }
   }
 
@@ -115,33 +54,8 @@
     animation: fadeIn 1s ease-in-out forwards;
   }
 
-  .animate-slideUp {
-    animation: slideUp 1s ease-in-out forwards;
-  }
-
-  .animate-slideInLeft {
-    animation: slideInLeft 1s ease-in-out forwards;
-  }
-
-  .animate-slideInRight {
-    animation: slideInRight 1s ease-in-out forwards;
-  }
-
-  .animate-expandText {
-    animation: expandText 1.5s ease-in-out forwards;
-    transform-origin: center; /* Expands from the center */
-  }
-
-  .animate-slideInLeftToCenter {
-    animation: slideInLeftToCenter 1.5s ease-in-out forwards;
-  }
-
-  .animate-slideInRightToCenter {
-    animation: slideInRightToCenter 1.5s ease-in-out forwards;
-  }
-
   .animate-slotMachine {
-    animation: slotMachine 0.8s ease-in-out infinite;
+    animation: slotMachine 14s linear infinite;
   }
 }
 
@@ -151,5 +65,5 @@
 }
 
 .text-paleRed {
-  color: rgb(239, 84, 84)
+  color: rgb(239, 84, 84);
 }

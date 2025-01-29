@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
-const rotatingWords = [
+const rotatingWords: string[] = [
   "UI",
   "UX",
   "Design",
@@ -11,25 +11,21 @@ const rotatingWords = [
 ];
 
 const Contact: React.FC = () => {
-  const [currentWord, setCurrentWord] = useState(0);
   const handlesRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentWord((prevWord) => (prevWord + 1) % rotatingWords.length);
-    }, 1500); // Change word every 1.5 seconds
-
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            handlesRef.current?.classList.add("animate-slideInLeftToCenter");
+            handlesRef.current?.classList.add("animate-fadeIn", "opacity-100");
+            handlesRef.current?.classList.remove("opacity-0");
           } else {
-            handlesRef.current?.classList.remove("animate-slideInLeftToCenter");
+            handlesRef.current?.classList.remove(
+              "animate-fadeIn",
+              "opacity-100"
+            );
+            handlesRef.current?.classList.add("opacity-0");
           }
         });
       },
@@ -57,17 +53,24 @@ const Contact: React.FC = () => {
         <h2 className="text-6xl font-bebas tracking-wide animate-fadeIn">
           Let’s connect and chat about
         </h2>
-        <div className="relative h-[6rem] flex justify-center items-center overflow-hidden">
-          <span className="text-7xl font-bebas text-paleRed animate-slotMachine">
-            {rotatingWords[currentWord]}
-          </span>
+        <div className="relative h-[6rem] w-auto flex justify-center items-center overflow-hidden">
+          <div className="animate-slotMachine flex flex-col">
+            {rotatingWords.concat(rotatingWords).map((word, index) => (
+              <span
+                key={index}
+                className="text-7xl font-bebas text-paleRed mb-4"
+              >
+                {word}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Contact Handles */}
       <div
         ref={handlesRef}
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-wrap justify-center gap-10 opacity-0"
+        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-row justify-center items-center gap-8 whitespace-nowrap opacity-0 animate-fadeIn transition-opacity duration-1000 overflow-x-auto max-w-screen-lg px-4"
       >
         {[
           {
