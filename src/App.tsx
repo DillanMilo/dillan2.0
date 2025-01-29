@@ -16,11 +16,11 @@ function App() {
 
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
-        if (
-          !foundActive &&
-          rect.top >= -200 &&
-          rect.top < window.innerHeight / 2
-        ) {
+
+        // Adjust this threshold to control when the dimming starts
+        const dimmingThreshold = window.innerHeight * 1; // Change this value to delay dimming
+
+        if (!foundActive && rect.top >= -200 && rect.top < dimmingThreshold) {
           setActiveSection(section.id);
           foundActive = true;
         }
@@ -46,7 +46,7 @@ function App() {
       <section
         id="home"
         className={`transition-opacity duration-500 ${
-          activeSection === "home" ? "opacity-100" : "opacity-40"
+          activeSection === "home" ? "opacity-100" : "opacity-60"
         }`}
       >
         <Home />
@@ -54,7 +54,7 @@ function App() {
       <section
         id="info"
         className={`transition-opacity duration-500 ${
-          activeSection === "info" ? "opacity-100" : "opacity-40"
+          activeSection === "info" ? "opacity-100" : "opacity-60"
         }`}
       >
         <Info />
@@ -62,7 +62,7 @@ function App() {
       <section
         id="work"
         className={`transition-opacity duration-500 ${
-          activeSection === "work" ? "opacity-100" : "opacity-40"
+          activeSection === "work" ? "opacity-100" : "opacity-60"
         }`}
       >
         <Work />
@@ -70,7 +70,7 @@ function App() {
       <section
         id="contact"
         className={`transition-opacity duration-500 ${
-          activeSection === "contact" ? "opacity-100" : "opacity-40"
+          activeSection === "contact" ? "opacity-100" : "opacity-60"
         }`}
       >
         <Contact />
