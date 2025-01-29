@@ -27,9 +27,9 @@ const Contact: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            handlesRef.current?.classList.add("animate-fadeIn");
+            handlesRef.current?.classList.add("animate-slideInLeftToCenter");
           } else {
-            handlesRef.current?.classList.remove("animate-fadeIn");
+            handlesRef.current?.classList.remove("animate-slideInLeftToCenter");
           }
         });
       },
@@ -58,7 +58,7 @@ const Contact: React.FC = () => {
           Let’s connect and chat about
         </h2>
         <div className="relative h-[6rem] flex justify-center items-center overflow-hidden">
-          <span className="text-7xl font-bebas text-red-600 animate-rotateWord">
+          <span className="text-7xl font-bebas text-paleRed animate-slotMachine">
             {rotatingWords[currentWord]}
           </span>
         </div>
@@ -67,7 +67,7 @@ const Contact: React.FC = () => {
       {/* Contact Handles */}
       <div
         ref={handlesRef}
-        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-wrap justify-center gap-10 opacity-0 animate-fadeIn delay-500"
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex flex-wrap justify-center gap-10 opacity-0"
       >
         {[
           {

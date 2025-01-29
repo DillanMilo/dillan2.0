@@ -8,13 +8,9 @@
   body {
     font-family: "Bebas Neue", sans-serif;
     background: url("/src/assets/IMG_06902.jpg") no-repeat center center fixed;
-background-size: cover;
-
+    background-size: cover;
   }
 }
-
-
-
 
 /* Tailwind Custom Font Class */
 @layer utilities {
@@ -67,6 +63,54 @@ background-size: cover;
     }
   }
 
+  @keyframes expandText {
+    from {
+      transform: scaleY(0); /* Start collapsed vertically */
+      opacity: 0;
+    }
+    to {
+      transform: scaleY(1); /* Fully expanded */
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInLeftToCenter {
+    from {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRightToCenter {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slotMachine {
+    0% {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+  }
+
   .animate-fadeIn {
     animation: fadeIn 1s ease-in-out forwards;
   }
@@ -82,52 +126,30 @@ background-size: cover;
   .animate-slideInRight {
     animation: slideInRight 1s ease-in-out forwards;
   }
+
+  .animate-expandText {
+    animation: expandText 1.5s ease-in-out forwards;
+    transform-origin: center; /* Expands from the center */
+  }
+
+  .animate-slideInLeftToCenter {
+    animation: slideInLeftToCenter 1.5s ease-in-out forwards;
+  }
+
+  .animate-slideInRightToCenter {
+    animation: slideInRightToCenter 1.5s ease-in-out forwards;
+  }
+
+  .animate-slotMachine {
+    animation: slotMachine 0.8s ease-in-out infinite;
+  }
 }
 
-@keyframes expandText {
-  from {
-    transform: scaleY(0); /* Start collapsed vertically */
-    opacity: 0;
-  }
-  to {
-    transform: scaleY(1); /* Fully expanded */
-    opacity: 1;
-  }
-}
-
-.animate-expandText {
-  animation: expandText 1.5s ease-in-out forwards;
-  transform-origin: center; /* Expands from the center */
-}
+/* Custom Text Colors */
 .text-slateGreen {
-  color:  #f5f5dc;
-}
-@keyframes slideInLeftToCenter {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  color: #a8b2ac;
 }
 
-@keyframes slideInRightToCenter {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.animate-slideInLeftToCenter {
-  animation: slideInLeftToCenter 1.5s ease-in-out forwards;
-}
-
-.animate-slideInRightToCenter {
-  animation: slideInRightToCenter 1.5s ease-in-out forwards;
+.text-paleRed {
+  color: rgb(239, 84, 84)
 }
