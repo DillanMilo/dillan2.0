@@ -1,20 +1,31 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const Work: React.FC = () => {
+  const [visibleProjects, setVisibleProjects] = useState<boolean[]>([
+    false,
+    false,
+    false,
+  ]);
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("opacity-100", "translate-x-0");
-          } else {
-            entry.target.classList.remove("opacity-100", "translate-x-0");
+          const index = projectRefs.current.findIndex(
+            (project) => project === entry.target
+          );
+
+          if (entry.isIntersecting && index !== -1) {
+            setVisibleProjects((prev) => {
+              const updatedVisibility = [...prev];
+              updatedVisibility[index] = true; // Mark project as visible
+              return updatedVisibility;
+            });
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.3 } // Adjust for better timing
     );
 
     projectRefs.current.forEach((project) => {
@@ -28,7 +39,7 @@ const Work: React.FC = () => {
     };
   }, []);
 
-  // Define project data with their respective links
+  // Define project data with their respective links and animations
   const projects = [
     {
       title: "Game Hub",
@@ -60,7 +71,9 @@ const Work: React.FC = () => {
         <div
           key={index}
           ref={(el) => (projectRefs.current[index] = el)}
-          className={`w-full max-w-3xl mb-8 opacity-0 transform ${project.animation}`}
+          className={`w-full max-w-3xl mb-8 opacity-0 transform ${
+            visibleProjects[index] ? project.animation + " opacity-100" : ""
+          } transition-all duration-1000`}
         >
           <h2 className="text-6xl font-bebas text-red-600 mb-4 underline">
             <a href={project.link} target="_blank" rel="noreferrer">
