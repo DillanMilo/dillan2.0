@@ -45,7 +45,7 @@ const Info: React.FC = () => {
       className="relative flex flex-col items-center justify-start text-center pt-32 pb-16 px-6 overflow-hidden"
     >
       {/* Title with Expand Animation */}
-      <h1 className="text-[11rem] font-bebas uppercase tracking-wide text-white">
+      <h1 className="text-[11rem] font-bebas uppercase tracking-wide text-white opacity-0">
         Milosevich
       </h1>
 

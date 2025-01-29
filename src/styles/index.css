@@ -84,3 +84,18 @@ background-size: cover;
   }
 }
 
+@keyframes expandText {
+  from {
+    transform: scaleY(0); /* Start collapsed vertically */
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1); /* Fully expanded */
+    opacity: 1;
+  }
+}
+
+.animate-expandText {
+  animation: expandText 1.5s ease-in-out forwards;
+  transform-origin: center; /* Expands from the center */
+}
