@@ -7,8 +7,14 @@
 @layer base {
   body {
     font-family: "Bebas Neue", sans-serif;
+    background: url("/src/assets/IMG_06902.jpg") no-repeat center center fixed;
+background-size: cover;
+
   }
 }
+
+
+
 
 /* Tailwind Custom Font Class */
 @layer utilities {

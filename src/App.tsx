@@ -17,8 +17,8 @@ function App() {
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
 
-        // Adjust this threshold to control when the dimming starts
-        const dimmingThreshold = window.innerHeight * 1; // Change this value to delay dimming
+        // Adjust this value to delay the dimming effect
+        const dimmingThreshold = window.innerHeight * 0.8;
 
         if (!foundActive && rect.top >= -200 && rect.top < dimmingThreshold) {
           setActiveSection(section.id);
@@ -38,14 +38,11 @@ function App() {
   }, []);
 
   return (
-    <div
-      className="min-h-screen text-white bg-cover bg-center bg-fixed"
-      style={{ backgroundImage: "url('/src/assets/IMG_06902.jpg')" }}
-    >
+    <div className="min-h-screen text-white">
       <Navbar />
       <section
         id="home"
-        className={`transition-opacity duration-500 ${
+        className={`transition-opacity duration-700 ease-in-out ${
           activeSection === "home" ? "opacity-100" : "opacity-60"
         }`}
       >
@@ -53,7 +50,7 @@ function App() {
       </section>
       <section
         id="info"
-        className={`transition-opacity duration-500 ${
+        className={`transition-opacity duration-700 ease-in-out ${
           activeSection === "info" ? "opacity-100" : "opacity-60"
         }`}
       >
@@ -61,7 +58,7 @@ function App() {
       </section>
       <section
         id="work"
-        className={`transition-opacity duration-500 ${
+        className={`transition-opacity duration-700 ease-in-out ${
           activeSection === "work" ? "opacity-100" : "opacity-60"
         }`}
       >
@@ -69,7 +66,7 @@ function App() {
       </section>
       <section
         id="contact"
-        className={`transition-opacity duration-500 ${
+        className={`transition-opacity duration-700 ease-in-out ${
           activeSection === "contact" ? "opacity-100" : "opacity-60"
         }`}
       >
