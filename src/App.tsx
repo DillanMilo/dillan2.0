@@ -38,7 +38,10 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div
+      className="min-h-screen text-white bg-cover bg-center bg-fixed"
+      style={{ backgroundImage: "url('/src/assets/IMG_06902.jpg')" }}
+    >
       <Navbar />
       <section
         id="home"
