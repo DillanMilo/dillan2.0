@@ -55,13 +55,10 @@ const Contact: React.FC = () => {
         </h2>
 
         {/* Slot Machine Container */}
-        <div className="relative h-[6rem] flex justify-center items-center overflow-hidden">
-          <div className="flex flex-col animate-slotMachine">
-            {rotatingWords.concat(rotatingWords).map((word, index) => (
-              <span
-                key={index}
-                className="text-7xl font-bebas text-paleRed mb-4"
-              >
+        <div className="relative h-[6rem] flex justify-center items-center overflow-hidden w-auto">
+          <div className="slot-machine">
+            {rotatingWords.map((word, index) => (
+              <span key={index} className="rotating-word">
                 {word}
               </span>
             ))}
