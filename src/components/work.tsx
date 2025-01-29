@@ -43,20 +43,22 @@ const Work: React.FC = () => {
   const projects = [
     {
       title: "Game Hub",
-      description: "A fun web app showcasing video games across platforms.",
+      description:
+        "A fun web app showcasing video games across platforms-Like i said, I like video games.",
       link: "https://github.com/DillanMilo/game-hub",
       animation: "animate-slideInLeft",
     },
     {
       title: "Reddit Mini",
       description:
-        "A bite-sized Reddit experience with dynamic content loading.",
+        "A bite-sized Reddit experience with dynamic content loading-cause dynamite comes in small packages.",
       link: "https://github.com/DillanMilo/reddit-mini",
       animation: "animate-slideInRight",
     },
     {
       title: "Spotify App",
-      description: "A playlist builder with Spotify integration.",
+      description:
+        "A playlist builder with Spotify integration-Silence isnt always golden.",
       link: "https://github.com/DillanMilo/Jamming-With-Spotify",
       animation: "animate-slideInLeft",
     },
@@ -73,14 +75,14 @@ const Work: React.FC = () => {
           ref={(el) => (projectRefs.current[index] = el)}
           className={`w-full max-w-3xl mb-8 opacity-0 transform ${
             visibleProjects[index] ? project.animation + " opacity-100" : ""
-          } transition-all duration-1000`}
+          } transition-all duration-1500`}
         >
-          <h2 className="text-6xl font-bebas text-red-600 mb-4 underline">
+          <h2 className="text-6xl font-bebas text-red-600 mb-15 underline">
             <a href={project.link} target="_blank" rel="noreferrer">
               {project.title}
             </a>
           </h2>
-          <p className="text-4xl text-white mb-10">{project.description}</p>
+          <p className="text-4xl text-white mb-12">{project.description}</p>
         </div>
       ))}
     </section>
