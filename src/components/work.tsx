@@ -28,33 +28,43 @@ const Work: React.FC = () => {
     };
   }, []);
 
+  // Define project data with their respective links
+  const projects = [
+    {
+      title: "Game Hub",
+      description: "A fun web app showcasing video games across platforms.",
+      link: "https://github.com/DillanMilo/game-hub",
+    },
+    {
+      title: "Reddit Mini",
+      description:
+        "A bite-sized Reddit experience with dynamic content loading.",
+      link: "https://github.com/DillanMilo/reddit-mini",
+    },
+    {
+      title: "Spotify App",
+      description: "A playlist builder with Spotify integration.",
+      link: "https://github.com/DillanMilo/Jamming-With-Spotify",
+    },
+  ];
+
   return (
     <section
       id="work"
       className="relative flex flex-col items-center text-center py-20 px-6"
     >
-      {["Game Hub", "Reddit Mini", "Spotify App"].map((title, index) => (
+      {projects.map((project, index) => (
         <div
           key={index}
           ref={(el) => (projectRefs.current[index] = el)}
           className="w-full max-w-3xl mb-8 opacity-0 transform translate-y-10 animate-slideUp"
         >
-          <h2 className="text-4xl font-bebas text-red-600 mb-4 underline">
-            <a
-              href={`https://example-link-${index + 1}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {title}
+          <h2 className="text-6xl font-bebas text-red-600 mb-4 underline">
+            <a href={project.link} target="_blank" rel="noreferrer">
+              {project.title}
             </a>
           </h2>
-          <p className="text-2xl text-gray-400">
-            {title === "Game Hub"
-              ? "A fun web app showcasing video games across platforms."
-              : title === "Reddit Mini"
-              ? "A bite-sized Reddit experience with dynamic content loading."
-              : "A playlist builder with Spotify integration."}
-          </p>
+          <p className="text-4xl text-white mb-10">{project.description}</p>
         </div>
       ))}
     </section>
