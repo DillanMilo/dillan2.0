@@ -96,14 +96,15 @@
     }
   }
 
-  /* ✅ Optimized Slot Machine Animation */
+  /* ✅ Optimized Slot Machine Animation with 1s Pause Per Word */
   @keyframes slotMachine {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(-100%);
-    }
+    0%, 14.28% { transform: translateY(0%); } /* Word 1 - Pause */
+    14.28%, 28.56% { transform: translateY(-14.28%); } /* Word 2 */
+    28.56%, 42.84% { transform: translateY(-28.56%); } /* Word 3 */
+    42.84%, 57.12% { transform: translateY(-42.84%); } /* Word 4 */
+    57.12%, 71.4% { transform: translateY(-57.12%); } /* Word 5 */
+    71.4%, 85.68% { transform: translateY(-71.4%); } /* Word 6 */
+    85.68%, 100% { transform: translateY(-85.68%); } /* Word 7 */
   }
 
   .animate-fadeIn {
@@ -135,9 +136,9 @@
     animation: slideInRightToCenter 1.5s ease-in-out forwards;
   }
 
-  /* ✅ Proper Slot Machine Animation */
+  /* ✅ Smooth Slot Machine Effect with 1s Hold per Word */
   .animate-slotMachine {
-    animation: slotMachine 14s steps(7) infinite;
+    animation: slotMachine 4s steps(7, end) infinite;
   }
 }
 
