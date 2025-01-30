@@ -5,7 +5,7 @@ const Home: React.FC = () => {
   return (
     <div
       id="home"
-      className="relative h-screen w-screen flex items-center justify-start px-5 text-white overflow-hidden"
+      className="relative h-screen w-screen flex flex-col items-start justify-center px-5 md:px-10 lg:px-20 text-white overflow-hidden"
     >
       {/* Background Image */}
       <div
@@ -14,19 +14,16 @@ const Home: React.FC = () => {
       ></div>
 
       {/* Content */}
-      <div
-        className="relative z-10 opacity-0 animate-fadeIn"
-        style={{ animationDelay: "200ms" }}
-      >
+      <div className="relative z-10 text-left">
         <h2
-          className="text-5xl text-white font-bebas opacity-0 animate-fadeIn mb-20"
+          className="text-4xl md:text-5xl lg:text-6xl text-white font-bebas opacity-0 animate-fadeIn mb-10 md:mb-14"
           style={{ animationDelay: "200ms" }}
         >
           Heya, my name is
         </h2>
 
         {/* Name Animation */}
-        <h1 className="text-[15rem] font-bebas font-bold tracking-wide transform scale-y-200 opacity-0 animate-fadeIn flex">
+        <h1 className="text-[6rem] md:text-[10rem] lg:text-[15rem] font-bebas font-bold tracking-wide transform scale-y-200 opacity-0 animate-fadeIn flex">
           {"Dillan".split("").map((letter, index) => (
             <span
               key={index}
@@ -40,7 +37,7 @@ const Home: React.FC = () => {
 
         {/* Description */}
         <p
-          className="text-3xl text-gray-300 font-bebas tracking-wide opacity-0 animate-slideInLeft"
+          className="text-xl md:text-2xl lg:text-3xl text-gray-300 font-bebas tracking-wide opacity-0 animate-slideInLeft mt-5 md:mt-8 max-w-lg"
           style={{ animationDelay: "1200ms" }}
         >
           I build stuff and make things look nice on the web.
@@ -49,7 +46,7 @@ const Home: React.FC = () => {
 
       {/* Intro Description (Loads in Last) */}
       <p
-        className="absolute bottom-10 right-10 text-right text-4xl text-white font-bebas max-w-md opacity-0 animate-slideInRight"
+        className="absolute bottom-6 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
         style={{ animationDelay: "2000ms" }}
       >
         I’m a creative UI and UX developer who loves crafting beautiful and
