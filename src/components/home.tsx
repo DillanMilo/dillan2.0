@@ -5,7 +5,7 @@ const Home: React.FC = () => {
   return (
     <div
       id="home"
-      className="relative h-screen w-screen flex flex-col items-start justify-center px-5 md:px-10 lg:px-20 text-white overflow-hidden"
+      className="relative h-screen w-full flex flex-col items-start justify-center px-5 md:px-10 lg:px-20 text-white overflow-x-hidden"
     >
       {/* Background Image */}
       <div
@@ -16,7 +16,7 @@ const Home: React.FC = () => {
       {/* Content */}
       <div className="relative z-10 text-left">
         <h2
-          className="text-4xl   md:text-5xl lg:text-6xl text-white font-bebas opacity-0 animate-fadeIn mb-10  md:mb-14"
+          className="text-4xl md:text-5xl lg:text-6xl text-white font-bebas opacity-0 animate-fadeIn mb-10 md:mb-14"
           style={{ animationDelay: "200ms" }}
         >
           Heya, my name is
