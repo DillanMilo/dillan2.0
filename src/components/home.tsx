@@ -16,7 +16,7 @@ const Home: React.FC = () => {
       {/* Content */}
       <div className="relative z-10 text-left">
         <h2
-          className="text-4xl md:text-5xl lg:text-6xl text-white font-bebas opacity-0 animate-fadeIn mb-10 md:mb-14"
+          className="text-4xl   md:text-5xl lg:text-6xl text-white font-bebas opacity-0 animate-fadeIn mb-10  md:mb-14"
           style={{ animationDelay: "200ms" }}
         >
           Heya, my name is
@@ -37,7 +37,7 @@ const Home: React.FC = () => {
 
         {/* Description */}
         <p
-          className="text-xl md:text-2xl lg:text-3xl text-gray-300 font-bebas tracking-wide opacity-0 animate-slideInLeft mt-5 md:mt-8 max-w-lg"
+          className="text-xl md:text-2xl mb-30 lg:text-3xl text-gray-300 font-bebas tracking-wide opacity-0 animate-slideInLeft mt-5 md:mt-8 max-w-lg"
           style={{ animationDelay: "1200ms" }}
         >
           I build stuff and make things look nice on the web.
@@ -46,7 +46,7 @@ const Home: React.FC = () => {
 
       {/* Intro Description (Loads in Last) */}
       <p
-        className="absolute bottom-6 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
+        className="absolute bottom-20 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
         style={{ animationDelay: "2000ms" }}
       >
         I’m a creative UI and UX developer who loves crafting beautiful and
