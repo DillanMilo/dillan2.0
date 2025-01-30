@@ -40,15 +40,16 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-4 right-5 z-50 flex justify-end transform ${
+      className={`fixed top-2 right-3 sm:top-4 sm:right-5 z-50 flex justify-end transform ${
         isVisible ? "translate-x-0 opacity-100" : "translate-x-20 opacity-0"
       } transition-all duration-1000 ease-out`}
     >
-      <ul className="flex gap-4 sm:gap-2">
+      <ul className="flex gap-3 sm:gap-4 md:gap-5">
         {["info", "work", "contact"].map((section) => (
           <li key={section}>
             <button
-              className={`relative text-white transition-all duration-300 text-4xl sm:text-2xl md:text-3xl lg:text-5xl px-3 font-bebas
+              className={`relative text-white transition-all duration-300 
+              text-2xl sm:text-3xl md:text-4xl lg:text-5xl px-2 sm:px-3 font-bebas
               ${activeSection === section ? "after:w-full" : "after:w-0"} 
               hover:after:w-full after:absolute after:left-0 after:bottom-[-2px] after:h-[1px] after:bg-white after:transition-all after:duration-300`}
               onClick={() => handleScroll(section)}
