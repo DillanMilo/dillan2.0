@@ -9,9 +9,10 @@
     font-family: "Bebas Neue", sans-serif;
     overflow-x: hidden; /* ✅ Prevents horizontal scrolling */
     max-width: 100vw; /* ✅ Ensures no element exceeds viewport width */
+    min-height: 100vh; /* ✅ Forces full height on all screens */
   }
 
-  /* ✅ Fix for Safari Jittery Background */
+  /* ✅ Default Background for All Screens (Larger Screens & Mobile) */
   body::before {
     content: "";
     position: fixed;
@@ -21,21 +22,12 @@
     height: 100vh;
     background: url("/src/assets/IMG_06902.jpg") no-repeat center center;
     background-size: cover;
-    background-attachment: local; /* ✅ Prevents jittering */
-    z-index: -1; /* ✅ Places it behind everything */
-    will-change: transform; /* ✅ Helps prevent repainting issues */
-  }
-
-  /* ✅ Fix background zoom on mobile screens */
-  @media (max-width: 768px) {
-    body::before {
-      background-size: contain;
-      background-attachment: scroll;
-    }
+    background-attachment: fixed;
+    z-index: -1; /* ✅ Ensures it's behind all content */
   }
 }
 
-/* ✅ Mobile-specific background overlay */
+/* ✅ Mobile-specific background overlay (Keeps src/assets/IMG_07154.jpg for home screen) */
 @layer utilities {
   .mobile-overlay::after {
     content: "";
