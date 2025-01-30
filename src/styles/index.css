@@ -14,6 +14,27 @@
   }
 }
 
+/* ✅ Mobile-specific background overlay */
+@layer utilities {
+  .mobile-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("/src/assets/IMG_07154.jpg") no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0;
+    animation: fadeIn 2.5s ease-in-out forwards;
+    z-index: -1; /* ✅ Behind content but above main background */
+  }
+
+  /* ✅ Hide overlay on larger screens */
+  @media (min-width: 768px) {
+    .mobile-overlay::after {
+      display: none;
+    }
+  }
+}
+
 /* Tailwind Custom Font Class */
 @layer utilities {
   .font-bebas {
@@ -39,7 +60,6 @@
     }
     to {
       opacity: 1;
-      transform: translateY(0);
     }
   }
 
@@ -50,7 +70,6 @@
     }
     to {
       opacity: 1;
-      transform: translateX(0);
     }
   }
 
@@ -61,17 +80,16 @@
     }
     to {
       opacity: 1;
-      transform: translateX(0);
     }
   }
 
   @keyframes expandText {
     from {
-      transform: scaleY(0); /* Start collapsed vertically */
+      transform: scaleY(0);
       opacity: 0;
     }
     to {
-      transform: scaleY(1); /* Fully expanded */
+      transform: scaleY(1);
       opacity: 1;
     }
   }
@@ -100,14 +118,14 @@
 
   /* ✅ Improved Slot Machine Animation with Proper Timing */
   @keyframes slotMachine {
-    0%, 12.5% { transform: translateY(0%); opacity: 1; }   /* Word 1 */
-    25%, 25% { transform: translateY(-100%); opacity: 1; } /* Word 2 */
-    37.5%, 37.5% { transform: translateY(-200%); opacity: 1; } /* Word 3 */
-    50%, 50% { transform: translateY(-300%); opacity: 1; } /* Word 4 */
-    62.5%, 62.5% { transform: translateY(-400%); opacity: 1; } /* Word 5 */
-    75%, 75% { transform: translateY(-500%); opacity: 1; } /* Word 6 */
-    87.5%, 87.5% { transform: translateY(-600%); opacity: 1; } /* Word 7 */
-    100% { transform: translateY(-700%); opacity: 1; } /* Loop */
+    0%, 12.5% { transform: translateY(0%); opacity: 1; }
+    25%, 25% { transform: translateY(-100%); opacity: 1; }
+    37.5%, 37.5% { transform: translateY(-200%); opacity: 1; }
+    50%, 50% { transform: translateY(-300%); opacity: 1; }
+    62.5%, 62.5% { transform: translateY(-400%); opacity: 1; }
+    75%, 75% { transform: translateY(-500%); opacity: 1; }
+    87.5%, 87.5% { transform: translateY(-600%); opacity: 1; }
+    100% { transform: translateY(-700%); opacity: 1; }
   }
 
   .animate-fadeIn {
@@ -128,7 +146,7 @@
 
   .animate-expandText {
     animation: expandText 1.5s ease-in-out forwards;
-    transform-origin: center; /* Expands from the center */
+    transform-origin: center;
   }
 
   .animate-slideInLeftToCenter {
@@ -145,7 +163,7 @@
     flex-direction: column;
     align-items: center;
     overflow: hidden;
-    height: 7rem; /* Adjust to match text size */
+    height: 7rem;
     width: auto;
   }
 
@@ -155,16 +173,16 @@
     color: rgb(239, 84, 84);
     display: block;
     text-align: center;
-    animation: slotMachine 8s ease-in-out infinite; /* Adjusted for 7 words */
+    animation: slotMachine 8s ease-in-out infinite;
   }
 
   /* ✅ Hide Scrollbars While Keeping Scroll Functionality */
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE & Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   .no-scrollbar::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
+    display: none;
   }
 }
 
