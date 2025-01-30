@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 
 const Work: React.FC = () => {
-  const [visibleProjects, setVisibleProjects] = useState<boolean[]>([
+  const [animatedProjects, setAnimatedProjects] = useState<boolean[]>([
     false,
     false,
     false,
@@ -17,13 +17,11 @@ const Work: React.FC = () => {
           );
 
           if (index !== -1) {
-            setVisibleProjects((prev) => {
+            setAnimatedProjects((prev) => {
               const updatedVisibility = [...prev];
 
-              if (entry.isIntersecting) {
-                updatedVisibility[index] = true; // Animate when in view
-              } else {
-                updatedVisibility[index] = false; // Reset when out of view
+              if (entry.isIntersecting && !updatedVisibility[index]) {
+                updatedVisibility[index] = true; // Play animation only ONCE
               }
 
               return updatedVisibility;
@@ -45,7 +43,7 @@ const Work: React.FC = () => {
     };
   }, []);
 
-  // Define project data with their respective links and animations
+  // Define project data with their respective animations
   const projects = [
     {
       title: "Game Hub",
@@ -82,18 +80,20 @@ const Work: React.FC = () => {
         <div
           key={index}
           ref={(el) => (projectRefs.current[index] = el)}
-          className={`w-full max-w-3xl mb-8 opacity-0 transform transition-all duration-1500 ${
-            visibleProjects[index]
+          className={`w-full max-w-3xl mb-8 transform transition-all duration-1500 ${
+            animatedProjects[index]
               ? `${project.animation} ${project.delay} opacity-100`
-              : "opacity-0"
+              : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-6xl font-bebas text-red-600 mb-15 underline">
+          <h2 className="text-5xl sm:text-4xl md:text-5xl font-bebas text-red-600 mb-6 underline">
             <a href={project.link} target="_blank" rel="noreferrer">
               {project.title}
             </a>
           </h2>
-          <p className="text-4xl text-white mb-12">{project.description}</p>
+          <p className="text-3xl sm:text-2xl md:text-3xl text-white mb-8">
+            {project.description}
+          </p>
         </div>
       ))}
     </section>
