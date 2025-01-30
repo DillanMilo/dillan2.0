@@ -12,7 +12,7 @@
     min-height: 100vh; /* ✅ Forces full height on all screens */
   }
 
-  /* ✅ Default Background for All Screens (Larger Screens & Mobile) */
+  /* ✅ Default Background for All Screens */
   body::before {
     content: "";
     position: fixed;
@@ -21,9 +21,17 @@
     width: 100vw;
     height: 100vh;
     background: url("/src/assets/IMG_06902.jpg") no-repeat center center;
-    background-size: cover;
+    background-size: cover; /* ✅ Ensures it covers the entire screen */
     background-attachment: fixed;
-    z-index: -1; /* ✅ Ensures it's behind all content */
+    z-index: -1; /* ✅ Places it behind everything */
+  }
+
+  /* ✅ Fix Background Coverage on Mobile Screens */
+  @media (max-width: 768px) {
+    body::before {
+      background-size: cover; /* ✅ Makes sure it fully covers */
+      background-attachment: scroll; /* ✅ Ensures smooth scrolling */
+    }
   }
 }
 
@@ -33,8 +41,9 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: url("/src/assets/IMG_07154.jpg") no-repeat center center fixed;
+    background: url("/src/assets/IMG_07154.jpg") no-repeat center center;
     background-size: cover;
+    background-attachment: fixed;
     opacity: 0;
     animation: fadeIn 2.5s ease-in-out forwards;
     z-index: -1; /* ✅ Behind content but above main background */
