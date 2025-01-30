@@ -1,6 +1,5 @@
 import React from "react";
 import bgImageMobile from "../assets/IMG_07154.jpg"; // Mobile Background
-import bgImageDefault from "../assets/IMG_06902.jpg"; // Default Background
 
 const Home: React.FC = () => {
   return (
@@ -8,13 +7,7 @@ const Home: React.FC = () => {
       id="home"
       className="relative h-screen w-full flex flex-col items-start justify-center px-5 md:px-10 lg:px-20 text-white overflow-x-hidden"
     >
-      {/* Default Background (Larger Screens) */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-100"
-        style={{ backgroundImage: `url(${bgImageDefault})` }}
-      ></div>
-
-      {/* Mobile Overlay Background (Appears on Mobile Only) */}
+      {/* ✅ Mobile Overlay Background (Only for Mobile) */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn md:hidden"
         style={{
