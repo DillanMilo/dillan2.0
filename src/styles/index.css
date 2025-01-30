@@ -7,10 +7,31 @@
 @layer base {
   html, body {
     font-family: "Bebas Neue", sans-serif;
-    background: url("/src/assets/IMG_06902.jpg") no-repeat center center fixed;
-    background-size: cover;
     overflow-x: hidden; /* ✅ Prevents horizontal scrolling */
     max-width: 100vw; /* ✅ Ensures no element exceeds viewport width */
+  }
+
+  /* ✅ Fix for Safari Jittery Background */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("/src/assets/IMG_06902.jpg") no-repeat center center;
+    background-size: cover;
+    background-attachment: local; /* ✅ Prevents jittering */
+    z-index: -1; /* ✅ Places it behind everything */
+    will-change: transform; /* ✅ Helps prevent repainting issues */
+  }
+
+  /* ✅ Fix background zoom on mobile screens */
+  @media (max-width: 768px) {
+    body::before {
+      background-size: contain;
+      background-attachment: scroll;
+    }
   }
 }
 
@@ -74,7 +95,7 @@
   }
 }
 
-/* Custom Animations */
+/* ✅ Custom Animations */
 @layer utilities {
   @keyframes fadeIn {
     from {
