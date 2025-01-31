@@ -60,17 +60,17 @@ const Contact: React.FC = () => {
     >
       {/* Caption - Adjusted for Mobile */}
       <div className="mt-66 sm:mt-40">
-        <h2 className="text-4xl sm:text-8xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
+        <h2 className="text-5xl sm:text-8xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
           Let’s connect and chat about
         </h2>
 
         {/* Slot Machine Effect - Adjusted for Mobile */}
         <div className="relative h-[6rem] sm:h-[6rem] md:h-[6rem] flex justify-center items-center overflow-hidden w-auto">
-          <div className="h-full flex items-center justify-center text-5xl sm:text-6xl md:text-5xl font-bebas text-red-600">
+          <div className="relative w-full h-full flex items-center justify-center">
             {rotatingWords.map((word, index) => (
               <span
                 key={index}
-                className={`absolute transition duration-1000 ease-in-out ${
+                className={`absolute inset-0 flex items-center justify-center min-w-[max-content] text-7xl sm:text-6xl md:text-10xl font-bebas text-paleRed transition duration-1000 ease-in-out ${
                   index === visibleIndex
                     ? "opacity-100 scale-100 translate-y-0"
                     : "opacity-0 scale-90 translate-y-4"
