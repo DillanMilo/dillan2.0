@@ -35,7 +35,7 @@
   }
 }
 
-/* ✅ Mobile-specific background overlay (Keeps src/assets/IMG_07154.jpg for home screen) */
+/* ✅ Mobile-specific background overlay */
 @layer utilities {
   .mobile-overlay::after {
     content: "";
@@ -46,10 +46,9 @@
     background-attachment: fixed;
     opacity: 0;
     animation: fadeIn 2.5s ease-in-out forwards;
-    z-index: -1; /* ✅ Behind content but above main background */
+    z-index: -1;
   }
 
-  /* ✅ Hide overlay on larger screens */
   @media (min-width: 768px) {
     .mobile-overlay::after {
       display: none;
@@ -74,14 +73,12 @@
     animation: fadeIn 1s ease-in-out forwards;
   }
 
-  /* ✅ Only Show on Mobile Landscape */
   @media (orientation: landscape) and (max-width: 1024px) {
     .landscape-overlay {
       display: flex;
     }
   }
 
-  /* ✅ Hide on Larger Screens */
   @media (min-width: 1025px) {
     .landscape-overlay {
       display: none;
@@ -99,135 +96,83 @@
 /* ✅ Custom Animations */
 @layer utilities {
   @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; }
   }
 
   @keyframes slideInLeft {
-    from {
-      opacity: 0;
-      transform: translateX(-50px);
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; }
   }
 
   @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(50px);
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; }
   }
 
   @keyframes expandText {
-    from {
-      transform: scaleY(0);
-      opacity: 0;
-    }
-    to {
-      transform: scaleY(1);
-      opacity: 1;
-    }
+    from { transform: scaleY(0); opacity: 0; }
+    to { transform: scaleY(1); opacity: 1; }
   }
 
   @keyframes slideInLeftToCenter {
-    from {
-      opacity: 0;
-      transform: translateX(-100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-100%); }
+    to { opacity: 1; transform: translateX(0); }
   }
 
   @keyframes slideInRightToCenter {
-    from {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-    to {
-      opacity: 1;
-    }
+    from { opacity: 0; transform: translateX(100%); }
+    to { opacity: 1; }
   }
 
-  /* ✅ Improved Slot Machine Animation with Proper Timing */
+  /* ✅ Improved Slot Machine Animation */
   @keyframes slotMachine {
-    0%, 12.5% { transform: translateY(0%); opacity: 1; }
-    25%, 25% { transform: translateY(-100%); opacity: 1; }
-    37.5%, 37.5% { transform: translateY(-200%); opacity: 1; }
-    50%, 50% { transform: translateY(-300%); opacity: 1; }
-    62.5%, 62.5% { transform: translateY(-400%); opacity: 1; }
-    75%, 75% { transform: translateY(-500%); opacity: 1; }
-    87.5%, 87.5% { transform: translateY(-600%); opacity: 1; }
-    100% { transform: translateY(-700%); opacity: 1; }
+    0%, 14.28% { transform: translateY(0%); opacity: 1; }
+    28.56% { transform: translateY(-100%); opacity: 1; }
+    42.84% { transform: translateY(-200%); opacity: 1; }
+    57.12% { transform: translateY(-300%); opacity: 1; }
+    71.4% { transform: translateY(-400%); opacity: 1; }
+    85.68% { transform: translateY(-500%); opacity: 1; }
+    100% { transform: translateY(-600%); opacity: 1; }
   }
 
-  .animate-fadeIn {
-    animation: fadeIn 1s ease-in-out forwards;
-  }
-
-  .animate-slideUp {
-    animation: slideUp 1s ease-in-out forwards;
-  }
-
-  .animate-slideInLeft {
-    animation: slideInLeft 1s ease-in-out forwards;
-  }
-
-  .animate-slideInRight {
-    animation: slideInRight 1s ease-in-out forwards;
-  }
-
-  .animate-expandText {
-    animation: expandText 1.5s ease-in-out forwards;
-    transform-origin: center;
-  }
-
-  .animate-slideInLeftToCenter {
-    animation: slideInLeftToCenter 1.5s ease-in-out forwards;
-  }
-
-  .animate-slideInRightToCenter {
-    animation: slideInRightToCenter 1.5s ease-in-out forwards;
-  }
-
-  /* ✅ Smooth Slot Machine Effect with 1s Hold per Word */
-  .slot-machine {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-    height: 7rem;
-    width: auto;
-  }
-
+  /* ✅ Updated Rotating Word Styles */
   .rotating-word {
     font-size: 6rem;
     font-family: "Bebas Neue", sans-serif;
     color: rgb(239, 84, 84);
-    display: block;
     text-align: center;
-    animation: slotMachine 8s ease-in-out infinite;
+    line-height: 7rem;
+    height: 7rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: slotMachine 8s infinite ease-in-out;
   }
+
+  /* ✅ Mobile Adjustments */
+  @media (max-width: 640px) {
+    .rotating-word {
+      font-size: 3rem; /* ✅ Smaller text for mobile */
+      line-height: 4rem;
+      height: 4rem;
+      animation: slotMachine 10s infinite ease-in-out; /* ✅ Slower on mobile */
+    }
+  }
+
+  /* ✅ Tailwind Animations */
+  .animate-fadeIn { animation: fadeIn 1s ease-in-out forwards; }
+  .animate-slideUp { animation: slideUp 1s ease-in-out forwards; }
+  .animate-slideInLeft { animation: slideInLeft 1s ease-in-out forwards; }
+  .animate-slideInRight { animation: slideInRight 1s ease-in-out forwards; }
+  .animate-expandText { animation: expandText 1.5s ease-in-out forwards; transform-origin: center; }
+  .animate-slideInLeftToCenter { animation: slideInLeftToCenter 1.5s ease-in-out forwards; }
+  .animate-slideInRightToCenter { animation: slideInRightToCenter 1.5s ease-in-out forwards; }
 
   /* ✅ Hide Scrollbars While Keeping Scroll Functionality */
   .no-scrollbar {
@@ -240,10 +185,5 @@
 }
 
 /* Custom Text Colors */
-.text-slateGreen {
-  color: #a8b2ac;
-}
-
-.text-paleRed {
-  color: rgb(239, 84, 84);
-}
+.text-slateGreen { color: #a8b2ac; }
+.text-paleRed { color: rgb(239, 84, 84); }

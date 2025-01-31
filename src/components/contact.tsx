@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const rotatingWords = [
   "UI",
@@ -12,6 +12,16 @@ const rotatingWords = [
 
 const Contact: React.FC = () => {
   const handlesRef = useRef<HTMLDivElement>(null);
+  const [visibleIndex, setVisibleIndex] = useState(0);
+
+  // Rotate words every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisibleIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
+    }, 1500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -42,23 +52,30 @@ const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative h-screen flex flex-col justify-start items-center text-center pt-20 bg-cover bg-center bg-fixed text-white"
+      className="relative h-screen flex flex-col justify-start items-center text-center pt-20 bg-cover bg-center bg-fixed text-white px-4 sm:px-6"
       style={{
         backgroundImage:
           "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/src/assets/8xq1yhiw09q41.jpg')",
       }}
     >
-      {/* Caption */}
-      <div className="mt-50">
-        <h2 className="text-6xl font-bebas tracking-wide animate-fadeIn">
+      {/* Caption - Adjusted for Mobile */}
+      <div className="mt-66 sm:mt-40">
+        <h2 className="text-4xl sm:text-8xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
           Let’s connect and chat about
         </h2>
 
-        {/* Slot Machine Container */}
-        <div className="relative h-[6rem] flex justify-center items-center overflow-hidden w-auto">
-          <div className="slot-machine">
+        {/* Slot Machine Effect - Adjusted for Mobile */}
+        <div className="relative h-[6rem] sm:h-[6rem] md:h-[6rem] flex justify-center items-center overflow-hidden w-auto">
+          <div className="h-full flex items-center justify-center text-5xl sm:text-6xl md:text-5xl font-bebas text-red-600">
             {rotatingWords.map((word, index) => (
-              <span key={index} className="rotating-word">
+              <span
+                key={index}
+                className={`absolute transition duration-1000 ease-in-out ${
+                  index === visibleIndex
+                    ? "opacity-100 scale-100 translate-y-0"
+                    : "opacity-0 scale-90 translate-y-4"
+                }`}
+              >
                 {word}
               </span>
             ))}
@@ -66,10 +83,10 @@ const Contact: React.FC = () => {
         </div>
       </div>
 
-      {/* Contact Handles */}
+      {/* Contact Handles - Positioned in a row at the bottom */}
       <div
         ref={handlesRef}
-        className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-row justify-center items-center gap-8 whitespace-nowrap opacity-0 animate-fadeIn transition-opacity duration-1000 overflow-x-auto max-w-screen-lg px-4"
+        className="absolute bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 flex flex-nowrap items-center gap-4 sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap transition-opacity duration-1000 opacity-0 animate-fadeIn"
       >
         {[
           {
@@ -89,7 +106,7 @@ const Contact: React.FC = () => {
             href={handle.link}
             target="_blank"
             rel="noreferrer"
-            className="text-5xl font-bebas text-red-600 transition-all duration-300 hover:text-red-400"
+            className="text-2xl sm:text-3xl md:text-5xl font-bebas text-red-600 transition-all duration-300 hover:text-red-400 whitespace-nowrap"
           >
             {handle.name}
           </a>
