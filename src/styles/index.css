@@ -89,7 +89,7 @@
 /* ✅ Adjust Background Image for Mobile - Only for `8xq1yhiw09q41.jpg` */
 @media (max-width: 768px) {
   #contact {
-    background-image: url("/src/assets/8xq1yhiw09q41.jpg") !important;
+     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
     background-size: 300% auto !important; /* ✅ Zooms in 170% */
     background-position: center top !important; /* ✅ Centers the image */
     background-repeat: no-repeat !important; /* ✅ Prevents repeating */
