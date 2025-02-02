@@ -91,13 +91,13 @@ const Contact: React.FC = () => {
         {[
           {
             name: "LinkedIn",
-            link: "https://linkedin.com/in/dillanmilosevich",
+            link: "https://www.linkedin.com/in/dillan-milosevich-9a817891/",
           },
-          { name: "X", link: "https://twitter.com/yourhandle" },
-          { name: "Email", link: "mailto:dillanxx@icloud.com" },
+          { name: "X", link: "https://twitter.com/dillanx1x" },
+          { name: "Email", link: "mailto:dillanxx@gmail.com" },
           { name: "GitHub", link: "https://github.com/DillanMilo" },
           { name: "ENS", link: "https://app.ens.domains/dillanxx.eth" },
-          { name: "SNS", link: "https://www.sns.id/domain?domain=dillanxx" },
+          { name: "SNS", link: "https://sns.id/domain?domain=dillanxx" },
           { name: "BNS", link: "https://app.ens.domains/dillanxx.base.eth" },
           { name: "Call", link: "tel:+12812108139" },
         ].map((handle, index) => (
