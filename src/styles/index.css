@@ -196,3 +196,10 @@
 /* Custom Text Colors */
 .text-slateGreen { color: #a8b2ac; }
 .text-paleRed { color: rgb(239, 84, 84); }
+
+/* iOS-specific override to ensure consistent background image appearance */
+@supports (-webkit-touch-callout: none) {
+  body::before {
+    background-attachment: scroll;
+  }
+}
