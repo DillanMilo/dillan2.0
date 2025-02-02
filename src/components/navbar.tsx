@@ -2,22 +2,47 @@ import React, { useState, useEffect } from "react";
 
 const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
-
-  // State to control navbar animation
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Delay navbar appearance by 2000ms (2s)
+    // Delay navbar appearance
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 3000);
-
     return () => clearTimeout(timer);
   }, []);
 
+  // Custom smooth scroll function with adjustable duration (default is 1500ms)
+  const smoothScrollTo = (targetY: number, duration: number = 1500) => {
+    const startY = window.scrollY;
+    const diff = targetY - startY;
+    let startTime: number | null = null;
+
+    // Easing function for a smooth transition
+    const easeInOutQuad = (t: number) =>
+      t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+    const step = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const time = timestamp - startTime;
+      const progress = Math.min(time / duration, 1);
+      const ease = easeInOutQuad(progress);
+      window.scrollTo(0, startY + diff * ease);
+      if (time < duration) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  };
+
   const handleScroll = (id: string) => {
     setActiveSection(id);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const element = document.getElementById(id);
+    if (element) {
+      const targetY = element.getBoundingClientRect().top + window.pageYOffset;
+      smoothScrollTo(targetY, 1500); // Adjust the duration as needed
+    }
   };
 
   const handleScrollSpy = () => {
