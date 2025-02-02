@@ -12,7 +12,7 @@
     min-height: 100vh; /* ✅ Forces full height on all screens */
   }
 
-  /* ✅ Default Background for All Screens */
+  /* ✅ Default Background for All Screens (Now with a dimming overlay) */
   body::before {
     content: "";
     position: fixed;
@@ -20,7 +20,9 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: url("/src/assets/IMG_06902.jpg") no-repeat center center;
+    /* Combine a dimming gradient with your background image */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url("/src/assets/IMG_06902.jpg") no-repeat center center;
     background-size: cover; /* ✅ Ensures it covers the entire screen */
     background-attachment: fixed;
     z-index: -1; /* ✅ Places it behind everything */
