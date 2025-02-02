@@ -45,7 +45,7 @@ const Work: React.FC = () => {
 
   // Optional: If your SPA doesn't unmount the Work component on navigation,
   // uncomment the following useEffect to reset animations each time the work section becomes visible.
-  /*
+
   useEffect(() => {
     const workSection = document.getElementById("work");
     const resetObserver = new IntersectionObserver(
@@ -64,7 +64,6 @@ const Work: React.FC = () => {
       if (workSection) resetObserver.unobserve(workSection);
     };
   }, []);
-  */
 
   // Define your project data.
   const projects = [
