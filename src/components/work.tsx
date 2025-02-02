@@ -1,13 +1,67 @@
 import React, { useEffect, useState, useRef } from "react";
 
 const Work: React.FC = () => {
-  const [animatedProjects, setAnimatedProjects] = useState<boolean[]>([
-    false,
-    false,
-    false,
-  ]);
+  // Define your project data upfront.
+  const projects = [
+    {
+      title: "Game Hub",
+      description:
+        "A fun web app showcasing video games across platforms - Like I said, I like video games.",
+      link: "https://github.com/DillanMilo/game-hub",
+      animation: "animate-slideInLeftToCenter",
+      delay: "delay-[200ms]",
+    },
+    {
+      title: "Reddit Mini",
+      description:
+        "A bite-sized Reddit experience with dynamic content loading—because dynamite comes in small packages.",
+      link: "https://github.com/DillanMilo/reddit-mini",
+      animation: "animate-slideInRightToCenter",
+      delay: "delay-[600ms]",
+    },
+    {
+      title: "Spotify App",
+      description:
+        "A playlist builder with Spotify integration—Silence isn't always golden.",
+      link: "https://github.com/DillanMilo/Jamming-With-Spotify",
+      animation: "animate-slideInLeftToCenter",
+      delay: "delay-[1000ms]",
+    },
+  ];
+
+  // State to track if each project has animated.
+  const [animatedProjects, setAnimatedProjects] = useState<boolean[]>(
+    new Array(projects.length).fill(false)
+  );
+  // State to detect if the Work section is visible.
+  const [workVisible, setWorkVisible] = useState(false);
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Reset project animations each time the Work section becomes visible.
+  useEffect(() => {
+    const workSection = document.getElementById("work");
+    if (!workSection) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !workVisible) {
+            setWorkVisible(true);
+            // Reset all project animations so they replay on each visit.
+            setAnimatedProjects(new Array(projects.length).fill(false));
+          } else if (!entry.isIntersecting && workVisible) {
+            setWorkVisible(false);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(workSection);
+    return () => {
+      observer.disconnect();
+    };
+  }, [workVisible, projects.length]);
+
+  // Intersection Observer to trigger animations for each project.
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -39,34 +93,6 @@ const Work: React.FC = () => {
       });
     };
   }, []);
-
-  // Define project data with their respective animations
-  const projects = [
-    {
-      title: "Game Hub",
-      description:
-        "A fun web app showcasing video games across platforms - Like I said, I like video games.",
-      link: "https://github.com/DillanMilo/game-hub",
-      animation: "animate-slideInLeftToCenter",
-      delay: "delay-[200ms]",
-    },
-    {
-      title: "Reddit Mini",
-      description:
-        "A bite-sized Reddit experience with dynamic content loading—because dynamite comes in small packages.",
-      link: "https://github.com/DillanMilo/reddit-mini",
-      animation: "animate-slideInRightToCenter",
-      delay: "delay-[600ms]",
-    },
-    {
-      title: "Spotify App",
-      description:
-        "A playlist builder with Spotify integration—Silence isn't always golden.",
-      link: "https://github.com/DillanMilo/Jamming-With-Spotify",
-      animation: "animate-slideInLeftToCenter",
-      delay: "delay-[1000ms]",
-    },
-  ];
 
   return (
     <section
