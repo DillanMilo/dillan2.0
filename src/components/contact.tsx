@@ -86,7 +86,7 @@ const Contact: React.FC = () => {
       {/* Contact Handles - Positioned in a row at the bottom */}
       <div
         ref={handlesRef}
-        className="absolute bottom-25 sm:bottom-6 gap-5 left-1/2 transform -translate-x-1/2 flex flex-nowrap items-center sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap transition-opacity duration-1000 opacity-0 animate-fadeIn"
+        className="absolute bottom-5 sm:bottom-6 gap-5 left-1/2 transform -translate-x-1/2 flex flex-nowrap items-center sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap transition-opacity duration-1000 opacity-0 animate-fadeIn"
       >
         {[
           {
