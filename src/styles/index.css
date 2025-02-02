@@ -47,12 +47,9 @@
     background-attachment: fixed;
     opacity: 1; /* ✅ Make sure it's fully visible */
     animation: fadeIn 2.5s ease-in-out forwards;
-    z-index: -1; /* ✅ Behind content but above main background */
+    z-index: 0; /* ✅ Adjusted to ensure visibility behind content */
   }
 }
-
-
-
 
 /* ✅ Mobile Landscape Blocker */
 @layer utilities {
@@ -87,7 +84,8 @@
 /* ✅ Adjust Background Image for Mobile - Only for `8xq1yhiw09q41.jpg` */
 @media (max-width: 768px) {
   #contact {
-     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
     background-size: 300% auto !important; /* ✅ Zooms in 170% */
     background-position: center top !important; /* ✅ Centers the image */
     background-repeat: no-repeat !important; /* ✅ Prevents repeating */
