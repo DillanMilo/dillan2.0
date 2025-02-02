@@ -55,7 +55,7 @@ const Info: React.FC = () => {
       </p>
 
       {/* Description */}
-      <p className="text-[1.8rem] mt-10 sm:text-[2rem] md:text-[2.5rem] text-slateGreen font-bebas max-w-[600px] opacity-0 leading-relaxed">
+      <p className=" text-slateGreen text-[1.8rem] mt-10 sm:text-[2rem] md:text-[2.5rem] text-slateGreen font-bebas max-w-[600px] opacity-0 leading-relaxed">
         Design meets functionality in my world of UI/UX development. I
         specialize in turning concepts into interactive experiences, balancing
         creativity with code to bring ideas to life. I love Nature, Food, and

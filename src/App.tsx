@@ -56,7 +56,7 @@ function App() {
     <div className="min-h-screen text-white">
       {/* ✅ Mobile Landscape Overlay (Hides SPA when in landscape mode) */}
       {isLandscape && (
-        <div className="fixed inset-0 bg-black flex items-center justify-center text-white text-center z-50 opacity-0 animate-fadeIn md:hidden">
+        <div className="fixed inset-0 bg-black flex items-center justify-center text-red-600 text-center z-50 opacity-0 animate-fadeIn">
           <p className="text-2xl md:text-3xl font-bebas tracking-wide">
             No no, turn your phone upright for the best experience ;)
           </p>
