@@ -86,7 +86,7 @@
 /* ✅ Adjust Background Image for Mobile - Only for `8xq1yhiw09q41.jpg` */
 @media (max-width: 768px) {
   #contact {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), 
                 url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
     background-size: 300% auto !important; /* ✅ Zooms in 170% */
     background-position: center top !important; /* ✅ Centers the image */
@@ -182,7 +182,7 @@
   .animate-expandText { animation: expandText 1.5s ease-in-out forwards; transform-origin: center; }
   .animate-slideInLeftToCenter { animation: slideInLeftToCenter 1.5s ease-in-out forwards; }
   .animate-slideInRightToCenter { animation: slideInRightToCenter 1.5s ease-in-out forwards; }
-
+  
   /* ✅ Hide Scrollbars While Keeping Scroll Functionality */
   .no-scrollbar {
     -ms-overflow-style: none;
@@ -201,5 +201,16 @@
 @supports (-webkit-touch-callout: none) {
   body::before {
     background-attachment: scroll;
+  }
+}
+
+/* ----- NEW: Adjust h1 centering for very small mobile screens ----- */
+@media (max-width: 425px) {
+  #info h1 {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    max-width: 100% !important;
   }
 }
