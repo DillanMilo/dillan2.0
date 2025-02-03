@@ -50,7 +50,7 @@ const Home: React.FC = () => {
 
       {/* Intro Description (Loads in Last) */}
       <p
-        className="absolute bottom-20 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
+        className="absolute bottom-25 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
         style={{ animationDelay: "2000ms" }}
       >
         I’m a creative UI and UX developer who loves crafting beautiful and
