@@ -306,5 +306,10 @@
   #home > div:first-child {
     bottom: 2rem !important;
   }
+
+  /* shift the projects a little closer together */ 
+  #work > div {
+    margin-top: -2rem !important;
+  }
    
 }
