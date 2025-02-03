@@ -247,3 +247,20 @@
   }
   
 }
+@media (max-width: 640px) {
+/* adjust linear gradient for background image */ 
+  #contact {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
+    background-size: 300% auto !important; /* ✅ Zooms in 170% */
+    background-position: center top !important; /* ✅ Centers the image */
+    background-repeat: no-repeat !important; /* ✅ Prevents repeating */
+    background-attachment: scroll !important; /* ✅ Ensures it scrolls smoothly */
+  }
+  /* Shift the first child (caption container) upward */
+  #contact > div:first-child {
+    margin-top: 10rem !important;
+  }
+  
+
+}
