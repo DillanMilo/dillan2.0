@@ -206,6 +206,13 @@
 
 /* ----- NEW: Adjust project container and text sizes in the Work section for very small mobile screens ----- */
 @media (max-width: 425px) {
+  #info h1 {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    max-width: 100% !important;
+  }
   #work > div {
     max-width: 95% !important;
     margin-left: auto !important;
