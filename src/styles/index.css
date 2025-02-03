@@ -248,7 +248,7 @@
   
 }
 @media (max-width: 640px) {
-/* adjust linear gradient for background image */ 
+  /* adjust linear gradient for background image */ 
   #contact {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
                 url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
@@ -261,6 +261,11 @@
   #contact > div:first-child {
     margin-top: 10rem !important;
   }
-  
+}
 
+/* ----- NEW: Adjust Work Section for Tablets in Portrait Mode ----- */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  #work {
+    min-height: 100vh !important;
+  }
 }
