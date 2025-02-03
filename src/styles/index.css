@@ -225,3 +225,15 @@
     font-size: 1.5rem !important;
   }
 }
+
+/* ----- NEW: Shift Contact Content Higher on Small Screens ----- */
+@media (max-width: 425px) {
+  /* Reduce top padding on the contact section */
+  #contact {
+    padding-top: 0rem !important;
+  }
+  /* Shift the first child (caption container) upward */
+  #contact > div:first-child {
+    margin-top: 12rem !important;
+  }
+}
