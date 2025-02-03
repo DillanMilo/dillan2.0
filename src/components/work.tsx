@@ -7,7 +7,7 @@ const Work: React.FC = () => {
       title: "Game Hub",
       description:
         "A fun web app showcasing video games across platforms - Like I said, I like video games.",
-      link: "https://github.com/DillanMilo/game-hub",
+      link: "https://game-hub-x.vercel.app/",
       animation: "animate-slideInLeftToCenter",
       delay: "delay-[200ms]",
     },
@@ -15,7 +15,7 @@ const Work: React.FC = () => {
       title: "Reddit Mini",
       description:
         "A bite-sized Reddit experience with dynamic content loading—because dynamite comes in small packages.",
-      link: "https://github.com/DillanMilo/reddit-mini",
+      link: "https://reddit-mini-app.vercel.app/",
       animation: "animate-slideInRightToCenter",
       delay: "delay-[600ms]",
     },
@@ -23,7 +23,7 @@ const Work: React.FC = () => {
       title: "Spotify App",
       description:
         "A playlist builder with Spotify integration—Silence isn't always golden.",
-      link: "https://github.com/DillanMilo/Jamming-With-Spotify",
+      link: "",
       animation: "animate-slideInLeftToCenter",
       delay: "delay-[1000ms]",
     },
