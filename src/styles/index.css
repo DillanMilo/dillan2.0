@@ -194,7 +194,7 @@
 }
 
 /* Custom Text Colors */
-.text-slateGreen { color: #a8b2ac; }
+.text-slateGreen { color: #f5f5dc; }
 .text-paleRed { color: rgb(239, 84, 84); }
 
 /* iOS-specific override to ensure consistent background image appearance */
