@@ -271,14 +271,11 @@
    /* adjust intro description higher in the home section */
   #home > div:first-child {
     bottom: 8rem !important;
-  
-}
-
-/* adjust work projects to shift lower on screen */
+  }
+  /* shift the work projects to shift lower on screen */
   #work > div {
     margin-top: 5rem !important;
   }
-  
   /* add src/assets/8xq1yhiw09q41.jpg as background image */
   #contact {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
@@ -288,10 +285,9 @@
     background-repeat: no-repeat !important; /* ✅ Prevents repeating */
     background-attachment: scroll !important; /* ✅ Ensures it scrolls smoothly */
   }
-
 }
 
-/* ----- NEW: Adjust Tablets in landscape Mode ----- */
+/* ----- NEW: Adjust Tablets in Landscape Mode ----- */
 @media (min-width: 1025px) and (orientation: landscape) {
   #contact {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
@@ -301,12 +297,14 @@
     background-repeat: no-repeat !important; /* ✅ Prevents repeating */
     background-attachment: scroll !important; /* ✅ Ensures it scrolls smoothly */
   }
-
+  /* make caption bigger in contact section */
+  #contact > div:first-child {
+    margin-top: 10rem !important;
+  }
   /* shift the intro description in home higher */
   #home > div:first-child {
     bottom: 2rem !important;
   }
-
   /* shift the projects a little closer together */ 
   #work > div {
     margin-top: 0rem !important;
@@ -314,8 +312,18 @@
   #work {
     min-height: 100vh !important;
   }
-   
-  #info {
-    min-height: 100vh !important;
+}
+
+/* ----- NEW: Increase Caption and Rotating Word Sizes on Larger Screens ----- */
+@media (min-width: 1025px) {
+  /* Increase the font size of the contact caption */
+  #contact > div:first-child h2 {
+    font-size: 7rem !important;
+  }
+  /* Increase the font size of the rotating words */
+  #contact > div:first-child div > div > span {
+    font-size: 7.5rem !important;
+    line-height: 11rem !important;
+    height: 6rem !important;
   }
 }
