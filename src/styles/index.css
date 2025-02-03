@@ -268,4 +268,16 @@
   #work {
     min-height: 100vh !important;
   }
+   /* adjust intro description higher in the home section */
+  #home > div:first-child {
+    bottom: 8rem !important;
+  
+}
+
+/* adjust work projects to shift lower on screen */
+  #work > div {
+    margin-top: 5rem !important;
+  }
+
+  
 }
