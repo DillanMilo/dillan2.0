@@ -302,5 +302,9 @@
     background-attachment: scroll !important; /* ✅ Ensures it scrolls smoothly */
   }
 
+  /* shift the intro description in home higher */
+  #home > div:first-child {
+    bottom: 2rem !important;
+  }
    
 }
