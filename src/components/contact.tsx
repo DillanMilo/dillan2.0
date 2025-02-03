@@ -86,7 +86,7 @@ const Contact: React.FC = () => {
       {/* Contact Handles - Positioned in a row at the bottom */}
       <div
         ref={handlesRef}
-        className="absolute bottom-20 sm:bottom-6 gap-3 left-1/2 transform -translate-x-1/2 flex flex-nowrap items-center sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap transition-opacity duration-1000 opacity-0 animate-fadeIn"
+        className="absolute bottom-20 sm:bottom-25 gap-3 left-1/2 transform -translate-x-1/2 flex flex-nowrap items-center sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap transition-opacity duration-1000 opacity-0 animate-fadeIn"
       >
         {[
           {
@@ -106,7 +106,7 @@ const Contact: React.FC = () => {
             href={handle.link}
             target="_blank"
             rel="noreferrer"
-            className="text-2xl  sm:text-3xl md:text-5xl font-bebas text-red-600 transition-all duration-300 hover:text-red-400 whitespace-nowrap"
+            className="text-2xl sm:text-3xl md:text-5xl font-bebas text-red-600 transition-all duration-300 hover:text-red-400 whitespace-nowrap"
           >
             {handle.name}
           </a>
