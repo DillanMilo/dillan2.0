@@ -55,7 +55,7 @@ const Contact: React.FC = () => {
       className="relative h-screen flex flex-col justify-start items-center text-center pt-20 bg-cover bg-center bg-fixed text-white px-4 sm:px-6"
       style={{
         backgroundImage:
-          "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('public/8xq1yhiw09q41.webp')",
+          "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/8xq1yhiw09q41.webp')",
       }}
     >
       {/* Caption - Adjusted for Mobile */}
