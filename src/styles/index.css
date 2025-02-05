@@ -22,7 +22,7 @@
     height: 100vh;
     /* Combine a dimming gradient with your background image */
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-                url("/src/assets/IMG_06902.jpg") no-repeat center center;
+                url("/IMG_06902.webp") no-repeat center center;
     background-size: cover; /* ✅ Ensures it covers the entire screen */
     background-attachment: fixed;
     z-index: -1; /* ✅ Places it behind everything */
@@ -194,7 +194,7 @@
 }
 
 /* Custom Text Colors */
-.text-slateGreen { color: #f5f5dc; }
+.text-slateGreen { color: #a8b2ac; }
 .text-paleRed { color: rgb(239, 84, 84); }
 
 /* iOS-specific override to ensure consistent background image appearance */
@@ -240,22 +240,21 @@
   #contact {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
                 url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
-    background-size: 300% auto !important; /* ✅ Zooms in 170% */
-    background-position: center top !important; /* ✅ Centers the image */
-    background-repeat: no-repeat !important; /* ✅ Prevents repeating */
-    background-attachment: scroll !important; /* ✅ Ensures it scrolls smoothly */
+    background-size: 300% auto !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
   }
-  
 }
 @media (max-width: 640px) {
   /* adjust linear gradient for background image */ 
   #contact {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
                 url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
-    background-size: 300% auto !important; /* ✅ Zooms in 170% */
-    background-position: center top !important; /* ✅ Centers the image */
-    background-repeat: no-repeat !important; /* ✅ Prevents repeating */
-    background-attachment: scroll !important; /* ✅ Ensures it scrolls smoothly */
+    background-size: 300% auto !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
   }
   /* Shift the first child (caption container) upward */
   #contact > div:first-child {
@@ -280,10 +279,10 @@
   #contact {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
                 url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
-    background-size: 300% auto !important; /* ✅ Zooms in 170% */
-    background-position: center top !important; /* ✅ Centers the image */
-    background-repeat: no-repeat !important; /* ✅ Prevents repeating */
-    background-attachment: scroll !important; /* ✅ Ensures it scrolls smoothly */
+    background-size: 300% auto !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
   }
 }
 
@@ -292,10 +291,10 @@
   #contact {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
                 url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
-    background-size: 150% auto !important; /* ✅ Zooms in 170% */
-    background-position: center top !important; /* ✅ Centers the image */
-    background-repeat: no-repeat !important; /* ✅ Prevents repeating */
-    background-attachment: scroll !important; /* ✅ Ensures it scrolls smoothly */
+    background-size: 150% auto !important;
+    background-position: center top !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
   }
   /* make caption bigger in contact section */
   #contact > div:first-child {
@@ -318,12 +317,12 @@
 @media (min-width: 1025px) {
   /* Increase the font size of the contact caption */
   #contact > div:first-child h2 {
-    font-size: 7rem !important;
+    font-size: 8rem !important;
   }
   /* Increase the font size of the rotating words */
-  #contact > div:first-child div > div > span {
+  #contact > div:first-child div.relative > div.relative > span {
     font-size: 7.5rem !important;
-    line-height: 11rem !important;
+    line-height: 10rem !important;
     height: 6rem !important;
   }
 }
