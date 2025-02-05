@@ -87,7 +87,7 @@
 @media (max-width: 768px) {
   #contact {
     background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), 
-                url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
+                url("/8xq1yhiw09q41.webp") no-repeat center top !important;
     background-size: 300% auto !important; /* ✅ Zooms in 170% */
     background-position: center top !important; /* ✅ Centers the image */
     background-repeat: no-repeat !important; /* ✅ Prevents repeating */
@@ -239,7 +239,7 @@
   /* adjust linear gradient for background image */ 
   #contact {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
+                url("/8xq1yhiw09q41.webp") no-repeat center top !important;
     background-size: 300% auto !important;
     background-position: center top !important;
     background-repeat: no-repeat !important;
@@ -250,7 +250,7 @@
   /* adjust linear gradient for background image */ 
   #contact {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
+                url("/8xq1yhiw09q41.webp") no-repeat center top !important;
     background-size: 300% auto !important;
     background-position: center top !important;
     background-repeat: no-repeat !important;
@@ -275,10 +275,10 @@
   #work > div {
     margin-top: 5rem !important;
   }
-  /* add src/assets/8xq1yhiw09q41.jpg as background image */
+  /* add public/8xq1yhiw09q41.webp as background image */
   #contact {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
+                url("/8xq1yhiw09q41.webp") no-repeat center top !important;
     background-size: 300% auto !important;
     background-position: center top !important;
     background-repeat: no-repeat !important;
@@ -290,7 +290,7 @@
 @media (min-width: 1025px) and (orientation: landscape) {
   #contact {
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url("/src/assets/8xq1yhiw09q41.jpg") no-repeat center top !important;
+                url("/8xq1yhiw09q41.webp") no-repeat center top !important;
     background-size: 150% auto !important;
     background-position: center top !important;
     background-repeat: no-repeat !important;
