@@ -14,12 +14,30 @@ const Contact: React.FC = () => {
   const handlesRef = useRef<HTMLDivElement>(null);
   const [visibleIndex, setVisibleIndex] = useState(0);
 
-  // Rotate words every 2 seconds
+  // Set meta data manually without Helmet
+  useEffect(() => {
+    // Update document title
+    document.title = "Contact - Dillan Milosevich";
+
+    // Update meta description
+    const metaDescription = document.querySelector("meta[name='description']");
+    const contentText =
+      "Connect with Dillan Milosevich, a creative UI/UX developer who builds engaging, functional websites.";
+    if (metaDescription) {
+      metaDescription.setAttribute("content", contentText);
+    } else {
+      const meta = document.createElement("meta");
+      meta.name = "description";
+      meta.content = contentText;
+      document.head.appendChild(meta);
+    }
+  }, []);
+
+  // Rotate words every 1.5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setVisibleIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
     }, 1500);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -41,9 +59,7 @@ const Contact: React.FC = () => {
       },
       { threshold: 0.5 }
     );
-
     if (handlesRef.current) observer.observe(handlesRef.current);
-
     return () => {
       if (handlesRef.current) observer.unobserve(handlesRef.current);
     };

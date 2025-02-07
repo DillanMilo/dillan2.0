@@ -3,12 +3,33 @@ import React, { useEffect, useRef } from "react";
 const Info: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
+  // Set meta data for the Info page without Helmet
+  useEffect(() => {
+    // Set the document title
+    document.title = "Info - Dillan Milosevich";
+
+    // Define the meta description content for the Info page
+    const infoDescription =
+      "Learn more about Dillan Milosevich, a creative UI/UX developer specializing in turning concepts into interactive experiences and blending art with code.";
+
+    // Update or create the meta description tag
+    let metaDescription = document.querySelector("meta[name='description']");
+    if (metaDescription) {
+      metaDescription.setAttribute("content", infoDescription);
+    } else {
+      metaDescription = document.createElement("meta");
+      metaDescription.setAttribute("name", "description");
+      metaDescription.setAttribute("content", infoDescription);
+      document.head.appendChild(metaDescription);
+    }
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
         if (entry?.isIntersecting) {
-          // Update: query for h2 instead of h1
+          // Query for h2 (since we're using an H2 for the title)
           sectionRef.current
             ?.querySelector("h2")
             ?.classList.add("animate-expandText");
@@ -56,7 +77,7 @@ const Info: React.FC = () => {
       </p>
 
       {/* Description */}
-      <p className="text-slateGreen text-[1.6rem] mt-10 mb-10 sm:text-[2rem] md:text-[2.5rem] text-slateGreen font-bebas max-w-[600px] opacity-0 leading-relaxed">
+      <p className="text-slateGreen text-[1.6rem] mt-10 mb-10 sm:text-[2rem] md:text-[2.5rem] text-slateGreen font-bebas max-w-[600px] opacity-0 leading-relaxed text-slateGreen">
         Design meets functionality in my world of UI/UX development. I
         specialize in turning concepts into interactive experiences, balancing
         creativity with code to bring ideas to life. I love Nature, Food, and

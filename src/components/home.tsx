@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import bgImageMobile from "../assets/IMG_07154.jpg"; // Mobile Background
 
 const Home: React.FC = () => {
+  useEffect(() => {
+    // Set the document title for the Home page
+    document.title = "Home - Dillan Milosevich";
+
+    // Define the meta description content for the Home page
+    const homeDescription =
+      "Welcome to Dillan Milosevich's personal website. Explore creative projects and learn about a dedicated UI/UX developer who builds engaging, functional websites.";
+
+    // Find an existing meta description tag, or create one if it doesn't exist
+    let metaDescription = document.querySelector("meta[name='description']");
+    if (metaDescription) {
+      metaDescription.setAttribute("content", homeDescription);
+    } else {
+      metaDescription = document.createElement("meta");
+      metaDescription.setAttribute("name", "description");
+      metaDescription.setAttribute("content", homeDescription);
+      document.head.appendChild(metaDescription);
+    }
+  }, []);
+
   return (
     <div
       id="home"
