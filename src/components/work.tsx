@@ -1,6 +1,24 @@
+// src/components/work.tsx
 import React, { useEffect, useState, useRef } from "react";
 
 const Work: React.FC = () => {
+  // Set meta data for the Work page without Helmet
+  useEffect(() => {
+    document.title = "Work - Dillan Milosevich";
+    const workDescription =
+      "Explore the portfolio of Dillan Milosevich, a creative UI/UX developer showcasing innovative projects in web design and development.";
+
+    let metaDescription = document.querySelector("meta[name='description']");
+    if (metaDescription) {
+      metaDescription.setAttribute("content", workDescription);
+    } else {
+      metaDescription = document.createElement("meta");
+      metaDescription.setAttribute("name", "description");
+      metaDescription.setAttribute("content", workDescription);
+      document.head.appendChild(metaDescription);
+    }
+  }, []);
+
   // Define your project data upfront.
   const projects = [
     {
