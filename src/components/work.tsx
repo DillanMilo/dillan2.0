@@ -23,7 +23,6 @@ const Work: React.FC = () => {
       title: "Spotify App",
       description:
         "A playlist builder with Spotify integration—Silence isn't always golden.",
-      link: "",
       animation: "animate-slideInLeftToCenter",
       delay: "delay-[1000ms]",
     },
