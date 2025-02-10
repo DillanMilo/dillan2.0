@@ -78,10 +78,10 @@ const Info: React.FC = () => {
 
       {/* Description */}
       <p className="text-slateGreen text-[1.6rem] mt-10 mb-10 sm:text-[2rem] md:text-[2.5rem] text-slateGreen font-bebas max-w-[600px] opacity-0 leading-relaxed text-slateGreen">
-        Design meets functionality in my world of UI/UX development. I
-        specialize in turning concepts into interactive experiences, balancing
-        creativity with code to bring ideas to life. I love Nature, Food, and
-        Video Games—three passions that fuel my creativity in unexpected ways.
+        I’m a UI/UX developer who believes design should feel as effortless as
+        doomscrolling at 2 AM. I love nature, food, and gaming, all of which
+        fuel my creativity. Let’s build something intuitive, fun, and maybe even
+        a little cheeky and make the web better with your idea.
       </p>
     </section>
   );
