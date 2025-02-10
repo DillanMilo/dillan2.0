@@ -5,6 +5,7 @@ import Info from "./components/info";
 import Work from "./components/work";
 import Contact from "./components/contact";
 import { useEffect, useState } from "react";
+import { Analytics } from "@vercel/analytics/react"; // Added Vercel Analytics import
 
 function App() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -101,6 +102,8 @@ function App() {
           </section>
         </>
       )}
+      {/* Vercel Analytics Component - Added at the end so it renders on every page */}
+      <Analytics />
     </div>
   );
 }
