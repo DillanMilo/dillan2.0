@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const rotatingWords = [
-  "UI",
-  "UX",
   "Design",
-  "Functionality",
-  "Responsive Design",
   "Web Development",
+  "Functionality",
+  "UI",
+  "Responsive Design",
+  "UX",
   "Videogames",
 ];
 
