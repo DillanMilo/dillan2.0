@@ -8,7 +8,21 @@ const rotatingWords = [
   "Responsive Design",
   "UX",
   "Videogames",
-];
+] as const;
+
+const socialLinks = [
+  {
+    name: "LinkedIn",
+    link: "https://www.linkedin.com/in/dillan-milosevich-9a817891/",
+  },
+  { name: "X", link: "https://twitter.com/dillanx1x" },
+  { name: "Email", link: "mailto:dillanxx@gmail.com" },
+  { name: "GitHub", link: "https://github.com/DillanMilo" },
+  { name: "ENS", link: "https://app.ens.domains/dillanxx.eth" },
+  { name: "SNS", link: "https://sns.id/domain?domain=dillanxx" },
+  { name: "BNS", link: "https://app.ens.domains/dillanxx.base.eth" },
+  { name: "Call", link: "tel:+12812108139" },
+] as const;
 
 const Contact: React.FC = () => {
   const handlesRef = useRef<HTMLDivElement>(null);
@@ -142,19 +156,7 @@ const Contact: React.FC = () => {
         ref={handlesRef}
         className="absolute bottom-20 sm:bottom-25 gap-3 left-1/2 transform -translate-x-1/2 flex flex-nowrap items-center sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap transition-opacity duration-1000 opacity-0 animate-fadeIn"
       >
-        {[
-          {
-            name: "LinkedIn",
-            link: "https://www.linkedin.com/in/dillan-milosevich-9a817891/",
-          },
-          { name: "X", link: "https://twitter.com/dillanx1x" },
-          { name: "Email", link: "mailto:dillanxx@gmail.com" },
-          { name: "GitHub", link: "https://github.com/DillanMilo" },
-          { name: "ENS", link: "https://app.ens.domains/dillanxx.eth" },
-          { name: "SNS", link: "https://sns.id/domain?domain=dillanxx" },
-          { name: "BNS", link: "https://app.ens.domains/dillanxx.base.eth" },
-          { name: "Call", link: "tel:+12812108139" },
-        ].map((handle, index) => (
+        {socialLinks.map((handle, index) => (
           <a
             key={index}
             href={handle.link}
