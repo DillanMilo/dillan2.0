@@ -4,22 +4,61 @@ import bgImageMobile from "../assets/IMG_07154.jpg"; // Mobile Background
 const Home: React.FC = () => {
   useEffect(() => {
     // Set the document title for the Home page
-    document.title = "Home - Dillan Milosevich";
+    document.title = "Dillan Milosevich | Creative Front-End Developer";
 
-    // Define the meta description content for the Home page
-    const homeDescription =
-      "Welcome to Dillan Milosevich's personal website. Explore creative projects and learn about a dedicated UI/UX developer who builds engaging, functional websites.";
+    // Define meta tag contents
+    const metaTags = {
+      description:
+        "Welcome to Dillan Milosevich's portfolio - a creative front-end developer specializing in beautiful, functional websites. Explore my projects and UI/UX development work.",
+      keywords:
+        "Dillan Milosevich, Front-End Developer, UI/UX Developer, Web Development, React Developer, Creative Developer, Website Design",
+      author: "Dillan Milosevich",
+      "og:title": "Dillan Milosevich | Creative Front-End Developer",
+      "og:description":
+        "Creative front-end developer crafting beautiful and functional websites. Explore my portfolio and web development projects.",
+      "og:type": "website",
+      "og:url": window.location.href,
+      "twitter:card": "summary_large_image",
+      "twitter:title": "Dillan Milosevich | Creative Front-End Developer",
+      "twitter:description":
+        "Creative front-end developer crafting beautiful and functional websites. Explore my portfolio and web development projects.",
+      robots: "index, follow",
+      canonical: window.location.href,
+    };
 
-    // Find an existing meta description tag, or create one if it doesn't exist
-    let metaDescription = document.querySelector("meta[name='description']");
-    if (metaDescription) {
-      metaDescription.setAttribute("content", homeDescription);
-    } else {
-      metaDescription = document.createElement("meta");
-      metaDescription.setAttribute("name", "description");
-      metaDescription.setAttribute("content", homeDescription);
-      document.head.appendChild(metaDescription);
+    // Function to create or update meta tags
+    const updateMetaTag = (name: string, content: string) => {
+      let metaTag =
+        document.querySelector(`meta[name='${name}']`) ||
+        document.querySelector(`meta[property='${name}']`);
+
+      if (metaTag) {
+        metaTag.setAttribute("content", content);
+      } else {
+        metaTag = document.createElement("meta");
+        if (name.startsWith("og:")) {
+          metaTag.setAttribute("property", name);
+        } else {
+          metaTag.setAttribute("name", name);
+        }
+        metaTag.setAttribute("content", content);
+        document.head.appendChild(metaTag);
+      }
+    };
+
+    // Create or update canonical link
+    let canonicalLink = document.querySelector("link[rel='canonical']");
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
     }
+    canonicalLink.setAttribute("href", metaTags.canonical);
+
+    // Apply all meta tags
+    Object.entries(metaTags).forEach(([name, content]) => {
+      updateMetaTag(name, content);
+    });
   }, []);
 
   return (
@@ -73,7 +112,7 @@ const Home: React.FC = () => {
         className="absolute bottom-25 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
         style={{ animationDelay: "2000ms" }}
       >
-        I’m a creative front-end developer who loves crafting beautiful and
+        I'm a creative front-end developer who loves crafting beautiful and
         functional websites. My passion lies in blending art with code to bring
         ideas to life.
       </p>

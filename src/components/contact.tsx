@@ -16,21 +16,59 @@ const Contact: React.FC = () => {
 
   // Set meta data manually without Helmet
   useEffect(() => {
-    // Update document title
-    document.title = "Contact - Dillan Milosevich";
+    const metaTags = {
+      description:
+        "Connect with Dillan Milosevich - Find me on LinkedIn, Twitter, GitHub, or reach out via email to discuss web development projects and opportunities.",
+      keywords:
+        "Contact Dillan Milosevich, Developer Contact, Web Development Collaboration, Hire Front-End Developer",
+      author: "Dillan Milosevich",
+      "og:title": "Contact Dillan Milosevich | Let's Connect",
+      "og:description":
+        "Ready to bring your web project to life? Connect with Dillan Milosevich through various social platforms or direct contact methods.",
+      "og:type": "website",
+      "og:url": window.location.href,
+      "twitter:card": "summary_large_image",
+      "twitter:title": "Contact Dillan Milosevich | Let's Connect",
+      "twitter:description":
+        "Ready to bring your web project to life? Connect with Dillan Milosevich through various social platforms or direct contact methods.",
+      robots: "index, follow",
+      canonical: window.location.href,
+    };
 
-    // Update meta description
-    const metaDescription = document.querySelector("meta[name='description']");
-    const contentText =
-      "Connect with Dillan Milosevich, a creative UI/UX developer who builds engaging, functional websites.";
-    if (metaDescription) {
-      metaDescription.setAttribute("content", contentText);
-    } else {
-      const meta = document.createElement("meta");
-      meta.name = "description";
-      meta.content = contentText;
-      document.head.appendChild(meta);
+    document.title = "Contact | Dillan Milosevich";
+
+    const updateMetaTag = (name: string, content: string) => {
+      let metaTag =
+        document.querySelector(`meta[name='${name}']`) ||
+        document.querySelector(`meta[property='${name}']`);
+
+      if (metaTag) {
+        metaTag.setAttribute("content", content);
+      } else {
+        metaTag = document.createElement("meta");
+        if (name.startsWith("og:")) {
+          metaTag.setAttribute("property", name);
+        } else {
+          metaTag.setAttribute("name", name);
+        }
+        metaTag.setAttribute("content", content);
+        document.head.appendChild(metaTag);
+      }
+    };
+
+    // Create or update canonical link
+    let canonicalLink = document.querySelector("link[rel='canonical']");
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
     }
+    canonicalLink.setAttribute("href", metaTags.canonical);
+
+    // Apply all meta tags
+    Object.entries(metaTags).forEach(([name, content]) => {
+      updateMetaTag(name, content);
+    });
   }, []);
 
   // Rotate words every 1.5 seconds
@@ -77,7 +115,7 @@ const Contact: React.FC = () => {
       {/* Caption - Adjusted for Mobile */}
       <div className="mt-66 sm:mt-40">
         <h2 className="text-5xl sm:text-8xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
-          Let’s connect and chat about
+          Let's connect and chat about
         </h2>
 
         {/* Slot Machine Effect - Adjusted for Mobile */}

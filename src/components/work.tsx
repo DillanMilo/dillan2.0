@@ -4,19 +4,59 @@ import React, { useEffect, useState, useRef } from "react";
 const Work: React.FC = () => {
   // Set meta data for the Work page without Helmet
   useEffect(() => {
-    document.title = "Work - Dillan Milosevich";
-    const workDescription =
-      "Explore the portfolio of Dillan Milosevich, a creative UI/UX developer showcasing innovative projects in web design and development.";
+    document.title = "Work & Projects | Dillan Milosevich";
 
-    let metaDescription = document.querySelector("meta[name='description']");
-    if (metaDescription) {
-      metaDescription.setAttribute("content", workDescription);
-    } else {
-      metaDescription = document.createElement("meta");
-      metaDescription.setAttribute("name", "description");
-      metaDescription.setAttribute("content", workDescription);
-      document.head.appendChild(metaDescription);
+    const metaTags = {
+      description:
+        "Explore Dillan Milosevich's portfolio featuring innovative web development projects, including Game Hub, Reddit Mini, and Spotify integrations.",
+      keywords:
+        "Web Development Projects, Game Hub, Reddit Mini, Spotify App, Portfolio, Front-End Development, UI/UX Projects",
+      author: "Dillan Milosevich",
+      "og:title": "Work & Projects | Dillan Milosevich",
+      "og:description":
+        "Discover creative web development projects by Dillan Milosevich. From gaming platforms to social media integrations.",
+      "og:type": "website",
+      "og:url": window.location.href,
+      "twitter:card": "summary_large_image",
+      "twitter:title": "Work & Projects | Dillan Milosevich",
+      "twitter:description":
+        "Discover creative web development projects by Dillan Milosevich. From gaming platforms to social media integrations.",
+      robots: "index, follow",
+      canonical: window.location.href,
+    };
+
+    const updateMetaTag = (name: string, content: string) => {
+      let metaTag =
+        document.querySelector(`meta[name='${name}']`) ||
+        document.querySelector(`meta[property='${name}']`);
+
+      if (metaTag) {
+        metaTag.setAttribute("content", content);
+      } else {
+        metaTag = document.createElement("meta");
+        if (name.startsWith("og:")) {
+          metaTag.setAttribute("property", name);
+        } else {
+          metaTag.setAttribute("name", name);
+        }
+        metaTag.setAttribute("content", content);
+        document.head.appendChild(metaTag);
+      }
+    };
+
+    // Create or update canonical link
+    let canonicalLink = document.querySelector("link[rel='canonical']");
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
     }
+    canonicalLink.setAttribute("href", metaTags.canonical);
+
+    // Apply all meta tags
+    Object.entries(metaTags).forEach(([name, content]) => {
+      updateMetaTag(name, content);
+    });
   }, []);
 
   // Define your project data upfront.

@@ -3,25 +3,60 @@ import React, { useEffect, useRef } from "react";
 const Info: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Set meta data for the Info page without Helmet
   useEffect(() => {
-    // Set the document title
-    document.title = "Info - Dillan Milosevich";
+    const metaTags = {
+      description:
+        "Get to know Dillan Milosevich - a creative front-end developer passionate about intuitive design, gaming, and building engaging web experiences.",
+      keywords:
+        "Dillan Milosevich, Front-End Developer, UI Designer, Web Developer Bio, Creative Developer",
+      author: "Dillan Milosevich",
+      "og:title": "About Dillan Milosevich | Creative Front-End Developer",
+      "og:description":
+        "Meet Dillan Milosevich - a front-end developer combining intuitive design with creative development to craft engaging web experiences.",
+      "og:type": "website",
+      "og:url": window.location.href,
+      "twitter:card": "summary_large_image",
+      "twitter:title": "About Dillan Milosevich | Creative Front-End Developer",
+      "twitter:description":
+        "Meet Dillan Milosevich - a front-end developer combining intuitive design with creative development to craft engaging web experiences.",
+      robots: "index, follow",
+      canonical: window.location.href,
+    };
 
-    // Define the meta description content for the Info page
-    const infoDescription =
-      "Learn more about Dillan Milosevich, a creative UI/UX developer specializing in turning concepts into interactive experiences and blending art with code.";
+    document.title = "About | Dillan Milosevich";
 
-    // Update or create the meta description tag
-    let metaDescription = document.querySelector("meta[name='description']");
-    if (metaDescription) {
-      metaDescription.setAttribute("content", infoDescription);
-    } else {
-      metaDescription = document.createElement("meta");
-      metaDescription.setAttribute("name", "description");
-      metaDescription.setAttribute("content", infoDescription);
-      document.head.appendChild(metaDescription);
+    const updateMetaTag = (name: string, content: string) => {
+      let metaTag =
+        document.querySelector(`meta[name='${name}']`) ||
+        document.querySelector(`meta[property='${name}']`);
+
+      if (metaTag) {
+        metaTag.setAttribute("content", content);
+      } else {
+        metaTag = document.createElement("meta");
+        if (name.startsWith("og:")) {
+          metaTag.setAttribute("property", name);
+        } else {
+          metaTag.setAttribute("name", name);
+        }
+        metaTag.setAttribute("content", content);
+        document.head.appendChild(metaTag);
+      }
+    };
+
+    // Create or update canonical link
+    let canonicalLink = document.querySelector("link[rel='canonical']");
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
     }
+    canonicalLink.setAttribute("href", metaTags.canonical);
+
+    // Apply all meta tags
+    Object.entries(metaTags).forEach(([name, content]) => {
+      updateMetaTag(name, content);
+    });
   }, []);
 
   useEffect(() => {
@@ -78,9 +113,9 @@ const Info: React.FC = () => {
 
       {/* Description */}
       <p className="text-slateGreen text-[1.6rem] mt-10 mb-10 sm:text-[2rem] md:text-[2.5rem] text-slateGreen font-bebas max-w-[600px] opacity-0 leading-relaxed text-slateGreen">
-        I’m a front-end developer with a love for intuitive design—think
+        I'm a front-end developer with a love for intuitive design—think
         doomscrolling at 2 AM levels of effortless. I draw inspiration from
-        nature, food, and gaming to fuel my creativity. Let’s build something
+        nature, food, and gaming to fuel my creativity. Let's build something
         intuitive, fun, and maybe even a little cheeky and make the web a better
         place with your idea.
       </p>
