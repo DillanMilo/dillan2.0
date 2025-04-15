@@ -8,7 +8,21 @@ const rotatingWords = [
   "Responsive Design",
   "UX",
   "Videogames",
-];
+] as const;
+
+const socialLinks = [
+  {
+    name: "LinkedIn",
+    link: "https://www.linkedin.com/in/dillan-milosevich-9a817891/",
+  },
+  { name: "X", link: "https://twitter.com/dillanx1x" },
+  { name: "Email", link: "mailto:dillanxx@gmail.com" },
+  { name: "GitHub", link: "https://github.com/DillanMilo" },
+  { name: "ENS", link: "https://app.ens.domains/dillanxx.eth" },
+  { name: "SNS", link: "https://sns.id/domain?domain=dillanxx" },
+  { name: "BNS", link: "https://app.ens.domains/dillanxx.base.eth" },
+  { name: "Call", link: "tel:+12812108139" },
+] as const;
 
 const Contact: React.FC = () => {
   const handlesRef = useRef<HTMLDivElement>(null);
@@ -73,10 +87,11 @@ const Contact: React.FC = () => {
 
   // Rotate words every 1.5 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
+    const intervalId = setInterval(() => {
       setVisibleIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
     }, 1500);
-    return () => clearInterval(interval);
+
+    return () => clearInterval(intervalId); // More explicit cleanup
   }, []);
 
   useEffect(() => {
@@ -106,11 +121,7 @@ const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative h-screen flex flex-col justify-start items-center text-center pt-20 bg-cover bg-center bg-fixed text-white px-4 sm:px-6"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/8xq1yhiw09q41.webp')",
-      }}
+      className="relative h-screen flex flex-col justify-start items-center text-center pt-20 contact-background"
     >
       {/* Caption - Adjusted for Mobile */}
       <div className="mt-66 sm:mt-40">
@@ -137,24 +148,12 @@ const Contact: React.FC = () => {
         </div>
       </div>
 
-      {/* Contact Handles - Positioned in a row at the bottom */}
+      {/* Contact Handles - Positioned at bottom of contact section */}
       <div
         ref={handlesRef}
-        className="absolute bottom-20 sm:bottom-25 gap-3 left-1/2 transform -translate-x-1/2 flex flex-nowrap items-center sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap transition-opacity duration-1000 opacity-0 animate-fadeIn"
+        className="absolute bottom-10 sm:bottom-12 md:bottom-16 gap-3 left-1/2 transform -translate-x-1/2 flex flex-nowrap items-center sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap transition-opacity duration-1000 opacity-0 animate-fadeIn"
       >
-        {[
-          {
-            name: "LinkedIn",
-            link: "https://www.linkedin.com/in/dillan-milosevich-9a817891/",
-          },
-          { name: "X", link: "https://twitter.com/dillanx1x" },
-          { name: "Email", link: "mailto:dillanxx@gmail.com" },
-          { name: "GitHub", link: "https://github.com/DillanMilo" },
-          { name: "ENS", link: "https://app.ens.domains/dillanxx.eth" },
-          { name: "SNS", link: "https://sns.id/domain?domain=dillanxx" },
-          { name: "BNS", link: "https://app.ens.domains/dillanxx.base.eth" },
-          { name: "Call", link: "tel:+12812108139" },
-        ].map((handle, index) => (
+        {socialLinks.map((handle, index) => (
           <a
             key={index}
             href={handle.link}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
@@ -45,23 +45,24 @@ const Navbar: React.FC = () => {
     }
   };
 
-  const handleScrollSpy = () => {
+  const handleScrollSpy = useCallback(() => {
     const sections = ["home", "info", "work", "contact"];
-    sections.forEach((section) => {
+    const currentSection = sections.find((section) => {
       const element = document.getElementById(section);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-        if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
-          setActiveSection(section);
-        }
-      }
+      if (!element) return false;
+      const rect = element.getBoundingClientRect();
+      return rect.top >= 0 && rect.top < window.innerHeight / 2;
     });
-  };
+
+    if (currentSection) {
+      setActiveSection(currentSection);
+    }
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScrollSpy);
     return () => window.removeEventListener("scroll", handleScrollSpy);
-  }, []);
+  }, [handleScrollSpy]);
 
   return (
     <nav

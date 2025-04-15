@@ -1,12 +1,9 @@
 import React, { useEffect } from "react";
 import bgImageMobile from "../assets/IMG_07154.jpg"; // Mobile Background
+import { updateMetaTags } from "../utils/metaUtils";
 
 const Home: React.FC = () => {
   useEffect(() => {
-    // Set the document title for the Home page
-    document.title = "Dillan Milosevich | Creative Front-End Developer";
-
-    // Define meta tag contents
     const metaTags = {
       description:
         "Welcome to Dillan Milosevich's portfolio - a creative front-end developer specializing in beautiful, functional websites. Explore my projects and UI/UX development work.",
@@ -26,43 +23,39 @@ const Home: React.FC = () => {
       canonical: window.location.href,
     };
 
-    // Function to create or update meta tags
-    const updateMetaTag = (name: string, content: string) => {
-      let metaTag =
-        document.querySelector(`meta[name='${name}']`) ||
-        document.querySelector(`meta[property='${name}']`);
+    updateMetaTags(
+      metaTags,
+      "Dillan Milosevich | Creative Front-End Developer"
+    );
 
-      if (metaTag) {
-        metaTag.setAttribute("content", content);
-      } else {
-        metaTag = document.createElement("meta");
-        if (name.startsWith("og:")) {
-          metaTag.setAttribute("property", name);
-        } else {
-          metaTag.setAttribute("name", name);
-        }
-        metaTag.setAttribute("content", content);
-        document.head.appendChild(metaTag);
-      }
+    // Add JSON-LD structured data
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Dillan Milosevich",
+      url: "https://your-domain.com",
+      jobTitle: "Front-End Developer",
+      description:
+        "Creative front-end developer specializing in beautiful, functional websites",
+      sameAs: [
+        "https://www.linkedin.com/in/dillan-milosevich-9a817891/",
+        "https://twitter.com/dillanx1x",
+        "https://github.com/DillanMilo",
+      ],
     };
 
-    // Create or update canonical link
-    let canonicalLink = document.querySelector("link[rel='canonical']");
-    if (!canonicalLink) {
-      canonicalLink = document.createElement("link");
-      canonicalLink.setAttribute("rel", "canonical");
-      document.head.appendChild(canonicalLink);
-    }
-    canonicalLink.setAttribute("href", metaTags.canonical);
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify(structuredData);
+    document.head.appendChild(script);
 
-    // Apply all meta tags
-    Object.entries(metaTags).forEach(([name, content]) => {
-      updateMetaTag(name, content);
-    });
+    return () => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (
-    <div
+    <main
       id="home"
       className="relative h-screen w-full flex flex-col items-start justify-center px-5 md:px-10 lg:px-20 text-white overflow-x-hidden"
     >
@@ -116,7 +109,7 @@ const Home: React.FC = () => {
         functional websites. My passion lies in blending art with code to bring
         ideas to life.
       </p>
-    </div>
+    </main>
   );
 };
 

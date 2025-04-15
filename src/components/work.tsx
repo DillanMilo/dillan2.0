@@ -1,6 +1,34 @@
 // src/components/work.tsx
 import React, { useEffect, useState, useRef } from "react";
 
+// Move projects data outside component to prevent recreation on each render
+const projects = [
+  {
+    title: "Game Hub",
+    description:
+      "A fun web app showcasing video games across platforms - Like I said, I like video games.",
+    link: "https://game-hub-x.vercel.app/",
+    animation: "animate-slideInLeftToCenter",
+    delay: "delay-[200ms]",
+  },
+  {
+    title: "Reddit Mini",
+    description:
+      "A bite-sized Reddit experience with dynamic content loading—because dynamite comes in small packages.",
+    link: "https://reddit-mini-app.vercel.app/",
+    animation: "animate-slideInRightToCenter",
+    delay: "delay-[600ms]",
+  },
+  {
+    title: "Spotify App",
+    description:
+      "A playlist builder with Spotify integration—Silence isn't always golden.",
+    link: "#", // Add a placeholder link or actual link
+    animation: "animate-slideInLeftToCenter",
+    delay: "delay-[1000ms]",
+  },
+] as const;
+
 const Work: React.FC = () => {
   // Set meta data for the Work page without Helmet
   useEffect(() => {
@@ -58,33 +86,6 @@ const Work: React.FC = () => {
       updateMetaTag(name, content);
     });
   }, []);
-
-  // Define your project data upfront.
-  const projects = [
-    {
-      title: "Game Hub",
-      description:
-        "A fun web app showcasing video games across platforms - Like I said, I like video games.",
-      link: "https://game-hub-x.vercel.app/",
-      animation: "animate-slideInLeftToCenter",
-      delay: "delay-[200ms]",
-    },
-    {
-      title: "Reddit Mini",
-      description:
-        "A bite-sized Reddit experience with dynamic content loading—because dynamite comes in small packages.",
-      link: "https://reddit-mini-app.vercel.app/",
-      animation: "animate-slideInRightToCenter",
-      delay: "delay-[600ms]",
-    },
-    {
-      title: "Spotify App",
-      description:
-        "A playlist builder with Spotify integration—Silence isn't always golden.",
-      animation: "animate-slideInLeftToCenter",
-      delay: "delay-[1000ms]",
-    },
-  ];
 
   // State to track if each project has animated.
   const [animatedProjects, setAnimatedProjects] = useState<boolean[]>(

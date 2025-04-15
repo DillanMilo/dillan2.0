@@ -206,59 +206,19 @@
 
 /* ----- NEW: Adjust project container and text sizes in the Work section for very small mobile screens ----- */
 @media (max-width: 425px) {
-  #info h1 {
-    display: block !important;
-    width: 100% !important;
-    margin: 0 auto !important;
-    text-align: center !important;
-    max-width: 100% !important;
-  }
+  #info h1,
   #work > div {
-    max-width: 95% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    max-width: 95%;
+    margin-left: auto;
+    margin-right: auto;
   }
-  #work h2 {
-    font-size: 2.5rem !important;
-  }
-  #work p {
-    font-size: 1.5rem !important;
-  }
-}
 
-/* ----- NEW: Shift Contact Content Higher on Small Screens ----- */
-@media (max-width: 425px) {
-  /* Reduce top padding on the contact section */
   #contact {
     padding-top: 0rem !important;
   }
-  /* Shift the first child (caption container) upward */
+
   #contact > div:first-child {
     margin-top: 12rem !important;
-  }
-  /* adjust linear gradient for background image */ 
-  #contact {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url("/8xq1yhiw09q41.webp") no-repeat center top !important;
-    background-size: 300% auto !important;
-    background-position: center top !important;
-    background-repeat: no-repeat !important;
-    background-attachment: scroll !important;
-  }
-}
-@media (max-width: 640px) {
-  /* adjust linear gradient for background image */ 
-  #contact {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url("/8xq1yhiw09q41.webp") no-repeat center top !important;
-    background-size: 300% auto !important;
-    background-position: center top !important;
-    background-repeat: no-repeat !important;
-    background-attachment: scroll !important;
-  }
-  /* Shift the first child (caption container) upward */
-  #contact > div:first-child {
-    margin-top: 10rem !important;
   }
 }
 
@@ -324,5 +284,27 @@
     font-size: 7.5rem !important;
     line-height: 10rem !important;
     height: 6rem !important;
+  }
+}
+
+/* Common contact background styles */
+.contact-background {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+              url("/8xq1yhiw09q41.webp") no-repeat center top !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+  background-position: center top !important;
+}
+
+/* Adjust background size based on screen size */
+@media (max-width: 1024px) {
+  .contact-background {
+    background-size: 300% auto !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .contact-background {
+    background-size: 150% auto !important;
   }
 }
