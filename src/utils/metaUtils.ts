@@ -26,7 +26,9 @@ export const updateMetaTags = (metaTags: Record<string, string>, pageTitle: stri
     canonicalLink.setAttribute("rel", "canonical");
     document.head.appendChild(canonicalLink);
   }
-  canonicalLink.setAttribute("href", metaTags.canonical);
+  // Add null check for canonical URL
+  const canonicalUrl = metaTags.canonical || window.location.href;
+  canonicalLink.setAttribute("href", canonicalUrl);
 
   // Apply all meta tags
   Object.entries(metaTags).forEach(([name, content]) => {

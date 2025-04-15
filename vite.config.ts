@@ -20,7 +20,8 @@ export default defineConfig({
       }
     },
     chunkSizeWarningLimit: 1000, // Adjust if needed.
-  }
+  },
+  publicDir: 'public', // Make sure this is set
   // Removed server.compression as it's not a recognized property.
 })
 

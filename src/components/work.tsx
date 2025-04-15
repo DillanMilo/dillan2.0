@@ -23,6 +23,7 @@ const projects = [
     title: "Spotify App",
     description:
       "A playlist builder with Spotify integration—Silence isn't always golden.",
+    link: "#", // Add a placeholder link or actual link
     animation: "animate-slideInLeftToCenter",
     delay: "delay-[1000ms]",
   },
