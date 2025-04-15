@@ -27,10 +27,35 @@ const Home: React.FC = () => {
       metaTags,
       "Dillan Milosevich | Creative Front-End Developer"
     );
+
+    // Add JSON-LD structured data
+    const structuredData = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Dillan Milosevich",
+      url: "https://your-domain.com",
+      jobTitle: "Front-End Developer",
+      description:
+        "Creative front-end developer specializing in beautiful, functional websites",
+      sameAs: [
+        "https://www.linkedin.com/in/dillan-milosevich-9a817891/",
+        "https://twitter.com/dillanx1x",
+        "https://github.com/DillanMilo",
+      ],
+    };
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify(structuredData);
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (
-    <div
+    <main
       id="home"
       className="relative h-screen w-full flex flex-col items-start justify-center px-5 md:px-10 lg:px-20 text-white overflow-x-hidden"
     >
@@ -84,7 +109,7 @@ const Home: React.FC = () => {
         functional websites. My passion lies in blending art with code to bring
         ideas to life.
       </p>
-    </div>
+    </main>
   );
 };
 

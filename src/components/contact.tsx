@@ -148,10 +148,10 @@ const Contact: React.FC = () => {
         </div>
       </div>
 
-      {/* Contact Handles - Positioned in a row at the bottom */}
+      {/* Contact Handles - Positioned at bottom of contact section */}
       <div
         ref={handlesRef}
-        className="absolute bottom-20 sm:bottom-25 gap-3 left-1/2 transform -translate-x-1/2 flex flex-nowrap items-center sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap transition-opacity duration-1000 opacity-0 animate-fadeIn"
+        className="absolute bottom-10 sm:bottom-12 md:bottom-16 gap-3 left-1/2 transform -translate-x-1/2 flex flex-nowrap items-center sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap transition-opacity duration-1000 opacity-0 animate-fadeIn"
       >
         {socialLinks.map((handle, index) => (
           <a
