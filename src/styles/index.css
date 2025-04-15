@@ -286,3 +286,25 @@
     height: 6rem !important;
   }
 }
+
+/* Common contact background styles */
+.contact-background {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+              url("/8xq1yhiw09q41.webp") no-repeat center top !important;
+  background-repeat: no-repeat !important;
+  background-attachment: scroll !important;
+  background-position: center top !important;
+}
+
+/* Adjust background size based on screen size */
+@media (max-width: 1024px) {
+  .contact-background {
+    background-size: 300% auto !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .contact-background {
+    background-size: 150% auto !important;
+  }
+}

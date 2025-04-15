@@ -87,10 +87,11 @@ const Contact: React.FC = () => {
 
   // Rotate words every 1.5 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
+    const intervalId = setInterval(() => {
       setVisibleIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
     }, 1500);
-    return () => clearInterval(interval);
+
+    return () => clearInterval(intervalId); // More explicit cleanup
   }, []);
 
   useEffect(() => {
@@ -120,11 +121,7 @@ const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative h-screen flex flex-col justify-start items-center text-center pt-20 bg-cover bg-center bg-fixed text-white px-4 sm:px-6"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/8xq1yhiw09q41.webp')",
-      }}
+      className="relative h-screen flex flex-col justify-start items-center text-center pt-20 contact-background"
     >
       {/* Caption - Adjusted for Mobile */}
       <div className="mt-66 sm:mt-40">
