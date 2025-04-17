@@ -159,7 +159,7 @@ const Contact: React.FC = () => {
             href={handle.link}
             target="_blank"
             rel="noreferrer"
-            className="text-2xl sm:text-3xl md:text-5xl font-bebas text-red-600 transition-all duration-300 hover:text-red-400 whitespace-nowrap [text-shadow:-0.5px_-0.5px_0_white,0.5px_-0.5px_0_white,-0.5px_0.5px_0_white,0.5px_0.5px_0_white]"
+            className="text-2xl sm:text-3xl md:text-5xl font-bebas text-red-600 transition-all duration-300 hover:text-red-400 whitespace-nowrap [text-shadow:-0.5px_-0.5px_0_black,0.5px_-0.5px_0_black,-0.5px_0.5px_0_black,0.5px_0.5px_0_black]"
           >
             {handle.name}
           </a>
