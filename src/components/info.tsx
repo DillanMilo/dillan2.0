@@ -108,7 +108,7 @@ const Info: React.FC = () => {
 
       {/* Subtext */}
       <p className="text-xl sm:text-2xl md:text-2xl text-gray-400 font-bebas mt-4 opacity-0">
-        The name's long, but my loading times aren't.
+        The name's long, but my load times aren't.
       </p>
 
       {/* Description */}
