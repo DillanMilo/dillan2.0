@@ -1,8 +1,19 @@
 // src/components/work.tsx
 import React, { useEffect, useState, useRef } from "react";
+import { ChevronDown } from "lucide-react";
 
-// Move projects data outside component to prevent recreation on each render
-const projects = [
+// Add this before the projects array
+interface Project {
+  title: string;
+  description: string;
+  link: string;
+  animation: string;
+  delay: string;
+  isDropdown?: boolean;
+  dropdownItems?: Array<{ name: string; link: string }>;
+}
+
+const projects: Project[] = [
   {
     title: "Game Hub",
     description:
@@ -12,18 +23,30 @@ const projects = [
     delay: "delay-[200ms]",
   },
   {
+    title: "Professional Bio's",
+    description:
+      "Impactful, bespoke single-page applications for professionals. Coz business cards are lame.",
+    link: "#",
+    animation: "animate-slideInRightToCenter",
+    delay: "delay-[600ms]",
+    isDropdown: true,
+    dropdownItems: [
+      {
+        name: "Richard Nell",
+        link: "https://richard-nell.vercel.app",
+      },
+      {
+        name: "Carly Milo",
+        link: "https://carlymilo.vercel.app",
+      },
+      // Add more items as you create more professional bios
+    ],
+  },
+  {
     title: "Reddit Mini",
     description:
       "A bite-sized Reddit experience with dynamic content loading—because dynamite comes in small packages.",
     link: "https://reddit-mini-app.vercel.app/",
-    animation: "animate-slideInRightToCenter",
-    delay: "delay-[600ms]",
-  },
-  {
-    title: "Spotify App",
-    description:
-      "A playlist builder with Spotify integration—Silence isn't always golden.",
-    link: "#", // Add a placeholder link or actual link
     animation: "animate-slideInLeftToCenter",
     delay: "delay-[1000ms]",
   },
@@ -95,6 +118,9 @@ const Work: React.FC = () => {
   const [workVisible, setWorkVisible] = useState(false);
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Add state for subtext animation
+  const [subtextVisible, setSubtextVisible] = useState(false);
+
   // Reset project animations each time the Work section becomes visible.
   useEffect(() => {
     const workSection = document.getElementById("work");
@@ -104,10 +130,11 @@ const Work: React.FC = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !workVisible) {
             setWorkVisible(true);
-            // Reset all project animations so they replay on each visit.
+            setSubtextVisible(true);
             setAnimatedProjects(new Array(projects.length).fill(false));
           } else if (!entry.isIntersecting && workVisible) {
             setWorkVisible(false);
+            setSubtextVisible(false);
           }
         });
       },
@@ -152,11 +179,26 @@ const Work: React.FC = () => {
     };
   }, []);
 
+  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
+
+  const toggleDropdown = (index: number) => {
+    setOpenDropdown(openDropdown === index ? null : index);
+  };
+
   return (
     <section
       id="work"
       className="relative flex flex-col items-center text-center py-20 px-6"
     >
+      <p
+        className={`text-2xl sm:text-3xl text-gray-400 font-bebas mb-16 transform transition-all duration-1000 ${
+          subtextVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-10"
+        }`}
+      >
+        Don't be shy, click around...
+      </p>
       {projects.map((project, index) => (
         <div
           key={index}
@@ -167,14 +209,56 @@ const Work: React.FC = () => {
               : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-5xl sm:text-4xl md:text-5xl font-bebas text-red-600 mb-6 underline">
-            <a href={project.link} target="_blank" rel="noreferrer">
-              {project.title}
-            </a>
+          <h2
+            className={`text-5xl sm:text-4xl md:text-5xl font-bebas text-red-600 mb-6 underline cursor-pointer
+              ${
+                project.isDropdown
+                  ? "hover:text-red-400 transition-colors duration-300"
+                  : ""
+              }`}
+            onClick={() => (project.isDropdown ? toggleDropdown(index) : null)}
+          >
+            {project.isDropdown ? (
+              <span className="flex items-center justify-center gap-2">
+                {project.title}
+                <ChevronDown
+                  className={`h-6 w-6 transition-transform duration-300 ${
+                    openDropdown === index ? "rotate-180" : ""
+                  }`}
+                />
+              </span>
+            ) : (
+              <a href={project.link} target="_blank" rel="noreferrer">
+                {project.title}
+              </a>
+            )}
           </h2>
           <p className="text-3xl sm:text-2xl md:text-3xl text-white mb-8">
             {project.description}
           </p>
+
+          {/* Dropdown Content */}
+          {project.isDropdown && project.dropdownItems && (
+            <div
+              className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                openDropdown === index
+                  ? "max-h-96 opacity-100"
+                  : "max-h-0 opacity-0"
+              }`}
+            >
+              {project.dropdownItems.map((item, i) => (
+                <a
+                  key={i}
+                  href={item.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block text-3xl font-bebas text-red-600 hover:text-red-400 transition-colors duration-300 py-2"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </section>
