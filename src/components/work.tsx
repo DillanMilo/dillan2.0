@@ -1,6 +1,7 @@
 // src/components/work.tsx
 import React, { useEffect, useState, useRef } from "react";
 import { ChevronDown } from "lucide-react";
+import { getProjectsSchema } from "../utils/schema";
 
 // Add this before the projects array
 interface Project {
@@ -53,30 +54,24 @@ const projects: Project[] = [
 ] as const;
 
 const Work: React.FC = () => {
-  // Set meta data for the Work page without Helmet
   useEffect(() => {
-    document.title = "Work & Projects | Dillan Milosevich";
-
     const metaTags = {
       description:
-        "Explore Dillan Milosevich's portfolio featuring innovative web development projects, including Game Hub, Reddit Mini, and Spotify integrations.",
+        "Explore Dillan Milosevich's portfolio of web development projects - from game platforms to professional websites and Reddit integrations.",
       keywords:
-        "Web Development Projects, Game Hub, Reddit Mini, Spotify App, Portfolio, Front-End Development, UI/UX Projects",
-      author: "Dillan Milosevich",
-      "og:title": "Work & Projects | Dillan Milosevich",
+        "Web Development Projects, Game Hub, Reddit Mini, Professional Websites, Portfolio, Front-End Development, UI/UX Projects, React Applications",
+      "og:title": "Projects & Work | Dillan Milosevich",
       "og:description":
-        "Discover creative web development projects by Dillan Milosevich. From gaming platforms to social media integrations.",
+        "Discover innovative web applications and professional websites crafted by Dillan Milosevich. Featured projects include Game Hub, Reddit Mini, and professional bio pages.",
       "og:type": "website",
       "og:url": window.location.href,
-      "twitter:card": "summary_large_image",
-      "twitter:title": "Work & Projects | Dillan Milosevich",
-      "twitter:description":
-        "Discover creative web development projects by Dillan Milosevich. From gaming platforms to social media integrations.",
       robots: "index, follow",
       canonical: window.location.href,
     };
 
-    const updateMetaTag = (name: string, content: string) => {
+    // Update meta tags
+    document.title = "Work & Projects | Dillan Milosevich";
+    Object.entries(metaTags).forEach(([name, content]) => {
       let metaTag =
         document.querySelector(`meta[name='${name}']`) ||
         document.querySelector(`meta[property='${name}']`);
@@ -93,21 +88,19 @@ const Work: React.FC = () => {
         metaTag.setAttribute("content", content);
         document.head.appendChild(metaTag);
       }
-    };
-
-    // Create or update canonical link
-    let canonicalLink = document.querySelector("link[rel='canonical']");
-    if (!canonicalLink) {
-      canonicalLink = document.createElement("link");
-      canonicalLink.setAttribute("rel", "canonical");
-      document.head.appendChild(canonicalLink);
-    }
-    canonicalLink.setAttribute("href", metaTags.canonical);
-
-    // Apply all meta tags
-    Object.entries(metaTags).forEach(([name, content]) => {
-      updateMetaTag(name, content);
     });
+
+    // Add projects schema
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.text = JSON.stringify(getProjectsSchema());
+    document.head.appendChild(script);
+
+    return () => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
   }, []);
 
   // State to track if each project has animated.

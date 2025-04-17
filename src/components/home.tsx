@@ -1,52 +1,44 @@
 import React, { useEffect } from "react";
 import bgImageMobile from "../assets/IMG_07154.jpg"; // Mobile Background
 import { updateMetaTags } from "../utils/metaUtils";
+import { getPersonSchema } from "../utils/schema";
 
 const Home: React.FC = () => {
   useEffect(() => {
     const metaTags = {
       description:
-        "Welcome to Dillan Milosevich's portfolio - a creative front-end developer specializing in beautiful, functional websites. Explore my projects and UI/UX development work.",
+        "Welcome to Dillan Milosevich's portfolio - a creative front-end developer from Tomball, Houston, specializing in beautiful, functional websites.",
       keywords:
-        "Dillan Milosevich, Front-End Developer, UI/UX Developer, Web Development, React Developer, Creative Developer, Website Design",
+        "Dillan Milosevich, Front-End Developer, UI/UX Developer, Web Development, React Developer, Creative Developer, Website Design, Houston Developer, Tomball Developer",
       author: "Dillan Milosevich",
-      "og:title": "Dillan Milosevich | Creative Front-End Developer",
+      "og:title": "Dillan Milosevich | Creative Front-End Developer in Houston",
       "og:description":
-        "Creative front-end developer crafting beautiful and functional websites. Explore my portfolio and web development projects.",
+        "Creative front-end developer from Tomball, Houston, crafting beautiful and functional websites. Explore my portfolio and web development projects.",
       "og:type": "website",
       "og:url": window.location.href,
       "twitter:card": "summary_large_image",
-      "twitter:title": "Dillan Milosevich | Creative Front-End Developer",
+      "twitter:title":
+        "Dillan Milosevich | Creative Front-End Developer in Houston",
       "twitter:description":
-        "Creative front-end developer crafting beautiful and functional websites. Explore my portfolio and web development projects.",
+        "Creative front-end developer from Tomball, Houston, crafting beautiful and functional websites. Explore my portfolio and web development projects.",
       robots: "index, follow",
       canonical: window.location.href,
+      // Add location-specific meta tags
+      "geo.region": "US-TX",
+      "geo.placename": "Tomball",
+      "geo.position": "30.0972;-95.6161",
+      ICBM: "30.0972, -95.6161",
     };
 
     updateMetaTags(
       metaTags,
-      "Dillan Milosevich | Creative Front-End Developer"
+      "Dillan Milosevich | Creative Front-End Developer in Houston"
     );
 
     // Add JSON-LD structured data
-    const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      name: "Dillan Milosevich",
-      url: "https://your-domain.com",
-      jobTitle: "Front-End Developer",
-      description:
-        "Creative front-end developer specializing in beautiful, functional websites",
-      sameAs: [
-        "https://www.linkedin.com/in/dillan-milosevich-9a817891/",
-        "https://twitter.com/dillanx1x",
-        "https://github.com/DillanMilo",
-      ],
-    };
-
     const script = document.createElement("script");
     script.type = "application/ld+json";
-    script.text = JSON.stringify(structuredData);
+    script.text = JSON.stringify(getPersonSchema());
     document.head.appendChild(script);
 
     return () => {
