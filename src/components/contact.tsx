@@ -94,19 +94,21 @@ const Contact: React.FC = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Add new useEffect for intersection observer
+  // Update the intersection observer settings
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setShowBanner(true);
-            // Optional: Disconnect observer after triggering
             observer.disconnect();
           }
         });
       },
-      { threshold: 0.5 } // Adjust this value to control when animation triggers
+      {
+        threshold: 0.1, // Trigger when even a small part is visible
+        rootMargin: "0px", // Only trigger when actually in view
+      }
     );
 
     if (bannerTriggerRef.current) {
@@ -161,16 +163,16 @@ const Contact: React.FC = () => {
         ))}
       </div>
 
-      {/* Trigger div - placed where we want animation to start */}
+      {/* Move trigger div closer to bottom */}
       <div
         ref={bannerTriggerRef}
-        className="absolute bottom-[30%] w-full h-1"
+        className="absolute bottom-[15%] w-full h-1"
         aria-hidden="true"
       />
 
-      {/* Social Links - Mobile Banner */}
+      {/* Update animation classes for mobile banner */}
       <div
-        className={`md:hidden absolute bottom-10 left-0 w-full bg-red-600 transition-all duration-500
+        className={`md:hidden absolute bottom-10 left-0 w-full bg-red-600 transition-all duration-1000
           ${showBanner ? "animate-slideInBanner" : "translate-x-[-100%]"}`}
       >
         <div className="flex overflow-x-auto whitespace-nowrap py-4 px-2 gap-4 justify-start">
@@ -183,7 +185,7 @@ const Contact: React.FC = () => {
               className={`text-2xl font-bebas text-white opacity-0 
                 ${showBanner ? "animate-fadeInSocial" : ""}`}
               style={{
-                animationDelay: `${index * 200 + 1000}ms`,
+                animationDelay: `${index * 300 + 1200}ms`, // Increased delays
                 animationFillMode: "forwards",
               }}
             >

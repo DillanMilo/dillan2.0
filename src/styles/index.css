@@ -215,11 +215,11 @@
   }
 
   .animate-slideInBanner {
-    animation: slideInBanner 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: slideInBanner 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   .animate-fadeInSocial {
-    animation: fadeInSocial 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: fadeInSocial 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     animation-fill-mode: forwards;
   }
 }
