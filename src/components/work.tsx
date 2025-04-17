@@ -39,8 +39,8 @@ const projects: Project[] = [
     isDropdown: true,
     dropdownItems: [
       {
-        name: "John Smith",
-        link: "https://example-bio-site.com",
+        name: "Richard Nell",
+        link: "https://richard-nell.vercel.app",
       },
       // Add more items as you create more professional bios
     ],
@@ -204,7 +204,7 @@ const Work: React.FC = () => {
               <span className="flex items-center justify-center gap-2">
                 {project.title}
                 <span
-                  className={`transform transition-transform duration-300 ${
+                  className={`transform transition-transform duration-300 text-2xl ${
                     openDropdown === index ? "rotate-180" : ""
                   }`}
                 >
