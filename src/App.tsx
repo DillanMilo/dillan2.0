@@ -53,6 +53,10 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    document.documentElement.lang = "en";
+  }, []);
+
   return (
     <div className="min-h-screen text-white">
       {/* ✅ Mobile Landscape Overlay (Hides SPA when in landscape mode) */}

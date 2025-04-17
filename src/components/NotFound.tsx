@@ -2,7 +2,43 @@ import React, { useEffect } from "react";
 
 const NotFound: React.FC = () => {
   useEffect(() => {
+    // Update meta tags for 404 page
+    const metaTags = {
+      robots: "noindex, nofollow", // Prevent indexing of 404 page
+      description: "Page not found - Dillan Milosevich's portfolio",
+      "og:title": "404 - Page Not Found | Dillan Milosevich",
+      "og:description": "The requested page could not be found.",
+      canonical: window.location.origin, // Point canonical to homepage
+    };
+
+    // Update meta tags
+    Object.entries(metaTags).forEach(([name, content]) => {
+      let metaTag =
+        document.querySelector(`meta[name='${name}']`) ||
+        document.querySelector(`meta[property='${name}']`);
+
+      if (metaTag) {
+        metaTag.setAttribute("content", content);
+      } else {
+        metaTag = document.createElement("meta");
+        if (name.startsWith("og:")) {
+          metaTag.setAttribute("property", name);
+        } else {
+          metaTag.setAttribute("name", name);
+        }
+        metaTag.setAttribute("content", content);
+        document.head.appendChild(metaTag);
+      }
+    });
+
     document.title = "404 - Page Not Found | Dillan Milosevich";
+
+    // Cleanup
+    return () => {
+      // Remove noindex meta tag when leaving 404 page
+      const robotsTag = document.querySelector("meta[name='robots']");
+      if (robotsTag) document.head.removeChild(robotsTag);
+    };
   }, []);
 
   return (
