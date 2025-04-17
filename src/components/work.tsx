@@ -37,7 +37,7 @@ const projects: Project[] = [
       },
       {
         name: "Carly Milo",
-        link: "",
+        link: "https://carly-milo.com",
       },
       // Add more items as you create more professional bios
     ],
