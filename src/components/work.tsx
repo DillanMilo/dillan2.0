@@ -43,6 +43,10 @@ const projects: Project[] = [
         name: "Richard Nell",
         link: "https://richard-nell.vercel.app",
       },
+      {
+        name: "Carly Milo",
+        link: "https://carlymilo.vercel.app",
+      },
       // Add more items as you create more professional bios
     ],
   },
@@ -114,6 +118,9 @@ const Work: React.FC = () => {
   const [workVisible, setWorkVisible] = useState(false);
   const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Add state for subtext animation
+  const [subtextVisible, setSubtextVisible] = useState(false);
+
   // Reset project animations each time the Work section becomes visible.
   useEffect(() => {
     const workSection = document.getElementById("work");
@@ -123,10 +130,11 @@ const Work: React.FC = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !workVisible) {
             setWorkVisible(true);
-            // Reset all project animations so they replay on each visit.
+            setSubtextVisible(true);
             setAnimatedProjects(new Array(projects.length).fill(false));
           } else if (!entry.isIntersecting && workVisible) {
             setWorkVisible(false);
+            setSubtextVisible(false);
           }
         });
       },
@@ -182,6 +190,15 @@ const Work: React.FC = () => {
       id="work"
       className="relative flex flex-col items-center text-center py-20 px-6"
     >
+      <p
+        className={`text-2xl sm:text-3xl text-gray-400 font-bebas mb-16 transform transition-all duration-1000 ${
+          subtextVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-10"
+        }`}
+      >
+        Don't be shy, click around...
+      </p>
       {projects.map((project, index) => (
         <div
           key={index}
