@@ -37,7 +37,7 @@ const projects: Project[] = [
       },
       {
         name: "Carly Milo",
-        link: "https://carlymilo.vercel.app",
+        link: "",
       },
       // Add more items as you create more professional bios
     ],
