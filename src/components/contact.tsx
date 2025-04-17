@@ -99,15 +99,18 @@ const Contact: React.FC = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          // Show banner when entering viewport
           if (entry.isIntersecting) {
             setShowBanner(true);
-            observer.disconnect();
+          } else {
+            // Hide banner when leaving viewport
+            setShowBanner(false);
           }
         });
       },
       {
-        threshold: 0.1, // Trigger when even a small part is visible
-        rootMargin: "0px", // Only trigger when actually in view
+        threshold: 0.1,
+        rootMargin: "0px",
       }
     );
 
@@ -115,6 +118,7 @@ const Contact: React.FC = () => {
       observer.observe(bannerTriggerRef.current);
     }
 
+    // Don't disconnect the observer so it continues to watch for changes
     return () => observer.disconnect();
   }, []);
 
