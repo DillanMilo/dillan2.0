@@ -1,8 +1,18 @@
 // src/components/work.tsx
 import React, { useEffect, useState, useRef } from "react";
 
-// Move projects data outside component to prevent recreation on each render
-const projects = [
+// Add this before the projects array
+interface Project {
+  title: string;
+  description: string;
+  link: string;
+  animation: string;
+  delay: string;
+  isDropdown?: boolean;
+  dropdownItems?: Array<{ name: string; link: string }>;
+}
+
+const projects: Project[] = [
   {
     title: "Game Hub",
     description:
@@ -20,12 +30,20 @@ const projects = [
     delay: "delay-[600ms]",
   },
   {
-    title: "Spotify App",
+    title: "Professional Bio's",
     description:
-      "A playlist builder with Spotify integration—Silence isn't always golden.",
-    link: "#", // Add a placeholder link or actual link
+      "Bespoke single-page applications for professionals. More impactful than a business card, these personalized sites showcase individual talents and achievements.",
+    link: "#",
     animation: "animate-slideInLeftToCenter",
     delay: "delay-[1000ms]",
+    isDropdown: true,
+    dropdownItems: [
+      {
+        name: "John Smith",
+        link: "https://example-bio-site.com",
+      },
+      // Add more items as you create more professional bios
+    ],
   },
 ] as const;
 
@@ -152,6 +170,12 @@ const Work: React.FC = () => {
     };
   }, []);
 
+  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
+
+  const toggleDropdown = (index: number) => {
+    setOpenDropdown(openDropdown === index ? null : index);
+  };
+
   return (
     <section
       id="work"
@@ -167,14 +191,58 @@ const Work: React.FC = () => {
               : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-5xl sm:text-4xl md:text-5xl font-bebas text-red-600 mb-6 underline">
-            <a href={project.link} target="_blank" rel="noreferrer">
-              {project.title}
-            </a>
+          <h2
+            className={`text-5xl sm:text-4xl md:text-5xl font-bebas text-red-600 mb-6 underline cursor-pointer
+              ${
+                project.isDropdown
+                  ? "hover:text-red-400 transition-colors duration-300"
+                  : ""
+              }`}
+            onClick={() => (project.isDropdown ? toggleDropdown(index) : null)}
+          >
+            {project.isDropdown ? (
+              <span className="flex items-center justify-center gap-2">
+                {project.title}
+                <span
+                  className={`transform transition-transform duration-300 ${
+                    openDropdown === index ? "rotate-180" : ""
+                  }`}
+                >
+                  ▼
+                </span>
+              </span>
+            ) : (
+              <a href={project.link} target="_blank" rel="noreferrer">
+                {project.title}
+              </a>
+            )}
           </h2>
           <p className="text-3xl sm:text-2xl md:text-3xl text-white mb-8">
             {project.description}
           </p>
+
+          {/* Dropdown Content */}
+          {project.isDropdown && project.dropdownItems && (
+            <div
+              className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                openDropdown === index
+                  ? "max-h-96 opacity-100"
+                  : "max-h-0 opacity-0"
+              }`}
+            >
+              {project.dropdownItems.map((item, i) => (
+                <a
+                  key={i}
+                  href={item.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block text-3xl font-bebas text-red-600 hover:text-red-400 transition-colors duration-300 py-2"
+                >
+                  {item.name}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </section>
