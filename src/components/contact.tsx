@@ -170,7 +170,7 @@ const Contact: React.FC = () => {
 
       {/* Social Links - Mobile Banner */}
       <div
-        className={`md:hidden absolute bottom-0 left-0 w-full bg-red-600 transition-all duration-500
+        className={`md:hidden absolute bottom-10 left-0 w-full bg-red-600 transition-all duration-500
           ${showBanner ? "animate-slideInBanner" : "translate-x-[-100%]"}`}
       >
         <div className="flex overflow-x-auto whitespace-nowrap py-4 px-2 gap-4 justify-start">
