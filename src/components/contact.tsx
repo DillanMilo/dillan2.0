@@ -25,8 +25,9 @@ const socialLinks = [
 ] as const;
 
 const Contact: React.FC = () => {
-  const handlesRef = useRef<HTMLDivElement>(null);
   const [visibleIndex, setVisibleIndex] = useState(0);
+  const [showBanner, setShowBanner] = useState(false);
+  const bannerTriggerRef = useRef<HTMLDivElement>(null);
 
   // Set meta data manually without Helmet
   useEffect(() => {
@@ -90,32 +91,29 @@ const Contact: React.FC = () => {
     const intervalId = setInterval(() => {
       setVisibleIndex((prevIndex) => (prevIndex + 1) % rotatingWords.length);
     }, 1500);
-
-    return () => clearInterval(intervalId); // More explicit cleanup
+    return () => clearInterval(intervalId);
   }, []);
 
+  // Add new useEffect for intersection observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            handlesRef.current?.classList.add("animate-fadeIn", "opacity-100");
-            handlesRef.current?.classList.remove("opacity-0");
-          } else {
-            handlesRef.current?.classList.remove(
-              "animate-fadeIn",
-              "opacity-100"
-            );
-            handlesRef.current?.classList.add("opacity-0");
+            setShowBanner(true);
+            // Optional: Disconnect observer after triggering
+            observer.disconnect();
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 } // Adjust this value to control when animation triggers
     );
-    if (handlesRef.current) observer.observe(handlesRef.current);
-    return () => {
-      if (handlesRef.current) observer.unobserve(handlesRef.current);
-    };
+
+    if (bannerTriggerRef.current) {
+      observer.observe(bannerTriggerRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -148,22 +146,51 @@ const Contact: React.FC = () => {
         </div>
       </div>
 
-      {/* Contact Handles - Positioned at bottom of contact section */}
-      <div
-        ref={handlesRef}
-        className="absolute bottom-10 sm:bottom-12 md:bottom-16 gap-3 left-1/2 transform -translate-x-1/2 flex flex-nowrap items-center sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap transition-opacity duration-1000 opacity-0 animate-fadeIn"
-      >
+      {/* Social Links - Desktop */}
+      <div className="hidden md:flex absolute bottom-10 sm:bottom-12 md:bottom-16 gap-3 left-1/2 transform -translate-x-1/2 items-center sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap opacity-0 animate-fadeIn">
         {socialLinks.map((handle, index) => (
           <a
             key={index}
             href={handle.link}
             target="_blank"
             rel="noreferrer"
-            className="text-2xl sm:text-3xl md:text-5xl font-bebas text-red-600 transition-all duration-300 hover:text-red-400 whitespace-nowrap [text-shadow:-0.5px_0_0_black,0.5px_0_0_black,0_-0.5px_0_black,0_0.5px_0_black,-0.5px_-0.5px_0_black,0.5px_-0.5px_0_black,-0.5px_0.5px_0_black,0.5px_0.5px_0_black]"
+            className="text-2xl sm:text-3xl md:text-5xl font-bebas text-red-600 transition-all duration-300 hover:text-red-400 whitespace-nowrap [text-shadow:-0.5px_0_0_black,0.5px_0_0_black,0_-0.5px_0_black,0_0.5px_0_black]"
           >
             {handle.name}
           </a>
         ))}
+      </div>
+
+      {/* Trigger div - placed where we want animation to start */}
+      <div
+        ref={bannerTriggerRef}
+        className="absolute bottom-[30%] w-full h-1"
+        aria-hidden="true"
+      />
+
+      {/* Social Links - Mobile Banner */}
+      <div
+        className={`md:hidden absolute bottom-0 left-0 w-full bg-red-600 transition-all duration-500
+          ${showBanner ? "animate-slideInBanner" : "translate-x-[-100%]"}`}
+      >
+        <div className="flex overflow-x-auto whitespace-nowrap py-4 px-2 gap-4 justify-start">
+          {socialLinks.map((handle, index) => (
+            <a
+              key={index}
+              href={handle.link}
+              target="_blank"
+              rel="noreferrer"
+              className={`text-2xl font-bebas text-white opacity-0 
+                ${showBanner ? "animate-fadeInSocial" : ""}`}
+              style={{
+                animationDelay: `${index * 200 + 1000}ms`,
+                animationFillMode: "forwards",
+              }}
+            >
+              {handle.name}
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
