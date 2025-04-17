@@ -23,20 +23,12 @@ const projects: Project[] = [
     delay: "delay-[200ms]",
   },
   {
-    title: "Reddit Mini",
-    description:
-      "A bite-sized Reddit experience with dynamic content loading—because dynamite comes in small packages.",
-    link: "https://reddit-mini-app.vercel.app/",
-    animation: "animate-slideInRightToCenter",
-    delay: "delay-[600ms]",
-  },
-  {
     title: "Professional Bio's",
     description:
       "Impactful, bespoke single-page applications for professionals. Coz business cards are lame.",
     link: "#",
-    animation: "animate-slideInLeftToCenter",
-    delay: "delay-[1000ms]",
+    animation: "animate-slideInRightToCenter",
+    delay: "delay-[600ms]",
     isDropdown: true,
     dropdownItems: [
       {
@@ -49,6 +41,14 @@ const projects: Project[] = [
       },
       // Add more items as you create more professional bios
     ],
+  },
+  {
+    title: "Reddit Mini",
+    description:
+      "A bite-sized Reddit experience with dynamic content loading—because dynamite comes in small packages.",
+    link: "https://reddit-mini-app.vercel.app/",
+    animation: "animate-slideInLeftToCenter",
+    delay: "delay-[1000ms]",
   },
 ] as const;
 
