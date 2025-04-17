@@ -1,5 +1,6 @@
 // src/components/work.tsx
 import React, { useEffect, useState, useRef } from "react";
+import { ChevronDown } from "lucide-react";
 
 // Add this before the projects array
 interface Project {
@@ -203,13 +204,11 @@ const Work: React.FC = () => {
             {project.isDropdown ? (
               <span className="flex items-center justify-center gap-2">
                 {project.title}
-                <span
-                  className={`transform transition-transform duration-300 text-2xl ${
+                <ChevronDown
+                  className={`h-6 w-6 transition-transform duration-300 ${
                     openDropdown === index ? "rotate-180" : ""
                   }`}
-                >
-                  ▼
-                </span>
+                />
               </span>
             ) : (
               <a href={project.link} target="_blank" rel="noreferrer">
