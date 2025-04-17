@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+# Update date: 2024-03-21
 Sitemap: https://dillanmilo.com/sitemap.xml 
