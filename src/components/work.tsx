@@ -32,7 +32,7 @@ const projects: Project[] = [
   {
     title: "Professional Bio's",
     description:
-      "Bespoke single-page applications for professionals. More impactful than a business card, these personalized sites showcase individual talents and achievements.",
+      "Impactful, bespoke single-page applications for professionals. Coz business cards are lame.",
     link: "#",
     animation: "animate-slideInLeftToCenter",
     delay: "delay-[1000ms]",
