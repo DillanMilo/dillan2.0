@@ -215,7 +215,7 @@ const Work: React.FC = () => {
               <span className="flex items-center justify-center gap-2">
                 {project.title}
                 <ChevronDown
-                  className={`h-6 w-6 transition-transform duration-300 ${
+                  className={`h-8 w-8 transition-transform duration-300 ${
                     openDropdown === index ? "rotate-180" : ""
                   }`}
                 />
