@@ -40,8 +40,14 @@ const Navbar: React.FC = () => {
     setActiveSection(id);
     const element = document.getElementById(id);
     if (element) {
-      const targetY = element.getBoundingClientRect().top + window.pageYOffset;
-      smoothScrollTo(targetY, 1500); // Adjust the duration as needed
+      let targetY = element.getBoundingClientRect().top + window.pageYOffset;
+
+      // If clicking contact, scroll to bottom of the section
+      if (id === "contact") {
+        targetY = element.offsetTop + element.offsetHeight - window.innerHeight;
+      }
+
+      smoothScrollTo(targetY, 1500);
     }
   };
 
