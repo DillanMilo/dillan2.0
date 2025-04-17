@@ -108,16 +108,16 @@ const Info: React.FC = () => {
 
       {/* Subtext */}
       <p className="text-xl sm:text-2xl md:text-2xl text-gray-400 font-bebas mt-4 opacity-0">
-        No, it's not a sandwich. It's my last name.
+        The name's long, but my loading times aren't.
       </p>
 
       {/* Description */}
       <p className="text-slateGreen text-[1.6rem] mt-10 mb-10 sm:text-[2rem] md:text-[2.5rem] text-slateGreen font-bebas max-w-[600px] opacity-0 leading-relaxed text-slateGreen">
-        I'm a front-end developer with a love for intuitive design—think
-        doomscrolling at 2 AM levels of effortless. I draw inspiration from
-        nature, food, and gaming to fuel my creativity. Let's build something
-        intuitive, fun, and maybe even a little cheeky and make the web a better
-        place with your idea.
+        I'm a front-end developer who treats UI like a good joke—if you have to
+        explain it, it's not working. I blend clean code with creative flair,
+        fueled by coffee, gaming, and the occasional existential crisis. Let's
+        build something intuitive, fun, and maybe even a little cheeky and make
+        the web a better place with your idea.
       </p>
     </section>
   );
