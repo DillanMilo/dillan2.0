@@ -19,7 +19,7 @@ const socialLinks = [
   { name: "Email", link: "mailto:dillanxx@gmail.com" },
   { name: "GitHub", link: "https://github.com/DillanMilo" },
   { name: "ENS", link: "https://app.ens.domains/dillanxx.eth" },
-  { name: "SNS", link: "https://sns.id/domain?domain=dillanxx" },
+  { name: "SNS", link: "https://www.sns.id/domain/dillanxx" },
   { name: "BNS", link: "https://app.ens.domains/dillanxx.base.eth" },
   { name: "Call", link: "tel:+12812108139" },
 ] as const;
