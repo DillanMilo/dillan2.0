@@ -33,12 +33,13 @@ const projects: Project[] = [
     isDropdown: true,
     dropdownItems: [
       {
-        name: "Richard Nell",
-        link: "https://richard-nell.vercel.app",
-      },
-      {
         name: "Carly Milo",
         link: "https://carly-milo.com",
+      },
+
+      {
+        name: "Richard Nell",
+        link: "https://richard-nell.vercel.app",
       },
       // Add more items as you create more professional bios
     ],
