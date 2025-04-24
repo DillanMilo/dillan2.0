@@ -97,7 +97,7 @@ const Home: React.FC = () => {
         className="absolute bottom-25 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
         style={{ animationDelay: "2000ms" }}
       >
-        I'm a creative front-end developer who loves crafting beautiful and
+        I'm a creative software engineer who loves crafting beautiful and
         functional websites. My passion lies in blending art with code to bring
         ideas to life.
       </p>
