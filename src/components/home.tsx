@@ -7,20 +7,20 @@ const Home: React.FC = () => {
   useEffect(() => {
     const metaTags = {
       description:
-        "Welcome to Dillan Milosevich's portfolio - a creative front-end developer from Tomball, Houston, specializing in beautiful, functional websites.",
+        "Welcome to Dillan Milosevich's portfolio - a creative software engineer from Tomball, Houston, specializing in front-end development and beautiful, functional websites.",
       keywords:
-        "Dillan Milosevich, Front-End Developer, UI/UX Developer, Web Development, React Developer, Creative Developer, Website Design, Houston Developer, Tomball Developer",
+        "Dillan Milosevich, Software Engineer, Front-End Developer, Web Development, React Developer, Creative Developer, Website Design, Houston Developer, Tomball Developer",
       author: "Dillan Milosevich",
-      "og:title": "Dillan Milosevich | Creative Front-End Developer in Houston",
+      "og:title": "Dillan Milosevich | Creative Software Engineer in Houston",
       "og:description":
-        "Creative front-end developer from Tomball, Houston, crafting beautiful and functional websites. Explore my portfolio and web development projects.",
+        "Creative software engineer from Tomball, Houston, crafting beautiful and functional websites. Explore my portfolio and web development projects.",
       "og:type": "website",
       "og:url": window.location.href,
       "twitter:card": "summary_large_image",
       "twitter:title":
-        "Dillan Milosevich | Creative Front-End Developer in Houston",
+        "Dillan Milosevich | Creative Software Engineer in Houston",
       "twitter:description":
-        "Creative front-end developer from Tomball, Houston, crafting beautiful and functional websites. Explore my portfolio and web development projects.",
+        "Creative software engineer from Tomball, Houston, crafting beautiful and functional websites. Explore my portfolio and web development projects.",
       robots: "index, follow",
       canonical: window.location.href,
       // Add location-specific meta tags
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
 
     updateMetaTags(
       metaTags,
-      "Dillan Milosevich | Creative Front-End Developer in Houston"
+      "Dillan Milosevich | Creative Software Engineer in Houston"
     );
 
     // Add JSON-LD structured data
