@@ -33,19 +33,21 @@ const Contact: React.FC = () => {
   useEffect(() => {
     const metaTags = {
       description:
-        "Connect with Dillan Milosevich - Find me on LinkedIn, Twitter, GitHub, or reach out via email to discuss web development projects and opportunities.",
+        "Connect with Dillan Milosevich - Find me on LinkedIn, Twitter, GitHub, or reach out via email to discuss software engineering and web development projects.",
       keywords:
-        "Contact Dillan Milosevich, Developer Contact, Web Development Collaboration, Hire Front-End Developer",
+        "Contact Dillan Milosevich, Software Engineer Contact, Web Development Collaboration, Front-End Development, Hire Software Engineer",
       author: "Dillan Milosevich",
-      "og:title": "Contact Dillan Milosevich | Let's Connect",
+      "og:title":
+        "Contact Dillan Milosevich | Software Engineer | Let's Connect",
       "og:description":
-        "Ready to bring your web project to life? Connect with Dillan Milosevich through various social platforms or direct contact methods.",
+        "Ready to bring your web project to life? Connect with Dillan Milosevich, a software engineer with front-end expertise, through various social platforms or direct contact methods.",
       "og:type": "website",
       "og:url": window.location.href,
       "twitter:card": "summary_large_image",
-      "twitter:title": "Contact Dillan Milosevich | Let's Connect",
+      "twitter:title":
+        "Contact Dillan Milosevich | Software Engineer | Let's Connect",
       "twitter:description":
-        "Ready to bring your web project to life? Connect with Dillan Milosevich through various social platforms or direct contact methods.",
+        "Ready to bring your web project to life? Connect with Dillan Milosevich, a software engineer with front-end expertise, through various social platforms or direct contact methods.",
       robots: "index, follow",
       canonical: window.location.href,
     };
