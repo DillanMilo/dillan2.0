@@ -36,6 +36,10 @@ const projects: Project[] = [
         name: "Carly Milo",
         link: "https://carly-milo.com",
       },
+      {
+        name: "Chad Hanekom",
+        link: "https://chadhanekom.com",
+      },
 
       {
         name: "Richard Nell",
