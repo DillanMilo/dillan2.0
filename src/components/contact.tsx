@@ -166,7 +166,7 @@ const Contact: React.FC = () => {
         className={`absolute bottom-10 left-0 w-full bg-red-600 transition-all duration-1000
           ${showBanner ? "animate-slideInBanner" : "translate-x-[-100%]"}`}
       >
-        <div className="flex overflow-x-auto whitespace-nowrap py-4 px-2 md:px-4 justify-between md:justify-evenly max-w-full md:max-w-screen-xl mx-auto">
+        <div className="flex overflow-x-auto whitespace-nowrap py-3 px-2 md:px-4 justify-between md:justify-evenly max-w-full md:max-w-screen-xl mx-auto">
           {socialLinks.map((handle, index) => (
             <a
               key={index}
