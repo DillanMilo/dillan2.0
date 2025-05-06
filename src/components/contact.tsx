@@ -141,7 +141,7 @@ const Contact: React.FC = () => {
             {rotatingWords.map((word, index) => (
               <span
                 key={index}
-                className={`absolute inset-0 flex items-center justify-center min-w-[max-content] text-6xl sm:text-6xl md:text-10xl font-bebas text-red-400 transition duration-1000 ease-in-out ${
+                className={`absolute inset-0 flex items-center justify-center min-w-[max-content] text-6xl sm:text-6xl md:text-10xl font-bebas text-red-500 sm:text-red-400 transition duration-1000 ease-in-out ${
                   index === visibleIndex
                     ? "opacity-100 scale-100 translate-y-0"
                     : "opacity-0 scale-90 translate-y-4"
