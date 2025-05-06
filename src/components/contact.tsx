@@ -173,7 +173,7 @@ const Contact: React.FC = () => {
               href={handle.link}
               target="_blank"
               rel="noreferrer"
-              className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bebas text-white opacity-0 
+              className={`text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bebas text-white opacity-0 
                 ${showBanner ? "animate-fadeInSocial" : ""}`}
               style={{
                 animationDelay: `${index * 300 + 1200}ms`, // Increased delays
