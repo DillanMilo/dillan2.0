@@ -154,21 +154,6 @@ const Contact: React.FC = () => {
         </div>
       </div>
 
-      {/* Social Links - Desktop */}
-      <div className="hidden md:flex absolute bottom-10 sm:bottom-12 md:bottom-16 gap-3 left-1/2 transform -translate-x-1/2 items-center sm:gap-6 px-4 overflow-x-auto max-w-screen-lg whitespace-nowrap opacity-0 animate-fadeIn">
-        {socialLinks.map((handle, index) => (
-          <a
-            key={index}
-            href={handle.link}
-            target="_blank"
-            rel="noreferrer"
-            className="text-2xl sm:text-3xl md:text-5xl font-bebas text-red-600 transition-all duration-300 hover:text-red-400 whitespace-nowrap [text-shadow:-0.5px_0_0_black,0.5px_0_0_black,0_-0.5px_0_black,0_0.5px_0_black]"
-          >
-            {handle.name}
-          </a>
-        ))}
-      </div>
-
       {/* Move trigger div closer to bottom */}
       <div
         ref={bannerTriggerRef}
@@ -176,19 +161,19 @@ const Contact: React.FC = () => {
         aria-hidden="true"
       />
 
-      {/* Update animation classes for mobile banner */}
+      {/* Updated banner for both mobile and desktop */}
       <div
-        className={`md:hidden absolute bottom-10 left-0 w-full bg-red-600 transition-all duration-1000
+        className={`absolute bottom-10 left-0 w-full bg-red-600 transition-all duration-1000
           ${showBanner ? "animate-slideInBanner" : "translate-x-[-100%]"}`}
       >
-        <div className="flex overflow-x-auto whitespace-nowrap py-4 px-2 gap-4 justify-start">
+        <div className="flex overflow-x-auto whitespace-nowrap py-4 px-2 md:px-4 justify-between md:justify-evenly max-w-full md:max-w-screen-xl mx-auto">
           {socialLinks.map((handle, index) => (
             <a
               key={index}
               href={handle.link}
               target="_blank"
               rel="noreferrer"
-              className={`text-2xl font-bebas text-white opacity-0 
+              className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-bebas text-white opacity-0 
                 ${showBanner ? "animate-fadeInSocial" : ""}`}
               style={{
                 animationDelay: `${index * 300 + 1200}ms`, // Increased delays
