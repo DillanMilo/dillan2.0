@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import bgImageMobile from "../assets/IMG_07154.jpg"; // Mobile Background
+import bgImageMobile from "/IMG_2177.jpg"; // Mobile Background
 import { updateMetaTags } from "../utils/metaUtils";
 import { getPersonSchema } from "../utils/schema";
 
