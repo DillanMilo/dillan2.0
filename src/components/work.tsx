@@ -18,7 +18,7 @@ const projects: Project[] = [
   {
     title: "Africa Wild Ventures",
     description:
-      "Bringing the Big Five to your browser—elephantine performance with cheetah-fast load times. Africa's calling, and it has great UX. (Currently in development)",
+      "Elephantine performance with cheetah-fast load times. Africa's calling, and it has great UX. (Currently in development)",
     link: "https://africa-wild-ventures.vercel.app",
     animation: "animate-slideInLeftToCenter",
     delay: "delay-[200ms]",
