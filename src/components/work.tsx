@@ -49,10 +49,10 @@ const projects: Project[] = [
     ],
   },
   {
-    title: "Reddit Mini",
+    title: "Africa Wild Ventures",
     description:
-      "A bite-sized Reddit experience with dynamic content loading—because dynamite comes in small packages.",
-    link: "https://reddit-mini-app.vercel.app/",
+      "A premier destination for authentic African hunting, fishing, safari, and tourist experiences.",
+    link: "https://africa-wild-ventures.vercel.app",
     animation: "animate-slideInLeftToCenter",
     delay: "delay-[1000ms]",
   },
