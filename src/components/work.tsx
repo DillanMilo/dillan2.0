@@ -16,10 +16,10 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "Game Hub",
+    title: "Africa Wild Ventures",
     description:
-      "A fun web app showcasing video games across platforms - Like I said, I like video games.",
-    link: "https://game-hub-x.vercel.app/",
+      "A premier destination for authentic African hunting, fishing, safari, and tourist experiences.",
+    link: "https://africa-wild-ventures.vercel.app",
     animation: "animate-slideInLeftToCenter",
     delay: "delay-[200ms]",
   },
@@ -49,10 +49,10 @@ const projects: Project[] = [
     ],
   },
   {
-    title: "Africa Wild Ventures",
+    title: "Game Hub",
     description:
-      "A premier destination for authentic African hunting, fishing, safari, and tourist experiences.",
-    link: "https://africa-wild-ventures.vercel.app",
+      "A fun web app showcasing video games across platforms - Like I said, I like video games.",
+    link: "https://game-hub-x.vercel.app/",
     animation: "animate-slideInLeftToCenter",
     delay: "delay-[1000ms]",
   },
