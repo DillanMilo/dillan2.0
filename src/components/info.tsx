@@ -6,19 +6,19 @@ const Info: React.FC = () => {
   useEffect(() => {
     const metaTags = {
       description:
-        "Get to know Dillan Milosevich - a creative software engineer passionate about front-end development, intuitive design, gaming, and building engaging web experiences.",
+        "Get to know Dillan Milosevich - a creative software developer passionate about front-end development, intuitive design, gaming, and building engaging web experiences.",
       keywords:
-        "Dillan Milosevich, Software Engineer, Front-End Developer, UI Designer, Web Developer Bio, Creative Developer",
+        "Dillan Milosevich, Software Developer, Front-End Developer, UI Designer, Web Developer Bio, Creative Developer",
       author: "Dillan Milosevich",
-      "og:title": "About Dillan Milosevich | Creative Software Engineer",
+      "og:title": "About Dillan Milosevich | Creative Software Developer",
       "og:description":
-        "Meet Dillan Milosevich - a software engineer combining intuitive design with creative development to craft engaging web experiences.",
+        "Meet Dillan Milosevich - a software developer combining intuitive design with creative development to craft engaging web experiences.",
       "og:type": "website",
       "og:url": window.location.href,
       "twitter:card": "summary_large_image",
-      "twitter:title": "About Dillan Milosevich | Creative Software Engineer",
+      "twitter:title": "About Dillan Milosevich | Creative Software Developer",
       "twitter:description":
-        "Meet Dillan Milosevich - a software engineer combining intuitive design with creative development to craft engaging web experiences.",
+        "Meet Dillan Milosevich - a software developer combining intuitive design with creative development to craft engaging web experiences.",
       robots: "index, follow",
       canonical: window.location.href,
     };

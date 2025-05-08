@@ -62,12 +62,12 @@ const Work: React.FC = () => {
   useEffect(() => {
     const metaTags = {
       description:
-        "Explore Dillan Milosevich's portfolio of web development projects - from game platforms to professional websites and React applications built by a software engineer with front-end expertise.",
+        "Explore Dillan Milosevich's portfolio of web development projects - from game platforms to professional websites and React applications built by a software developer with front-end expertise.",
       keywords:
-        "Web Development Projects, Software Engineering, Front-End Development, Game Hub, Reddit Mini, Professional Websites, Portfolio, UI/UX Projects, React Applications",
-      "og:title": "Projects & Work | Dillan Milosevich | Software Engineer",
+        "Web Development Projects, Software Development, Front-End Development, Game Hub, Reddit Mini, Professional Websites, Portfolio, UI/UX Projects, React Applications",
+      "og:title": "Projects & Work | Dillan Milosevich | Software Developer",
       "og:description":
-        "Discover innovative web applications and professional websites crafted by Dillan Milosevich, a software engineer specializing in front-end development. Featured projects include Game Hub, Reddit Mini, and professional bio pages.",
+        "Discover innovative web applications and professional websites crafted by Dillan Milosevich, a software developer specializing in front-end development. Featured projects include Game Hub, Reddit Mini, and professional bio pages.",
       "og:type": "website",
       "og:url": window.location.href,
       robots: "index, follow",

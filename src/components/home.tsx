@@ -7,20 +7,20 @@ const Home: React.FC = () => {
   useEffect(() => {
     const metaTags = {
       description:
-        "Welcome to Dillan Milosevich's portfolio - a creative software engineer from Tomball, Houston, specializing in front-end development and beautiful, functional websites.",
+        "Welcome to Dillan Milosevich's portfolio - a creative software developer from Tomball, Houston, specializing in front-end development and beautiful, functional websites.",
       keywords:
-        "Dillan Milosevich, Software Engineer, Front-End Developer, Web Development, React Developer, Creative Developer, Website Design, Houston Developer, Tomball Developer",
+        "Dillan Milosevich, Software Developer, Front-End Developer, Web Development, React Developer, Creative Developer, Website Design, Houston Developer, Tomball Developer",
       author: "Dillan Milosevich",
-      "og:title": "Dillan Milosevich | Creative Software Engineer in Houston",
+      "og:title": "Dillan Milosevich | Creative Software Developer in Houston",
       "og:description":
-        "Creative software engineer from Tomball, Houston, crafting beautiful and functional websites. Explore my portfolio and web development projects.",
+        "Creative software developer from Tomball, Houston, crafting beautiful and functional websites. Explore my portfolio and web development projects.",
       "og:type": "website",
       "og:url": window.location.href,
       "twitter:card": "summary_large_image",
       "twitter:title":
-        "Dillan Milosevich | Creative Software Engineer in Houston",
+        "Dillan Milosevich | Creative Software Developer in Houston",
       "twitter:description":
-        "Creative software engineer from Tomball, Houston, crafting beautiful and functional websites. Explore my portfolio and web development projects.",
+        "Creative software developer from Tomball, Houston, crafting beautiful and functional websites. Explore my portfolio and web development projects.",
       robots: "index, follow",
       canonical: window.location.href,
       // Add location-specific meta tags
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
 
     updateMetaTags(
       metaTags,
-      "Dillan Milosevich | Creative Software Engineer in Houston"
+      "Dillan Milosevich | Creative Software Developer in Houston"
     );
 
     // Add JSON-LD structured data
@@ -97,7 +97,7 @@ const Home: React.FC = () => {
         className="absolute bottom-25 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
         style={{ animationDelay: "2000ms" }}
       >
-        I'm a creative software engineer who loves crafting beautiful and
+        I'm a creative software developer who loves crafting beautiful and
         functional websites. My passion lies in blending art with code to bring
         ideas to life.
       </p>

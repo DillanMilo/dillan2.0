@@ -3,7 +3,7 @@ export const getPersonSchema = () => ({
   "@type": "Person",
   "@id": "https://dillanmilo.com/#person",
   name: "Dillan Milosevich",
-  jobTitle: "Front-End Developer",
+  jobTitle: "Software Developer",
   url: "https://dillanmilo.com",
   sameAs: [
     "https://www.linkedin.com/in/dillan-milosevich-9a817891/",
@@ -11,7 +11,7 @@ export const getPersonSchema = () => ({
     "https://github.com/DillanMilo"
   ],
   image: "https://dillanmilo.com/path-to-your-profile-image.jpg", // Update this path if you have a profile image
-  description: "Creative front-end developer specializing in beautiful, functional websites",
+  description: "Creative software developer specializing in beautiful, functional websites",
   address: {
     "@type": "PostalAddress",
     "addressLocality": "Tomball",
