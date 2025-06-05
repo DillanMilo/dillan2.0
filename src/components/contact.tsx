@@ -7,7 +7,6 @@ const rotatingWords = [
   "UI",
   "Responsive Design",
   "UX",
-  "Videogames",
 ] as const;
 
 const socialLinks = [
