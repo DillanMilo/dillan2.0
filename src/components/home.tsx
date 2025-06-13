@@ -61,6 +61,15 @@ const Home: React.FC = () => {
         }}
       ></div>
 
+      {/* ✅ Desktop Overlay Background (Only for Desktop) */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn hidden md:block"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/src/assets/IMG_2919.jpg)`,
+          animationDelay: "2500ms",
+        }}
+      ></div>
+
       {/* Content */}
       <div className="relative z-10 text-left">
         <h2
