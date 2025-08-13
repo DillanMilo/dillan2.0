@@ -97,7 +97,7 @@ const Home: React.FC = () => {
           className="text-xl md:text-2xl mb-30 lg:text-3xl text-gray-300 font-bebas tracking-wide opacity-0 animate-slideInLeft mt-5 md:mt-8 max-w-lg"
           style={{ animationDelay: "1200ms" }}
         >
-          I build stuff and make things look nice on the web.
+          I design and build websites & software that work as good as they look.
         </p>
       </div>
 
@@ -106,9 +106,8 @@ const Home: React.FC = () => {
         className="absolute bottom-25 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
         style={{ animationDelay: "2000ms" }}
       >
-        I'm a creative software developer who loves crafting beautiful and
-        functional websites. My passion lies in blending art with code to bring
-        ideas to life.
+        I also create custom AI tools that help businesses plug leaks, fix
+        bottlenecks, and save (sometimes ridiculous) amounts of money.
       </p>
     </main>
   );
