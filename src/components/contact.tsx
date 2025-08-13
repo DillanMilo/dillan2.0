@@ -2,10 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 
 const rotatingWords = [
   "Design",
+  "AI",
   "Web Development",
   "Functionality",
+  "Automation",
   "UI",
   "Responsive Design",
+  "Bottlenecks",
   "UX",
 ] as const;
 
