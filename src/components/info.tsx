@@ -112,7 +112,7 @@ const Info: React.FC = () => {
       </p>
 
       {/* Description */}
-      <p className="text-slateGreen text-[1.6rem] mt-10 mb-10 sm:text-[2rem] md:text-[2.5rem] text-slateGreen font-bebas max-w-[600px] opacity-0 leading-relaxed text-slateGreen">
+      <p className="text-white text-[1.6rem] mt-10 mb-10 sm:text-[2rem] md:text-[2.5rem] font-bebas max-w-[600px] opacity-0 leading-relaxed">
         I treat UI like a good joke — if you have to explain it, it’s not
         working. Beyond design and code, I assist in identifying breakpoints in
         businesses and build custom AI and automation systems that spot where
