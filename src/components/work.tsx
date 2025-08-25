@@ -16,6 +16,14 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "A5 Rail",
+    description:
+      "Next-level AR/VR training for rail pros. Slick, fast, secure — looks so good you might actually enjoy compliance.",
+    link: "https://www.a5rail.com",
+    animation: "animate-slideInRightToCenter",
+    delay: "delay-[200ms]",
+  },
+  {
     title: "Africa Wild Ventures",
     description:
       "Elephantine performance with cheetah-fast load times. Africa's calling, and it has great UX. (Currently in development)",
