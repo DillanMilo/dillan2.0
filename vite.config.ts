@@ -11,12 +11,11 @@ export default defineConfig({
   ],
   build: {
     minify: 'esbuild', // Ensure minification using esbuild.
-    target: 'esnext',  // Serve modern JavaScript.
+    target: 'es2015',  // More compatible target for better browser support.
     rollupOptions: {
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'], // Split vendor chunks.
-          utils: ['./src/utils/schema', './src/utils/metaUtils'], // Separate utils
         }
       }
     },
@@ -32,5 +31,10 @@ export default defineConfig({
     drop: ['console', 'debugger'],
   },
   publicDir: 'public', // Make sure this is set
+  server: {
+    fs: {
+      strict: false // Allow serving files from parent directories
+    }
+  }
 })
 
