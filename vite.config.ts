@@ -11,16 +11,8 @@ export default defineConfig({
       algorithm: 'gzip',
       ext: '.gz',
       threshold: 1024,
-      compressionOptions: { level: 9 }
-    }),
-    compression({
-      algorithm: 'brotliCompress',
-      ext: '.br',
-      threshold: 1024,
-      compressionOptions: { 
-        level: 11,
-        chunkSize: 32 * 1024
-      }
+      compressionOptions: { level: 6 }, // More conservative compression level
+      deleteOriginFile: false
     })
   ],
   build: {
@@ -31,7 +23,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          analytics: ['@vercel/analytics'],
         },
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name?.split('.') || [];
