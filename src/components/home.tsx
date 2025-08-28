@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import bgImageMobile from "/IMG_2177.jpg"; // Mobile Background
 import { updateMetaTags } from "../utils/metaUtils";
 import {
   getPersonSchema,
