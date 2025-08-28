@@ -7,55 +7,33 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    compression({
-      algorithm: 'gzip',
-      ext: '.gz',
-      threshold: 1024,
-      compressionOptions: { level: 6 }, // More conservative compression level
-      deleteOriginFile: false
-    })
+    compression() // Add Gzip compression for production builds.
   ],
   build: {
-    minify: 'esbuild',
-    target: 'es2015',
-    cssMinify: 'esbuild',
+    minify: 'esbuild', // Ensure minification using esbuild.
+    target: 'es2015',  // More compatible target for better browser support.
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
-        },
-        assetFileNames: (assetInfo) => {
-          const info = assetInfo.name?.split('.') || [];
-          const ext = info[info.length - 1];
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext || '')) {
-            return `assets/images/[name]-[hash][extname]`;
-          }
-          if (/css/i.test(ext || '')) {
-            return `assets/css/[name]-[hash][extname]`;
-          }
-          return `assets/[name]-[hash][extname]`;
-        },
-        chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js',
+          vendor: ['react', 'react-dom'], // Split vendor chunks.
+        }
       }
     },
-    chunkSizeWarningLimit: 500,
-    sourcemap: false,
-    cssCodeSplit: true,
-    assetsInlineLimit: 2048, // Inline small assets as base64
+    chunkSizeWarningLimit: 500, // Stricter chunk size limits
+    sourcemap: false, // Disable sourcemaps in production for smaller bundles
   },
   optimizeDeps: {
-    include: ['react', 'react-dom'],
+    include: ['react', 'react-dom'], // Pre-bundle dependencies
   },
   esbuild: {
+    // Remove console logs in production
     pure: ['console.log', 'console.warn'],
     drop: ['console', 'debugger'],
-    legalComments: 'none',
   },
-  publicDir: 'public',
+  publicDir: 'public', // Make sure this is set
   server: {
     fs: {
-      strict: false
+      strict: false // Allow serving files from parent directories
     }
   }
 })
