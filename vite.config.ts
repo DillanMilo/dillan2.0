@@ -7,33 +7,64 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
-    compression() // Add Gzip compression for production builds.
+    compression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 1024,
+      compressionOptions: { level: 9 }
+    }),
+    compression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 1024,
+      compressionOptions: { 
+        level: 11,
+        chunkSize: 32 * 1024
+      }
+    })
   ],
   build: {
-    minify: 'esbuild', // Ensure minification using esbuild.
-    target: 'es2015',  // More compatible target for better browser support.
+    minify: 'esbuild',
+    target: 'es2015',
+    cssMinify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'], // Split vendor chunks.
-        }
+          vendor: ['react', 'react-dom'],
+          analytics: ['@vercel/analytics'],
+        },
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name?.split('.') || [];
+          const ext = info[info.length - 1];
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext || '')) {
+            return `assets/images/[name]-[hash][extname]`;
+          }
+          if (/css/i.test(ext || '')) {
+            return `assets/css/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
       }
     },
-    chunkSizeWarningLimit: 500, // Stricter chunk size limits
-    sourcemap: false, // Disable sourcemaps in production for smaller bundles
+    chunkSizeWarningLimit: 500,
+    sourcemap: false,
+    cssCodeSplit: true,
+    assetsInlineLimit: 2048, // Inline small assets as base64
   },
   optimizeDeps: {
-    include: ['react', 'react-dom'], // Pre-bundle dependencies
+    include: ['react', 'react-dom'],
   },
   esbuild: {
-    // Remove console logs in production
     pure: ['console.log', 'console.warn'],
     drop: ['console', 'debugger'],
+    legalComments: 'none',
   },
-  publicDir: 'public', // Make sure this is set
+  publicDir: 'public',
   server: {
     fs: {
-      strict: false // Allow serving files from parent directories
+      strict: false
     }
   }
 })

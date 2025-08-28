@@ -25,12 +25,20 @@
     z-index: -1; /* ✅ Places it behind everything */
   }
   
-  /* Load background image after initial load */
+  /* Load background image after initial load - optimized for desktop */
   body.loaded::before {
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
                 url("/IMG_06902.webp") no-repeat center center;
     background-size: cover;
-    background-attachment: fixed;
+    background-attachment: scroll; /* Changed from fixed for better performance */
+    will-change: auto; /* Optimize for performance */
+  }
+  
+  /* Desktop-specific optimizations */
+  @media (min-width: 1024px) {
+    body.loaded::before {
+      background-attachment: fixed; /* Only use fixed on desktop where it performs better */
+    }
   }
 
   /* ✅ Fix Background Coverage on Mobile Screens */
