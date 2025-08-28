@@ -103,7 +103,7 @@ const Info: React.FC = () => {
     >
       {/* Title with Expand Animation */}
       <h2 className="text-[6rem] sm:text-[8rem] md:text-[10rem] lg:text-[11rem] font-bebas uppercase tracking-normal sm:tracking-wide max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[60%] text-white opacity-0">
-        About Dillan
+        MILOSEVICH
       </h2>
 
       {/* Subtext */}
