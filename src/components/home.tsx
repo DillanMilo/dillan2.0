@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import bgImageMobile from "/IMG_2177.jpg"; // Mobile Background
 import { updateMetaTags } from "../utils/metaUtils";
-import { getPersonSchema } from "../utils/schema";
+import {
+  getPersonSchema,
+  getWebsiteSchema,
+  getOrganizationSchema,
+} from "../utils/schema";
 
 const Home: React.FC = () => {
   useEffect(() => {
@@ -36,13 +40,28 @@ const Home: React.FC = () => {
     );
 
     // Add JSON-LD structured data
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.text = JSON.stringify(getPersonSchema());
-    document.head.appendChild(script);
+    const schemas = [
+      getPersonSchema(),
+      getWebsiteSchema(),
+      getOrganizationSchema(),
+    ];
+    const scripts: HTMLScriptElement[] = [];
+
+    schemas.forEach((schema, index) => {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.text = JSON.stringify(schema);
+      script.id = `schema-${index}`;
+      document.head.appendChild(script);
+      scripts.push(script);
+    });
 
     return () => {
-      document.head.removeChild(script);
+      scripts.forEach((script) => {
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+      });
     };
   }, []);
 

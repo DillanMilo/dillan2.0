@@ -134,7 +134,7 @@ const Contact: React.FC = () => {
       {/* Caption - Adjusted for Mobile */}
       <div className="mt-66 sm:mt-40">
         <h2 className="text-5xl sm:text-8xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
-          Let's connect and chat about
+          Let's Connect and Chat About
         </h2>
 
         {/* Slot Machine Effect - Adjusted for Mobile */}

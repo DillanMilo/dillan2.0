@@ -196,6 +196,7 @@ const Work: React.FC = () => {
       id="work"
       className="relative flex flex-col items-center text-center py-20 px-6"
     >
+      <h2 className="sr-only">Portfolio & Projects</h2>
       <p
         className={`text-2xl sm:text-3xl text-gray-400 font-bebas mb-16 transform transition-all duration-1000 ${
           subtextVisible
@@ -215,7 +216,7 @@ const Work: React.FC = () => {
               : "opacity-0 translate-y-10"
           }`}
         >
-          <h2
+          <h3
             className={`text-5xl sm:text-4xl md:text-5xl font-bebas text-red-600 mb-6 underline cursor-pointer
               ${
                 project.isDropdown
@@ -238,7 +239,7 @@ const Work: React.FC = () => {
                 {project.title}
               </a>
             )}
-          </h2>
+          </h3>
           <p className="text-3xl sm:text-2xl md:text-3xl text-white mb-8">
             {project.description}
           </p>

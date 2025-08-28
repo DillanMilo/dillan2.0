@@ -101,9 +101,9 @@ const Info: React.FC = () => {
       ref={sectionRef}
       className="relative flex flex-col items-center justify-start text-center pt-22 pb-16 px-6 overflow-hidden"
     >
-      {/* Title with Expand Animation (Changed from H1 to H2) */}
+      {/* Title with Expand Animation */}
       <h2 className="text-[6rem] sm:text-[8rem] md:text-[10rem] lg:text-[11rem] font-bebas uppercase tracking-normal sm:tracking-wide max-w-[90%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[60%] text-white opacity-0">
-        Milosevich
+        About Dillan
       </h2>
 
       {/* Subtext */}

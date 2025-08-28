@@ -1,6 +1,7 @@
 {
   "short_name": "Dillan M.",
-  "name": "Dillan Milosevich Portfolio",
+  "name": "Dillan Milosevich - Creative Software Developer",
+  "description": "Portfolio of Dillan Milosevich, a creative software developer specializing in beautiful, functional websites and web applications.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,16 +11,23 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#000000",
+  "scope": "/",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["portfolio", "developer", "software", "creative"]
 } 

@@ -10,7 +10,7 @@ export const getPersonSchema = () => ({
     "https://twitter.com/dillanx1x",
     "https://github.com/DillanMilo"
   ],
-  image: "https://dillanmilo.com/path-to-your-profile-image.jpg", // Update this path if you have a profile image
+  image: "https://dillanmilo.com/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
   description: "Creative software developer specializing in beautiful, functional websites",
   address: {
     "@type": "PostalAddress",
@@ -60,28 +60,100 @@ export const getProjectsSchema = () => ({
       "@type": "ListItem",
       position: 1,
       item: getProjectSchema({
-        title: "Game Hub",
-        description: "A web application showcasing video games across platforms, featuring dynamic content loading and interactive game discovery.",
-        url: "https://game-hub-x.vercel.app/",
+        title: "A5 Rail",
+        description: "Next-level AR/VR training for rail professionals featuring secure, fast, and engaging compliance training solutions.",
+        url: "https://www.a5rail.com",
       })
     },
     {
       "@type": "ListItem",
       position: 2,
       item: getProjectSchema({
-        title: "Professional Bio Platform",
-        description: "Collection of impactful, bespoke single-page applications for professionals, featuring modern design and seamless user experience.",
-        url: "https://richard-nell.vercel.app", // Using one of your examples
+        title: "Africa Wild Ventures",
+        description: "High-performance safari and adventure booking platform with optimized load times and exceptional user experience.",
+        url: "https://africa-wild-ventures.vercel.app",
       })
     },
     {
       "@type": "ListItem",
       position: 3,
       item: getProjectSchema({
-        title: "Reddit Mini",
-        description: "A streamlined Reddit experience with dynamic content loading, offering efficient content browsing and interaction.",
-        url: "https://reddit-mini-app.vercel.app/",
+        title: "Professional Bio Platform",
+        description: "Collection of impactful, bespoke single-page applications for professionals, featuring modern design and seamless user experience.",
+        url: "https://richard-nell.vercel.app",
+      })
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      item: getProjectSchema({
+        title: "Game Hub",
+        description: "A web application showcasing video games across platforms, featuring dynamic content loading and interactive game discovery.",
+        url: "https://game-hub-x.vercel.app/",
       })
     }
   ]
+});
+
+export const getWebsiteSchema = () => ({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://dillanmilo.com/#website",
+  url: "https://dillanmilo.com",
+  name: "Dillan Milosevich - Creative Software Developer",
+  description: "Portfolio website of Dillan Milosevich, a creative software developer specializing in beautiful, functional websites and web applications.",
+  publisher: {
+    "@id": "https://dillanmilo.com/#person"
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "https://dillanmilo.com/#work?query={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  inLanguage: "en-US"
+});
+
+export const getOrganizationSchema = () => ({
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://dillanmilo.com/#organization",
+  name: "Dillan Milosevich - Software Development Services",
+  alternateName: "DM Dev",
+  url: "https://dillanmilo.com",
+  logo: "https://dillanmilo.com/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
+  image: "https://dillanmilo.com/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
+  description: "Professional software development services specializing in creative web solutions, front-end development, and custom automation systems.",
+  founder: {
+    "@id": "https://dillanmilo.com/#person"
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Tomball",
+    addressRegion: "TX",
+    addressCountry: "US"
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 30.0972,
+    longitude: -95.6161
+  },
+  areaServed: [
+    {
+      "@type": "State",
+      name: "Texas"
+    },
+    {
+      "@type": "Country",
+      name: "United States"
+    }
+  ],
+  serviceType: [
+    "Web Development",
+    "Front-End Development", 
+    "Software Development",
+    "UI/UX Design",
+    "Automation Systems",
+    "Custom AI Solutions"
+  ],
+  priceRange: "$$"
 }); 

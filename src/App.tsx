@@ -4,6 +4,7 @@ import Home from "./components/home";
 import Info from "./components/info";
 import Work from "./components/work";
 import Contact from "./components/contact";
+import SEOBreadcrumbs from "./components/SEOBreadcrumbs";
 import { useEffect, useState } from "react";
 import { Analytics } from "@vercel/analytics/react"; // Added Vercel Analytics import
 
@@ -57,6 +58,31 @@ function App() {
     document.documentElement.lang = "en";
   }, []);
 
+  // Define breadcrumb items based on active section
+  const getBreadcrumbs = () => {
+    const base = [{ name: "Home", url: "https://dillanmilo.com/" }];
+
+    switch (activeSection) {
+      case "info":
+        return [
+          ...base,
+          { name: "About", url: "https://dillanmilo.com/#info" },
+        ];
+      case "work":
+        return [
+          ...base,
+          { name: "Portfolio", url: "https://dillanmilo.com/#work" },
+        ];
+      case "contact":
+        return [
+          ...base,
+          { name: "Contact", url: "https://dillanmilo.com/#contact" },
+        ];
+      default:
+        return base;
+    }
+  };
+
   return (
     <div className="min-h-screen text-white">
       {/* ✅ Mobile Landscape Overlay (Hides SPA when in landscape mode) */}
@@ -71,6 +97,7 @@ function App() {
       {/* ✅ Main Content (Hidden in Mobile Landscape Mode) */}
       {!isLandscape && (
         <>
+          <SEOBreadcrumbs items={getBreadcrumbs()} />
           <Navbar />
           <section
             id="home"
