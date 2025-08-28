@@ -39,22 +39,41 @@ const Home: React.FC = () => {
       "Dillan Milosevich | Creative Software Developer in Houston"
     );
 
-    // Add JSON-LD structured data
-    const schemas = [
-      getPersonSchema(),
-      getWebsiteSchema(),
-      getOrganizationSchema(),
-    ];
-    const scripts: HTMLScriptElement[] = [];
+    // Add JSON-LD structured data with performance optimization
+    const addSchemas = () => {
+      const schemas = [
+        getPersonSchema(),
+        getWebsiteSchema(),
+        getOrganizationSchema(),
+      ];
+      const scripts: HTMLScriptElement[] = [];
 
-    schemas.forEach((schema, index) => {
-      const script = document.createElement("script");
-      script.type = "application/ld+json";
-      script.text = JSON.stringify(schema);
-      script.id = `schema-${index}`;
-      document.head.appendChild(script);
-      scripts.push(script);
-    });
+      schemas.forEach((schema, index) => {
+        const script = document.createElement("script");
+        script.type = "application/ld+json";
+        script.text = JSON.stringify(schema);
+        script.id = `schema-${index}`;
+        document.head.appendChild(script);
+        scripts.push(script);
+      });
+
+      return scripts;
+    };
+
+    // Use requestIdleCallback to avoid blocking main thread
+    let scripts: HTMLScriptElement[] = [];
+    if (typeof window !== "undefined") {
+      if ("requestIdleCallback" in window) {
+        (window as any).requestIdleCallback(() => {
+          scripts = addSchemas();
+        });
+      } else {
+        // Fallback for browsers without requestIdleCallback
+        setTimeout(() => {
+          scripts = addSchemas();
+        }, 100);
+      }
+    }
 
     return () => {
       scripts.forEach((script) => {
@@ -70,21 +89,22 @@ const Home: React.FC = () => {
       id="home"
       className="relative h-screen w-full flex flex-col items-start justify-center px-5 md:px-10 lg:px-20 text-white overflow-x-hidden"
     >
-      {/* ✅ Mobile Overlay Background (Only for Mobile) */}
+      {/* ✅ Mobile Overlay Background (Only for Mobile) - Lazy loaded */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn md:hidden"
         style={{
-          // Combine a dimming gradient with the mobile background image
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${bgImageMobile})`,
+          // Use webp version for better performance
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/IMG_2177.webp)`,
           animationDelay: "2500ms",
         }}
       ></div>
 
-      {/* ✅ Desktop Overlay Background (Only for Desktop) */}
+      {/* ✅ Desktop Overlay Background (Only for Desktop) - Lazy loaded */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn hidden md:block"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/IMG_2919.jpg)`,
+          // Use webp version for better performance
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/IMG_2919.webp)`,
           animationDelay: "2500ms",
         }}
       ></div>

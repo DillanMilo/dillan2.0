@@ -1,12 +1,14 @@
 import "./styles/index.css";
 import Navbar from "./components/navbar";
 import Home from "./components/home";
-import Info from "./components/info";
-import Work from "./components/work";
-import Contact from "./components/contact";
 import SEOBreadcrumbs from "./components/SEOBreadcrumbs";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react"; // Added Vercel Analytics import
+
+// Lazy load non-critical components
+const Info = lazy(() => import("./components/info"));
+const Work = lazy(() => import("./components/work"));
+const Contact = lazy(() => import("./components/contact"));
 
 function App() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -56,6 +58,13 @@ function App() {
 
   useEffect(() => {
     document.documentElement.lang = "en";
+
+    // Add loaded class after initial render to trigger background image loading
+    const timer = setTimeout(() => {
+      document.body.classList.add("loaded");
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Define breadcrumb items based on active section
@@ -107,30 +116,54 @@ function App() {
           >
             <Home />
           </section>
-          <section
-            id="info"
-            className={`transition-opacity duration-700 ease-in-out ${
-              activeSection === "info" ? "opacity-100" : "opacity-60"
-            }`}
+          <Suspense
+            fallback={
+              <div className="h-screen flex items-center justify-center text-white">
+                Loading...
+              </div>
+            }
           >
-            <Info />
-          </section>
-          <section
-            id="work"
-            className={`transition-opacity duration-700 ease-in-out ${
-              activeSection === "work" ? "opacity-100" : "opacity-60"
-            }`}
+            <section
+              id="info"
+              className={`transition-opacity duration-700 ease-in-out ${
+                activeSection === "info" ? "opacity-100" : "opacity-60"
+              }`}
+            >
+              <Info />
+            </section>
+          </Suspense>
+          <Suspense
+            fallback={
+              <div className="h-screen flex items-center justify-center text-white">
+                Loading...
+              </div>
+            }
           >
-            <Work />
-          </section>
-          <section
-            id="contact"
-            className={`transition-opacity duration-700 ease-in-out ${
-              activeSection === "contact" ? "opacity-100" : "opacity-60"
-            }`}
+            <section
+              id="work"
+              className={`transition-opacity duration-700 ease-in-out ${
+                activeSection === "work" ? "opacity-100" : "opacity-60"
+              }`}
+            >
+              <Work />
+            </section>
+          </Suspense>
+          <Suspense
+            fallback={
+              <div className="h-screen flex items-center justify-center text-white">
+                Loading...
+              </div>
+            }
           >
-            <Contact />
-          </section>
+            <section
+              id="contact"
+              className={`transition-opacity duration-700 ease-in-out ${
+                activeSection === "contact" ? "opacity-100" : "opacity-60"
+              }`}
+            >
+              <Contact />
+            </section>
+          </Suspense>
         </>
       )}
       {/* Vercel Analytics Component - Added at the end so it renders on every page */}

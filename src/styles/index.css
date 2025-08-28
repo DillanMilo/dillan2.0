@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
-
 /* Import Tailwind CSS */
 @import "tailwindcss";
 
@@ -20,12 +18,19 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    /* Combine a dimming gradient with your background image */
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-                url("/IMG_06902.webp") no-repeat center center;
+    /* Use solid color initially, then load image */
+    background: #000000;
     background-size: cover; /* ✅ Ensures it covers the entire screen */
     background-attachment: fixed;
     z-index: -1; /* ✅ Places it behind everything */
+  }
+  
+  /* Load background image after initial load */
+  body.loaded::before {
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url("/IMG_06902.webp") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
   }
 
   /* ✅ Fix Background Coverage on Mobile Screens */

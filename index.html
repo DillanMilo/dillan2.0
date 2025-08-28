@@ -36,12 +36,11 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG">
     <link rel="manifest" href="/site.webmanifest">
     
-    <!-- Preload Critical Assets -->
-    <link rel="preload" href="/IMG_07154.webp" as="image">
-    <link rel="preload" href="/8xq1yhiw09q41.webp" as="image">
-    
-    <!-- Add loading optimization -->
+    <!-- Critical Resource Preloading (Only most important) -->
+    <link rel="preload" href="/IMG_06902.webp" as="image" fetchpriority="high">
     <link rel="modulepreload" href="/src/main.tsx">
+    
+    <!-- Less critical images will be loaded with lazy loading -->
     <link rel="dns-prefetch" href="//dillanmilo.com">
     
     <!-- Canonical URL -->
@@ -66,9 +65,13 @@
     <meta property="article:author" content="Dillan Milosevich" />
     
     <!-- Performance Hints -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
     <link rel="dns-prefetch" href="//vercel.app" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    
+    <!-- Optimized Font Loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"></noscript>
     
     <!-- Theme Color -->
     <meta name="theme-color" content="#000000" />

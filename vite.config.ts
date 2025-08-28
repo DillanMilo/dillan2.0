@@ -16,12 +16,21 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'], // Split vendor chunks.
+          utils: ['./src/utils/schema', './src/utils/metaUtils'], // Separate utils
         }
       }
     },
-    chunkSizeWarningLimit: 1000, // Adjust if needed.
+    chunkSizeWarningLimit: 500, // Stricter chunk size limits
+    sourcemap: false, // Disable sourcemaps in production for smaller bundles
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom'], // Pre-bundle dependencies
+  },
+  esbuild: {
+    // Remove console logs in production
+    pure: ['console.log', 'console.warn'],
+    drop: ['console', 'debugger'],
   },
   publicDir: 'public', // Make sure this is set
-  // Removed server.compression as it's not a recognized property.
 })
 
