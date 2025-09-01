@@ -18,7 +18,7 @@ const socialLinks = [
     link: "https://www.linkedin.com/in/dillan-milosevich-9a817891/",
   },
   { name: "X", link: "https://twitter.com/dillanx1x" },
-  { name: "Email", link: "mailto:dillanxx@gmail.com" },
+  { name: "Email", link: "mailto:creativecurrentsx@gmail.com" },
   { name: "GitHub", link: "https://github.com/DillanMilo" },
   { name: "ENS", link: "https://app.ens.domains/dillanxx.eth" },
   { name: "SNS", link: "https://www.sns.id/domain/dillanxx" },
