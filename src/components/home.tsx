@@ -4,38 +4,40 @@ import {
   getPersonSchema,
   getWebsiteSchema,
   getOrganizationSchema,
+  getLocalBusinessSchema,
 } from "../utils/schema";
 
 const Home: React.FC = () => {
   useEffect(() => {
     const metaTags = {
       description:
-        "Welcome to Dillan Milosevich's portfolio - a creative software developer from Tomball, Houston, specializing in front-end development and beautiful, functional websites.",
+        "Top software developer in The Woodlands, Creekside, Tomball & Houston TX. Expert in custom web development, automation workflows, AI-powered solutions, and small business software. Serving Montgomery County and Greater Houston.",
       keywords:
-        "Dillan Milosevich, Software Developer, Front-End Developer, Web Development, React Developer, Creative Developer, Website Design, Houston Developer, Tomball Developer",
+        "Dillan Milosevich, Software Developer The Woodlands, Web Developer Houston, Tomball Developer, Creekside Developer, React Developer Texas, Front-End Developer Montgomery County, Website Design The Woodlands, Custom Web Development Houston, AI Automation Texas, Workflow Automation, Small Business Software, AI-Powered Solutions, Business Solutions The Woodlands",
       author: "Dillan Milosevich",
-      "og:title": "Dillan Milosevich | Creative Software Developer in Houston",
+      "og:title":
+        "Dillan Milosevich | Software Developer in The Woodlands & Houston TX",
       "og:description":
-        "Creative software developer from Tomball, Houston, crafting beautiful and functional websites. Explore my portfolio and web development projects.",
+        "Professional software developer serving The Woodlands, Creekside, Tomball & Houston. Custom web development, automation workflows, AI-powered solutions, and small business software for local businesses.",
       "og:type": "website",
       "og:url": window.location.href,
       "twitter:card": "summary_large_image",
       "twitter:title":
-        "Dillan Milosevich | Creative Software Developer in Houston",
+        "Dillan Milosevich | Software Developer in The Woodlands & Houston TX",
       "twitter:description":
-        "Creative software developer from Tomball, Houston, crafting beautiful and functional websites. Explore my portfolio and web development projects.",
+        "Expert software developer in The Woodlands, Creekside, Tomball & Houston TX. Custom web development, automation workflows, AI-powered solutions & small business software.",
       robots: "index, follow",
       canonical: window.location.href,
       // Add location-specific meta tags
       "geo.region": "US-TX",
-      "geo.placename": "Tomball",
-      "geo.position": "30.0972;-95.6161",
-      ICBM: "30.0972, -95.6161",
+      "geo.placename": "The Woodlands, Creekside, Tomball, Houston",
+      "geo.position": "30.1658;-95.4613",
+      ICBM: "30.1658, -95.4613",
     };
 
     updateMetaTags(
       metaTags,
-      "Dillan Milosevich | Creative Software Developer in Houston"
+      "Dillan Milosevich | Software Developer in The Woodlands & Houston TX"
     );
 
     // Add JSON-LD structured data with performance optimization
@@ -44,6 +46,7 @@ const Home: React.FC = () => {
         getPersonSchema(),
         getWebsiteSchema(),
         getOrganizationSchema(),
+        getLocalBusinessSchema(),
       ];
       const scripts: HTMLScriptElement[] = [];
 
@@ -110,6 +113,12 @@ const Home: React.FC = () => {
 
       {/* Content */}
       <div className="relative z-10 text-left">
+        {/* SEO-optimized H1 for screen readers */}
+        <h1 className="sr-only">
+          Dillan Milosevich - Web Development, Automation Workflows & Small
+          Business Software Solutions in The Woodlands TX
+        </h1>
+
         <h2
           className="text-4xl md:text-5xl lg:text-6xl text-white font-bebas opacity-0 animate-fadeIn mb-10 md:mb-14"
           style={{ animationDelay: "200ms" }}
@@ -118,7 +127,10 @@ const Home: React.FC = () => {
         </h2>
 
         {/* Name Animation */}
-        <h1 className="text-[6rem] md:text-[10rem] lg:text-[15rem] font-bebas font-bold tracking-wide transform scale-y-200 opacity-0 animate-fadeIn flex">
+        <div
+          className="text-[6rem] md:text-[10rem] lg:text-[15rem] font-bebas font-bold tracking-wide transform scale-y-200 opacity-0 animate-fadeIn flex"
+          aria-hidden="true"
+        >
           {"Dillan".split("").map((letter, index) => (
             <span
               key={index}
@@ -128,7 +140,7 @@ const Home: React.FC = () => {
               {letter}
             </span>
           ))}
-        </h1>
+        </div>
 
         {/* Description */}
         <p
@@ -144,8 +156,9 @@ const Home: React.FC = () => {
         className="absolute bottom-25 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
         style={{ animationDelay: "2000ms" }}
       >
-        I also create custom AI tools that help businesses plug leaks, fix
-        bottlenecks, and save (sometimes ridiculous) amounts of money.
+        I also create AI-powered solutions and automation workflows that help
+        small businesses plug leaks, fix bottlenecks, and save (sometimes
+        ridiculous) amounts of money.
       </p>
     </main>
   );

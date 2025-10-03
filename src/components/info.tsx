@@ -113,11 +113,11 @@ const Info: React.FC = () => {
 
       {/* Description */}
       <p className="text-white text-[1.6rem] mt-10 mb-10 sm:text-[2rem] md:text-[2.5rem] font-bebas max-w-[600px] opacity-0 leading-relaxed">
-        I treat UI like a good joke — if you have to explain it, it’s not
-        working. Beyond design and code, I assist in identifying breakpoints in
-        businesses and build custom AI and automation systems that spot where
+        I treat UI like a good joke — if you have to explain it, it's not
+        working. Beyond design and code, I specialize in building custom AI
+        tools, automation workflows, and small business software that spot where
         your business is bleeding time or money, then patch it up — quietly
-        making you more efficient while you’re busy doing your thing. Fueled by
+        making you more efficient while you're busy doing your thing. Fueled by
         coffee, gaming, and the occasional existential crisis, I make sure your
         digital presence is fast, functional, and unforgettable.
       </p>
