@@ -59,12 +59,8 @@ function App() {
   useEffect(() => {
     document.documentElement.lang = "en";
 
-    // Add loaded class after initial render to trigger background image loading
-    const timer = setTimeout(() => {
-      document.body.classList.add("loaded");
-    }, 500);
-
-    return () => clearTimeout(timer);
+    // Add loaded class immediately for faster background loading
+    document.body.classList.add("loaded");
   }, []);
 
   // Define breadcrumb items based on active section

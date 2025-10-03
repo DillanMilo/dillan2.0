@@ -36,10 +36,11 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG">
     <link rel="manifest" href="/site.webmanifest">
     
-    <!-- Critical Resource Preloading (Only most important) -->
-    <link rel="preload" href="/IMG_06902.webp" as="image" fetchpriority="high">
+    <!-- Critical Resource Preloading - Hero Images for LCP -->
+    <link rel="preload" href="/IMG_2919.webp" as="image" fetchpriority="high" media="(min-width: 768px)">
+    <link rel="preload" href="/IMG_2177.webp" as="image" fetchpriority="high" media="(max-width: 767px)">
     
-    <!-- Less critical images will be loaded with lazy loading -->
+    <!-- DNS Prefetch -->
     <link rel="dns-prefetch" href="//dillanmilo.com">
     
     <!-- Canonical URL -->
