@@ -91,23 +91,23 @@ const Home: React.FC = () => {
       id="home"
       className="relative h-screen w-full flex flex-col items-start justify-center px-5 md:px-10 lg:px-20 text-white overflow-x-hidden"
     >
-      {/* ✅ Mobile Overlay Background (Only for Mobile) - Lazy loaded */}
+      {/* ✅ Mobile Overlay Background (Only for Mobile) - Optimized loading */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn md:hidden"
         style={{
           // Use webp version for better performance
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/IMG_2177.webp)`,
-          animationDelay: "2500ms",
+          animationDelay: "300ms",
         }}
       ></div>
 
-      {/* ✅ Desktop Overlay Background (Only for Desktop) - Lazy loaded */}
+      {/* ✅ Desktop Overlay Background (Only for Desktop) - Optimized loading */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn hidden md:block"
         style={{
           // Use webp version for better performance
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/IMG_2919.webp)`,
-          animationDelay: "2500ms",
+          animationDelay: "300ms",
         }}
       ></div>
 
@@ -120,22 +120,22 @@ const Home: React.FC = () => {
         </h1>
 
         <h2
-          className="text-4xl md:text-5xl lg:text-6xl text-white font-bebas opacity-0 animate-fadeIn mb-10 md:mb-14"
-          style={{ animationDelay: "200ms" }}
+          className="text-4xl md:text-5xl lg:text-6xl text-white font-bebas animate-fadeIn mb-10 md:mb-14"
+          style={{ animationDelay: "0ms" }}
         >
           Heya, my name is
         </h2>
 
-        {/* Name Animation */}
+        {/* Name Animation - Container visible immediately for LCP */}
         <div
-          className="text-[6rem] md:text-[10rem] lg:text-[15rem] font-bebas font-bold tracking-wide transform scale-y-200 opacity-0 animate-fadeIn flex"
+          className="text-[6rem] md:text-[10rem] lg:text-[15rem] font-bebas font-bold tracking-wide transform scale-y-200 flex"
           aria-hidden="true"
         >
           {"Dillan".split("").map((letter, index) => (
             <span
               key={index}
               className="inline-block opacity-0 animate-slideUp"
-              style={{ animationDelay: `${index * 150 + 500}ms` }}
+              style={{ animationDelay: `${index * 100 + 100}ms` }}
             >
               {letter}
             </span>
@@ -145,7 +145,7 @@ const Home: React.FC = () => {
         {/* Description */}
         <p
           className="text-xl md:text-2xl mb-30 lg:text-3xl text-gray-300 font-bebas tracking-wide opacity-0 animate-slideInLeft mt-5 md:mt-8 max-w-lg"
-          style={{ animationDelay: "1200ms" }}
+          style={{ animationDelay: "800ms" }}
         >
           I design and build websites & software that work as good as they look.
         </p>
@@ -154,7 +154,7 @@ const Home: React.FC = () => {
       {/* Intro Description (Loads in Last) */}
       <p
         className="absolute bottom-25 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
-        style={{ animationDelay: "2000ms" }}
+        style={{ animationDelay: "1200ms" }}
       >
         I also create AI-powered solutions and automation workflows that help
         small businesses plug leaks, fix bottlenecks, and save (sometimes
