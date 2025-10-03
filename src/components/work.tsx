@@ -204,7 +204,7 @@ const Work: React.FC = () => {
             : "opacity-0 translate-y-10"
         }`}
       >
-        Don't be shy, click around...
+        Don't be shy, Click any project title to explore...
       </p>
       {projects.map((project, index) => (
         <div
