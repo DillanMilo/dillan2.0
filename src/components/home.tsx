@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { updateMetaTags } from "../utils/metaUtils";
 import {
   getPersonSchema,
@@ -6,8 +6,14 @@ import {
   getOrganizationSchema,
   getLocalBusinessSchema,
 } from "../utils/schema";
+import CountdownTimer from "./CountdownTimer";
 
 const Home: React.FC = () => {
+  // Set target date to January 5th, 2026
+  const targetDate = useMemo(() => {
+    return new Date(2026, 0, 5); // Month is 0-indexed, so 0 = January
+  }, []);
+
   useEffect(() => {
     const metaTags = {
       description:
@@ -126,20 +132,25 @@ const Home: React.FC = () => {
           Heya, my name is
         </h2>
 
-        {/* Name Animation - Container visible immediately for LCP */}
-        <div
-          className="text-[6rem] md:text-[10rem] lg:text-[15rem] font-bebas font-bold tracking-wide transform scale-y-200 flex"
-          aria-hidden="true"
-        >
-          {"Dillan".split("").map((letter, index) => (
-            <span
-              key={index}
-              className="inline-block opacity-0 animate-slideUp"
-              style={{ animationDelay: `${index * 100 + 100}ms` }}
-            >
-              {letter}
-            </span>
-          ))}
+        {/* Name Animation with Countdown - Container visible immediately for LCP */}
+        <div className="flex items-end gap-4 md:gap-6 lg:gap-8 flex-wrap">
+          <div
+            className="text-[6rem] md:text-[10rem] lg:text-[15rem] font-bebas font-bold tracking-wide transform scale-y-200 flex"
+            aria-hidden="true"
+          >
+            {"Dillan".split("").map((letter, index) => (
+              <span
+                key={index}
+                className="inline-block opacity-0 animate-slideUp"
+                style={{ animationDelay: `${index * 100 + 100}ms` }}
+              >
+                {letter}
+              </span>
+            ))}
+          </div>
+          
+          {/* Countdown Timer - Next to name */}
+          <CountdownTimer targetDate={targetDate} animationDelay="700ms" />
         </div>
 
         {/* Description */}
