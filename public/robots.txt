@@ -8,7 +8,7 @@ Allow: /
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
 
-# Update date: 2024-12-19
+# Update date: 2025-11-11
 Sitemap: https://dillanmilo.com/sitemap.xml
 
 # Additional search engines
