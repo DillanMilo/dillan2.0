@@ -132,25 +132,20 @@ const Home: React.FC = () => {
           Heya, my name is
         </h2>
 
-        {/* Name Animation with Countdown - Container visible immediately for LCP */}
-        <div className="flex items-end gap-4 md:gap-6 lg:gap-8 flex-wrap">
-          <div
-            className="text-[6rem] md:text-[10rem] lg:text-[15rem] font-bebas font-bold tracking-wide transform scale-y-200 flex"
-            aria-hidden="true"
-          >
-            {"Dillan".split("").map((letter, index) => (
-              <span
-                key={index}
-                className="inline-block opacity-0 animate-slideUp"
-                style={{ animationDelay: `${index * 100 + 100}ms` }}
-              >
-                {letter}
-              </span>
-            ))}
-          </div>
-          
-          {/* Countdown Timer - Next to name */}
-          <CountdownTimer targetDate={targetDate} animationDelay="700ms" />
+        {/* Name Animation - Container visible immediately for LCP */}
+        <div
+          className="text-[6rem] md:text-[10rem] lg:text-[15rem] font-bebas font-bold tracking-wide transform scale-y-200 flex"
+          aria-hidden="true"
+        >
+          {"Dillan".split("").map((letter, index) => (
+            <span
+              key={index}
+              className="inline-block opacity-0 animate-slideUp"
+              style={{ animationDelay: `${index * 100 + 100}ms` }}
+            >
+              {letter}
+            </span>
+          ))}
         </div>
 
         {/* Description */}
@@ -161,6 +156,9 @@ const Home: React.FC = () => {
           I design and build websites & software that work as good as they look.
         </p>
       </div>
+
+      {/* Countdown Timer - Middle right of screen, next to name */}
+      <CountdownTimer targetDate={targetDate} animationDelay="700ms" />
 
       {/* Intro Description (Loads in Last) */}
       <p
