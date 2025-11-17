@@ -41,7 +41,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
       style={{ animationDelay }}
     >
       {/* Availability Text */}
-      <div className="text-xs md:text-sm lg:text-base text-gray-400 font-bebas uppercase tracking-wider text-right mb-1">
+      <div className="text-sm md:text-base lg:text-lg text-white font-bebas uppercase tracking-wider text-right mb-1 font-semibold">
         Available for work in
       </div>
       
