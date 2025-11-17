@@ -131,7 +131,7 @@ const Home: React.FC = () => {
       ></div>
 
       {/* Content */}
-      <div className="relative z-10 text-left">
+      <div className="relative z-10 text-left mt-24 md:mt-0">
         {/* SEO-optimized H1 for screen readers */}
         <h1 className="sr-only">
           Dillan Milosevich - Web Development, Automation Workflows & Small
