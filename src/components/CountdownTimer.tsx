@@ -58,13 +58,17 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
           >
             {toRoman(days)}
           </span>
-          <span className="text-sm md:text-base lg:text-lg text-gray-400 font-bebas mt-1 uppercase tracking-wider">Days</span>
         </div>
         
         {/* Date Display */}
         <div className="text-base md:text-xl lg:text-2xl text-gray-300 font-bebas mb-2 md:mb-4 lg:mb-6 tracking-wide transform scale-y-200">
           {formatDate(targetDate)}
         </div>
+      </div>
+      
+      {/* Days Label */}
+      <div className="text-sm md:text-base lg:text-lg text-white font-bebas uppercase tracking-wider text-right font-semibold">
+        Days ({days})
       </div>
     </div>
   );
