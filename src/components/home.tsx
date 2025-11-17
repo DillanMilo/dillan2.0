@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState, lazy, Suspense } from "react";
 import { updateMetaTags } from "../utils/metaUtils";
 import {
   getPersonSchema,
@@ -6,12 +6,25 @@ import {
   getOrganizationSchema,
   getLocalBusinessSchema,
 } from "../utils/schema";
-import CountdownTimer from "./CountdownTimer";
+
+// Lazy load CountdownTimer to load it last
+const CountdownTimer = lazy(() => import("./CountdownTimer"));
 
 const Home: React.FC = () => {
+  const [showCountdown, setShowCountdown] = useState(false);
+  
   // Set target date to January 5th, 2026
   const targetDate = useMemo(() => {
     return new Date(2026, 0, 5); // Month is 0-indexed, so 0 = January
+  }, []);
+
+  // Delay CountdownTimer to load last (after all other elements)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowCountdown(true);
+    }, 2000); // Load after 2 seconds, ensuring it's last
+    
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -157,8 +170,12 @@ const Home: React.FC = () => {
         </p>
       </div>
 
-      {/* Countdown Timer - Middle right of screen, next to name */}
-      <CountdownTimer targetDate={targetDate} animationDelay="700ms" />
+      {/* Countdown Timer - Middle right of screen, next to name - Loads last */}
+      {showCountdown && (
+        <Suspense fallback={null}>
+          <CountdownTimer targetDate={targetDate} animationDelay="0ms" />
+        </Suspense>
+      )}
 
       {/* Intro Description (Loads in Last) */}
       <p
