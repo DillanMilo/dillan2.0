@@ -21,7 +21,7 @@ const projects: Project[] = [
       "Next-level AR/VR training for rail pros. Slick, fast, secure — looks so good you might actually enjoy compliance.",
     link: "https://www.a5rail.com",
     animation: "animate-slideInRightToCenter",
-    delay: "delay-[200ms]",
+    delay: "delay-[100ms]",
   },
   {
     title: "Africa Wild Ventures",
@@ -29,7 +29,7 @@ const projects: Project[] = [
       "Elephantine performance with cheetah-fast load times. Africa's calling, and it has great UX. (Currently in development)",
     link: "https://africa-wild-ventures.vercel.app",
     animation: "animate-slideInLeftToCenter",
-    delay: "delay-[200ms]",
+    delay: "delay-[100ms]",
   },
   {
     title: "Professional Bio's",
@@ -37,7 +37,7 @@ const projects: Project[] = [
       "Impactful, bespoke single-page applications for professionals. Coz business cards are lame.",
     link: "#",
     animation: "animate-slideInRightToCenter",
-    delay: "delay-[600ms]",
+    delay: "delay-[300ms]",
     isDropdown: true,
     dropdownItems: [
       {
@@ -62,7 +62,7 @@ const projects: Project[] = [
       "A fun web app showcasing video games across platforms - Like I said, I like video games.",
     link: "https://game-hub-x.vercel.app/",
     animation: "animate-slideInLeftToCenter",
-    delay: "delay-[1000ms]",
+    delay: "delay-[500ms]",
   },
 ] as const;
 
@@ -198,7 +198,7 @@ const Work: React.FC = () => {
     >
       <h2 className="sr-only">Portfolio & Projects</h2>
       <p
-        className={`text-2xl sm:text-3xl text-gray-400 font-bebas mb-16 transform transition-all duration-1000 ${
+        className={`text-2xl sm:text-3xl text-gray-400 font-bebas mb-16 transform transition-all duration-700 ${
           subtextVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-10"
@@ -210,7 +210,7 @@ const Work: React.FC = () => {
         <div
           key={index}
           ref={(el) => (projectRefs.current[index] = el)}
-          className={`w-full max-w-3xl mb-8 lg:mb-24 transform transition-all duration-1500 ${
+          className={`w-full max-w-3xl mb-8 lg:mb-24 transform ${
             animatedProjects[index]
               ? `${project.animation} ${project.delay} opacity-100`
               : "opacity-0 translate-y-10"
