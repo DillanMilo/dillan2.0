@@ -130,8 +130,16 @@
   }
 
   @keyframes expandText {
-    from { transform: scaleY(0); opacity: 0; }
-    to { transform: scaleY(1); opacity: 1; }
+    from { 
+      transform: translateY(30px) scale(0.95); 
+      opacity: 0; 
+      filter: blur(10px);
+    }
+    to { 
+      transform: translateY(0) scale(1); 
+      opacity: 1; 
+      filter: blur(0px);
+    }
   }
 
   @keyframes slideInLeftToCenter {
@@ -184,7 +192,7 @@
   .animate-slideUp { animation: slideUp 1s ease-in-out forwards; }
   .animate-slideInLeft { animation: slideInLeft 1s ease-in-out forwards; }
   .animate-slideInRight { animation: slideInRight 1s ease-in-out forwards; }
-  .animate-expandText { animation: expandText 1.5s ease-in-out forwards; transform-origin: center; }
+  .animate-expandText { animation: expandText 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; transform-origin: center; }
   .animate-slideInLeftToCenter { animation: slideInLeftToCenter 1.5s ease-in-out forwards; }
   .animate-slideInRightToCenter { animation: slideInRightToCenter 1.5s ease-in-out forwards; }
   
