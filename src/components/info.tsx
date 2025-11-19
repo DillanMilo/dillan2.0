@@ -69,7 +69,7 @@ const Info: React.FC = () => {
             ?.querySelector("h2")
             ?.classList.add("animate-expandText");
           sectionRef.current?.querySelectorAll("p").forEach((p, index) => {
-            const delayClass = index === 0 ? "delay-[300ms]" : "delay-[700ms]";
+            const delayClass = index === 0 ? "delay-[400ms]" : "delay-[600ms]";
             p.classList.add("animate-fadeIn", delayClass);
           });
         } else {
@@ -79,8 +79,8 @@ const Info: React.FC = () => {
           sectionRef.current?.querySelectorAll("p").forEach((p) => {
             p.classList.remove(
               "animate-fadeIn",
-              "delay-[300ms]",
-              "delay-[700ms]"
+              "delay-[400ms]",
+              "delay-[600ms]"
             );
           });
         }
