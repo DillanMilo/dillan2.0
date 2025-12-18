@@ -32,6 +32,14 @@ const projects: Project[] = [
     delay: "delay-[100ms]",
   },
   {
+    title: "FORME",
+    description:
+      "Regenerative medicine meets pixel-perfect design. Your platelets deserve a website this good.",
+    link: "https://www.formeprp.com",
+    animation: "animate-slideInRightToCenter",
+    delay: "delay-[200ms]",
+  },
+  {
     title: "Professional Bio's",
     description:
       "Impactful, bespoke single-page applications for professionals. Coz business cards are lame.",
