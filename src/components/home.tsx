@@ -113,6 +113,8 @@ const Home: React.FC = () => {
       {/* ✅ Mobile Overlay Background (Only for Mobile) - Optimized loading */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn md:hidden"
+        role="img"
+        aria-label="Dillan Milosevich portfolio hero background"
         style={{
           // Use webp version for better performance
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/IMG_2177.webp)`,
@@ -123,6 +125,8 @@ const Home: React.FC = () => {
       {/* ✅ Desktop Overlay Background (Only for Desktop) - Optimized loading */}
       <div
         className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn hidden md:block"
+        role="img"
+        aria-label="Dillan Milosevich portfolio hero background"
         style={{
           // Use webp version for better performance
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/IMG_2919.webp)`,

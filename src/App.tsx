@@ -104,8 +104,16 @@ function App() {
         <>
           <SEOBreadcrumbs items={getBreadcrumbs()} />
           <Navbar />
+          {/* Skip link for keyboard navigation */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-red-600 focus:text-white focus:rounded"
+          >
+            Skip to main content
+          </a>
           <section
             id="home"
+            aria-label="Home - Introduction"
             className={`transition-opacity duration-700 ease-in-out ${
               activeSection === "home" ? "opacity-100" : "opacity-60"
             }`}
@@ -121,6 +129,7 @@ function App() {
           >
             <section
               id="info"
+              aria-label="About Dillan Milosevich"
               className={`transition-opacity duration-700 ease-in-out ${
                 activeSection === "info" ? "opacity-100" : "opacity-60"
               }`}
@@ -137,10 +146,12 @@ function App() {
           >
             <section
               id="work"
+              aria-label="Portfolio Projects"
               className={`transition-opacity duration-700 ease-in-out ${
                 activeSection === "work" ? "opacity-100" : "opacity-60"
               }`}
             >
+              <div id="main-content" />
               <Work />
             </section>
           </Suspense>
@@ -153,6 +164,7 @@ function App() {
           >
             <section
               id="contact"
+              aria-label="Contact and Social Links"
               className={`transition-opacity duration-700 ease-in-out ${
                 activeSection === "contact" ? "opacity-100" : "opacity-60"
               }`}
