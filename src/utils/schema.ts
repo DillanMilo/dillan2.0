@@ -119,9 +119,9 @@ export const getProjectsSchema = () => ({
       "@type": "ListItem",
       position: 2,
       item: getProjectSchema({
-        title: "Africa Wild Ventures",
+        title: "Africa WildVentures",
         description: "High-performance safari and adventure booking platform with optimized load times and exceptional user experience.",
-        url: "https://africa-wild-ventures.vercel.app",
+        url: "https://www.africawildventures.com",
       })
     },
     {
