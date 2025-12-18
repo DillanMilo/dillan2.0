@@ -128,6 +128,15 @@ export const getProjectsSchema = () => ({
       "@type": "ListItem",
       position: 3,
       item: getProjectSchema({
+        title: "FORME",
+        description: "Modern website for a regenerative medicine clinic specializing in PRP treatments, featuring clean design and intuitive user experience.",
+        url: "https://www.formeprp.com",
+      })
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      item: getProjectSchema({
         title: "Professional Bio Platform",
         description: "Collection of impactful, bespoke single-page applications for professionals, featuring modern design and seamless user experience.",
         url: "https://richard-nell.vercel.app",
@@ -135,7 +144,7 @@ export const getProjectsSchema = () => ({
     },
     {
       "@type": "ListItem",
-      position: 4,
+      position: 5,
       item: getProjectSchema({
         title: "Game Hub",
         description: "A web application showcasing video games across platforms, featuring dynamic content loading and interactive game discovery.",
