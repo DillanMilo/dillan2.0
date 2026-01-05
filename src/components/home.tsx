@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, lazy, Suspense } from "react";
+import React, { useEffect } from "react";
 import { updateMetaTags } from "../utils/metaUtils";
 import {
   getPersonSchema,
@@ -7,25 +7,9 @@ import {
   getLocalBusinessSchema,
 } from "../utils/schema";
 
-// Lazy load CountdownTimer to load it last
-const CountdownTimer = lazy(() => import("./CountdownTimer"));
+// CountdownTimer component is available at ./CountdownTimer.tsx for future use
 
 const Home: React.FC = () => {
-  const [showCountdown, setShowCountdown] = useState(false);
-  
-  // Set target date to January 5th, 2026
-  const targetDate = useMemo(() => {
-    return new Date(2026, 0, 5); // Month is 0-indexed, so 0 = January
-  }, []);
-
-  // Delay CountdownTimer to load last (after all other elements)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowCountdown(true);
-    }, 2000); // Load after 2 seconds, ensuring it's last
-    
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     const metaTags = {
@@ -173,13 +157,6 @@ const Home: React.FC = () => {
           I design and build websites & software that work as good as they look.
         </p>
       </div>
-
-      {/* Countdown Timer - Middle right of screen, next to name - Loads last */}
-      {showCountdown && (
-        <Suspense fallback={null}>
-          <CountdownTimer targetDate={targetDate} animationDelay="0ms" />
-        </Suspense>
-      )}
 
       {/* Intro Description (Loads in Last) */}
       <p
