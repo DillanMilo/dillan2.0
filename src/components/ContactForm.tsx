@@ -86,8 +86,8 @@ const ContactForm: React.FC = () => {
     setSubmitStatus("idle");
 
     try {
-      // Using Formspree - replace YOUR_FORM_ID with your actual Formspree form ID
-      const response = await fetch("https://formspree.io/f/xpwzvgew", {
+      // Using Resend via Vercel serverless function
+      const response = await fetch("/api/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -116,9 +116,8 @@ const ContactForm: React.FC = () => {
     <form
       ref={formRef}
       onSubmit={handleSubmit}
-      className={`w-full max-w-md mx-auto space-y-5 transition-all duration-700 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-      }`}
+      className={`w-full max-w-md mx-auto space-y-5 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
       noValidate
     >
       {/* Name Field */}
@@ -129,9 +128,8 @@ const ContactForm: React.FC = () => {
           value={formData.name}
           onChange={handleChange}
           placeholder="YOUR NAME"
-          className={`w-full px-4 py-3 bg-black/60 border-2 ${
-            errors.name ? "border-red-500" : "border-white/30"
-          } text-white font-bebas text-lg tracking-wider placeholder-white/50 focus:outline-none focus:border-red-500 transition-colors duration-300`}
+          className={`w-full px-4 py-3 bg-black/60 border-2 ${errors.name ? "border-red-500" : "border-white/30"
+            } text-white font-bebas text-lg tracking-wider placeholder-white/50 focus:outline-none focus:border-red-500 transition-colors duration-300`}
           aria-label="Your name"
           aria-invalid={!!errors.name}
         />
@@ -150,9 +148,8 @@ const ContactForm: React.FC = () => {
           value={formData.email}
           onChange={handleChange}
           placeholder="YOUR EMAIL"
-          className={`w-full px-4 py-3 bg-black/60 border-2 ${
-            errors.email ? "border-red-500" : "border-white/30"
-          } text-white font-bebas text-lg tracking-wider placeholder-white/50 focus:outline-none focus:border-red-500 transition-colors duration-300`}
+          className={`w-full px-4 py-3 bg-black/60 border-2 ${errors.email ? "border-red-500" : "border-white/30"
+            } text-white font-bebas text-lg tracking-wider placeholder-white/50 focus:outline-none focus:border-red-500 transition-colors duration-300`}
           aria-label="Your email address"
           aria-invalid={!!errors.email}
         />
@@ -171,9 +168,8 @@ const ContactForm: React.FC = () => {
           onChange={handleChange}
           placeholder="TELL ME ABOUT YOUR PROJECT..."
           rows={4}
-          className={`w-full px-4 py-3 bg-black/60 border-2 ${
-            errors.message ? "border-red-500" : "border-white/30"
-          } text-white font-bebas text-lg tracking-wider placeholder-white/50 focus:outline-none focus:border-red-500 transition-colors duration-300 resize-none`}
+          className={`w-full px-4 py-3 bg-black/60 border-2 ${errors.message ? "border-red-500" : "border-white/30"
+            } text-white font-bebas text-lg tracking-wider placeholder-white/50 focus:outline-none focus:border-red-500 transition-colors duration-300 resize-none`}
           aria-label="Your message"
           aria-invalid={!!errors.message}
         />
@@ -188,11 +184,10 @@ const ContactForm: React.FC = () => {
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`w-full mt-6 px-6 py-4 font-bebas text-xl tracking-wider transition-all duration-300 ${
-          isSubmitting
+        className={`w-full mt-6 px-6 py-4 font-bebas text-xl tracking-wider transition-all duration-300 ${isSubmitting
             ? "bg-gray-600 cursor-not-allowed"
             : "bg-red-600 hover:bg-red-700 hover:scale-[1.02] hover:shadow-lg hover:shadow-red-600/30"
-        } text-white`}
+          } text-white`}
         aria-label="Send message"
       >
         {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
