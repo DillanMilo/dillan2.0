@@ -165,7 +165,7 @@ const Home: React.FC = () => {
               contactSection.scrollIntoView({ behavior: "smooth" });
             }
           }}
-          className="mt-8 md:mt-10 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bebas text-xl md:text-2xl tracking-wider transition-all duration-300 opacity-0 animate-slideUp hover:scale-105 hover:shadow-lg hover:shadow-red-600/30"
+          className="mt-12 sm:mt-8 md:mt-10 px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white font-bebas text-base sm:text-lg md:text-2xl tracking-wider rounded-xl transition-all duration-300 opacity-0 animate-slideUp hover:scale-105 hover:shadow-lg hover:shadow-red-600/30"
           style={{ animationDelay: "1000ms" }}
           aria-label="Navigate to contact section"
         >

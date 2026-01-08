@@ -70,6 +70,22 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScrollSpy);
   }, [handleScrollSpy]);
 
+  // Check if scrolled past home section
+  const [isPastHome, setIsPastHome] = useState(false);
+
+  useEffect(() => {
+    const checkScrollPosition = () => {
+      const homeSection = document.getElementById("home");
+      if (homeSection) {
+        const homeBottom = homeSection.offsetTop + homeSection.offsetHeight;
+        setIsPastHome(window.scrollY > homeBottom - 100);
+      }
+    };
+
+    window.addEventListener("scroll", checkScrollPosition);
+    return () => window.removeEventListener("scroll", checkScrollPosition);
+  }, []);
+
   return (
     <nav
       className={`fixed top-2 right-3 sm:top-4 sm:right-5 z-50 flex justify-end transform ${
@@ -80,13 +96,24 @@ const Navbar: React.FC = () => {
         {["info", "work", "contact"].map((section) => (
           <li key={section}>
             <button
-              className={`relative text-white transition-all duration-300 
+              className={`relative transition-all duration-300
               text-2xl sm:text-3xl md:text-4xl lg:text-5xl px-2 sm:px-3 font-bebas
-              ${activeSection === section ? "after:w-full" : "after:w-0"} 
-              hover:after:w-full after:absolute after:left-0 after:bottom-[-2px] after:h-[1px] after:bg-white after:transition-all after:duration-300`}
+              ${activeSection === section ? "after:w-full" : "after:w-0"}
+              hover:after:w-full after:absolute after:left-0 after:bottom-[-2px] after:h-[1px] after:transition-all after:duration-300
+              ${section === "contact" && isPastHome
+                ? "sm:text-white text-red-500 after:bg-red-500 sm:after:bg-white"
+                : "text-white after:bg-white"
+              }`}
               onClick={() => handleScroll(section)}
             >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
+              {section === "contact" && isPastHome ? (
+                <>
+                  <span className="sm:hidden">Get In Touch</span>
+                  <span className="hidden sm:inline">Contact</span>
+                </>
+              ) : (
+                section.charAt(0).toUpperCase() + section.slice(1)
+              )}
             </button>
           </li>
         ))}

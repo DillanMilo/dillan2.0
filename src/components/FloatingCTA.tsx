@@ -39,18 +39,18 @@ const FloatingCTA: React.FC = () => {
   return (
     <button
       onClick={scrollToContact}
-      className={`fixed bottom-6 right-6 z-50 px-5 py-3 bg-red-600 hover:bg-red-700 text-white font-bebas text-lg tracking-wider shadow-lg shadow-red-600/30 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-red-600/40 ${
+      className={`hidden sm:block fixed bottom-6 right-6 z-50 px-5 py-3 bg-red-600 hover:bg-red-700 text-white font-bebas text-lg tracking-wider rounded-xl shadow-lg shadow-red-600/30 transition-all duration-500 hover:scale-105 hover:shadow-xl hover:shadow-red-600/40 ${
         isVisible
           ? "translate-y-0 opacity-100"
           : "translate-y-20 opacity-0 pointer-events-none"
       }`}
       aria-label="Navigate to contact section"
     >
-      <span className="flex items-center gap-2">
+      <span className="flex items-center gap-1.5 sm:gap-2">
         GET IN TOUCH
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
+          className="h-4 w-4 sm:h-5 sm:w-5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
