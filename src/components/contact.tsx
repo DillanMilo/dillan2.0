@@ -30,6 +30,7 @@ const socialLinks = [
 const Contact: React.FC = () => {
   const [visibleIndex, setVisibleIndex] = useState(0);
   const [showBanner, setShowBanner] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const bannerTriggerRef = useRef<HTMLDivElement>(null);
 
   // Set meta data manually without Helmet
@@ -130,10 +131,10 @@ const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex flex-col justify-start items-center text-center pt-10 md:pt-20 contact-background overflow-y-auto pb-32"
+      className="relative min-h-screen flex flex-col justify-start items-center text-center pt-6 md:pt-10 contact-background overflow-y-auto pb-32"
     >
       {/* Caption - Adjusted for Mobile */}
-      <div className="mt-20 sm:mt-24 md:mt-32">
+      <div className="mt-12 sm:mt-14 md:mt-20">
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
           Let's Connect and Chat About
         </h2>
@@ -157,9 +158,30 @@ const Contact: React.FC = () => {
         </div>
       </div>
 
-      {/* Contact Form */}
-      <div className="w-full px-5 md:px-10 mt-8 md:mt-12 z-10">
-        <ContactForm />
+      {/* Contact Form Toggle */}
+      <div className="w-full px-5 md:px-10 mt-8 md:mt-12 z-10 flex flex-col items-center">
+        {!showForm ? (
+          <button
+            onClick={() => setShowForm(true)}
+            className="group relative px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bebas text-2xl md:text-3xl tracking-wider transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/40 overflow-hidden"
+          >
+            <span className="relative z-10">GET IN TOUCH</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-red-700 via-red-500 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.3),transparent_70%)]" />
+            </div>
+          </button>
+        ) : (
+          <div className="w-full max-w-md animate-formReveal">
+            <button
+              onClick={() => setShowForm(false)}
+              className="mb-6 text-white/60 hover:text-white font-bebas text-lg tracking-wider transition-colors duration-300 flex items-center gap-2 mx-auto"
+            >
+              <span className="transform rotate-180">&#10148;</span> BACK
+            </button>
+            <ContactForm />
+          </div>
+        )}
       </div>
 
       {/* Divider text */}
