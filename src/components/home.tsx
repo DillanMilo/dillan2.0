@@ -156,6 +156,21 @@ const Home: React.FC = () => {
         >
           I design and build websites & software that work as good as they look.
         </p>
+
+        {/* CTA Button */}
+        <button
+          onClick={() => {
+            const contactSection = document.getElementById("contact");
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          className="mt-8 md:mt-10 px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-bebas text-xl md:text-2xl tracking-wider transition-all duration-300 opacity-0 animate-slideUp hover:scale-105 hover:shadow-lg hover:shadow-red-600/30"
+          style={{ animationDelay: "1000ms" }}
+          aria-label="Navigate to contact section"
+        >
+          LET'S WORK TOGETHER
+        </button>
       </div>
 
       {/* Intro Description (Loads in Last) */}

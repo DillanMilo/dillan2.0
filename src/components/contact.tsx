@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import ContactForm from "./ContactForm";
 
 const rotatingWords = [
   "Design",
@@ -129,21 +130,21 @@ const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative h-screen flex flex-col justify-start items-center text-center pt-20 contact-background"
+      className="relative min-h-screen flex flex-col justify-start items-center text-center pt-10 md:pt-20 contact-background overflow-y-auto pb-32"
     >
       {/* Caption - Adjusted for Mobile */}
-      <div className="mt-66 sm:mt-40">
-        <h2 className="text-5xl sm:text-8xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
+      <div className="mt-20 sm:mt-24 md:mt-32">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
           Let's Connect and Chat About
         </h2>
 
         {/* Slot Machine Effect - Adjusted for Mobile */}
-        <div className="relative h-[6rem] sm:h-[6rem] md:h-[6rem] flex justify-center items-center overflow-hidden w-auto">
+        <div className="relative h-[4rem] sm:h-[5rem] md:h-[6rem] flex justify-center items-center overflow-hidden w-auto">
           <div className="relative w-full h-full flex items-center justify-center">
             {rotatingWords.map((word, index) => (
               <span
                 key={index}
-                className={`absolute inset-0 flex items-center justify-center min-w-[max-content] text-6xl sm:text-6xl md:text-10xl font-bebas text-red-500 sm:text-red-400 transition duration-1000 ease-in-out ${
+                className={`absolute inset-0 flex items-center justify-center min-w-[max-content] text-4xl sm:text-5xl md:text-7xl font-bebas text-red-500 sm:text-red-400 transition duration-1000 ease-in-out ${
                   index === visibleIndex
                     ? "opacity-100 scale-100 translate-y-0"
                     : "opacity-0 scale-90 translate-y-4"
@@ -156,6 +157,16 @@ const Contact: React.FC = () => {
         </div>
       </div>
 
+      {/* Contact Form */}
+      <div className="w-full px-5 md:px-10 mt-8 md:mt-12 z-10">
+        <ContactForm />
+      </div>
+
+      {/* Divider text */}
+      <p className="text-white/60 font-bebas text-lg tracking-wider mt-10 mb-4 animate-fadeIn" style={{ animationDelay: "500ms" }}>
+        OR FIND ME ON
+      </p>
+
       {/* Move trigger div closer to bottom */}
       <div
         ref={bannerTriggerRef}
@@ -165,7 +176,7 @@ const Contact: React.FC = () => {
 
       {/* Updated banner for both mobile and desktop */}
       <div
-        className={`absolute bottom-10 left-0 w-full bg-red-600 transition-all duration-1000
+        className={`absolute bottom-0 left-0 w-full bg-red-600 transition-all duration-1000
           ${showBanner ? "animate-slideInBanner" : "translate-x-[-100%]"}`}
       >
         <div className="flex overflow-x-auto whitespace-nowrap py-3 px-2 md:px-4 justify-between md:justify-evenly max-w-full md:max-w-screen-xl mx-auto">
@@ -175,10 +186,10 @@ const Contact: React.FC = () => {
               href={handle.link}
               target="_blank"
               rel="noreferrer"
-              className={`text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bebas text-white opacity-0 
+              className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bebas text-white opacity-0
                 ${showBanner ? "animate-fadeInSocial" : ""}`}
               style={{
-                animationDelay: `${index * 300 + 1200}ms`, // Increased delays
+                animationDelay: `${index * 300 + 1200}ms`,
                 animationFillMode: "forwards",
               }}
             >
