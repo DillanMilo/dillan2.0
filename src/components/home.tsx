@@ -157,31 +157,32 @@ const Home: React.FC = () => {
           I design and build websites & software that work as good as they look.
         </p>
 
-        {/* CTA Button */}
-        <button
-          onClick={() => {
-            const contactSection = document.getElementById("contact");
-            if (contactSection) {
-              contactSection.scrollIntoView({ behavior: "smooth" });
-            }
-          }}
-          className="mt-12 sm:mt-8 md:mt-10 px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white font-bebas text-base sm:text-lg md:text-2xl tracking-wider rounded-xl transition-all duration-300 opacity-0 animate-slideUp hover:scale-105 hover:shadow-lg hover:shadow-red-600/30"
-          style={{ animationDelay: "1000ms" }}
-          aria-label="Navigate to contact section"
-        >
-          LET'S WORK TOGETHER
-        </button>
       </div>
 
-      {/* Intro Description (Loads in Last) */}
+      {/* Intro Description */}
       <p
         className="absolute bottom-25 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
-        style={{ animationDelay: "1200ms" }}
+        style={{ animationDelay: "1000ms" }}
       >
         I also create AI-powered solutions and automation workflows that help
         small businesses plug leaks, fix bottlenecks, and save (sometimes
         ridiculous) amounts of money.
       </p>
+
+      {/* CTA Button - Bottom of page, loads last */}
+      <button
+        onClick={() => {
+          const contactSection = document.getElementById("contact");
+          if (contactSection) {
+            contactSection.scrollIntoView({ behavior: "smooth" });
+          }
+        }}
+        className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-5 md:left-10 lg:left-20 px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white font-bebas text-base sm:text-lg md:text-2xl tracking-wider rounded-xl transition-all duration-300 opacity-0 animate-slideInLeft hover:scale-105 hover:shadow-lg hover:shadow-red-600/30 z-10"
+        style={{ animationDelay: "1400ms" }}
+        aria-label="Navigate to contact section"
+      >
+        LET'S WORK TOGETHER
+      </button>
     </main>
   );
 };
