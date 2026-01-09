@@ -177,7 +177,7 @@ const Home: React.FC = () => {
             contactSection.scrollIntoView({ behavior: "smooth" });
           }
         }}
-        className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-5 md:left-10 lg:left-20 px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-red-600 hover:bg-red-700 text-white font-bebas text-base sm:text-lg md:text-2xl tracking-wider rounded-xl transition-all duration-300 opacity-0 animate-slideInLeft hover:scale-105 hover:shadow-lg hover:shadow-red-600/30 z-10"
+        className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-5 md:left-10 lg:left-20 px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bebas text-base sm:text-lg md:text-2xl tracking-wider rounded-full transition-all duration-300 opacity-0 animate-slideInLeft hover:scale-105 hover:shadow-lg hover:shadow-red-500/30 z-10"
         style={{ animationDelay: "1400ms" }}
         aria-label="Navigate to contact section"
       >
