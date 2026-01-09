@@ -207,7 +207,7 @@ const Contact: React.FC = () => {
               key={index}
               href={handle.link}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bebas text-white opacity-0
                 ${showBanner ? "animate-fadeInSocial" : ""}`}
               style={{
