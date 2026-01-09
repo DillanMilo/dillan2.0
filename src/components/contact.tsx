@@ -163,7 +163,7 @@ const Contact: React.FC = () => {
         {!showForm ? (
           <button
             onClick={() => setShowForm(true)}
-            className="group relative px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bebas text-2xl md:text-3xl tracking-wider transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/40 overflow-hidden"
+            className="group relative px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bebas text-2xl md:text-3xl tracking-wider rounded-full transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/40 overflow-hidden"
           >
             <span className="relative z-10">GET IN TOUCH</span>
             <div className="absolute inset-0 bg-gradient-to-r from-red-700 via-red-500 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
