@@ -110,11 +110,15 @@ const Navbar: React.FC = () => {
                 {/* Desktop - always show Contact */}
                 <span className="hidden sm:inline">Contact</span>
 
-                {/* Mobile - horizontal slide effect */}
-                <span className="sm:hidden relative inline-flex items-center min-w-[5.5rem]">
+                {/* Mobile - horizontal slide effect with width transition */}
+                <span
+                  className={`sm:hidden relative inline-flex items-center h-[1.5em] transition-all duration-500 ease-out ${
+                    isPastHome ? "w-[6.2rem]" : "w-[4.2rem]"
+                  }`}
+                >
                   {/* Contact - slides out to right */}
                   <span
-                    className={`absolute left-0 text-white transition-all duration-500 ease-out ${
+                    className={`absolute left-0 top-1/2 -translate-y-1/2 text-white transition-all duration-500 ease-out whitespace-nowrap ${
                       isPastHome
                         ? "translate-x-[150%] opacity-0"
                         : "translate-x-0 opacity-100"
@@ -124,7 +128,7 @@ const Navbar: React.FC = () => {
                   </span>
                   {/* Get In Touch - slides in from right */}
                   <span
-                    className={`text-red-500 transition-all duration-500 ease-out whitespace-nowrap ${
+                    className={`absolute left-0 top-1/2 -translate-y-1/2 text-red-500 transition-all duration-500 ease-out whitespace-nowrap ${
                       isPastHome
                         ? "translate-x-0 opacity-100 animate-pulseGlow"
                         : "translate-x-[150%] opacity-0"
