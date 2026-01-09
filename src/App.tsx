@@ -2,6 +2,7 @@ import "./styles/index.css";
 import Navbar from "./components/navbar";
 import Home from "./components/home";
 import SEOBreadcrumbs from "./components/SEOBreadcrumbs";
+import FloatingCTA from "./components/FloatingCTA";
 import { useEffect, useState, lazy, Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react"; // Added Vercel Analytics import
 
@@ -104,6 +105,7 @@ function App() {
         <>
           <SEOBreadcrumbs items={getBreadcrumbs()} />
           <Navbar />
+          <FloatingCTA />
           {/* Skip link for keyboard navigation */}
           <a
             href="#main-content"

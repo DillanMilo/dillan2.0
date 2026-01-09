@@ -70,6 +70,22 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScrollSpy);
   }, [handleScrollSpy]);
 
+  // Check if scrolled past home section
+  const [isPastHome, setIsPastHome] = useState(false);
+
+  useEffect(() => {
+    const checkScrollPosition = () => {
+      const homeSection = document.getElementById("home");
+      if (homeSection) {
+        const homeBottom = homeSection.offsetTop + homeSection.offsetHeight;
+        setIsPastHome(window.scrollY > homeBottom - 100);
+      }
+    };
+
+    window.addEventListener("scroll", checkScrollPosition);
+    return () => window.removeEventListener("scroll", checkScrollPosition);
+  }, []);
+
   return (
     <nav
       className={`fixed top-2 right-3 sm:top-4 sm:right-5 z-50 flex justify-end transform ${
@@ -79,15 +95,60 @@ const Navbar: React.FC = () => {
       <ul className="flex gap-3 sm:gap-4 md:gap-5">
         {["info", "work", "contact"].map((section) => (
           <li key={section}>
-            <button
-              className={`relative text-white transition-all duration-300 
-              text-2xl sm:text-3xl md:text-4xl lg:text-5xl px-2 sm:px-3 font-bebas
-              ${activeSection === section ? "after:w-full" : "after:w-0"} 
-              hover:after:w-full after:absolute after:left-0 after:bottom-[-2px] after:h-[1px] after:bg-white after:transition-all after:duration-300`}
-              onClick={() => handleScroll(section)}
-            >
-              {section.charAt(0).toUpperCase() + section.slice(1)}
-            </button>
+            {section === "contact" ? (
+              <button
+                className={`relative transition-all duration-300
+                text-2xl sm:text-3xl md:text-4xl lg:text-5xl px-2 sm:px-3 font-bebas
+                ${activeSection === section ? "after:w-full" : "after:w-0"}
+                hover:after:w-full after:absolute after:left-0 after:bottom-[-2px] after:h-[1px] after:transition-all after:duration-300
+                ${isPastHome
+                  ? "sm:text-white sm:after:bg-white"
+                  : "text-white after:bg-white"
+                }`}
+                onClick={() => handleScroll(section)}
+              >
+                {/* Desktop - always show Contact */}
+                <span className="hidden sm:inline">Contact</span>
+
+                {/* Mobile - horizontal slide effect with width transition */}
+                <span
+                  className={`sm:hidden relative inline-flex items-center h-[1.5em] transition-all duration-500 ease-out ${
+                    isPastHome ? "w-[6.2rem]" : "w-[4.2rem]"
+                  }`}
+                >
+                  {/* Contact - slides out to right */}
+                  <span
+                    className={`absolute left-0 top-1/2 -translate-y-1/2 text-white transition-all duration-500 ease-out whitespace-nowrap ${
+                      isPastHome
+                        ? "translate-x-[150%] opacity-0"
+                        : "translate-x-0 opacity-100"
+                    }`}
+                  >
+                    Contact
+                  </span>
+                  {/* Get In Touch - slides in from right */}
+                  <span
+                    className={`absolute left-0 top-1/2 -translate-y-1/2 text-red-500 transition-all duration-500 ease-out whitespace-nowrap ${
+                      isPastHome
+                        ? "translate-x-0 opacity-100 animate-pulseGlow"
+                        : "translate-x-[150%] opacity-0"
+                    }`}
+                  >
+                    Get In Touch
+                  </span>
+                </span>
+              </button>
+            ) : (
+              <button
+                className={`relative text-white transition-all duration-300
+                text-2xl sm:text-3xl md:text-4xl lg:text-5xl px-2 sm:px-3 font-bebas
+                ${activeSection === section ? "after:w-full" : "after:w-0"}
+                hover:after:w-full after:absolute after:left-0 after:bottom-[-2px] after:h-[1px] after:bg-white after:transition-all after:duration-300`}
+                onClick={() => handleScroll(section)}
+              >
+                {section.charAt(0).toUpperCase() + section.slice(1)}
+              </button>
+            )}
           </li>
         ))}
       </ul>

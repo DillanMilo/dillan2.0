@@ -243,7 +243,7 @@ const Work: React.FC = () => {
                 />
               </span>
             ) : (
-              <a href={project.link} target="_blank" rel="noreferrer">
+              <a href={project.link} target="_blank" rel="noopener noreferrer">
                 {project.title}
               </a>
             )}
@@ -266,7 +266,7 @@ const Work: React.FC = () => {
                   key={i}
                   href={item.link}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   className="block text-3xl font-bebas text-red-600 hover:text-red-400 transition-colors duration-300 py-2"
                 >
                   {item.name}

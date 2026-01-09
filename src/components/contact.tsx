@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import ContactForm from "./ContactForm";
 
 const rotatingWords = [
   "Design",
@@ -29,6 +30,7 @@ const socialLinks = [
 const Contact: React.FC = () => {
   const [visibleIndex, setVisibleIndex] = useState(0);
   const [showBanner, setShowBanner] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const bannerTriggerRef = useRef<HTMLDivElement>(null);
 
   // Set meta data manually without Helmet
@@ -129,21 +131,21 @@ const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative h-screen flex flex-col justify-start items-center text-center pt-20 contact-background"
+      className="relative min-h-screen flex flex-col justify-start items-center text-center pt-6 md:pt-10 contact-background overflow-y-auto pb-32"
     >
       {/* Caption - Adjusted for Mobile */}
-      <div className="mt-66 sm:mt-40">
-        <h2 className="text-5xl sm:text-8xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
+      <div className="mt-12 sm:mt-14 md:mt-20">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
           Let's Connect and Chat About
         </h2>
 
         {/* Slot Machine Effect - Adjusted for Mobile */}
-        <div className="relative h-[6rem] sm:h-[6rem] md:h-[6rem] flex justify-center items-center overflow-hidden w-auto">
+        <div className="relative h-[4rem] sm:h-[5rem] md:h-[6rem] flex justify-center items-center overflow-hidden w-auto">
           <div className="relative w-full h-full flex items-center justify-center">
             {rotatingWords.map((word, index) => (
               <span
                 key={index}
-                className={`absolute inset-0 flex items-center justify-center min-w-[max-content] text-6xl sm:text-6xl md:text-10xl font-bebas text-red-500 sm:text-red-400 transition duration-1000 ease-in-out ${
+                className={`absolute inset-0 flex items-center justify-center min-w-[max-content] text-4xl sm:text-5xl md:text-7xl font-bebas text-red-500 sm:text-red-400 transition duration-1000 ease-in-out ${
                   index === visibleIndex
                     ? "opacity-100 scale-100 translate-y-0"
                     : "opacity-0 scale-90 translate-y-4"
@@ -156,6 +158,37 @@ const Contact: React.FC = () => {
         </div>
       </div>
 
+      {/* Contact Form Toggle */}
+      <div className="w-full px-5 md:px-10 mt-8 md:mt-12 z-10 flex flex-col items-center">
+        {!showForm ? (
+          <button
+            onClick={() => setShowForm(true)}
+            className="group relative px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bebas text-2xl md:text-3xl tracking-wider rounded-full transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/40 overflow-hidden"
+          >
+            <span className="relative z-10">GET IN TOUCH</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-red-700 via-red-500 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.3),transparent_70%)]" />
+            </div>
+          </button>
+        ) : (
+          <div className="w-full max-w-md animate-formReveal">
+            <button
+              onClick={() => setShowForm(false)}
+              className="mb-6 text-white/60 hover:text-white font-bebas text-lg tracking-wider transition-colors duration-300 flex items-center gap-2 mx-auto"
+            >
+              <span className="transform rotate-180">&#10148;</span> BACK
+            </button>
+            <ContactForm />
+          </div>
+        )}
+      </div>
+
+      {/* Divider text */}
+      <p className="text-white/60 font-bebas text-lg tracking-wider mt-10 mb-4 animate-fadeIn" style={{ animationDelay: "500ms" }}>
+        OR FIND ME ON
+      </p>
+
       {/* Move trigger div closer to bottom */}
       <div
         ref={bannerTriggerRef}
@@ -165,7 +198,7 @@ const Contact: React.FC = () => {
 
       {/* Updated banner for both mobile and desktop */}
       <div
-        className={`absolute bottom-10 left-0 w-full bg-red-600 transition-all duration-1000
+        className={`absolute bottom-0 left-0 w-full bg-red-600 transition-all duration-1000
           ${showBanner ? "animate-slideInBanner" : "translate-x-[-100%]"}`}
       >
         <div className="flex overflow-x-auto whitespace-nowrap py-3 px-2 md:px-4 justify-between md:justify-evenly max-w-full md:max-w-screen-xl mx-auto">
@@ -174,11 +207,11 @@ const Contact: React.FC = () => {
               key={index}
               href={handle.link}
               target="_blank"
-              rel="noreferrer"
-              className={`text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-bebas text-white opacity-0 
+              rel="noopener noreferrer"
+              className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bebas text-white opacity-0
                 ${showBanner ? "animate-fadeInSocial" : ""}`}
               style={{
-                animationDelay: `${index * 300 + 1200}ms`, // Increased delays
+                animationDelay: `${index * 300 + 1200}ms`,
                 animationFillMode: "forwards",
               }}
             >

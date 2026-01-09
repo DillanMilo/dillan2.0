@@ -103,12 +103,10 @@
 /* ✅ Adjust Background Image for Mobile - Only for `8xq1yhiw09q41.jpg` */
 @media (max-width: 768px) {
   #contact {
-    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), 
-                url("/8xq1yhiw09q41.webp") no-repeat center top !important;
-    background-size: 300% auto !important; /* ✅ Zooms in 170% */
-    background-position: center top !important; /* ✅ Centers the image */
-    background-repeat: no-repeat !important; /* ✅ Prevents repeating */
-    background-attachment: scroll !important; /* ✅ Ensures it scrolls smoothly */
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+                url("/8xq1yhiw09q41.webp") no-repeat center center !important;
+    background-size: cover !important;
+    background-attachment: scroll !important;
   }
 }
 
@@ -263,6 +261,55 @@
     animation: fadeInSocial 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     animation-fill-mode: both;
   }
+
+  @keyframes formReveal {
+    0% {
+      opacity: 0;
+      transform: scale(0.8) translateY(30px);
+      filter: blur(10px);
+    }
+    50% {
+      opacity: 1;
+      filter: blur(0px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      filter: blur(0px);
+    }
+  }
+
+  .animate-formReveal {
+    animation: formReveal 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      text-shadow: 0 0 4px rgba(239, 68, 68, 0.4), 0 0 8px rgba(239, 68, 68, 0.2);
+    }
+    50% {
+      text-shadow: 0 0 8px rgba(239, 68, 68, 0.6), 0 0 16px rgba(239, 68, 68, 0.4), 0 0 24px rgba(239, 68, 68, 0.2);
+    }
+  }
+
+  .animate-pulseGlow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlowBorder {
+    0%, 100% {
+      box-shadow: 0 0 5px rgba(239, 68, 68, 0.3), 0 0 10px rgba(239, 68, 68, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.5), 0 0 30px rgba(239, 68, 68, 0.3), 0 0 45px rgba(239, 68, 68, 0.1);
+    }
+  }
+
+}
+
+/* CTA Glow effect */
+.cta-glow {
+  animation: slideInLeft 1s ease-in-out 1.4s forwards, pulseGlowBorder 2.5s ease-in-out 3s infinite;
 }
 
 /* Custom Text Colors */
@@ -309,8 +356,9 @@
   }
   /* add public/8xq1yhiw09q41.webp as background image */
   #contact {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url("/8xq1yhiw09q41.webp") no-repeat center top !important;
+    background-color: #000000 !important;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url("/8xq1yhiw09q41.webp") !important;
     background-size: 300% auto !important;
     background-position: center top !important;
     background-repeat: no-repeat !important;
@@ -321,8 +369,9 @@
 /* ----- NEW: Adjust Tablets in Landscape Mode ----- */
 @media (min-width: 1025px) and (orientation: landscape) {
   #contact {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url("/8xq1yhiw09q41.webp") no-repeat center top !important;
+    background-color: #000000 !important;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url("/8xq1yhiw09q41.webp") !important;
     background-size: 150% auto !important;
     background-position: center top !important;
     background-repeat: no-repeat !important;
@@ -361,11 +410,9 @@
 
 /* Common contact background styles */
 .contact-background {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
               url("/8xq1yhiw09q41.webp") no-repeat center top !important;
-  background-repeat: no-repeat !important;
   background-attachment: scroll !important;
-  background-position: center top !important;
 }
 
 /* Adjust background size based on screen size */
