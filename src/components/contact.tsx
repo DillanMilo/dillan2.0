@@ -135,17 +135,17 @@ const Contact: React.FC = () => {
     >
       {/* Caption - Adjusted for Mobile */}
       <div className="mt-12 sm:mt-14 md:mt-20">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
+        <h2 className="text-5xl sm:text-5xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
           Let's Connect and Chat About
         </h2>
 
         {/* Slot Machine Effect - Adjusted for Mobile */}
-        <div className="relative h-[4rem] sm:h-[5rem] md:h-[6rem] flex justify-center items-center overflow-hidden w-auto">
+        <div className="relative h-[5rem] sm:h-[5rem] md:h-[6rem] flex justify-center items-center overflow-hidden w-auto">
           <div className="relative w-full h-full flex items-center justify-center">
             {rotatingWords.map((word, index) => (
               <span
                 key={index}
-                className={`absolute inset-0 flex items-center justify-center min-w-[max-content] text-4xl sm:text-5xl md:text-7xl font-bebas text-red-500 sm:text-red-400 transition duration-1000 ease-in-out ${
+                className={`absolute inset-0 flex items-center justify-center min-w-[max-content] text-5xl sm:text-5xl md:text-7xl font-bebas text-red-500 sm:text-red-400 transition duration-1000 ease-in-out ${
                   index === visibleIndex
                     ? "opacity-100 scale-100 translate-y-0"
                     : "opacity-0 scale-90 translate-y-4"
@@ -159,7 +159,7 @@ const Contact: React.FC = () => {
       </div>
 
       {/* Contact Form Toggle */}
-      <div className="w-full px-5 md:px-10 mt-20 md:mt-12 z-10 flex flex-col items-center">
+      <div className="w-full px-5 md:px-10 mt-32 md:mt-12 z-10 flex flex-col items-center">
         {!showForm ? (
           <button
             onClick={() => setShowForm(true)}
@@ -185,7 +185,7 @@ const Contact: React.FC = () => {
       </div>
 
       {/* Divider text */}
-      <p className="text-white/60 font-bebas text-lg tracking-wider mt-16 md:mt-10 mb-4 animate-fadeIn" style={{ animationDelay: "500ms" }}>
+      <p className="text-white/60 font-bebas text-lg tracking-wider mt-24 md:mt-10 mb-4 animate-fadeIn" style={{ animationDelay: "500ms" }}>
         OR FIND ME ON
       </p>
 
