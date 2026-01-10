@@ -159,7 +159,7 @@ const Contact: React.FC = () => {
       </div>
 
       {/* Contact Form Toggle */}
-      <div className="w-full px-5 md:px-10 mt-8 md:mt-12 z-10 flex flex-col items-center">
+      <div className="w-full px-5 md:px-10 mt-20 md:mt-12 z-10 flex flex-col items-center">
         {!showForm ? (
           <button
             onClick={() => setShowForm(true)}
@@ -185,7 +185,7 @@ const Contact: React.FC = () => {
       </div>
 
       {/* Divider text */}
-      <p className="text-white/60 font-bebas text-lg tracking-wider mt-10 mb-4 animate-fadeIn" style={{ animationDelay: "500ms" }}>
+      <p className="text-white/60 font-bebas text-lg tracking-wider mt-16 md:mt-10 mb-4 animate-fadeIn" style={{ animationDelay: "500ms" }}>
         OR FIND ME ON
       </p>
 
