@@ -103,8 +103,11 @@
 /* ✅ Adjust Background Image for Mobile - Only for `8xq1yhiw09q41.jpg` */
 @media (max-width: 768px) {
   #contact {
-    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-                url("/8xq1yhiw09q41.webp") no-repeat center center !important;
+    background-color: #000000 !important;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+                url("/8xq1yhiw09q41.webp") !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
     background-size: cover !important;
     background-attachment: scroll !important;
   }
@@ -359,7 +362,7 @@
     background-color: #000000 !important;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
                 url("/8xq1yhiw09q41.webp") !important;
-    background-size: 300% auto !important;
+    background-size: cover !important;
     background-position: center top !important;
     background-repeat: no-repeat !important;
     background-attachment: scroll !important;
@@ -372,7 +375,7 @@
     background-color: #000000 !important;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
                 url("/8xq1yhiw09q41.webp") !important;
-    background-size: 150% auto !important;
+    background-size: cover !important;
     background-position: center top !important;
     background-repeat: no-repeat !important;
     background-attachment: scroll !important;
@@ -410,20 +413,23 @@
 
 /* Common contact background styles */
 .contact-background {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url("/8xq1yhiw09q41.webp") no-repeat center top !important;
+  background-color: #000000 !important;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url("/8xq1yhiw09q41.webp") !important;
+  background-repeat: no-repeat !important;
+  background-position: center top !important;
   background-attachment: scroll !important;
 }
 
 /* Adjust background size based on screen size */
 @media (max-width: 1024px) {
   .contact-background {
-    background-size: 300% auto !important;
+    background-size: cover !important;
   }
 }
 
 @media (min-width: 1025px) {
   .contact-background {
-    background-size: 150% auto !important;
+    background-size: cover !important;
   }
 }
