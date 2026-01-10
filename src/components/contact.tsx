@@ -134,7 +134,7 @@ const Contact: React.FC = () => {
       className="relative min-h-screen flex flex-col justify-start items-center text-center pt-6 md:pt-10 contact-background overflow-y-auto pb-32"
     >
       {/* Caption - Adjusted for Mobile */}
-      <div className="mt-12 sm:mt-14 md:mt-20">
+      <div className="mt-20 sm:mt-14 md:mt-20">
         <h2 className="text-5xl sm:text-5xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
           Let's Connect and Chat About
         </h2>
