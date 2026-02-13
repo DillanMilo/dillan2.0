@@ -7,7 +7,7 @@ import {
   getLocalBusinessSchema,
 } from "../utils/schema";
 
-// CountdownTimer component is available at ./CountdownTimer.tsx for future use
+import CountdownTimer from "./CountdownTimer";
 
 const Home: React.FC = () => {
 
@@ -117,6 +117,9 @@ const Home: React.FC = () => {
           animationDelay: "300ms",
         }}
       ></div>
+
+      {/* Countdown Timer */}
+      <CountdownTimer targetDate={new Date("2026-04-06")} />
 
       {/* Content */}
       <div className="relative z-10 text-left mt-0 md:mt-0">
