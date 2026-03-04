@@ -9,8 +9,10 @@
       "Bash(./node_modules/.bin/tsc:*)",
       "Bash(ffprobe:*)",
       "Bash(ffmpeg:*)",
-      "Bash(ls:*)"
-      "Bash(node:*)"
+      "Bash(ls:*)",
+      "Bash(node:*)",
+      "Bash(git push:*)",
+      "Bash(git:*)"
     ]
   }
 }
