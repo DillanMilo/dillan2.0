@@ -6,7 +6,7 @@ import {
   getOrganizationSchema,
 } from "../utils/schema";
 
-import CountdownTimer from "./CountdownTimer";
+// import CountdownTimer from "./CountdownTimer";
 
 const Home: React.FC = () => {
 
