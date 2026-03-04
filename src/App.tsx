@@ -24,7 +24,7 @@ function App() {
         const rect = section.getBoundingClientRect();
         const dimmingThreshold = window.innerHeight * 0.8;
 
-        if (!foundActive && rect.top >= -200 && rect.top < dimmingThreshold) {
+        if (!foundActive && rect.top < dimmingThreshold && rect.bottom > 200) {
           setActiveSection(section.id);
           foundActive = true;
         }

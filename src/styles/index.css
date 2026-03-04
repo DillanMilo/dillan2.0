@@ -354,7 +354,7 @@
     bottom: 8rem !important;
   }
   /* shift the work projects to shift lower on screen */
-  #work > div {
+  #work > section > div {
     margin-top: 5rem !important;
   }
   /* add public/8xq1yhiw09q41.webp as background image */
@@ -388,8 +388,8 @@
   #home > div:first-child {
     bottom: 2rem !important;
   }
-  /* shift the projects a little closer together */ 
-  #work > div {
+  /* shift the projects a little closer together */
+  #work > section > div {
     margin-top: 0rem !important;
   }
   #work {
