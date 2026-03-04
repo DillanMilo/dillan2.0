@@ -10,6 +10,8 @@ interface Project {
   gradient: string;
   accentColor: string;
   tag: string;
+  desktopVideo?: string;
+  mobileVideo?: string;
   isDropdown?: boolean;
   dropdownItems?: Array<{ name: string; link: string }>;
 }
@@ -24,6 +26,8 @@ const projects: Project[] = [
       "radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #16213e 40%, #0f3460 100%)",
     accentColor: "#0f3460",
     tag: "AR / VR",
+    desktopVideo: "/videos/a5rail-desktop.webm",
+    mobileVideo: "/videos/a5rail-mobile.webm",
   },
   {
     title: "Africa WildVentures",
@@ -34,6 +38,8 @@ const projects: Project[] = [
       "radial-gradient(ellipse at 70% 80%, #1a120b 0%, #3c2a21 40%, #d4a574 100%)",
     accentColor: "#d4a574",
     tag: "Travel",
+    desktopVideo: "/videos/africawild-desktop.webm",
+    mobileVideo: "/videos/africawild-mobile.webm",
   },
   {
     title: "FORME",
@@ -44,6 +50,8 @@ const projects: Project[] = [
       "radial-gradient(ellipse at 50% 30%, #0a0a0a 0%, #1a1a1a 40%, #2d1f3d 100%)",
     accentColor: "#8b5cf6",
     tag: "Medical",
+    desktopVideo: "/videos/forme-desktop.webm",
+    mobileVideo: "/videos/forme-mobile.webm",
   },
   {
     title: "Professional Bios",
@@ -54,22 +62,14 @@ const projects: Project[] = [
       "radial-gradient(ellipse at 20% 50%, #0f0f0f 0%, #1c1917 40%, #44403c 100%)",
     accentColor: "#f59e0b",
     tag: "Branding",
+    desktopVideo: "/videos/bios-desktop.webm",
+    mobileVideo: "/videos/bios-mobile.webm",
     isDropdown: true,
     dropdownItems: [
       { name: "Carly Milo", link: "https://carly-milo.com" },
       { name: "Chad Hanekom", link: "https://chadhanekom.com" },
       { name: "Richard Nell", link: "https://richard-nell.vercel.app" },
     ],
-  },
-  {
-    title: "Game Hub",
-    description:
-      "A fun web app showcasing video games across platforms - Like I said, I like video games.",
-    link: "https://game-hub-x.vercel.app/",
-    gradient:
-      "radial-gradient(ellipse at 80% 20%, #0c0c1d 0%, #1a0a2e 40%, #e11d48 100%)",
-    accentColor: "#e11d48",
-    tag: "Gaming",
   },
 ];
 
@@ -79,8 +79,40 @@ const BrowserFrame: React.FC<{
   parallaxY: number;
   isMobile?: boolean;
 }> = ({ project, parallaxY, isMobile }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
+  const videoSrc = isMobile ? project.mobileVideo : project.desktopVideo;
+
+  // Auto-play video when the frame is in view, pause when not
+  useEffect(() => {
+    const el = frameRef.current;
+    const video = videoRef.current;
+    if (!el || !video || !videoSrc) return;
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [videoSrc]);
+
+  const showVideo = videoSrc && videoLoaded && !videoError;
+
   return (
-    <div className="relative w-full overflow-hidden rounded-lg border border-white/[0.08] shadow-2xl shadow-black/50">
+    <div
+      ref={frameRef}
+      className="relative w-full overflow-hidden rounded-lg border border-white/[0.08] shadow-2xl shadow-black/50"
+    >
       {/* Title bar */}
       <div className="flex items-center gap-2 px-4 py-2.5 bg-[#0a0a0a] border-b border-white/[0.06]">
         <div className="flex gap-1.5">
@@ -96,12 +128,12 @@ const BrowserFrame: React.FC<{
         </div>
       </div>
 
-      {/* Viewport area with parallax gradient */}
+      {/* Viewport area */}
       <div
         className="relative overflow-hidden"
         style={{ height: isMobile ? "280px" : "420px" }}
       >
-        {/* Parallax background — shifts vertically based on scroll */}
+        {/* Gradient fallback — always present behind the video */}
         <div
           className="absolute inset-[-30%] will-change-transform"
           style={{
@@ -110,60 +142,98 @@ const BrowserFrame: React.FC<{
           }}
         />
 
-        {/* Noise/grain overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          }}
-        />
+        {/* Video layer */}
+        {videoSrc && !videoError && (
+          <video
+            ref={videoRef}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            onLoadedData={() => setVideoLoaded(true)}
+            onError={() => setVideoError(true)}
+            className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
+              showVideo ? "opacity-100" : "opacity-0"
+            } ${isMobile ? "animate-kenBurns" : ""}`}
+            style={
+              isMobile
+                ? undefined
+                : { transform: `translate3d(0, ${parallaxY * 0.15}px, 0)` }
+            }
+          >
+            <source src={videoSrc} type="video/webm" />
+          </video>
+        )}
 
-        {/* Grid pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
+        {/* Overlays only show when no video is loaded (gradient fallback mode) */}
+        {!showVideo && (
+          <>
+            {/* Noise/grain overlay */}
+            <div
+              className="absolute inset-0 opacity-[0.03]"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+              }}
+            />
 
-        {/* Floating accent glow */}
-        <div
-          className="absolute w-40 h-40 rounded-full blur-3xl opacity-20"
-          style={{
-            background: project.accentColor,
-            bottom: "10%",
-            right: "10%",
-            transform: `translate3d(0, ${parallaxY * -0.5}px, 0)`,
-          }}
-        />
+            {/* Grid pattern overlay */}
+            <div
+              className="absolute inset-0 opacity-[0.04]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+                backgroundSize: "40px 40px",
+              }}
+            />
 
-        {/* Tag badge */}
-        <div className="absolute top-4 right-4 z-10">
+            {/* Floating accent glow */}
+            <div
+              className="absolute w-40 h-40 rounded-full blur-3xl opacity-20"
+              style={{
+                background: project.accentColor,
+                bottom: "10%",
+                right: "10%",
+                transform: `translate3d(0, ${parallaxY * -0.5}px, 0)`,
+              }}
+            />
+
+            {/* Large watermark letter */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span
+                className="text-[12rem] sm:text-[18rem] font-bebas leading-none select-none opacity-[0.04]"
+                style={{
+                  transform: `translate3d(0, ${parallaxY * -0.3}px, 0)`,
+                }}
+              >
+                {project.title.charAt(0)}
+              </span>
+            </div>
+          </>
+        )}
+
+        {/* Tag badge — always visible */}
+        <div className="absolute bottom-4 right-4 z-10">
           <span
-            className="px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-bebas rounded-full border"
+            className="px-3 py-1 text-[10px] uppercase tracking-[0.2em] font-bebas rounded-full border backdrop-blur-sm"
             style={{
               color: project.accentColor,
               borderColor: `${project.accentColor}33`,
-              backgroundColor: `${project.accentColor}0d`,
+              backgroundColor: `${project.accentColor}1a`,
             }}
           >
             {project.tag}
           </span>
         </div>
 
-        {/* Large watermark letter */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span
-            className="text-[12rem] sm:text-[18rem] font-bebas leading-none select-none opacity-[0.04]"
+        {/* Subtle vignette on video for polish */}
+        {showVideo && (
+          <div
+            className="absolute inset-0 pointer-events-none"
             style={{
-              transform: `translate3d(0, ${parallaxY * -0.3}px, 0)`,
+              boxShadow: "inset 0 0 60px rgba(0,0,0,0.4)",
             }}
-          >
-            {project.title.charAt(0)}
-          </span>
-        </div>
+          />
+        )}
       </div>
     </div>
   );
