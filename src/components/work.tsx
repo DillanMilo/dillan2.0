@@ -94,7 +94,7 @@ const BrowserFrame: React.FC<{
 
     const obs = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           video.play().catch(() => {});
         } else {
           video.pause();
@@ -274,7 +274,7 @@ const DesktopProjectCard: React.FC<{
     if (!cardRef.current) return;
     const obs = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
+        if (entry?.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.15 }
     );
@@ -423,7 +423,7 @@ const Work: React.FC = () => {
     };
   }, []);
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null!) as React.RefObject<HTMLDivElement>;
   const [isMobile, setIsMobile] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
   const [sectionVisible, setSectionVisible] = useState(false);
@@ -439,7 +439,7 @@ const Work: React.FC = () => {
     const el = containerRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(
-      ([entry]) => setSectionVisible(entry.isIntersecting),
+      ([entry]) => { if (entry) setSectionVisible(entry.isIntersecting); },
       { threshold: 0.05 }
     );
     obs.observe(el);
@@ -505,7 +505,7 @@ const Work: React.FC = () => {
 // ——————————————————————————————————————
 const MobileWork: React.FC<{
   sectionVisible: boolean;
-  containerRef: React.RefObject<HTMLDivElement | null>;
+  containerRef: React.RefObject<HTMLDivElement>;
   openDropdown: number | null;
   toggleDropdown: (index: number) => void;
 }> = ({ sectionVisible, containerRef, openDropdown, toggleDropdown }) => {
