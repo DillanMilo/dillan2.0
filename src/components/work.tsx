@@ -339,7 +339,7 @@ const DesktopProjectCard: React.FC<{
           </h3>
 
           <p
-            className="text-base lg:text-lg text-white/50 leading-relaxed font-sans max-w-md"
+            className="text-base lg:text-lg text-white/70 leading-relaxed font-sans max-w-md"
             style={textItemStyle(450)}
           >
             {project.description}
@@ -577,7 +577,7 @@ const MobileWork: React.FC<{
               <h3 className="text-3xl font-bebas text-white mb-2 leading-tight">
                 {project.title}
               </h3>
-              <p className="text-sm text-white/40 leading-relaxed font-sans mb-4">
+              <p className="text-sm text-white/65 leading-relaxed font-sans mb-4">
                 {project.description}
               </p>
 
