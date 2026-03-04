@@ -1,5 +1,5 @@
 // src/components/work.tsx
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { ChevronDown, ArrowUpRight, ExternalLink } from "lucide-react";
 import { getProjectsSchema } from "../utils/schema";
 
@@ -76,9 +76,9 @@ const projects: Project[] = [
 // Browser window chrome component
 const BrowserFrame: React.FC<{
   project: Project;
-  parallaxOffset: number;
+  parallaxY: number;
   isMobile?: boolean;
-}> = ({ project, parallaxOffset, isMobile }) => {
+}> = ({ project, parallaxY, isMobile }) => {
   return (
     <div className="relative w-full overflow-hidden rounded-lg border border-white/[0.08] shadow-2xl shadow-black/50">
       {/* Title bar */}
@@ -99,19 +99,18 @@ const BrowserFrame: React.FC<{
       {/* Viewport area with parallax gradient */}
       <div
         className="relative overflow-hidden"
-        style={{ height: isMobile ? "280px" : "380px" }}
+        style={{ height: isMobile ? "280px" : "420px" }}
       >
-        {/* Parallax background layer */}
+        {/* Parallax background — shifts vertically based on scroll */}
         <div
-          className="absolute inset-0 will-change-transform"
+          className="absolute inset-[-30%] will-change-transform"
           style={{
             background: project.gradient,
-            transform: `translate3d(${parallaxOffset * 0.3}px, 0, 0) scale(1.3)`,
-            transition: "transform 0.1s linear",
+            transform: `translate3d(0, ${parallaxY}px, 0)`,
           }}
         />
 
-        {/* Noise/grain overlay for texture */}
+        {/* Noise/grain overlay */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -129,14 +128,14 @@ const BrowserFrame: React.FC<{
           }}
         />
 
-        {/* Floating accent element */}
+        {/* Floating accent glow */}
         <div
-          className="absolute w-32 h-32 rounded-full blur-3xl opacity-20"
+          className="absolute w-40 h-40 rounded-full blur-3xl opacity-20"
           style={{
             background: project.accentColor,
-            bottom: "20%",
-            right: "15%",
-            transform: `translate3d(${parallaxOffset * -0.15}px, 0, 0)`,
+            bottom: "10%",
+            right: "10%",
+            transform: `translate3d(0, ${parallaxY * -0.5}px, 0)`,
           }}
         />
 
@@ -154,12 +153,12 @@ const BrowserFrame: React.FC<{
           </span>
         </div>
 
-        {/* Centered project initial as watermark */}
+        {/* Large watermark letter */}
         <div className="absolute inset-0 flex items-center justify-center">
           <span
-            className="text-[12rem] sm:text-[16rem] font-bebas leading-none select-none opacity-[0.04]"
+            className="text-[12rem] sm:text-[18rem] font-bebas leading-none select-none opacity-[0.04]"
             style={{
-              transform: `translate3d(${parallaxOffset * -0.2}px, 0, 0)`,
+              transform: `translate3d(0, ${parallaxY * -0.3}px, 0)`,
             }}
           >
             {project.title.charAt(0)}
@@ -170,8 +169,180 @@ const BrowserFrame: React.FC<{
   );
 };
 
+// ——————————————————————————————————————
+// DESKTOP: Single project card with parallax
+// ——————————————————————————————————————
+const DesktopProjectCard: React.FC<{
+  project: Project;
+  index: number;
+  openDropdown: number | null;
+  toggleDropdown: (index: number) => void;
+  isEven: boolean;
+}> = ({ project, index, openDropdown, toggleDropdown, isEven }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [parallaxY, setParallaxY] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Parallax on scroll — shift the browser frame background
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      // How far through the viewport the card is (0 = just entering bottom, 1 = leaving top)
+      const progress = 1 - (rect.top + rect.height) / (viewH + rect.height);
+      // Map to a parallax range of -40 to +40
+      setParallaxY((progress - 0.5) * 80);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Reveal on scroll
+  useEffect(() => {
+    if (!cardRef.current) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.15 }
+    );
+    obs.observe(cardRef.current);
+    return () => obs.disconnect();
+  }, []);
+
+  // Staggered reveal styles — browser frame slides from its side, text cascades in
+  const frameDirection = isEven ? -60 : 60; // px offset direction
+  const textDirection = isEven ? 40 : -40;
+
+  const frameStyle: React.CSSProperties = {
+    transform: isVisible
+      ? "translate3d(0, 0, 0) scale(1)"
+      : `translate3d(${frameDirection}px, 30px, 0) scale(0.95)`,
+    opacity: isVisible ? 1 : 0,
+    filter: isVisible ? "blur(0px)" : "blur(8px)",
+    transition: "transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s cubic-bezier(0.16, 1, 0.3, 1)",
+  };
+
+  const textItemStyle = (delay: number): React.CSSProperties => ({
+    transform: isVisible
+      ? "translate3d(0, 0, 0)"
+      : `translate3d(${textDirection}px, 20px, 0)`,
+    opacity: isVisible ? 1 : 0,
+    filter: isVisible ? "blur(0px)" : "blur(4px)",
+    transition: `transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, filter 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+  });
+
+  return (
+    <div ref={cardRef}>
+      <div
+        className={`flex items-center gap-12 lg:gap-20 ${
+          isEven ? "flex-row" : "flex-row-reverse"
+        }`}
+      >
+        {/* Browser frame side — slides in from its edge with scale + blur */}
+        <div className="flex-[1.4] min-w-0" style={frameStyle}>
+          <BrowserFrame project={project} parallaxY={parallaxY} />
+        </div>
+
+        {/* Info side — each element staggers in */}
+        <div className="flex-1 flex flex-col justify-center">
+          {/* Project number */}
+          <span
+            className="text-[5rem] lg:text-[6rem] font-bebas leading-none text-white/[0.04] mb-2 select-none"
+            style={textItemStyle(150)}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </span>
+
+          <span
+            className="inline-block w-10 h-[1px] mb-5"
+            style={{ ...textItemStyle(250), background: project.accentColor }}
+          />
+
+          <h3
+            className="text-5xl lg:text-6xl xl:text-7xl font-bebas text-white leading-[0.9] mb-5"
+            style={textItemStyle(350)}
+          >
+            {project.title}
+          </h3>
+
+          <p
+            className="text-base lg:text-lg text-white/50 leading-relaxed font-sans max-w-md"
+            style={textItemStyle(450)}
+          >
+            {project.description}
+          </p>
+
+          {/* CTA / Dropdown */}
+          <div style={textItemStyle(550)}>
+            {project.isDropdown && project.dropdownItems ? (
+              <div className="mt-8">
+                <button
+                  type="button"
+                  aria-expanded={openDropdown === index}
+                  onClick={() => toggleDropdown(index)}
+                  className="group flex items-center gap-3 text-red-500 hover:text-red-400 transition-colors duration-300 cursor-pointer bg-transparent border-none p-0"
+                >
+                  <span className="text-lg font-bebas tracking-wider uppercase">
+                    View Projects
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-300 ${
+                      openDropdown === index ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-500 ease-out ${
+                    openDropdown === index
+                      ? "max-h-60 opacity-100 mt-4"
+                      : "max-h-0 opacity-0 mt-0"
+                  }`}
+                >
+                  <div className="flex flex-col gap-2 pl-4 border-l border-white/10">
+                    {project.dropdownItems.map((item, i) => (
+                      <a
+                        key={i}
+                        href={item.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/link flex items-center gap-2 text-white/60 hover:text-red-400 transition-colors duration-300 py-1"
+                      >
+                        <span className="text-lg font-bebas tracking-wide">
+                          {item.name}
+                        </span>
+                        <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-y-0.5 translate-x-[-2px] group-hover/link:opacity-100 group-hover/link:translate-y-0 group-hover/link:translate-x-0 transition-all duration-300" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group mt-8 inline-flex items-center gap-3 text-red-500 hover:text-red-400 transition-colors duration-300"
+              >
+                <span className="text-lg font-bebas tracking-wider uppercase">
+                  Visit Site
+                </span>
+                <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ——————————————————————————————————————
+// MAIN WORK COMPONENT
+// ——————————————————————————————————————
 const Work: React.FC = () => {
-  // SEO schema
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "application/ld+json";
@@ -183,14 +354,10 @@ const Work: React.FC = () => {
   }, []);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);
   const [sectionVisible, setSectionVisible] = useState(false);
 
-  // Check mobile breakpoint
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
@@ -198,7 +365,6 @@ const Work: React.FC = () => {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // Section visibility
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -210,43 +376,10 @@ const Work: React.FC = () => {
     return () => obs.disconnect();
   }, []);
 
-  // Horizontal scroll mapping (desktop only)
-  const handleScroll = useCallback(() => {
-    if (isMobile || !containerRef.current || !stickyRef.current) return;
-
-    const container = containerRef.current;
-    const rect = container.getBoundingClientRect();
-    const scrollableHeight =
-      container.offsetHeight - window.innerHeight;
-    const scrolled = -rect.top;
-    const progress = Math.max(0, Math.min(1, scrolled / scrollableHeight));
-
-    setScrollProgress(progress);
-    setActiveIndex(
-      Math.min(
-        projects.length - 1,
-        Math.floor(progress * projects.length)
-      )
-    );
-  }, [isMobile]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
-
   const toggleDropdown = (index: number) => {
     setOpenDropdown(openDropdown === index ? null : index);
   };
 
-  // Calculate per-card parallax offset based on scroll
-  const getParallaxOffset = (index: number) => {
-    if (isMobile) return 0;
-    const cardProgress = scrollProgress * projects.length - index;
-    return cardProgress * -120;
-  };
-
-  // MOBILE LAYOUT — vertical stacked cards
   if (isMobile) {
     return (
       <MobileWork
@@ -258,187 +391,47 @@ const Work: React.FC = () => {
     );
   }
 
-  // DESKTOP LAYOUT — horizontal scroll showcase
-  const totalScrollHeight = `${projects.length * 80}vh`;
-
+  // DESKTOP LAYOUT — Full-width cinematic stacked cards with parallax
   return (
-    <div ref={containerRef} style={{ height: totalScrollHeight }}>
+    <section
+      ref={containerRef}
+      className="relative py-24 lg:py-32"
+    >
+      <h2 className="sr-only">Portfolio & Projects</h2>
+
+      {/* Section header */}
       <div
-        ref={stickyRef}
-        className="sticky top-0 h-screen overflow-hidden"
+        className={`text-center mb-20 lg:mb-28 transition-all duration-700 ${
+          sectionVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-6"
+        }`}
       >
-        <h2 className="sr-only">Portfolio & Projects</h2>
-
-        {/* Cinematic top bar */}
-        <div
-          className={`absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-8 lg:px-16 py-6 transition-all duration-700 ${
-            sectionVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 -translate-y-4"
-          }`}
-        >
-          <p className="text-sm text-white/30 font-bebas tracking-[0.3em] uppercase">
-            Selected Work
-          </p>
-          <p className="text-sm text-white/30 font-bebas tracking-[0.15em]">
-            <span className="text-white/60">{String(activeIndex + 1).padStart(2, "0")}</span>
-            <span className="mx-2">/</span>
-            <span>{String(projects.length).padStart(2, "0")}</span>
-          </p>
-        </div>
-
-        {/* Progress bar */}
-        <div className="absolute top-0 left-0 right-0 h-[2px] z-30 bg-white/[0.04]">
-          <div
-            className="h-full bg-red-600 will-change-transform origin-left"
-            style={{
-              transform: `scaleX(${scrollProgress})`,
-              transition: "transform 0.1s linear",
-            }}
-          />
-        </div>
-
-        {/* Horizontal sliding track */}
-        <div
-          className="flex h-full will-change-transform"
-          style={{
-            transform: `translate3d(${-scrollProgress * (projects.length - 1) * 100}vw, 0, 0)`,
-            transition: "transform 0.1s linear",
-            width: `${projects.length * 100}vw`,
-          }}
-        >
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="w-screen h-full flex items-center shrink-0"
-              style={{ padding: "0 6vw" }}
-            >
-              <div className="flex gap-10 lg:gap-16 items-center w-full max-w-[1400px] mx-auto">
-                {/* Left side — Browser frame */}
-                <div className="flex-1 min-w-0">
-                  <BrowserFrame
-                    project={project}
-                    parallaxOffset={getParallaxOffset(index)}
-                  />
-                </div>
-
-                {/* Right side — Project info */}
-                <div
-                  className="w-[320px] lg:w-[380px] shrink-0 flex flex-col justify-center"
-                  style={{
-                    transform: `translate3d(${getParallaxOffset(index) * -0.5}px, 0, 0)`,
-                    transition: "transform 0.1s linear",
-                  }}
-                >
-                  <div className="mb-4">
-                    <span
-                      className="inline-block w-8 h-[1px] mb-6"
-                      style={{ background: project.accentColor }}
-                    />
-                    <h3 className="text-5xl lg:text-6xl xl:text-7xl font-bebas text-white leading-[0.9] mb-4">
-                      {project.title}
-                    </h3>
-                    <p className="text-base lg:text-lg text-white/50 leading-relaxed font-sans">
-                      {project.description}
-                    </p>
-                  </div>
-
-                  {/* Dropdown for Professional Bios */}
-                  {project.isDropdown && project.dropdownItems ? (
-                    <div className="mt-6">
-                      <button
-                        type="button"
-                        aria-expanded={openDropdown === index}
-                        onClick={() => toggleDropdown(index)}
-                        className="group flex items-center gap-3 text-red-500 hover:text-red-400 transition-colors duration-300 cursor-pointer bg-transparent border-none p-0"
-                      >
-                        <span className="text-lg font-bebas tracking-wider uppercase">
-                          View Projects
-                        </span>
-                        <ChevronDown
-                          className={`w-4 h-4 transition-transform duration-300 ${
-                            openDropdown === index ? "rotate-180" : ""
-                          }`}
-                        />
-                      </button>
-                      <div
-                        className={`overflow-hidden transition-all duration-500 ease-out ${
-                          openDropdown === index
-                            ? "max-h-60 opacity-100 mt-4"
-                            : "max-h-0 opacity-0 mt-0"
-                        }`}
-                      >
-                        <div className="flex flex-col gap-2 pl-4 border-l border-white/10">
-                          {project.dropdownItems.map((item, i) => (
-                            <a
-                              key={i}
-                              href={item.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="group/link flex items-center gap-2 text-white/60 hover:text-red-400 transition-colors duration-300 py-1"
-                            >
-                              <span className="text-lg font-bebas tracking-wide">
-                                {item.name}
-                              </span>
-                              <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-y-0.5 translate-x-[-2px] group-hover/link:opacity-100 group-hover/link:translate-y-0 group-hover/link:translate-x-0 transition-all duration-300" />
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group mt-6 inline-flex items-center gap-3 text-red-500 hover:text-red-400 transition-colors duration-300"
-                    >
-                      <span className="text-lg font-bebas tracking-wider uppercase">
-                        Visit Site
-                      </span>
-                      <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Navigation dots */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
-          {projects.map((_, index) => (
-            <button
-              key={index}
-              aria-label={`Go to project ${index + 1}`}
-              className="group relative p-1 cursor-pointer bg-transparent border-none"
-              onClick={() => {
-                if (!containerRef.current) return;
-                const scrollableHeight =
-                  containerRef.current.offsetHeight - window.innerHeight;
-                const targetScroll =
-                  containerRef.current.offsetTop +
-                  (index / projects.length) * scrollableHeight;
-                window.scrollTo({ top: targetScroll, behavior: "smooth" });
-              }}
-            >
-              <div
-                className={`h-[3px] rounded-full transition-all duration-500 ${
-                  index === activeIndex
-                    ? "w-8 bg-red-500"
-                    : "w-3 bg-white/20 group-hover:bg-white/40"
-                }`}
-              />
-            </button>
-          ))}
-        </div>
+        <p className="text-sm text-white/30 font-bebas tracking-[0.3em] uppercase mb-3">
+          Selected Work
+        </p>
+        <div className="w-10 h-[1px] bg-red-600 mx-auto" />
       </div>
-    </div>
+
+      {/* Project cards */}
+      <div className="flex flex-col gap-28 lg:gap-40 px-8 lg:px-16 xl:px-24 max-w-[1500px] mx-auto">
+        {projects.map((project, index) => (
+          <DesktopProjectCard
+            key={index}
+            project={project}
+            index={index}
+            openDropdown={openDropdown}
+            toggleDropdown={toggleDropdown}
+            isEven={index % 2 === 0}
+          />
+        ))}
+      </div>
+    </section>
   );
 };
 
 // ——————————————————————————————————————
-// MOBILE LAYOUT
+// MOBILE LAYOUT (unchanged)
 // ——————————————————————————————————————
 const MobileWork: React.FC<{
   sectionVisible: boolean;
@@ -508,10 +501,8 @@ const MobileWork: React.FC<{
             }`}
             style={{ transitionDelay: `${index * 80}ms` }}
           >
-            {/* Browser frame */}
-            <BrowserFrame project={project} parallaxOffset={0} isMobile />
+            <BrowserFrame project={project} parallaxY={0} isMobile />
 
-            {/* Project info below the frame */}
             <div className="mt-5 px-1">
               <h3 className="text-3xl font-bebas text-white mb-2 leading-tight">
                 {project.title}
