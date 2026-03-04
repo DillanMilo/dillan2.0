@@ -88,6 +88,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
+      aria-label="Main navigation"
       className={`fixed top-2 right-3 sm:top-4 sm:right-5 z-50 flex justify-end transform ${
         isVisible ? "translate-x-0 opacity-100" : "translate-x-20 opacity-0"
       } transition-all duration-1000 ease-out`}

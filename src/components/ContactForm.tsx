@@ -132,11 +132,12 @@ const ContactForm: React.FC = () => {
             } text-white font-bebas text-lg tracking-wider placeholder-white/50 focus:outline-none focus:border-red-500 transition-colors duration-300`}
           aria-label="Your name"
           aria-invalid={!!errors.name}
+          aria-describedby={errors.name ? "name-error" : undefined}
         />
         {errors.name && (
-          <span className="absolute -bottom-5 left-0 text-red-400 text-sm font-bebas">
+          <p id="name-error" className="absolute -bottom-5 left-0 text-red-400 text-sm font-bebas m-0">
             {errors.name}
-          </span>
+          </p>
         )}
       </div>
 
@@ -152,11 +153,12 @@ const ContactForm: React.FC = () => {
             } text-white font-bebas text-lg tracking-wider placeholder-white/50 focus:outline-none focus:border-red-500 transition-colors duration-300`}
           aria-label="Your email address"
           aria-invalid={!!errors.email}
+          aria-describedby={errors.email ? "email-error" : undefined}
         />
         {errors.email && (
-          <span className="absolute -bottom-5 left-0 text-red-400 text-sm font-bebas">
+          <p id="email-error" className="absolute -bottom-5 left-0 text-red-400 text-sm font-bebas m-0">
             {errors.email}
-          </span>
+          </p>
         )}
       </div>
 
@@ -172,11 +174,12 @@ const ContactForm: React.FC = () => {
             } text-white font-bebas text-lg tracking-wider placeholder-white/50 focus:outline-none focus:border-red-500 transition-colors duration-300 resize-none`}
           aria-label="Your message"
           aria-invalid={!!errors.message}
+          aria-describedby={errors.message ? "message-error" : undefined}
         />
         {errors.message && (
-          <span className="absolute -bottom-5 left-0 text-red-400 text-sm font-bebas">
+          <p id="message-error" className="absolute -bottom-5 left-0 text-red-400 text-sm font-bebas m-0">
             {errors.message}
-          </span>
+          </p>
         )}
       </div>
 

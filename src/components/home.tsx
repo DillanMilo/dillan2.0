@@ -91,7 +91,6 @@ const Home: React.FC = () => {
 
   return (
     <main
-      id="home"
       className="relative h-screen w-full flex flex-col items-start justify-center px-5 md:px-10 lg:px-20 text-white overflow-x-hidden"
     >
       {/* ✅ Mobile Overlay Background (Only for Mobile) - Optimized loading */}

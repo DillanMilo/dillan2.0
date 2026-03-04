@@ -100,7 +100,7 @@
   }
 }
 
-/* ✅ Adjust Background Image for Mobile - Only for `8xq1yhiw09q41.jpg` */
+/* ✅ Adjust Background Image for Mobile - Only for `8xq1yhiw09q41.webp` */
 @media (max-width: 768px) {
   #contact {
     background-color: #000000 !important;
@@ -328,7 +328,7 @@
 
 /* ----- NEW: Adjust project container and text sizes in the Work section for very small mobile screens ----- */
 @media (max-width: 425px) {
-  #info h1,
+  #info h2,
   #work > div {
     max-width: 95%;
     margin-left: auto;
@@ -421,15 +421,7 @@
   background-attachment: scroll !important;
 }
 
-/* Adjust background size based on screen size */
-@media (max-width: 1024px) {
-  .contact-background {
-    background-size: cover !important;
-  }
-}
-
-@media (min-width: 1025px) {
-  .contact-background {
-    background-size: cover !important;
-  }
+/* Background size for contact section */
+.contact-background {
+  background-size: cover !important;
 }

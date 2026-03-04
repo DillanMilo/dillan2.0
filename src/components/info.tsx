@@ -88,16 +88,16 @@ const Info: React.FC = () => {
       { threshold: 0.5 }
     );
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
+    const currentSection = sectionRef.current;
+    if (currentSection) observer.observe(currentSection);
 
     return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current);
+      if (currentSection) observer.unobserve(currentSection);
     };
   }, []);
 
   return (
     <section
-      id="info"
       ref={sectionRef}
       className="relative flex flex-col items-center justify-start text-center pt-22 pb-16 px-6 overflow-hidden"
     >

@@ -130,7 +130,6 @@ const Contact: React.FC = () => {
 
   return (
     <section
-      id="contact"
       className="relative min-h-screen flex flex-col justify-start items-center text-center pt-6 md:pt-10 contact-background overflow-y-auto pb-32"
     >
       {/* Caption - Adjusted for Mobile */}

@@ -182,12 +182,13 @@ const Work: React.FC = () => {
       { threshold: 0.3 }
     );
 
-    projectRefs.current.forEach((project) => {
+    const currentRefs = [...projectRefs.current];
+    currentRefs.forEach((project) => {
       if (project) observer.observe(project);
     });
 
     return () => {
-      projectRefs.current.forEach((project) => {
+      currentRefs.forEach((project) => {
         if (project) observer.unobserve(project);
       });
     };
@@ -201,7 +202,6 @@ const Work: React.FC = () => {
 
   return (
     <section
-      id="work"
       className="relative flex flex-col items-center text-center py-20 px-6"
     >
       <h2 className="sr-only">Portfolio & Projects</h2>
@@ -225,23 +225,24 @@ const Work: React.FC = () => {
           }`}
         >
           <h3
-            className={`text-5xl sm:text-4xl md:text-5xl font-bebas text-red-600 mb-6 underline cursor-pointer
-              ${
-                project.isDropdown
-                  ? "hover:text-red-400 transition-colors duration-300"
-                  : ""
-              }`}
-            onClick={() => (project.isDropdown ? toggleDropdown(index) : null)}
+            className="text-5xl sm:text-4xl md:text-5xl font-bebas text-red-600 mb-6 underline"
           >
             {project.isDropdown ? (
-              <span className="flex items-center justify-center gap-2">
-                {project.title}
-                <ChevronDown
-                  className={`h-8 w-8 transition-transform duration-300 ${
-                    openDropdown === index ? "rotate-180" : ""
-                  }`}
-                />
-              </span>
+              <button
+                type="button"
+                aria-expanded={openDropdown === index}
+                onClick={() => toggleDropdown(index)}
+                className="cursor-pointer hover:text-red-400 transition-colors duration-300 bg-transparent border-none text-inherit font-inherit text-[length:inherit] p-0"
+              >
+                <span className="flex items-center justify-center gap-2">
+                  {project.title}
+                  <ChevronDown
+                    className={`h-8 w-8 transition-transform duration-300 ${
+                      openDropdown === index ? "rotate-180" : ""
+                    }`}
+                  />
+                </span>
+              </button>
             ) : (
               <a href={project.link} target="_blank" rel="noopener noreferrer">
                 {project.title}
