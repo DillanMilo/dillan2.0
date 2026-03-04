@@ -96,8 +96,9 @@ const Home: React.FC = () => {
         }}
       ></div>
 
-      {/* Countdown Timer */}
+      {/* Countdown Timer — commented out while available for work
       <CountdownTimer targetDate={new Date("2026-04-06")} />
+      */}
 
       {/* Content */}
       <div className="relative z-10 text-left mt-0 md:mt-0">
