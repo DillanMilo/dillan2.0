@@ -4,7 +4,6 @@ import {
   getPersonSchema,
   getWebsiteSchema,
   getOrganizationSchema,
-  getLocalBusinessSchema,
 } from "../utils/schema";
 
 import CountdownTimer from "./CountdownTimer";
@@ -23,14 +22,14 @@ const Home: React.FC = () => {
       "og:description":
         "Professional software developer serving The Woodlands, Creekside, Tomball & Houston. Custom web development, automation workflows, AI-powered solutions, and small business software for local businesses.",
       "og:type": "website",
-      "og:url": window.location.href,
+      "og:url": "https://dillanmilo.com/",
       "twitter:card": "summary_large_image",
       "twitter:title":
         "Dillan Milosevich | Software Developer in The Woodlands & Houston TX",
       "twitter:description":
         "Expert software developer in The Woodlands, Creekside, Tomball & Houston TX. Custom web development, automation workflows, AI-powered solutions & small business software.",
       robots: "index, follow",
-      canonical: window.location.href,
+      canonical: "https://dillanmilo.com/",
       // Add location-specific meta tags
       "geo.region": "US-TX",
       "geo.placename": "The Woodlands, Creekside, Tomball, Houston",
@@ -43,42 +42,22 @@ const Home: React.FC = () => {
       "Dillan Milosevich | Software Developer in The Woodlands & Houston TX"
     );
 
-    // Add JSON-LD structured data with performance optimization
-    const addSchemas = () => {
-      const schemas = [
-        getPersonSchema(),
-        getWebsiteSchema(),
-        getOrganizationSchema(),
-        getLocalBusinessSchema(),
-      ];
-      const scripts: HTMLScriptElement[] = [];
+    // Add JSON-LD structured data immediately so crawlers see it
+    const schemas = [
+      getPersonSchema(),
+      getWebsiteSchema(),
+      getOrganizationSchema(),
+    ];
+    const scripts: HTMLScriptElement[] = [];
 
-      schemas.forEach((schema, index) => {
-        const script = document.createElement("script");
-        script.type = "application/ld+json";
-        script.text = JSON.stringify(schema);
-        script.id = `schema-${index}`;
-        document.head.appendChild(script);
-        scripts.push(script);
-      });
-
-      return scripts;
-    };
-
-    // Use requestIdleCallback to avoid blocking main thread
-    let scripts: HTMLScriptElement[] = [];
-    if (typeof window !== "undefined") {
-      if ("requestIdleCallback" in window) {
-        (window as any).requestIdleCallback(() => {
-          scripts = addSchemas();
-        });
-      } else {
-        // Fallback for browsers without requestIdleCallback
-        setTimeout(() => {
-          scripts = addSchemas();
-        }, 100);
-      }
-    }
+    schemas.forEach((schema, index) => {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.text = JSON.stringify(schema);
+      script.id = `schema-${index}`;
+      document.head.appendChild(script);
+      scripts.push(script);
+    });
 
     return () => {
       scripts.forEach((script) => {
@@ -156,7 +135,7 @@ const Home: React.FC = () => {
           className="text-xl md:text-2xl mb-30 lg:text-3xl text-gray-300 font-bebas tracking-wide opacity-0 animate-slideInLeft mt-5 md:mt-8 max-w-lg"
           style={{ animationDelay: "800ms" }}
         >
-          I design and build websites & software that work as good as they look.
+          I design and build websites & software that work as well as they look.
         </p>
 
       </div>

@@ -33,7 +33,7 @@ export default defineConfig({
   publicDir: 'public', // Make sure this is set
   server: {
     fs: {
-      strict: false // Allow serving files from parent directories
+      strict: true
     }
   }
 })

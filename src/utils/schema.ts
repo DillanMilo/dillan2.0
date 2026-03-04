@@ -164,11 +164,6 @@ export const getWebsiteSchema = () => ({
   publisher: {
     "@id": "https://dillanmilo.com/#person"
   },
-  potentialAction: {
-    "@type": "SearchAction",
-    target: "https://dillanmilo.com/#work?query={search_term_string}",
-    "query-input": "required name=search_term_string"
-  },
   inLanguage: "en-US"
 });
 
@@ -185,9 +180,10 @@ export const getOrganizationSchema = () => ({
   founder: {
     "@id": "https://dillanmilo.com/#person"
   },
+  telephone: "+1-281-210-8139",
+  email: "creativecurrentsx@gmail.com",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "The Woodlands",
     addressLocality: "The Woodlands",
     addressRegion: "TX",
     postalCode: "77380",
@@ -240,60 +236,6 @@ export const getOrganizationSchema = () => ({
       name: "Texas"
     }
   ],
-  serviceType: [
-    "Custom Web Development",
-    "E-Commerce Development",
-    "React Development",
-    "Front-End Development", 
-    "Full-Stack Development",
-    "UI/UX Design",
-    "Business Automation",
-    "Workflow Automation",
-    "AI Integration",
-    "AI-Powered Solutions",
-    "Custom AI Solutions",
-    "Small Business Software",
-    "Website Optimization",
-    "Digital Transformation",
-    "Mobile-Responsive Design"
-  ],
-  priceRange: "$$",
-  slogan: "Beautiful, Functional Websites That Work",
-  knowsAbout: [
-    "Web Development",
-    "Software Engineering",
-    "React",
-    "TypeScript",
-    "AI Automation",
-    "Business Optimization",
-    "UI/UX Design"
-  ]
-});
-
-export const getLocalBusinessSchema = () => ({
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://dillanmilo.com/#localbusiness",
-  name: "Dillan Milosevich - Web Development Services",
-  image: "https://dillanmilo.com/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
-  telephone: "+1-281-210-8139",
-  email: "creativecurrentsx@gmail.com",
-  url: "https://dillanmilo.com",
-  priceRange: "$$",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "The Woodlands",
-    addressLocality: "The Woodlands",
-    addressRegion: "TX",
-    postalCode: "77380",
-    addressCountry: "US"
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 30.1658,
-    longitude: -95.4613
-  },
-  description: "Professional software development and web design services in The Woodlands, Creekside, Tomball, and Houston TX. Specializing in custom websites, React applications, AI automation, and business optimization solutions for local businesses.",
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
     dayOfWeek: [
@@ -306,16 +248,6 @@ export const getLocalBusinessSchema = () => ({
     opens: "09:00",
     closes: "18:00"
   },
-  areaServed: [
-    "The Woodlands, TX",
-    "Creekside, TX", 
-    "Tomball, TX",
-    "Spring, TX",
-    "Magnolia, TX",
-    "Conroe, TX",
-    "Houston, TX",
-    "Montgomery County, TX"
-  ],
   sameAs: [
     "https://www.linkedin.com/in/dillan-milosevich-9a817891/",
     "https://twitter.com/dillanx1x",
@@ -374,5 +306,34 @@ export const getLocalBusinessSchema = () => ({
         }
       }
     ]
-  }
-}); 
+  },
+  serviceType: [
+    "Custom Web Development",
+    "E-Commerce Development",
+    "React Development",
+    "Front-End Development", 
+    "Full-Stack Development",
+    "UI/UX Design",
+    "Business Automation",
+    "Workflow Automation",
+    "AI Integration",
+    "AI-Powered Solutions",
+    "Custom AI Solutions",
+    "Small Business Software",
+    "Website Optimization",
+    "Digital Transformation",
+    "Mobile-Responsive Design"
+  ],
+  priceRange: "$$",
+  slogan: "Beautiful, Functional Websites That Work",
+  knowsAbout: [
+    "Web Development",
+    "Software Engineering",
+    "React",
+    "TypeScript",
+    "AI Automation",
+    "Business Optimization",
+    "UI/UX Design"
+  ]
+});
+

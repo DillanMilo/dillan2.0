@@ -29,7 +29,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { name, email, message } = req.body;
+    const { name, email, message, website } = req.body;
+
+    // Honeypot anti-spam: if the hidden field has a value, return fake success
+    if (website) {
+      return res.status(200).json({ success: true });
+    }
 
     // Validate required fields
     if (!name || !email || !message) {
@@ -40,6 +45,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({ error: 'Invalid email format' });
+    }
+
+    // Validate input lengths
+    if (name.length > 200) {
+      return res.status(400).json({ error: 'Name must be 200 characters or fewer' });
+    }
+    if (email.length > 320) {
+      return res.status(400).json({ error: 'Email must be 320 characters or fewer' });
+    }
+    if (message.length > 5000) {
+      return res.status(400).json({ error: 'Message must be 5000 characters or fewer' });
     }
 
     // Sanitize user inputs to prevent HTML injection
@@ -78,11 +94,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       text: `
 New Contact Form Submission
 
-Name: ${name}
-Email: ${email}
+Name: ${safeName}
+Email: ${safeEmail}
 
 Message:
-${message}
+${safeMessage}
 
 ---
 This email was sent from your website contact form.

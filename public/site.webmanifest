@@ -1,6 +1,8 @@
 {
   "name": "Dillan Milosevich Portfolio",
   "short_name": "DM Portfolio",
+  "description": "Dillan Milosevich - Software Developer & Web Designer",
+  "lang": "en",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +15,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "background_color": "#000000",
   "display": "standalone"
-} 
+}

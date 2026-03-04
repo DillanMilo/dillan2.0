@@ -4,62 +4,6 @@ const Info: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const metaTags = {
-      description:
-        "Get to know Dillan Milosevich - a creative software developer passionate about front-end development, intuitive design, gaming, and building engaging web experiences.",
-      keywords:
-        "Dillan Milosevich, Software Developer, Front-End Developer, UI Designer, Web Developer Bio, Creative Developer",
-      author: "Dillan Milosevich",
-      "og:title": "About Dillan Milosevich | Creative Software Developer",
-      "og:description":
-        "Meet Dillan Milosevich - a software developer combining intuitive design with creative development to craft engaging web experiences.",
-      "og:type": "website",
-      "og:url": window.location.href,
-      "twitter:card": "summary_large_image",
-      "twitter:title": "About Dillan Milosevich | Creative Software Developer",
-      "twitter:description":
-        "Meet Dillan Milosevich - a software developer combining intuitive design with creative development to craft engaging web experiences.",
-      robots: "index, follow",
-      canonical: window.location.href,
-    };
-
-    document.title = "About | Dillan Milosevich";
-
-    const updateMetaTag = (name: string, content: string) => {
-      let metaTag =
-        document.querySelector(`meta[name='${name}']`) ||
-        document.querySelector(`meta[property='${name}']`);
-
-      if (metaTag) {
-        metaTag.setAttribute("content", content);
-      } else {
-        metaTag = document.createElement("meta");
-        if (name.startsWith("og:")) {
-          metaTag.setAttribute("property", name);
-        } else {
-          metaTag.setAttribute("name", name);
-        }
-        metaTag.setAttribute("content", content);
-        document.head.appendChild(metaTag);
-      }
-    };
-
-    // Create or update canonical link
-    let canonicalLink = document.querySelector("link[rel='canonical']");
-    if (!canonicalLink) {
-      canonicalLink = document.createElement("link");
-      canonicalLink.setAttribute("rel", "canonical");
-      document.head.appendChild(canonicalLink);
-    }
-    canonicalLink.setAttribute("href", metaTags.canonical);
-
-    // Apply all meta tags
-    Object.entries(metaTags).forEach(([name, content]) => {
-      updateMetaTag(name, content);
-    });
-  }, []);
-
-  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];

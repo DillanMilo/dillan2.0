@@ -4,6 +4,7 @@ interface FormData {
   name: string;
   email: string;
   message: string;
+  website: string;
 }
 
 interface FormErrors {
@@ -17,6 +18,7 @@ const ContactForm: React.FC = () => {
     name: "",
     email: "",
     message: "",
+    website: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,6 +87,14 @@ const ContactForm: React.FC = () => {
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
+    // Honeypot anti-spam: if the hidden field has a value, silently "succeed"
+    if (formData.website) {
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", message: "", website: "" });
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       // Using Resend via Vercel serverless function
       const response = await fetch("/api/send-email", {
@@ -96,12 +106,13 @@ const ContactForm: React.FC = () => {
           name: formData.name,
           email: formData.email,
           message: formData.message,
+          website: formData.website,
         }),
       });
 
       if (response.ok) {
         setSubmitStatus("success");
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", message: "", website: "" });
       } else {
         setSubmitStatus("error");
       }
@@ -120,6 +131,21 @@ const ContactForm: React.FC = () => {
         }`}
       noValidate
     >
+      {/* Honeypot field - hidden from real users, bots will fill it in */}
+      <div
+        style={{ position: "absolute", left: "-9999px", opacity: 0, height: 0, width: 0, overflow: "hidden" }}
+        aria-hidden="true"
+      >
+        <input
+          type="text"
+          name="website"
+          value={formData.website}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       {/* Name Field */}
       <div className="relative">
         <input

@@ -40,7 +40,7 @@ const projects: Project[] = [
     delay: "delay-[200ms]",
   },
   {
-    title: "Professional Bio's",
+    title: "Professional Bios",
     description:
       "Impactful, bespoke single-page applications for professionals. Coz business cards are lame.",
     link: "#",
@@ -75,43 +75,8 @@ const projects: Project[] = [
 ] as const;
 
 const Work: React.FC = () => {
+  // Add projects schema
   useEffect(() => {
-    const metaTags = {
-      description:
-        "Explore Dillan Milosevich's portfolio of web development projects - from game platforms to professional websites and React applications built by a software developer with front-end expertise.",
-      keywords:
-        "Web Development Projects, Software Development, Front-End Development, Game Hub, Reddit Mini, Professional Websites, Portfolio, UI/UX Projects, React Applications",
-      "og:title": "Projects & Work | Dillan Milosevich | Software Developer",
-      "og:description":
-        "Discover innovative web applications and professional websites crafted by Dillan Milosevich, a software developer specializing in front-end development. Featured projects include Game Hub, Reddit Mini, and professional bio pages.",
-      "og:type": "website",
-      "og:url": window.location.href,
-      robots: "index, follow",
-      canonical: window.location.href,
-    };
-
-    // Update meta tags
-    document.title = "Work & Projects | Dillan Milosevich";
-    Object.entries(metaTags).forEach(([name, content]) => {
-      let metaTag =
-        document.querySelector(`meta[name='${name}']`) ||
-        document.querySelector(`meta[property='${name}']`);
-
-      if (metaTag) {
-        metaTag.setAttribute("content", content);
-      } else {
-        metaTag = document.createElement("meta");
-        if (name.startsWith("og:")) {
-          metaTag.setAttribute("property", name);
-        } else {
-          metaTag.setAttribute("name", name);
-        }
-        metaTag.setAttribute("content", content);
-        document.head.appendChild(metaTag);
-      }
-    });
-
-    // Add projects schema
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.text = JSON.stringify(getProjectsSchema());

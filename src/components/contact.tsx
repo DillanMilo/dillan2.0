@@ -33,65 +33,6 @@ const Contact: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
   const bannerTriggerRef = useRef<HTMLDivElement>(null);
 
-  // Set meta data manually without Helmet
-  useEffect(() => {
-    const metaTags = {
-      description:
-        "Connect with Dillan Milosevich - Find me on LinkedIn, Twitter, GitHub, or reach out via email to discuss software development and web development projects.",
-      keywords:
-        "Contact Dillan Milosevich, Software Developer Contact, Web Development Collaboration, Front-End Development, Hire Software Developer",
-      author: "Dillan Milosevich",
-      "og:title":
-        "Contact Dillan Milosevich | Software Developer | Let's Connect",
-      "og:description":
-        "Ready to bring your web project to life? Connect with Dillan Milosevich, a software developer with front-end expertise, through various social platforms or direct contact methods.",
-      "og:type": "website",
-      "og:url": window.location.href,
-      "twitter:card": "summary_large_image",
-      "twitter:title":
-        "Contact Dillan Milosevich | Software Developer | Let's Connect",
-      "twitter:description":
-        "Ready to bring your web project to life? Connect with Dillan Milosevich, a software developer with front-end expertise, through various social platforms or direct contact methods.",
-      robots: "index, follow",
-      canonical: window.location.href,
-    };
-
-    document.title = "Contact | Dillan Milosevich";
-
-    const updateMetaTag = (name: string, content: string) => {
-      let metaTag =
-        document.querySelector(`meta[name='${name}']`) ||
-        document.querySelector(`meta[property='${name}']`);
-
-      if (metaTag) {
-        metaTag.setAttribute("content", content);
-      } else {
-        metaTag = document.createElement("meta");
-        if (name.startsWith("og:")) {
-          metaTag.setAttribute("property", name);
-        } else {
-          metaTag.setAttribute("name", name);
-        }
-        metaTag.setAttribute("content", content);
-        document.head.appendChild(metaTag);
-      }
-    };
-
-    // Create or update canonical link
-    let canonicalLink = document.querySelector("link[rel='canonical']");
-    if (!canonicalLink) {
-      canonicalLink = document.createElement("link");
-      canonicalLink.setAttribute("rel", "canonical");
-      document.head.appendChild(canonicalLink);
-    }
-    canonicalLink.setAttribute("href", metaTags.canonical);
-
-    // Apply all meta tags
-    Object.entries(metaTags).forEach(([name, content]) => {
-      updateMetaTag(name, content);
-    });
-  }, []);
-
   // Rotate words every 1.5 seconds
   useEffect(() => {
     const intervalId = setInterval(() => {

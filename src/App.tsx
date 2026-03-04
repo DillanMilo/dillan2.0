@@ -113,6 +113,7 @@ function App() {
           >
             Skip to main content
           </a>
+          <div id="main-content" />
           <section
             id="home"
             aria-label="Home - Introduction"
@@ -153,7 +154,6 @@ function App() {
                 activeSection === "work" ? "opacity-100" : "opacity-60"
               }`}
             >
-              <div id="main-content" />
               <Work />
             </section>
           </Suspense>
