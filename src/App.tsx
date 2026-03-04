@@ -13,30 +13,46 @@ const Contact = lazy(() => import("./components/contact"));
 
 function App() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [sectionOpacities, setSectionOpacities] = useState<Record<string, number>>({});
   const [isLandscape, setIsLandscape] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = document.querySelectorAll("section");
+      const sections = document.querySelectorAll("section[id]");
       let foundActive = false;
+      const opacities: Record<string, number> = {};
 
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
-        const dimmingThreshold = window.innerHeight * 0.8;
+        const viewH = window.innerHeight;
+        const dimmingThreshold = viewH * 0.8;
 
-        if (!foundActive && rect.top >= -200 && rect.top < dimmingThreshold) {
+        // Track active section for breadcrumbs
+        if (!foundActive && rect.top < dimmingThreshold && rect.bottom > 200) {
           setActiveSection(section.id);
           foundActive = true;
         }
+
+        // Calculate smooth opacity based on how centered the section is
+        const sectionCenter = rect.top + rect.height / 2;
+        const viewCenter = viewH / 2;
+        const distance = Math.abs(sectionCenter - viewCenter);
+        const maxDistance = viewH * 0.8 + rect.height / 2;
+        // Smoothly interpolate: 1.0 when centered, down to 0.5 at edges
+        const t = Math.min(distance / maxDistance, 1);
+        const opacity = 1 - t * 0.5; // ranges from 1.0 to 0.5
+        opacities[section.id] = Math.max(0.5, Math.min(1, opacity));
       });
+
+      setSectionOpacities(opacities);
 
       if (!foundActive) {
         setActiveSection(null);
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Run on mount to detect initial section
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -117,9 +133,8 @@ function App() {
           <section
             id="home"
             aria-label="Home - Introduction"
-            className={`transition-opacity duration-700 ease-in-out ${
-              activeSection === "home" ? "opacity-100" : "opacity-60"
-            }`}
+            className="transition-opacity duration-1000 ease-out"
+            style={{ opacity: sectionOpacities["home"] ?? 1 }}
           >
             <Home />
           </section>
@@ -133,9 +148,8 @@ function App() {
             <section
               id="info"
               aria-label="About Dillan Milosevich"
-              className={`transition-opacity duration-700 ease-in-out ${
-                activeSection === "info" ? "opacity-100" : "opacity-60"
-              }`}
+              className="transition-opacity duration-1000 ease-out"
+              style={{ opacity: sectionOpacities["info"] ?? 1 }}
             >
               <Info />
             </section>
@@ -150,9 +164,8 @@ function App() {
             <section
               id="work"
               aria-label="Portfolio Projects"
-              className={`transition-opacity duration-700 ease-in-out ${
-                activeSection === "work" ? "opacity-100" : "opacity-60"
-              }`}
+              className="transition-opacity duration-1000 ease-out"
+              style={{ opacity: sectionOpacities["work"] ?? 1 }}
             >
               <Work />
             </section>
@@ -167,9 +180,8 @@ function App() {
             <section
               id="contact"
               aria-label="Contact and Social Links"
-              className={`transition-opacity duration-700 ease-in-out ${
-                activeSection === "contact" ? "opacity-100" : "opacity-60"
-              }`}
+              className="transition-opacity duration-1000 ease-out"
+              style={{ opacity: sectionOpacities["contact"] ?? 1 }}
             >
               <Contact />
             </section>

@@ -7,6 +7,9 @@
       "Bash(npx tsc:*)",
       "Bash(npx:*)",
       "Bash(./node_modules/.bin/tsc:*)",
+      "Bash(ffprobe:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(ls:*)"
       "Bash(node:*)"
     ]
   }

@@ -16,20 +16,11 @@ const Info: React.FC = () => {
             const delayClass = index === 0 ? "delay-[400ms]" : "delay-[600ms]";
             p.classList.add("animate-fadeIn", delayClass);
           });
-        } else {
-          sectionRef.current
-            ?.querySelector("h2")
-            ?.classList.remove("animate-expandText");
-          sectionRef.current?.querySelectorAll("p").forEach((p) => {
-            p.classList.remove(
-              "animate-fadeIn",
-              "delay-[400ms]",
-              "delay-[600ms]"
-            );
-          });
         }
+        // Don't strip animation classes on exit — let the parent section
+        // opacity handle the fade-out smoothly instead of snapping elements away
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     );
 
     const currentSection = sectionRef.current;

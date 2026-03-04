@@ -299,6 +299,17 @@
     animation: pulseGlow 2s ease-in-out infinite;
   }
 
+  @keyframes kenBurns {
+    0% { transform: scale(1) translate3d(0, 0, 0); }
+    50% { transform: scale(1.06) translate3d(-1%, -1%, 0); }
+    100% { transform: scale(1) translate3d(0, 0, 0); }
+  }
+
+  .animate-kenBurns {
+    animation: kenBurns 12s ease-in-out infinite;
+    will-change: transform;
+  }
+
   @keyframes pulseGlowBorder {
     0%, 100% {
       box-shadow: 0 0 5px rgba(239, 68, 68, 0.3), 0 0 10px rgba(239, 68, 68, 0.2);
@@ -354,7 +365,7 @@
     bottom: 8rem !important;
   }
   /* shift the work projects to shift lower on screen */
-  #work > div {
+  #work > section > div {
     margin-top: 5rem !important;
   }
   /* add public/8xq1yhiw09q41.webp as background image */
@@ -388,8 +399,8 @@
   #home > div:first-child {
     bottom: 2rem !important;
   }
-  /* shift the projects a little closer together */ 
-  #work > div {
+  /* shift the projects a little closer together */
+  #work > section > div {
     margin-top: 0rem !important;
   }
   #work {

@@ -142,15 +142,6 @@ export const getProjectsSchema = () => ({
         url: "https://richard-nell.vercel.app",
       })
     },
-    {
-      "@type": "ListItem",
-      position: 5,
-      item: getProjectSchema({
-        title: "Game Hub",
-        description: "A web application showcasing video games across platforms, featuring dynamic content loading and interactive game discovery.",
-        url: "https://game-hub-x.vercel.app/",
-      })
-    }
   ]
 });
 
