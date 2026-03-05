@@ -172,7 +172,7 @@ export const getOrganizationSchema = () => ({
     "@id": "https://dillanmilo.com/#person"
   },
   telephone: "+1-281-210-8139",
-  email: "creativecurrentsx@gmail.com",
+  email: "dillan@creativecurrents.io",
   address: {
     "@type": "PostalAddress",
     addressLocality: "The Woodlands",
