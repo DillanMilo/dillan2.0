@@ -6,6 +6,7 @@ import { getProjectsSchema } from "../utils/schema";
 interface Project {
   title: string;
   description: string;
+  outcome: string;
   link: string;
   gradient: string;
   accentColor: string;
@@ -21,6 +22,8 @@ const projects: Project[] = [
     title: "A5 Rail",
     description:
       "Next-level AR/VR training for rail pros. Slick, fast, secure — looks so good you might actually enjoy compliance.",
+    outcome:
+      "Rebuilt from scratch, now serves enterprise rail clients across North America.",
     link: "https://www.a5rail.com",
     gradient:
       "radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #16213e 40%, #0f3460 100%)",
@@ -33,6 +36,8 @@ const projects: Project[] = [
     title: "Africa WildVentures",
     description:
       "Elephantine performance with cheetah-fast load times. Africa's calling, and it has great UX.",
+    outcome:
+      "Brought a premium African safari brand to life online, driving direct bookings.",
     link: "https://www.africawildventures.com",
     gradient:
       "radial-gradient(ellipse at 70% 80%, #1a120b 0%, #3c2a21 40%, #d4a574 100%)",
@@ -45,6 +50,8 @@ const projects: Project[] = [
     title: "FORME",
     description:
       "Regenerative medicine meets pixel-perfect design. Your platelets deserve a website this good.",
+    outcome:
+      "Built to convert from day one — ready to launch and start filling appointments.",
     link: "https://www.formeprp.com",
     gradient:
       "radial-gradient(ellipse at 50% 30%, #0a0a0a 0%, #1a1a1a 40%, #2d1f3d 100%)",
@@ -57,6 +64,8 @@ const projects: Project[] = [
     title: "Professional Bios",
     description:
       "Impactful, bespoke single-page applications for professionals. Coz business cards are lame.",
+    outcome:
+      "Replaced outdated profiles with pages that land clients and speaking gigs.",
     link: "#",
     gradient:
       "radial-gradient(ellipse at 20% 50%, #0f0f0f 0%, #1c1917 40%, #44403c 100%)",
@@ -345,8 +354,15 @@ const DesktopProjectCard: React.FC<{
             {project.description}
           </p>
 
+          <p
+            className="text-sm lg:text-base text-white/60 italic leading-relaxed font-sans max-w-md mt-3"
+            style={textItemStyle(500)}
+          >
+            {project.outcome}
+          </p>
+
           {/* CTA / Dropdown */}
-          <div style={textItemStyle(550)}>
+          <div style={textItemStyle(600)}>
             {project.isDropdown && project.dropdownItems ? (
               <div className="mt-8">
                 <button
@@ -577,8 +593,11 @@ const MobileWork: React.FC<{
               <h3 className="text-3xl font-bebas text-white mb-2 leading-tight">
                 {project.title}
               </h3>
-              <p className="text-sm text-white/65 leading-relaxed font-sans mb-4">
+              <p className="text-sm text-white/65 leading-relaxed font-sans mb-2">
                 {project.description}
+              </p>
+              <p className="text-xs text-white/55 italic leading-relaxed font-sans mb-4">
+                {project.outcome}
               </p>
 
               {project.isDropdown && project.dropdownItems ? (

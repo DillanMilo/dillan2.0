@@ -68,40 +68,52 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       from: 'Dillan Milo <contact@dillanmilo.com>',
       to: 'dillan@creativecurrents.io',
       replyTo: email,
-      subject: `New Contact Form Submission from ${safeName}`,
+      subject: `CC Inquiry — ${safeName}`,
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #333; border-bottom: 2px solid #e53e3e; padding-bottom: 10px;">
-            New Contact Form Submission
-          </h2>
-
-          <div style="margin: 20px 0;">
-            <p style="margin: 10px 0;"><strong>Name:</strong> ${safeName}</p>
-            <p style="margin: 10px 0;"><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; background-color: #0a0a0a; border-radius: 12px; overflow: hidden; border: 1px solid #1a1a1a;">
+          <!-- Header with logo -->
+          <div style="background-color: #0a0a0a; padding: 32px 40px 24px; text-align: center; border-bottom: 1px solid #1a1a1a;">
+            <img src="https://dillanmilo.com/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG" alt="Creative Currents" style="height: 48px; margin-bottom: 8px;" />
+            <p style="color: #555; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0;">New Inquiry</p>
           </div>
 
-          <div style="background-color: #f7f7f7; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="margin-top: 0; color: #555;">Message:</h3>
-            <p style="white-space: pre-wrap; color: #333;">${safeMessage}</p>
+          <!-- Contact details -->
+          <div style="padding: 32px 40px;">
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #1a1a1a; color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; width: 80px; vertical-align: top;">From</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #1a1a1a; color: #e0e0e0; font-size: 15px;">${safeName}</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px 0; border-bottom: 1px solid #1a1a1a; color: #666; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; vertical-align: top;">Email</td>
+                <td style="padding: 12px 0; border-bottom: 1px solid #1a1a1a;"><a href="mailto:${safeEmail}" style="color: #4a9eff; text-decoration: none; font-size: 15px;">${safeEmail}</a></td>
+              </tr>
+            </table>
+
+            <!-- Message body -->
+            <div style="background-color: #111; padding: 24px; border-radius: 8px; border-left: 3px solid #4a9eff;">
+              <p style="color: #666; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 12px 0;">Message</p>
+              <p style="white-space: pre-wrap; color: #ccc; font-size: 15px; line-height: 1.6; margin: 0;">${safeMessage}</p>
+            </div>
           </div>
 
-          <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
-          <p style="color: #888; font-size: 12px;">
-            This email was sent from your website contact form.
-          </p>
+          <!-- Footer -->
+          <div style="padding: 20px 40px; border-top: 1px solid #1a1a1a; text-align: center;">
+            <p style="color: #444; font-size: 11px; margin: 0;">dillanmilo.com &middot; Creative Currents</p>
+          </div>
         </div>
       `,
       text: `
-New Contact Form Submission
+CC Inquiry — ${safeName}
 
-Name: ${safeName}
+From: ${safeName}
 Email: ${safeEmail}
 
 Message:
 ${safeMessage}
 
----
-This email was sent from your website contact form.
+—
+dillanmilo.com · Creative Currents
       `,
     });
 
