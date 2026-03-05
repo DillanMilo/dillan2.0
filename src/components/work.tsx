@@ -33,6 +33,20 @@ const projects: Project[] = [
     mobileVideo: "/videos/a5rail-mobile.webm",
   },
   {
+    title: "LastCallIQ",
+    description:
+      "AI-powered inventory management SaaS — built, owned, and actively used by real clients.",
+    outcome:
+      "Currently serving Food & Beverage businesses across Texas.",
+    link: "https://www.lastcalliq.com",
+    gradient:
+      "radial-gradient(ellipse at 40% 60%, #0a1a0a 0%, #1a2e1a 40%, #2d5a3d 100%)",
+    accentColor: "#22c55e",
+    tag: "SaaS",
+    desktopVideo: "/videos/ScreenRecording_03-05-2026 11-43-17_1.webm",
+    mobileVideo: "/videos/ScreenRecording_03-05-2026 11-43-17_1.webm",
+  },
+  {
     title: "Africa WildVentures",
     description:
       "Elephantine performance with cheetah-fast load times. Africa's calling, and it has great UX.",
