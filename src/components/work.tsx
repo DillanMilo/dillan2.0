@@ -343,7 +343,7 @@ const DesktopProjectCard: React.FC<{
         <div className="flex-1 flex flex-col justify-center">
           {/* Project number */}
           <span
-            className="text-[5rem] lg:text-[6rem] font-bebas leading-none text-white/[0.04] mb-2 select-none"
+            className="text-[5rem] lg:text-[6rem] font-bebas leading-none text-white/15 mb-2 select-none"
             style={textItemStyle(150)}
           >
             {String(index + 1).padStart(2, "0")}
@@ -362,14 +362,14 @@ const DesktopProjectCard: React.FC<{
           </h3>
 
           <p
-            className="text-base lg:text-lg text-white/70 leading-relaxed font-sans max-w-md"
+            className="text-base lg:text-lg text-white leading-relaxed font-sans max-w-md"
             style={textItemStyle(450)}
           >
             {project.description}
           </p>
 
           <p
-            className="text-sm lg:text-base text-white/60 italic leading-relaxed font-sans max-w-md mt-3"
+            className="text-sm lg:text-base text-white italic leading-relaxed font-sans max-w-md mt-3"
             style={textItemStyle(500)}
           >
             {project.outcome}
@@ -607,10 +607,10 @@ const MobileWork: React.FC<{
               <h3 className="text-3xl font-bebas text-white mb-2 leading-tight">
                 {project.title}
               </h3>
-              <p className="text-sm text-white/65 leading-relaxed font-sans mb-2">
+              <p className="text-sm text-white leading-relaxed font-sans mb-2">
                 {project.description}
               </p>
-              <p className="text-xs text-white/55 italic leading-relaxed font-sans mb-4">
+              <p className="text-xs text-white italic leading-relaxed font-sans mb-4">
                 {project.outcome}
               </p>
 
