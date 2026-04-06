@@ -507,7 +507,7 @@ const Work: React.FC = () => {
             : "opacity-0 translate-y-6"
         }`}
       >
-        <p className="text-sm text-white/30 font-bebas tracking-[0.3em] uppercase mb-3">
+        <p className="text-sm text-white font-bebas tracking-[0.3em] uppercase mb-3">
           Selected Work
         </p>
         <div className="w-10 h-[1px] bg-red-600 mx-auto" />
@@ -582,7 +582,7 @@ const MobileWork: React.FC<{
             : "opacity-0 translate-y-6"
         }`}
       >
-        <p className="text-xs text-white/30 font-bebas tracking-[0.3em] uppercase mb-2">
+        <p className="text-xs text-white font-bebas tracking-[0.3em] uppercase mb-2">
           Selected Work
         </p>
         <div className="w-8 h-[1px] bg-red-600 mx-auto" />
