@@ -32,6 +32,9 @@ const Info: React.FC = () => {
   const ghostY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
   // Subtle horizontal drift for the accent line
   const lineWidth = useTransform(scrollYProgress, [0.1, 0.5], ["0%", "100%"]);
+  const arcPathLength = useTransform(scrollYProgress, [0.06, 0.56], [0, 1]);
+  const arcOpacity = useTransform(scrollYProgress, [0, 0.12, 0.72], [0, 0.72, 0.28]);
+  const arcY = useTransform(scrollYProgress, [0, 1], [-28, 38]);
 
   const surname = "MILOSEVICH";
 
@@ -40,6 +43,35 @@ const Info: React.FC = () => {
       ref={sectionRef}
       className="relative flex flex-col items-center justify-start text-center pt-22 pb-16 px-6 overflow-hidden min-h-screen"
     >
+      <motion.svg
+        aria-hidden="true"
+        viewBox="0 0 260 720"
+        className="pointer-events-none absolute -left-16 top-0 hidden h-[48rem] w-[18rem] md:block lg:-left-10 lg:h-[54rem] lg:w-[21rem]"
+        style={{ opacity: arcOpacity, y: arcY }}
+      >
+        <filter id="info-pencil-roughen">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.9"
+            numOctaves="2"
+            seed="7"
+            result="noise"
+          />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.8" />
+        </filter>
+        <motion.path
+          d="M44 26 C220 130 222 586 44 694"
+          fill="none"
+          stroke="rgba(238,238,226,0.7)"
+          strokeWidth="2.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeDasharray="3 9"
+          filter="url(#info-pencil-roughen)"
+          style={{ pathLength: arcPathLength }}
+        />
+      </motion.svg>
+
       {/* Ghost parallax text behind everything */}
       <motion.div
         style={{ y: ghostY }}

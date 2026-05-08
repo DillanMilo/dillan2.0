@@ -60,8 +60,9 @@ function App() {
   useEffect(() => {
     const handleOrientationChange = () => {
       setIsLandscape(
-        window.matchMedia("(orientation: landscape) and (max-width: 1024px)")
-          .matches
+        window.matchMedia(
+          "(orientation: landscape) and (max-width: 1024px) and (max-height: 600px) and (pointer: coarse)"
+        ).matches
       );
     };
 

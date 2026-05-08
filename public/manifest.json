@@ -1,23 +1,12 @@
 {
-  "short_name": "Dillan M.",
-  "name": "Dillan Milosevich - Creative Software Developer",
-  "description": "Portfolio of Dillan Milosevich, a creative software developer specializing in beautiful, functional websites and web applications.",
+  "short_name": "Dillan Milo",
+  "name": "Dillan Milosevich - Software Developer",
+  "description": "Software developer serving The Woodlands, Tomball, Houston, and small businesses with web development, automation, and AI software.",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
+      "src": "/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
       "type": "image/png",
-      "sizes": "192x192",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512",
+      "sizes": "1024x1024",
       "purpose": "any maskable"
     }
   ],

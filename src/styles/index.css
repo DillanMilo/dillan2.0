@@ -16,6 +16,7 @@
 /* Set Bebas Neue as the default font */
 @layer base {
   html, body {
+    position: relative;
     font-family: "Bebas Neue", sans-serif;
     overflow-x: hidden; /* ✅ Prevents horizontal scrolling */
     max-width: 100vw; /* ✅ Ensures no element exceeds viewport width */

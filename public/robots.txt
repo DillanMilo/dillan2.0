@@ -1,22 +1,4 @@
 User-agent: *
 Allow: /
 
-# Disallow any paths that shouldn't be indexed (if any)
-# Disallow: /admin/
-# Disallow: /private/
-
-# Crawl-delay for respectful crawling
-Crawl-delay: 1
-
-# Update date: 2025-11-11
 Sitemap: https://dillanmilo.com/sitemap.xml
-
-# Additional search engines
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: / 

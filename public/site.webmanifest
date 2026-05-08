@@ -1,21 +1,21 @@
 {
-  "name": "Dillan Milosevich Portfolio",
-  "short_name": "DM Portfolio",
-  "description": "Dillan Milosevich - Software Developer & Web Designer",
-  "lang": "en",
+  "name": "Dillan Milosevich - Software Developer",
+  "short_name": "Dillan Milo",
+  "description": "Software developer serving The Woodlands, Tomball, Houston, and small businesses with web development, automation, and AI software.",
+  "lang": "en-US",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/android-chrome-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "theme_color": "#000000",
   "background_color": "#000000",
-  "display": "standalone"
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "categories": ["portfolio", "developer", "software"]
 }

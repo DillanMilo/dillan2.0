@@ -11,6 +11,25 @@ import {
 const Home: React.FC = () => {
 
   useEffect(() => {
+    const measurementId = "G-SL5CG1FVGQ";
+    const existingAnalyticsScript = document.querySelector(
+      `script[src="https://www.googletagmanager.com/gtag/js?id=${measurementId}"]`
+    );
+
+    if (!existingAnalyticsScript) {
+      const analyticsScript = document.createElement("script");
+      analyticsScript.async = true;
+      analyticsScript.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+      document.head.appendChild(analyticsScript);
+    }
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag(...args: unknown[]) {
+      window.dataLayer.push(args);
+    };
+    window.gtag("js", new Date());
+    window.gtag("config", measurementId);
+
     const metaTags = {
       description:
         "Top software developer in The Woodlands, Creekside, Tomball & Houston TX. Expert in custom web development, automation workflows, AI-powered solutions, and small business software. Serving Montgomery County and Greater Houston.",
