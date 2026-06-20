@@ -5,6 +5,7 @@ import SEOBreadcrumbs from "./components/SEOBreadcrumbs";
 import FloatingCTA from "./components/FloatingCTA";
 import { useEffect, useState, lazy, Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react"; // Added Vercel Analytics import
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 // Lazy load non-critical components
 const Info = lazy(() => import("./components/info"));
@@ -189,6 +190,8 @@ function App() {
           </Suspense>
         </>
       )}
+      {/* Google Analytics 4 (gtag.js) - loads on every page, production only */}
+      <GoogleAnalytics />
       {/* Vercel Analytics Component - Added at the end so it renders on every page */}
       <Analytics />
     </div>
