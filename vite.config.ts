@@ -4,6 +4,8 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import compression from 'vite-plugin-compression'
 
+const GA_MEASUREMENT_ID = 'G-SL5CG1FVGQ'
+
 function sendJson(res: ServerResponse, status: number, body: unknown) {
   res.statusCode = status
   res.setHeader('Content-Type', 'application/json; charset=utf-8')
@@ -54,6 +56,35 @@ function localContactApiPlugin(): Plugin {
   }
 }
 
+function googleAnalyticsHtmlPlugin(): Plugin {
+  return {
+    name: 'google-analytics-html',
+    apply: 'build',
+    transformIndexHtml() {
+      return [
+        {
+          tag: 'script',
+          attrs: {
+            async: true,
+            src: `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`,
+          },
+          injectTo: 'head',
+        },
+        {
+          tag: 'script',
+          children: [
+            'window.dataLayer = window.dataLayer || [];',
+            'function gtag(){dataLayer.push(arguments);}',
+            "gtag('js', new Date());",
+            `gtag('config', '${GA_MEASUREMENT_ID}');`,
+          ].join('\n'),
+          injectTo: 'head',
+        },
+      ]
+    },
+  }
+}
+
 export default defineConfig(({ mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
@@ -62,6 +93,7 @@ export default defineConfig(({ mode }) => {
       localContactApiPlugin(),
       react(),
       tailwindcss(),
+      ...(mode === 'production' ? [googleAnalyticsHtmlPlugin()] : []),
       compression() // Add Gzip compression for production builds.
     ],
     build: {
