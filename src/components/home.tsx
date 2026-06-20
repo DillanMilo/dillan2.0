@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
 import { updateMetaTags } from "../utils/metaUtils";
-import {
-  getPersonSchema,
-  getWebsiteSchema,
-  getOrganizationSchema,
-} from "../utils/schema";
 
 // import CountdownTimer from "./CountdownTimer";
 
@@ -13,23 +8,23 @@ const Home: React.FC = () => {
   useEffect(() => {
     const metaTags = {
       description:
-        "Top software developer in The Woodlands, Creekside, Tomball & Houston TX. Expert in custom web development, automation workflows, AI-powered solutions, and small business software. Serving Montgomery County and Greater Houston.",
+        "Custom websites, AI automation, and small business software by Dillan Milosevich, serving The Woodlands, Tomball, Houston, and Montgomery County.",
       keywords:
-        "Dillan Milosevich, Software Developer The Woodlands, Web Developer Houston, Tomball Developer, Creekside Developer, React Developer Texas, Front-End Developer Montgomery County, Website Design The Woodlands, Custom Web Development Houston, AI Automation Texas, Workflow Automation, Small Business Software, AI-Powered Solutions, Business Solutions The Woodlands",
+        "Dillan Milosevich, web developer The Woodlands TX, software developer Houston, custom website development, AI automation, workflow automation, small business software, React developer Texas",
       author: "Dillan Milosevich",
       "og:title":
-        "Dillan Milosevich | Software Developer in The Woodlands & Houston TX",
+        "Dillan Milosevich | Web Developer in The Woodlands TX",
       "og:description":
-        "Professional software developer serving The Woodlands, Creekside, Tomball & Houston. Custom web development, automation workflows, AI-powered solutions, and small business software for local businesses.",
+        "Custom websites, AI automation, workflow automation, and small business software for companies in The Woodlands, Tomball, Houston, and Montgomery County.",
       "og:type": "website",
-      "og:url": "https://dillanmilo.com/",
+      "og:url": "https://www.dillanmilo.com/",
       "twitter:card": "summary_large_image",
       "twitter:title":
-        "Dillan Milosevich | Software Developer in The Woodlands & Houston TX",
+        "Dillan Milosevich | Web Developer in The Woodlands TX",
       "twitter:description":
-        "Expert software developer in The Woodlands, Creekside, Tomball & Houston TX. Custom web development, automation workflows, AI-powered solutions & small business software.",
+        "Custom websites, AI automation, workflow automation, and small business software for The Woodlands, Tomball, Houston, and Montgomery County.",
       robots: "index, follow",
-      canonical: "https://dillanmilo.com/",
+      canonical: "https://www.dillanmilo.com/",
       // Add location-specific meta tags
       "geo.region": "US-TX",
       "geo.placename": "The Woodlands, Creekside, Tomball, Houston",
@@ -39,33 +34,8 @@ const Home: React.FC = () => {
 
     updateMetaTags(
       metaTags,
-      "Dillan Milosevich | Software Developer in The Woodlands & Houston TX"
+      "Dillan Milosevich | Web Developer in The Woodlands TX"
     );
-
-    // Add JSON-LD structured data immediately so crawlers see it
-    const schemas = [
-      getPersonSchema(),
-      getWebsiteSchema(),
-      getOrganizationSchema(),
-    ];
-    const scripts: HTMLScriptElement[] = [];
-
-    schemas.forEach((schema, index) => {
-      const script = document.createElement("script");
-      script.type = "application/ld+json";
-      script.text = JSON.stringify(schema);
-      script.id = `schema-${index}`;
-      document.head.appendChild(script);
-      scripts.push(script);
-    });
-
-    return () => {
-      scripts.forEach((script) => {
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
-        }
-      });
-    };
   }, []);
 
   return (

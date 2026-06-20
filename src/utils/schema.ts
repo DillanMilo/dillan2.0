@@ -1,17 +1,17 @@
 export const getPersonSchema = () => ({
   "@context": "https://schema.org",
   "@type": "Person",
-  "@id": "https://dillanmilo.com/#person",
+  "@id": "https://www.dillanmilo.com/#person",
   name: "Dillan Milosevich",
   jobTitle: "Software Developer & Web Development Specialist",
-  url: "https://dillanmilo.com",
+  url: "https://www.dillanmilo.com",
   sameAs: [
     "https://www.linkedin.com/in/dillan-milosevich-9a817891/",
     "https://twitter.com/dillanx1x",
     "https://github.com/DillanMilo"
   ],
-  image: "https://dillanmilo.com/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
-  description: "Professional software developer serving The Woodlands, Creekside, Tomball, and Houston TX. Specializing in custom web development, AI automation, and business optimization solutions.",
+  image: "https://www.dillanmilo.com/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
+  description: "Software developer serving The Woodlands, Tomball, Houston, and Montgomery County. Specializing in custom web development, AI automation, and small business software.",
   address: {
     "@type": "PostalAddress",
     "addressLocality": "The Woodlands",
@@ -95,7 +95,7 @@ export const getProjectSchema = (project: {
   operatingSystem: "Any",
   author: {
     "@type": "Person",
-    "@id": "https://dillanmilo.com/#person",
+    "@id": "https://www.dillanmilo.com/#person",
     name: "Dillan Milosevich"
   },
   ...(project.image && { image: project.image }),
@@ -119,14 +119,23 @@ export const getProjectsSchema = () => ({
       "@type": "ListItem",
       position: 2,
       item: getProjectSchema({
-        title: "Africa WildVentures",
-        description: "High-performance safari and adventure booking platform with optimized load times and exceptional user experience.",
-        url: "https://www.africawildventures.com",
+        title: "LastCallIQ",
+        description: "AI-powered inventory management SaaS for food and beverage businesses across Texas.",
+        url: "https://www.lastcalliq.com",
       })
     },
     {
       "@type": "ListItem",
       position: 3,
+      item: getProjectSchema({
+        title: "Africa WildVentures",
+        description: "Safari and adventure booking platform built for direct bookings and a strong user experience.",
+        url: "https://www.africawildventures.com",
+      })
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
       item: getProjectSchema({
         title: "FORME",
         description: "Modern website for a regenerative medicine clinic specializing in PRP treatments, featuring clean design and intuitive user experience.",
@@ -135,9 +144,9 @@ export const getProjectsSchema = () => ({
     },
     {
       "@type": "ListItem",
-      position: 4,
+      position: 5,
       item: getProjectSchema({
-        title: "Professional Bio Platform",
+        title: "Professional Bios",
         description: "Collection of impactful, bespoke single-page applications for professionals, featuring modern design and seamless user experience.",
         url: "https://richard-nell.vercel.app",
       })
@@ -148,12 +157,12 @@ export const getProjectsSchema = () => ({
 export const getWebsiteSchema = () => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": "https://dillanmilo.com/#website",
-  url: "https://dillanmilo.com",
-  name: "Dillan Milosevich - Creative Software Developer",
-  description: "Portfolio website of Dillan Milosevich, a creative software developer specializing in beautiful, functional websites and web applications.",
+  "@id": "https://www.dillanmilo.com/#website",
+  url: "https://www.dillanmilo.com",
+  name: "Dillan Milosevich",
+  description: "Custom web development, AI automation, workflow automation, and small business software in The Woodlands, Tomball, Houston, and Montgomery County.",
   publisher: {
-    "@id": "https://dillanmilo.com/#person"
+    "@id": "https://www.dillanmilo.com/#person"
   },
   inLanguage: "en-US"
 });
@@ -161,15 +170,15 @@ export const getWebsiteSchema = () => ({
 export const getOrganizationSchema = () => ({
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "@id": "https://dillanmilo.com/#organization",
+  "@id": "https://www.dillanmilo.com/#organization",
   name: "Dillan Milosevich - Software Development Services",
   alternateName: "DM Dev",
-  url: "https://dillanmilo.com",
-  logo: "https://dillanmilo.com/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
-  image: "https://dillanmilo.com/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
-  description: "Leading software development services in The Woodlands, Creekside, Tomball, and Houston TX. Specializing in custom web development, business automation, AI solutions, and digital transformation for local businesses.",
+  url: "https://www.dillanmilo.com",
+  logo: "https://www.dillanmilo.com/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
+  image: "https://www.dillanmilo.com/og-image.png",
+  description: "Custom websites, business automation, AI-powered tools, and small business software for local companies in The Woodlands, Tomball, Houston, and Montgomery County.",
   founder: {
-    "@id": "https://dillanmilo.com/#person"
+    "@id": "https://www.dillanmilo.com/#person"
   },
   telephone: "+1-281-210-8139",
   email: "dillan@creativecurrents.io",
@@ -327,4 +336,3 @@ export const getOrganizationSchema = () => ({
     "UI/UX Design"
   ]
 });
-

@@ -1,7 +1,6 @@
 // src/components/work.tsx
 import React, { useEffect, useState, useRef } from "react";
 import { ChevronDown, ArrowUpRight, ExternalLink } from "lucide-react";
-import { getProjectsSchema } from "../utils/schema";
 
 interface Project {
   title: string;
@@ -443,16 +442,6 @@ const DesktopProjectCard: React.FC<{
 // MAIN WORK COMPONENT
 // ——————————————————————————————————————
 const Work: React.FC = () => {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.text = JSON.stringify(getProjectsSchema());
-    document.head.appendChild(script);
-    return () => {
-      if (script.parentNode) script.parentNode.removeChild(script);
-    };
-  }, []);
-
   const containerRef = useRef<HTMLDivElement>(null!) as React.RefObject<HTMLDivElement>;
   const [isMobile, setIsMobile] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<number | null>(null);

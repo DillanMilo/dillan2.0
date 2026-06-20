@@ -41,16 +41,93 @@
           "value": "public, immutable, max-age=31536000"
         }
       ]
+    },
+    {
+      "source": "/videos/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, immutable, max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/og-image.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, immutable, max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, immutable, max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/IMG_2177.webp",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, immutable, max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/IMG_2919.webp",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, immutable, max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/IMG_06902.webp",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, immutable, max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/IMG_07154.webp",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, immutable, max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/8xq1yhiw09q41.webp",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, immutable, max-age=31536000"
+        }
+      ]
+    },
+    {
+      "source": "/watermark.webp",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, immutable, max-age=31536000"
+        }
+      ]
     }
   ],
   "rewrites": [
     {
       "source": "/api/(.*)",
       "destination": "/api/$1"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
     }
   ]
 }

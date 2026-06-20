@@ -32,6 +32,7 @@ export const updateMetaTags = (metaTags: Record<string, string>, pageTitle: stri
 
   // Apply all meta tags
   Object.entries(metaTags).forEach(([name, content]) => {
+    if (name === "canonical") return;
     updateMetaTag(name, content);
   });
-}; 
+};

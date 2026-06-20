@@ -83,23 +83,23 @@ function App() {
 
   // Define breadcrumb items based on active section
   const getBreadcrumbs = () => {
-    const base = [{ name: "Home", url: "https://dillanmilo.com/" }];
+    const base = [{ name: "Home", url: "https://www.dillanmilo.com/" }];
 
     switch (activeSection) {
       case "info":
         return [
           ...base,
-          { name: "About", url: "https://dillanmilo.com/#info" },
+          { name: "About", url: "https://www.dillanmilo.com/#info" },
         ];
       case "work":
         return [
           ...base,
-          { name: "Portfolio", url: "https://dillanmilo.com/#work" },
+          { name: "Portfolio", url: "https://www.dillanmilo.com/#work" },
         ];
       case "contact":
         return [
           ...base,
-          { name: "Contact", url: "https://dillanmilo.com/#contact" },
+          { name: "Contact", url: "https://www.dillanmilo.com/#contact" },
         ];
       default:
         return base;

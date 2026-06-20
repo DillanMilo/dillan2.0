@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://dillanmilo.com/</loc>
-    <lastmod>2026-05-08</lastmod>
+    <loc>https://www.dillanmilo.com/</loc>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://dillanmilo.com/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG</image:loc>
-      <image:title>Dillan Milosevich - Software Developer in The Woodlands &amp; Houston TX</image:title>
-      <image:caption>Professional software developer serving The Woodlands, Creekside, Tomball, and Houston TX - Custom web development and AI automation solutions</image:caption>
+      <image:loc>https://www.dillanmilo.com/og-image.png</image:loc>
+      <image:title>Dillan Milosevich - Web Developer in The Woodlands TX</image:title>
+      <image:caption>Custom websites, AI automation, workflow automation, and small business software for The Woodlands, Tomball, Houston, and Montgomery County.</image:caption>
     </image:image>
   </url>
 </urlset>

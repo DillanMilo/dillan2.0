@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { updateMetaTags } from "../utils/metaUtils";
 
 const NotFound: React.FC = () => {
   useEffect(() => {
@@ -8,37 +9,10 @@ const NotFound: React.FC = () => {
       description: "Page not found - Dillan Milosevich's portfolio",
       "og:title": "404 - Page Not Found | Dillan Milosevich",
       "og:description": "The requested page could not be found.",
-      canonical: window.location.origin, // Point canonical to homepage
+      canonical: "https://www.dillanmilo.com/", // Point canonical to homepage
     };
 
-    // Update meta tags
-    Object.entries(metaTags).forEach(([name, content]) => {
-      let metaTag =
-        document.querySelector(`meta[name='${name}']`) ||
-        document.querySelector(`meta[property='${name}']`);
-
-      if (metaTag) {
-        metaTag.setAttribute("content", content);
-      } else {
-        metaTag = document.createElement("meta");
-        if (name.startsWith("og:")) {
-          metaTag.setAttribute("property", name);
-        } else {
-          metaTag.setAttribute("name", name);
-        }
-        metaTag.setAttribute("content", content);
-        document.head.appendChild(metaTag);
-      }
-    });
-
-    document.title = "404 - Page Not Found | Dillan Milosevich";
-
-    // Cleanup
-    return () => {
-      // Remove noindex meta tag when leaving 404 page
-      const robotsTag = document.querySelector("meta[name='robots']");
-      if (robotsTag) document.head.removeChild(robotsTag);
-    };
+    updateMetaTags(metaTags, "404 - Page Not Found | Dillan Milosevich");
   }, []);
 
   return (
