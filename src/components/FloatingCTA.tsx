@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { trackCtaClick } from "../utils/analytics";
 
 const FloatingCTA: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -27,6 +28,7 @@ const FloatingCTA: React.FC = () => {
   }, []);
 
   const scrollToContact = () => {
+    trackCtaClick("get_in_touch", "floating_cta", "contact");
     const contactSection = document.getElementById("contact");
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: "smooth" });

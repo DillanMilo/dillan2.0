@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { trackCtaClick } from "../utils/analytics";
 import { updateMetaTags } from "../utils/metaUtils";
 
 // import CountdownTimer from "./CountdownTimer";
@@ -124,6 +125,7 @@ const Home: React.FC = () => {
       {/* CTA Button - Bottom of page, loads last */}
       <button
         onClick={() => {
+          trackCtaClick("lets_work_together", "hero", "contact");
           const contactSection = document.getElementById("contact");
           if (contactSection) {
             contactSection.scrollIntoView({ behavior: "smooth" });

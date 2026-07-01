@@ -1,4 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
+import {
+  trackContactFormError,
+  trackContactFormStart,
+  trackContactFormSubmit,
+  trackContactFormSuccess,
+  trackContactFormValidationError,
+} from "../utils/analytics";
 
 interface FormData {
   name: string;
@@ -25,6 +32,7 @@ const ContactForm: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [isVisible, setIsVisible] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const hasStartedForm = useRef(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,6 +73,9 @@ const ContactForm: React.FC = () => {
     }
 
     setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) {
+      trackContactFormValidationError(Object.keys(newErrors));
+    }
     return Object.keys(newErrors).length === 0;
   };
 
@@ -72,6 +83,10 @@ const ContactForm: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
+    if (name !== "website" && !hasStartedForm.current) {
+      hasStartedForm.current = true;
+      trackContactFormStart(name);
+    }
     setFormData((prev) => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
@@ -91,9 +106,12 @@ const ContactForm: React.FC = () => {
     if (formData.website) {
       setSubmitStatus("success");
       setFormData({ name: "", email: "", message: "", website: "" });
+      hasStartedForm.current = false;
       setIsSubmitting(false);
       return;
     }
+
+    trackContactFormSubmit();
 
     try {
       // Using Resend via Vercel serverless function
@@ -112,12 +130,16 @@ const ContactForm: React.FC = () => {
 
       if (response.ok) {
         setSubmitStatus("success");
+        trackContactFormSuccess();
         setFormData({ name: "", email: "", message: "", website: "" });
+        hasStartedForm.current = false;
       } else {
         setSubmitStatus("error");
+        trackContactFormError(`http_${response.status}`);
       }
     } catch {
       setSubmitStatus("error");
+      trackContactFormError("network_error");
     } finally {
       setIsSubmitting(false);
     }

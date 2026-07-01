@@ -3,8 +3,9 @@ import Navbar from "./components/navbar";
 import Home from "./components/home";
 import SEOBreadcrumbs from "./components/SEOBreadcrumbs";
 import FloatingCTA from "./components/FloatingCTA";
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react"; // Added Vercel Analytics import
+import { trackSectionView } from "./utils/analytics";
 
 // Lazy load non-critical components
 const Info = lazy(() => import("./components/info"));
@@ -15,6 +16,7 @@ function App() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [sectionOpacities, setSectionOpacities] = useState<Record<string, number>>({});
   const [isLandscape, setIsLandscape] = useState(false);
+  const viewedSections = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,6 +82,12 @@ function App() {
     // Add loaded class immediately for faster background loading
     document.body.classList.add("loaded");
   }, []);
+
+  useEffect(() => {
+    if (!activeSection || viewedSections.current.has(activeSection)) return;
+    viewedSections.current.add(activeSection);
+    trackSectionView(activeSection);
+  }, [activeSection]);
 
   // Define breadcrumb items based on active section
   const getBreadcrumbs = () => {

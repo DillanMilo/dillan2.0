@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { trackNavigationClick } from "../utils/analytics";
 
 const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
@@ -38,6 +39,7 @@ const Navbar: React.FC = () => {
 
   const handleScroll = (id: string) => {
     setActiveSection(id);
+    trackNavigationClick(id);
     const element = document.getElementById(id);
     if (element) {
       let targetY = element.getBoundingClientRect().top + window.pageYOffset;

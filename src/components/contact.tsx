@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import ContactForm from "./ContactForm";
+import {
+  trackContactFormOpen,
+  trackContactLinkClick,
+  trackSocialLinkClick,
+} from "../utils/analytics";
 
 const rotatingWords = [
   "Design",
@@ -26,6 +31,8 @@ const socialLinks = [
   { name: "BNS", link: "https://app.ens.domains/dillanxx.base.eth" },
   { name: "Call", link: "tel:+12812108139" },
 ] as const;
+
+const contactLinkNames = new Set(["Email", "Call"]);
 
 const Contact: React.FC = () => {
   const [visibleIndex, setVisibleIndex] = useState(0);
@@ -102,7 +109,10 @@ const Contact: React.FC = () => {
       <div className="w-full px-5 md:px-10 mt-32 md:mt-12 z-10 flex flex-col items-center">
         {!showForm ? (
           <button
-            onClick={() => setShowForm(true)}
+            onClick={() => {
+              trackContactFormOpen();
+              setShowForm(true);
+            }}
             className="group relative px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bebas text-2xl md:text-3xl tracking-wider rounded-full transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/40 overflow-hidden"
           >
             <span className="relative z-10">GET IN TOUCH</span>
@@ -148,6 +158,13 @@ const Contact: React.FC = () => {
               href={handle.link}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                if (contactLinkNames.has(handle.name)) {
+                  trackContactLinkClick(handle.name.toLowerCase(), "contact_banner");
+                  return;
+                }
+                trackSocialLinkClick(handle.name, "contact_banner");
+              }}
               className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bebas text-white opacity-0
                 ${showBanner ? "animate-fadeInSocial" : ""}`}
               style={{

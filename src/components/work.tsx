@@ -1,6 +1,10 @@
 // src/components/work.tsx
 import React, { useEffect, useState, useRef } from "react";
 import { ChevronDown, ArrowUpRight, ExternalLink } from "lucide-react";
+import {
+  trackPortfolioClick,
+  trackPortfolioDropdownOpen,
+} from "../utils/analytics";
 
 interface Project {
   title: string;
@@ -268,7 +272,7 @@ const DesktopProjectCard: React.FC<{
   project: Project;
   index: number;
   openDropdown: number | null;
-  toggleDropdown: (index: number) => void;
+  toggleDropdown: (index: number, projectTitle: string) => void;
   isEven: boolean;
 }> = ({ project, index, openDropdown, toggleDropdown, isEven }) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -381,7 +385,7 @@ const DesktopProjectCard: React.FC<{
                 <button
                   type="button"
                   aria-expanded={openDropdown === index}
-                  onClick={() => toggleDropdown(index)}
+                  onClick={() => toggleDropdown(index, project.title)}
                   className="group flex items-center gap-3 text-red-500 hover:text-red-400 transition-colors duration-300 cursor-pointer bg-transparent border-none p-0"
                 >
                   <span className="text-lg font-bebas tracking-wider uppercase">
@@ -407,6 +411,13 @@ const DesktopProjectCard: React.FC<{
                         href={item.link}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() =>
+                          trackPortfolioClick(
+                            `${project.title}: ${item.name}`,
+                            item.link,
+                            "dropdown"
+                          )
+                        }
                         className="group/link flex items-center gap-2 text-white/60 hover:text-red-400 transition-colors duration-300 py-1"
                       >
                         <span className="text-lg font-bebas tracking-wide">
@@ -423,6 +434,9 @@ const DesktopProjectCard: React.FC<{
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackPortfolioClick(project.title, project.link, "desktop")
+                }
                 className="group mt-8 inline-flex items-center gap-3 text-red-500 hover:text-red-400 transition-colors duration-300"
               >
                 <span className="text-lg font-bebas tracking-wider uppercase">
@@ -465,8 +479,12 @@ const Work: React.FC = () => {
     return () => obs.disconnect();
   }, []);
 
-  const toggleDropdown = (index: number) => {
-    setOpenDropdown(openDropdown === index ? null : index);
+  const toggleDropdown = (index: number, projectTitle: string) => {
+    const willOpen = openDropdown !== index;
+    if (willOpen) {
+      trackPortfolioDropdownOpen(projectTitle);
+    }
+    setOpenDropdown(willOpen ? index : null);
   };
 
   if (isMobile) {
@@ -526,7 +544,7 @@ const MobileWork: React.FC<{
   sectionVisible: boolean;
   containerRef: React.RefObject<HTMLDivElement>;
   openDropdown: number | null;
-  toggleDropdown: (index: number) => void;
+  toggleDropdown: (index: number, projectTitle: string) => void;
 }> = ({ sectionVisible, containerRef, openDropdown, toggleDropdown }) => {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visibleCards, setVisibleCards] = useState<boolean[]>(
@@ -608,7 +626,7 @@ const MobileWork: React.FC<{
                   <button
                     type="button"
                     aria-expanded={openDropdown === index}
-                    onClick={() => toggleDropdown(index)}
+                    onClick={() => toggleDropdown(index, project.title)}
                     className="flex items-center gap-2 text-red-500 cursor-pointer bg-transparent border-none p-0"
                   >
                     <span className="text-sm font-bebas tracking-wider uppercase">
@@ -634,6 +652,13 @@ const MobileWork: React.FC<{
                           href={item.link}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={() =>
+                            trackPortfolioClick(
+                              `${project.title}: ${item.name}`,
+                              item.link,
+                              "dropdown"
+                            )
+                          }
                           className="flex items-center gap-2 text-white/50 text-sm font-bebas tracking-wide py-0.5"
                         >
                           {item.name}
@@ -648,6 +673,9 @@ const MobileWork: React.FC<{
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() =>
+                    trackPortfolioClick(project.title, project.link, "mobile")
+                  }
                   className="inline-flex items-center gap-2 text-red-500 text-sm font-bebas tracking-wider uppercase"
                 >
                   Visit Site
