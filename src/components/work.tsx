@@ -16,6 +16,7 @@ interface Project {
   tag: string;
   desktopVideo?: string;
   mobileVideo?: string;
+  poster?: string;
   isDropdown?: boolean;
   dropdownItems?: Array<{ name: string; link: string }>;
 }
@@ -26,7 +27,7 @@ const projects: Project[] = [
     description:
       "A fashion editorial portfolio with full-on runway attitude — full-bleed film, bold type, and motion that struts down the page. Front-row energy, no ticket required.",
     outcome:
-      "Eight years behind the chair, styled into a portfolio built to book the next show.",
+      "Eight years of hair artistry, styled into a portfolio built to book the next show.",
     link: "https://www.elijahxx.com",
     gradient:
       "radial-gradient(ellipse at 40% 30%, #0a0a0a 0%, #1a0a0f 40%, #4c0519 100%)",
@@ -34,6 +35,7 @@ const projects: Project[] = [
     tag: "Editorial",
     desktopVideo: "/videos/elijah-desktop.webm",
     mobileVideo: "/videos/elijah-mobile.webm",
+    poster: "/videos/elijah-poster.webp",
   },
   {
     title: "A5 Rail",
@@ -48,6 +50,7 @@ const projects: Project[] = [
     tag: "AR / VR",
     desktopVideo: "/videos/a5rail-desktop.webm",
     mobileVideo: "/videos/a5rail-mobile.webm",
+    poster: "/videos/a5rail-poster.webp",
   },
   {
     title: "LastCallIQ",
@@ -62,6 +65,7 @@ const projects: Project[] = [
     tag: "SaaS",
     desktopVideo: "/videos/ScreenRecording_03-05-2026 11-43-17_1.webm",
     mobileVideo: "/videos/ScreenRecording_03-05-2026 11-43-17_1.webm",
+    poster: "/videos/lastcalliq-poster.webp",
   },
   {
     title: "FORME",
@@ -76,6 +80,7 @@ const projects: Project[] = [
     tag: "Medical",
     desktopVideo: "/videos/forme-desktop.webm",
     mobileVideo: "/videos/forme-mobile.webm",
+    poster: "/videos/forme-poster.webp",
   },
   {
     title: "Africa WildVentures",
@@ -90,6 +95,7 @@ const projects: Project[] = [
     tag: "Travel",
     desktopVideo: "/videos/africawild-desktop.webm",
     mobileVideo: "/videos/africawild-mobile.webm",
+    poster: "/videos/africawild-poster.webp",
   },
   {
     title: "Professional Bios",
@@ -104,6 +110,7 @@ const projects: Project[] = [
     tag: "Branding",
     desktopVideo: "/videos/bios-desktop.webm",
     mobileVideo: "/videos/bios-mobile.webm",
+    poster: "/videos/bios-poster.webp",
     isDropdown: true,
     dropdownItems: [
       { name: "Carly Milo", link: "https://carly-milo.com" },
@@ -123,6 +130,7 @@ const BrowserFrame: React.FC<{
   const frameRef = useRef<HTMLDivElement>(null);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const [posterError, setPosterError] = useState(false);
 
   const videoSrc = isMobile ? project.mobileVideo : project.desktopVideo;
 
@@ -147,6 +155,9 @@ const BrowserFrame: React.FC<{
   }, [videoSrc]);
 
   const showVideo = videoSrc && videoLoaded && !videoError;
+  // Static poster stands in whenever the video can't play — low-power mode,
+  // blocked autoplay, slow connections — so a real project frame always shows.
+  const showPoster = !!project.poster && !posterError;
 
   return (
     <div
@@ -182,6 +193,22 @@ const BrowserFrame: React.FC<{
           }}
         />
 
+        {/* Poster image — real project frame beneath the video. Stays visible
+            until the video actually plays, and remains the fallback whenever
+            autoplay is blocked (e.g. iOS Low Power Mode). */}
+        {showPoster && (
+          <img
+            src={project.poster}
+            alt={`${project.title} preview`}
+            loading="lazy"
+            decoding="async"
+            onError={() => setPosterError(true)}
+            className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
+              showVideo ? "opacity-0" : "opacity-100"
+            }`}
+          />
+        )}
+
         {/* Video layer */}
         {videoSrc && !videoError && (
           <video
@@ -205,8 +232,9 @@ const BrowserFrame: React.FC<{
           </video>
         )}
 
-        {/* Overlays only show when no video is loaded (gradient fallback mode) */}
-        {!showVideo && (
+        {/* Decorative overlays only show in pure gradient fallback mode —
+            i.e. when neither the video nor a poster image is available. */}
+        {!showVideo && !showPoster && (
           <>
             {/* Noise/grain overlay */}
             <div
@@ -265,8 +293,8 @@ const BrowserFrame: React.FC<{
           </span>
         </div>
 
-        {/* Subtle vignette on video for polish */}
-        {showVideo && (
+        {/* Subtle vignette on video/poster for polish */}
+        {(showVideo || showPoster) && (
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
