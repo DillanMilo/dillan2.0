@@ -22,6 +22,20 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Elijah Hourrides",
+    description:
+      "A fashion editorial portfolio with full-on runway attitude — full-bleed film, bold type, and motion that struts down the page. Front-row energy, no ticket required.",
+    outcome:
+      "Turned eight years of fashion-week work into a portfolio built to book the next show.",
+    link: "https://www.elijahxx.com",
+    gradient:
+      "radial-gradient(ellipse at 40% 30%, #0a0a0a 0%, #1a0a0f 40%, #4c0519 100%)",
+    accentColor: "#e11d48",
+    tag: "Editorial",
+    desktopVideo: "/videos/elijah-desktop.webm",
+    mobileVideo: "/videos/elijah-mobile.webm",
+  },
+  {
     title: "A5 Rail",
     description:
       "Next-level AR/VR training for rail pros. Slick, fast, secure — looks so good you might actually enjoy compliance.",
@@ -50,20 +64,6 @@ const projects: Project[] = [
     mobileVideo: "/videos/ScreenRecording_03-05-2026 11-43-17_1.webm",
   },
   {
-    title: "Africa WildVentures",
-    description:
-      "Elephantine performance with cheetah-fast load times. Africa's calling, and it has great UX.",
-    outcome:
-      "Brought a premium African safari brand to life online, driving direct bookings.",
-    link: "https://www.africawildventures.com",
-    gradient:
-      "radial-gradient(ellipse at 70% 80%, #1a120b 0%, #3c2a21 40%, #d4a574 100%)",
-    accentColor: "#d4a574",
-    tag: "Travel",
-    desktopVideo: "/videos/africawild-desktop.webm",
-    mobileVideo: "/videos/africawild-mobile.webm",
-  },
-  {
     title: "FORME",
     description:
       "Regenerative medicine meets pixel-perfect design. Your platelets deserve a website this good.",
@@ -76,6 +76,20 @@ const projects: Project[] = [
     tag: "Medical",
     desktopVideo: "/videos/forme-desktop.webm",
     mobileVideo: "/videos/forme-mobile.webm",
+  },
+  {
+    title: "Africa WildVentures",
+    description:
+      "Elephantine performance with cheetah-fast load times. Africa's calling, and it has great UX.",
+    outcome:
+      "Brought a premium African safari brand to life online, driving direct bookings.",
+    link: "https://www.africawildventures.com",
+    gradient:
+      "radial-gradient(ellipse at 70% 80%, #1a120b 0%, #3c2a21 40%, #d4a574 100%)",
+    accentColor: "#d4a574",
+    tag: "Travel",
+    desktopVideo: "/videos/africawild-desktop.webm",
+    mobileVideo: "/videos/africawild-mobile.webm",
   },
   {
     title: "Professional Bios",
