@@ -26,7 +26,7 @@ const projects: Project[] = [
     description:
       "A fashion editorial portfolio with full-on runway attitude — full-bleed film, bold type, and motion that struts down the page. Front-row energy, no ticket required.",
     outcome:
-      "Turned eight years of fashion-week work into a portfolio built to book the next show.",
+      "Eight years behind the chair, styled into a portfolio built to book the next show.",
     link: "https://www.elijahxx.com",
     gradient:
       "radial-gradient(ellipse at 40% 30%, #0a0a0a 0%, #1a0a0f 40%, #4c0519 100%)",
