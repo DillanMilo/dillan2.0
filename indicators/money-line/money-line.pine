@@ -1,0 +1,177 @@
+//@version=6
+indicator("Money Line", shorttitle = "MoneyLine", overlay = true)
+
+// ─────────────────────────────────────────────────────────────────────────────
+//  MONEY LINE — trend-flip indicator (personal rebuild, for private use)
+//
+//  One line, two states:
+//    GREEN → bullish trend → the line trails BELOW price and acts as support
+//    RED   → bearish trend → the line trails ABOVE price and acts as resistance
+//
+//  A "flip" happens when price closes through the line. The line then jumps to
+//  the other side of price and changes color. Alert conditions are named
+//  "Downtrend to Uptrend" and "Uptrend to Downtrend" — set alerts to fire
+//  "Once Per Bar Close" so flips are confirmed, not intrabar noise.
+//
+//  Works on every timeframe. Higher timeframes flip less often and carry more
+//  weight; lower timeframes flip earlier but whipsaw more. That behavior is
+//  inherent to the engine, not a setting.
+//
+//  Engine: ratcheting ATR trailing stop (Supertrend family). In a bull state
+//  the support line can only rise or hold — never fall. In a bear state the
+//  resistance line can only fall or hold — never rise. This is what creates
+//  the decisive, low-noise flips.
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ════════════════════════════ Inputs — Trend Engine ═════════════════════════
+string GRP_E = "Trend Engine"
+float src = input.source(hl2, "Source", group = GRP_E,
+     tooltip = "Price source the envelope is anchored to. hl2 (bar midpoint) is the classic choice; close makes the line slightly more reactive.")
+int atrLen = input.int(10, "Trend Length (ATR periods)", minval = 1, maxval = 100, group = GRP_E,
+     tooltip = "Volatility lookback. Higher = smoother line and fewer flips.")
+float sensitivity = input.float(3.0, "Sensitivity (ATR multiplier)", minval = 0.5, maxval = 10.0, step = 0.1, group = GRP_E,
+     tooltip = "How far the line trails price, in ATRs. HIGHER = fewer, higher-conviction flips (rides trends longer). LOWER = earlier flips but more whipsaw. If flips feel late, lower it; if you get chopped, raise it.")
+
+// ════════════════════════════ Inputs — Display ══════════════════════════════
+string GRP_V = "Display"
+color bullColor = input.color(#0abf53, "Bullish color", group = GRP_V)
+color bearColor = input.color(#f23645, "Bearish color", group = GRP_V)
+int lineWidth = input.int(3, "Line width", minval = 1, maxval = 10, group = GRP_V)
+int smoothLen = input.int(1, "Line smoothing", minval = 1, maxval = 25, group = GRP_V,
+     tooltip = "Purely cosmetic rounding of the plotted line (signals always use the raw engine). 1 = off (crisp shelves at the exact flip levels). 3–5 = softer, curvier line.")
+bool showSignals = input.bool(true, "BUY / SELL labels on flips", group = GRP_V)
+bool showFill = input.bool(true, "Fill between price and line", group = GRP_V)
+bool paintBars = input.bool(false, "Color price bars by trend", group = GRP_V)
+bool flashBg = input.bool(false, "Flash background on flip", group = GRP_V)
+
+// ═══════════════════════ Inputs — Multi-TF Dashboard ════════════════════════
+string GRP_D = "Multi-Timeframe Dashboard"
+bool showDash = input.bool(true, "Show dashboard", group = GRP_D,
+     tooltip = "Trend state on your five timeframes at a glance. Cells for timeframes ABOVE the chart update live until that higher-TF bar closes (same as opening that chart directly). Cells for timeframes BELOW the chart are approximations — for exact reads, view them from a chart at or below that timeframe.")
+string dashPos = input.string("Top Right", "Position", options = ["Top Right", "Top Left", "Bottom Right", "Bottom Left", "Middle Right", "Middle Left"], group = GRP_D)
+string dashSize = input.string("Normal", "Text size", options = ["Tiny", "Small", "Normal", "Large"], group = GRP_D)
+string tf1 = input.timeframe("W", "Timeframe 1", group = GRP_D)
+string tf2 = input.timeframe("D", "Timeframe 2", group = GRP_D)
+string tf3 = input.timeframe("240", "Timeframe 3", group = GRP_D)
+string tf4 = input.timeframe("60", "Timeframe 4", group = GRP_D)
+string tf5 = input.timeframe("30", "Timeframe 5", group = GRP_D)
+
+// ════════════════════════════════ Engine ════════════════════════════════════
+// Ratcheting ATR trailing stop. Returns the line value and the trend state
+// (+1 bullish / -1 bearish). Wrapped in a function so the identical engine can
+// be evaluated on other timeframes via request.security().
+f_engine() =>
+    float atrValue = ta.atr(atrLen)
+    float lowerBasic = src - sensitivity * atrValue
+    float upperBasic = src + sensitivity * atrValue
+
+    var float lowerBand = na
+    var float upperBand = na
+    var int trendDir = 1
+
+    float prevLower = nz(lowerBand[1], lowerBasic)
+    float prevUpper = nz(upperBand[1], upperBasic)
+
+    // Ratchet: in an uptrend the support line never falls; in a downtrend the
+    // resistance line never rises. The band resets once price closes through it.
+    lowerBand := lowerBasic > prevLower or close[1] < prevLower ? lowerBasic : prevLower
+    upperBand := upperBasic < prevUpper or close[1] > prevUpper ? upperBasic : prevUpper
+
+    if na(atrValue[1])
+        trendDir := 1
+    else if trendDir[1] == 1
+        trendDir := close < lowerBand ? -1 : 1
+    else
+        trendDir := close > upperBand ? 1 : -1
+
+    float lineVal = trendDir == 1 ? lowerBand : upperBand
+    [lineVal, trendDir]
+
+[moneyLine, dir] = f_engine()
+
+bool flipUp = dir == 1 and dir[1] == -1
+bool flipDown = dir == -1 and dir[1] == 1
+
+// ════════════════════════════════ Plots ═════════════════════════════════════
+float smoothedLine = ta.sma(moneyLine, smoothLen)
+
+plotBull = plot(dir == 1 ? smoothedLine : na, "Money Line (Bullish)", color = bullColor, linewidth = lineWidth, style = plot.style_linebr)
+plotBear = plot(dir == -1 ? smoothedLine : na, "Money Line (Bearish)", color = bearColor, linewidth = lineWidth, style = plot.style_linebr)
+plotMid = plot(showFill ? hl2 : na, "Fill anchor", color = color(na), display = display.none, editable = false)
+
+fill(plotBull, plotMid, color = color.new(bullColor, 88), title = "Bull fill")
+fill(plotBear, plotMid, color = color.new(bearColor, 88), title = "Bear fill")
+
+plotshape(showSignals and flipUp, "BUY flip", style = shape.labelup, location = location.belowbar, color = bullColor, text = "BUY", textcolor = color.white, size = size.small)
+plotshape(showSignals and flipDown, "SELL flip", style = shape.labeldown, location = location.abovebar, color = bearColor, text = "SELL", textcolor = color.white, size = size.small)
+
+barcolor(paintBars ? (dir == 1 ? bullColor : bearColor) : na)
+bgcolor(flashBg and (flipUp or flipDown) ? color.new(dir == 1 ? bullColor : bearColor, 80) : na, title = "Flip flash")
+
+// ════════════════════════════════ Alerts ════════════════════════════════════
+// Titles intentionally match the Money Line's own alert conditions.
+// In the alert dialog: Condition → MoneyLine → pick one of these →
+// trigger "Once Per Bar Close".
+alertcondition(flipUp, title = "Downtrend to Uptrend", message = "MONEY LINE ▲ {{ticker}} flipped BULLISH on the {{interval}} (close: {{close}})")
+alertcondition(flipDown, title = "Uptrend to Downtrend", message = "MONEY LINE ▼ {{ticker}} flipped BEARISH on the {{interval}} (close: {{close}})")
+alertcondition(flipUp or flipDown, title = "Any Trend Flip", message = "MONEY LINE ◆ {{ticker}} trend flipped on the {{interval}} (close: {{close}})")
+
+// ═══════════════════════ Multi-Timeframe Dashboard ══════════════════════════
+[l1, d1] = request.security(syminfo.tickerid, tf1, f_engine())
+[l2, d2] = request.security(syminfo.tickerid, tf2, f_engine())
+[l3, d3] = request.security(syminfo.tickerid, tf3, f_engine())
+[l4, d4] = request.security(syminfo.tickerid, tf4, f_engine())
+[l5, d5] = request.security(syminfo.tickerid, tf5, f_engine())
+
+f_tfName(string tf) =>
+    switch tf
+        "1" => "1m"
+        "3" => "3m"
+        "5" => "5m"
+        "15" => "15m"
+        "30" => "30m"
+        "45" => "45m"
+        "60" => "1H"
+        "120" => "2H"
+        "180" => "3H"
+        "240" => "4H"
+        "480" => "8H"
+        "720" => "12H"
+        "D" => "D"
+        "1D" => "D"
+        "W" => "W"
+        "1W" => "W"
+        "M" => "M"
+        "1M" => "M"
+        => tf
+
+f_posn(string p) =>
+    switch p
+        "Top Right" => position.top_right
+        "Top Left" => position.top_left
+        "Bottom Right" => position.bottom_right
+        "Bottom Left" => position.bottom_left
+        "Middle Right" => position.middle_right
+        => position.middle_left
+
+f_txtSize(string s) =>
+    switch s
+        "Tiny" => size.tiny
+        "Small" => size.small
+        "Large" => size.large
+        => size.normal
+
+f_cell(table t, int col, string tfStr, int d) =>
+    bool isBull = d == 1
+    table.cell(t, col, 0, f_tfName(tfStr), text_color = #b2b5be, text_size = f_txtSize(dashSize), bgcolor = color.new(#131722, 15))
+    table.cell(t, col, 1, isBull ? "BULL" : "BEAR", text_color = color.white, text_size = f_txtSize(dashSize), bgcolor = color.new(isBull ? bullColor : bearColor, 10))
+
+var table dash = na
+if showDash and barstate.islast
+    if na(dash)
+        dash := table.new(f_posn(dashPos), 5, 2, border_width = 1, border_color = color.new(#000000, 70))
+    f_cell(dash, 0, tf1, d1)
+    f_cell(dash, 1, tf2, d2)
+    f_cell(dash, 2, tf3, d3)
+    f_cell(dash, 3, tf4, d4)
+    f_cell(dash, 4, tf5, d5)
