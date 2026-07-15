@@ -10,13 +10,15 @@ interface Project {
   title: string;
   description: string;
   outcome: string;
-  link: string;
+  link?: string;
+  displayUrl?: string;
   gradient: string;
   accentColor: string;
   tag: string;
   desktopVideo?: string;
   mobileVideo?: string;
   poster?: string;
+  videoFit?: "cover" | "contain";
   isDropdown?: boolean;
   dropdownItems?: Array<{ name: string; link: string }>;
 }
@@ -51,6 +53,21 @@ const projects: Project[] = [
     desktopVideo: "/videos/a5rail-desktop.webm",
     mobileVideo: "/videos/a5rail-mobile.webm",
     poster: "/videos/a5rail-poster.webp",
+  },
+  {
+    title: "Fashion Editorial",
+    description:
+      "Backstage fashion film with soft movement, close detail, and a polished editorial rhythm.",
+    outcome:
+      "A short-form visual piece built to make the craft feel intimate, tactile, and immediate.",
+    displayUrl: "dillanmilo.com/work/fashion-editorial",
+    gradient:
+      "radial-gradient(ellipse at 55% 25%, #211a18 0%, #4a3a32 45%, #b89b7d 100%)",
+    accentColor: "#d9b48f",
+    tag: "Video",
+    desktopVideo: "/videos/fashion-editorial.mp4",
+    mobileVideo: "/videos/fashion-editorial.mp4",
+    videoFit: "contain",
   },
   {
     title: "LastCallIQ",
@@ -133,6 +150,12 @@ const BrowserFrame: React.FC<{
   const [posterError, setPosterError] = useState(false);
 
   const videoSrc = isMobile ? project.mobileVideo : project.desktopVideo;
+  const frameUrl = project.displayUrl ?? project.link ?? "dillanmilo.com/work";
+  const videoType = videoSrc?.endsWith(".mp4") ? "video/mp4" : "video/webm";
+  const videoFitClass =
+    project.videoFit === "contain"
+      ? "object-contain object-center"
+      : "object-cover object-top";
 
   // Auto-play video when the frame is in view, pause when not
   useEffect(() => {
@@ -174,7 +197,7 @@ const BrowserFrame: React.FC<{
         <div className="flex-1 mx-3">
           <div className="flex items-center gap-2 px-3 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] text-xs text-white/30 font-mono truncate">
             <span className="hidden sm:inline">https://</span>
-            {project.link.replace("https://", "").replace("http://", "")}
+            {frameUrl.replace("https://", "").replace("http://", "")}
           </div>
         </div>
       </div>
@@ -219,16 +242,16 @@ const BrowserFrame: React.FC<{
             preload="metadata"
             onLoadedData={() => setVideoLoaded(true)}
             onError={() => setVideoError(true)}
-            className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
+            className={`absolute inset-0 w-full h-full ${videoFitClass} transition-opacity duration-700 ${
               showVideo ? "opacity-100" : "opacity-0"
-            } ${isMobile ? "animate-kenBurns" : ""}`}
+            } ${isMobile && project.videoFit !== "contain" ? "animate-kenBurns" : ""}`}
             style={
               isMobile
                 ? undefined
                 : { transform: `translate3d(0, ${parallaxY * 0.15}px, 0)` }
             }
           >
-            <source src={videoSrc} type="video/webm" />
+            <source src={videoSrc} type={videoType} />
           </video>
         )}
 
@@ -371,6 +394,7 @@ const DesktopProjectCard: React.FC<{
     filter: isVisible ? "blur(0px)" : "blur(4px)",
     transition: `transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, filter 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
   });
+  const projectLink = project.link;
 
   return (
     <div ref={cardRef}>
@@ -471,13 +495,13 @@ const DesktopProjectCard: React.FC<{
                   </div>
                 </div>
               </div>
-            ) : (
+            ) : projectLink ? (
               <a
-                href={project.link}
+                href={projectLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() =>
-                  trackPortfolioClick(project.title, project.link, "desktop")
+                  trackPortfolioClick(project.title, projectLink, "desktop")
                 }
                 className="group mt-8 inline-flex items-center gap-3 text-red-500 hover:text-red-400 transition-colors duration-300"
               >
@@ -486,7 +510,7 @@ const DesktopProjectCard: React.FC<{
                 </span>
                 <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
               </a>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
@@ -710,20 +734,20 @@ const MobileWork: React.FC<{
                     </div>
                   </div>
                 </div>
-              ) : (
+              ) : project.link ? (
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() =>
-                    trackPortfolioClick(project.title, project.link, "mobile")
+                    trackPortfolioClick(project.title, project.link!, "mobile")
                   }
                   className="inline-flex items-center gap-2 text-red-500 text-sm font-bebas tracking-wider uppercase"
                 >
                   Visit Site
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
-              )}
+              ) : null}
             </div>
           </div>
         ))}

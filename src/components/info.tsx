@@ -5,6 +5,7 @@ import {
   useTransform,
   useInView,
 } from "framer-motion";
+import { trackCtaClick } from "../utils/analytics";
 
 const highlights = [
   { label: "Web Development", icon: "◆" },
@@ -182,6 +183,55 @@ const Info: React.FC = () => {
           digital presence is fast, functional, and unforgettable.
         </motion.p>
       </div>
+
+      {/* Founder studio callout */}
+      <motion.a
+        href="https://www.creativecurrents.co"
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() =>
+          trackCtaClick(
+            "creative_currents",
+            "about_founder_callout",
+            "https://www.creativecurrents.co"
+          )
+        }
+        initial={{ opacity: 0, y: 24 }}
+        animate={bioInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        whileHover={{ y: -4 }}
+        className="group relative mb-12 w-full max-w-xl overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] px-6 py-5 text-left backdrop-blur-sm transition-colors duration-300 hover:border-red-500/40 hover:bg-white/[0.055] sm:px-8 sm:py-6"
+        aria-label="Visit Creative Currents, Dillan's independent software studio"
+      >
+        <span
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 w-[2px] bg-red-500/70 transition-all duration-300 group-hover:w-1"
+        />
+
+        <span className="mb-3 flex items-center gap-3 text-xs font-bebas tracking-[0.24em] text-white/45 sm:text-sm">
+          <span className="h-px w-7 bg-red-500/70" />
+          Independent software studio
+        </span>
+
+        <span className="flex items-end justify-between gap-6">
+          <span>
+            <span className="block text-3xl font-bebas tracking-wide text-white sm:text-4xl">
+              Creative Currents
+            </span>
+            <span className="mt-1 block max-w-md text-base font-bebas leading-relaxed tracking-wide text-white/60 sm:text-lg">
+              I founded it to create thoughtful apps and digital products that
+              make everyday life flow a little better.
+            </span>
+          </span>
+
+          <span
+            aria-hidden="true"
+            className="mb-1 shrink-0 text-2xl text-red-500 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+          >
+            ↗
+          </span>
+        </span>
+      </motion.a>
 
       {/* Highlight pills / cards */}
       <div
