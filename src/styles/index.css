@@ -377,6 +377,17 @@
   }
 }
 
+@keyframes creativeCurrentsMarkDrift {
+  0%, 100% {
+    opacity: 0.48;
+    transform: translate3d(-3px, 1px, 0) rotate(-4deg);
+  }
+  50% {
+    opacity: 0.72;
+    transform: translate3d(3px, -2px, 0) rotate(4deg);
+  }
+}
+
 .studio-card-pulse {
   animation: studioCardPulse 3s ease-in-out infinite;
 }
@@ -387,6 +398,12 @@
 
 .studio-card-ambient {
   animation: studioAmbientPulse 3s ease-in-out infinite;
+}
+
+.creative-currents-mark {
+  filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.22));
+  transform-origin: 50% 58%;
+  animation: creativeCurrentsMarkDrift 5.6s ease-in-out infinite;
 }
 
 /* Custom Text Colors */

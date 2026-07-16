@@ -214,13 +214,20 @@ const Info: React.FC = () => {
           className="studio-card-ambient pointer-events-none absolute -right-16 -top-20 h-48 w-48 rounded-full bg-red-500/15 blur-3xl"
         />
 
-        <span className="relative z-10 mb-3 flex items-center gap-3 text-xs font-bebas tracking-[0.24em] text-white/65 sm:text-sm">
+        <img
+          src="/brand/creative-currents-wave.png"
+          alt=""
+          aria-hidden="true"
+          className="creative-currents-mark pointer-events-none absolute right-3 top-3 z-10 h-24 w-24 object-contain sm:right-5 sm:top-4 sm:h-28 sm:w-28"
+        />
+
+        <span className="relative z-10 mb-3 flex items-center gap-3 pr-16 text-xs font-bebas tracking-[0.24em] text-white/65 sm:pr-24 sm:text-sm">
           <span className="h-px w-7 bg-red-500/70" />
           Independent software studio
         </span>
 
         <span className="relative z-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
-          <span>
+          <span className="pr-8 sm:pr-16">
             <span className="block text-3xl font-bebas tracking-wide text-white sm:text-4xl">
               Creative Currents
             </span>
