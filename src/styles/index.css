@@ -332,6 +332,63 @@
   animation: slideInLeft 1s ease-in-out 1.4s forwards, pulseGlowBorder 2.5s ease-in-out 3s infinite;
 }
 
+/* Creative Currents callout: a quiet pulse that keeps the studio link discoverable. */
+@keyframes studioCardPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(239, 68, 68, 0.12),
+      0 0 18px rgba(239, 68, 68, 0.09),
+      0 18px 48px rgba(0, 0, 0, 0.32);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(239, 68, 68, 0.38),
+      0 0 42px rgba(239, 68, 68, 0.28),
+      0 0 72px rgba(239, 68, 68, 0.12),
+      0 22px 56px rgba(0, 0, 0, 0.42);
+  }
+}
+
+@keyframes studioCtaPulse {
+  0%, 100% {
+    transform: scale(1);
+    background-color: rgba(239, 68, 68, 0.15);
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.08);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.045);
+    background-color: rgba(239, 68, 68, 0.25);
+    box-shadow:
+      0 0 20px rgba(239, 68, 68, 0.36),
+      inset 0 0 10px rgba(248, 113, 113, 0.12);
+    filter: brightness(1.18);
+  }
+}
+
+@keyframes studioAmbientPulse {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.12);
+  }
+}
+
+.studio-card-pulse {
+  animation: studioCardPulse 3s ease-in-out infinite;
+}
+
+.studio-card-cta {
+  animation: studioCtaPulse 1.85s ease-in-out infinite;
+}
+
+.studio-card-ambient {
+  animation: studioAmbientPulse 3s ease-in-out infinite;
+}
+
 /* Custom Text Colors */
 .text-slateGreen { color: #ececbf; }
 .text-paleRed { color: rgb(239, 84, 84); }

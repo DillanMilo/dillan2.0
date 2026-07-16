@@ -5,6 +5,7 @@ import {
   useTransform,
   useInView,
 } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { trackCtaClick } from "../utils/analytics";
 
 const highlights = [
@@ -200,35 +201,42 @@ const Info: React.FC = () => {
         animate={bioInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
         whileHover={{ y: -4 }}
-        className="group relative mb-12 w-full max-w-xl overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.035] px-6 py-5 text-left backdrop-blur-sm transition-colors duration-300 hover:border-red-500/40 hover:bg-white/[0.055] sm:px-8 sm:py-6"
+        className="studio-card-pulse group relative mb-12 w-full max-w-xl overflow-hidden rounded-[1.75rem] border border-red-500/40 bg-[#080808]/85 px-6 py-5 text-left backdrop-blur-md transition-colors duration-300 hover:border-red-400/65 hover:bg-[#0b0808]/90 sm:px-8 sm:py-6"
         aria-label="Visit Creative Currents, Dillan's independent software studio"
       >
         <span
           aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-[2px] bg-red-500/70 transition-all duration-300 group-hover:w-1"
+          className="absolute inset-y-0 left-0 z-10 w-[2px] bg-red-500/80 transition-all duration-300 group-hover:w-1"
         />
 
-        <span className="mb-3 flex items-center gap-3 text-xs font-bebas tracking-[0.24em] text-white/45 sm:text-sm">
+        <span
+          aria-hidden="true"
+          className="studio-card-ambient pointer-events-none absolute -right-16 -top-20 h-48 w-48 rounded-full bg-red-500/15 blur-3xl"
+        />
+
+        <span className="relative z-10 mb-3 flex items-center gap-3 text-xs font-bebas tracking-[0.24em] text-white/65 sm:text-sm">
           <span className="h-px w-7 bg-red-500/70" />
           Independent software studio
         </span>
 
-        <span className="flex items-end justify-between gap-6">
+        <span className="relative z-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
           <span>
             <span className="block text-3xl font-bebas tracking-wide text-white sm:text-4xl">
               Creative Currents
             </span>
-            <span className="mt-1 block max-w-md text-base font-bebas leading-relaxed tracking-wide text-white/60 sm:text-lg">
+            <span className="mt-1 block max-w-md text-base font-bebas leading-relaxed tracking-wide text-white/80 sm:text-lg">
               I founded it to create thoughtful apps and digital products that
               make everyday life flow a little better.
             </span>
           </span>
 
-          <span
-            aria-hidden="true"
-            className="mb-1 shrink-0 text-2xl text-red-500 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-          >
-            ↗
+          <span className="studio-card-cta inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-red-500/50 bg-red-500/15 px-4 py-2 font-bebas text-sm tracking-[0.12em] text-red-300 transition-all duration-300 group-hover:border-red-400/75 group-hover:bg-red-500/25 group-hover:text-red-200 sm:mb-1 sm:text-base">
+            Explore the studio
+            <ArrowUpRight
+              aria-hidden="true"
+              strokeWidth={1.8}
+              className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:h-5 sm:w-5"
+            />
           </span>
         </span>
       </motion.a>
