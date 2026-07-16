@@ -119,18 +119,18 @@ export const getProjectsSchema = () => ({
       "@type": "ListItem",
       position: 2,
       item: getProjectSchema({
-        title: "Fashion Editorial",
-        description: "Backstage fashion film with soft movement, close detail, and a polished editorial rhythm.",
-        url: "https://www.dillanmilo.com/#work",
+        title: "LastCallIQ",
+        description: "AI-powered inventory management SaaS for food and beverage businesses across Texas.",
+        url: "https://www.lastcalliq.com",
       })
     },
     {
       "@type": "ListItem",
       position: 3,
       item: getProjectSchema({
-        title: "LastCallIQ",
-        description: "AI-powered inventory management SaaS for food and beverage businesses across Texas.",
-        url: "https://www.lastcalliq.com",
+        title: "Africa WildVentures",
+        description: "Safari and adventure booking platform built for direct bookings and a strong user experience.",
+        url: "https://www.africawildventures.com",
       })
     },
     {
@@ -145,15 +145,6 @@ export const getProjectsSchema = () => ({
     {
       "@type": "ListItem",
       position: 5,
-      item: getProjectSchema({
-        title: "Africa WildVentures",
-        description: "Safari and adventure booking platform built for direct bookings and a strong user experience.",
-        url: "https://www.africawildventures.com",
-      })
-    },
-    {
-      "@type": "ListItem",
-      position: 6,
       item: getProjectSchema({
         title: "Professional Bios",
         description: "Collection of impactful, bespoke single-page applications for professionals, featuring modern design and seamless user experience.",
