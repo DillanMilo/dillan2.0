@@ -201,17 +201,17 @@ const Info: React.FC = () => {
         animate={bioInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
         whileHover={{ y: -4 }}
-        className="studio-card-pulse group relative mb-12 w-full max-w-xl overflow-hidden rounded-[1.75rem] border border-red-500/40 bg-[#080808]/85 px-6 py-5 text-left backdrop-blur-md transition-colors duration-300 hover:border-red-400/65 hover:bg-[#0b0808]/90 sm:px-8 sm:py-6"
+        className="studio-card-pulse studio-card-brand group relative mb-12 w-full max-w-xl overflow-hidden rounded-[1.75rem] border px-6 py-5 text-left transition-colors duration-300 sm:px-8 sm:py-6"
         aria-label="Visit Creative Currents, Dillan's independent software studio"
       >
         <span
           aria-hidden="true"
-          className="absolute inset-y-0 left-0 z-10 w-[2px] bg-red-500/80 transition-all duration-300 group-hover:w-1"
+          className="absolute inset-y-0 left-0 z-10 w-[3px] bg-[#d83c32] transition-all duration-300 group-hover:w-1"
         />
 
         <span
           aria-hidden="true"
-          className="studio-card-ambient pointer-events-none absolute -right-16 -top-20 h-48 w-48 rounded-full bg-red-500/15 blur-3xl"
+          className="studio-card-ambient pointer-events-none absolute -right-16 -top-20 h-48 w-48 rounded-full bg-[#d83c32]/15 blur-3xl"
         />
 
         <img
@@ -221,23 +221,26 @@ const Info: React.FC = () => {
           className="creative-currents-mark pointer-events-none absolute right-3 top-3 z-10 h-24 w-24 object-contain sm:right-5 sm:top-4 sm:h-28 sm:w-28"
         />
 
-        <span className="relative z-10 mb-3 flex items-center gap-3 pr-16 text-xs font-bebas tracking-[0.24em] text-white/65 sm:pr-24 sm:text-sm">
-          <span className="h-px w-7 bg-red-500/70" />
+        <span className="relative z-10 mb-3 flex items-center gap-3 pr-16 text-xs font-mono font-semibold uppercase tracking-[0.22em] text-[#121210]/70 sm:pr-24 sm:text-sm">
+          <span className="h-px w-7 bg-[#d83c32]" />
           Independent software studio
         </span>
 
         <span className="relative z-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between sm:gap-6">
           <span className="pr-8 sm:pr-16">
-            <span className="block text-3xl font-bebas tracking-wide text-white sm:text-4xl">
+            <span className="creative-currents-display block text-4xl uppercase leading-none text-[#121210] sm:text-5xl">
               Creative Currents
             </span>
-            <span className="mt-1 block max-w-md text-base font-bebas leading-relaxed tracking-wide text-white/80 sm:text-lg">
+            <span className="creative-currents-tagline mt-1 block text-xl text-[#d83c32] sm:text-2xl">
+              Ideas in motion. Software with soul.
+            </span>
+            <span className="creative-currents-body mt-3 block max-w-md text-sm leading-relaxed text-[#4f4f48] sm:text-base">
               I founded it to create thoughtful apps and digital products that
               make everyday life flow a little better.
             </span>
           </span>
 
-          <span className="studio-card-cta inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-red-500/50 bg-red-500/15 px-4 py-2 font-bebas text-sm tracking-[0.12em] text-red-300 transition-all duration-300 group-hover:border-red-400/75 group-hover:bg-red-500/25 group-hover:text-red-200 sm:mb-1 sm:text-base">
+          <span className="studio-card-cta inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-[#121210] bg-[#121210] px-4 py-2 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[#efeee8] transition-all duration-300 group-hover:border-[#d83c32] group-hover:bg-[#d83c32] group-hover:text-white sm:mb-1 sm:text-sm">
             Explore the studio
             <ArrowUpRight
               aria-hidden="true"

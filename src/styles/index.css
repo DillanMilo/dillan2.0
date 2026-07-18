@@ -352,17 +352,17 @@
 @keyframes studioCtaPulse {
   0%, 100% {
     transform: scale(1);
-    background-color: rgba(239, 68, 68, 0.15);
-    box-shadow: 0 0 8px rgba(239, 68, 68, 0.08);
+    background-color: rgb(18, 18, 16);
+    box-shadow: 0 0 0 0 rgba(216, 60, 50, 0);
     filter: brightness(1);
   }
   50% {
-    transform: scale(1.045);
-    background-color: rgba(239, 68, 68, 0.25);
+    transform: scale(1.035);
+    background-color: rgb(18, 18, 16);
     box-shadow:
-      0 0 20px rgba(239, 68, 68, 0.36),
-      inset 0 0 10px rgba(248, 113, 113, 0.12);
-    filter: brightness(1.18);
+      0 0 0 4px rgba(216, 60, 50, 0.12),
+      0 0 22px rgba(216, 60, 50, 0.28);
+    filter: brightness(1.1);
   }
 }
 
@@ -379,13 +379,49 @@
 
 @keyframes creativeCurrentsMarkDrift {
   0%, 100% {
-    opacity: 0.48;
+    opacity: 0.58;
     transform: translate3d(-3px, 1px, 0) rotate(-4deg);
   }
   50% {
-    opacity: 0.72;
+    opacity: 0.82;
     transform: translate3d(3px, -2px, 0) rotate(4deg);
   }
+}
+
+.studio-card-brand {
+  isolation: isolate;
+  color: #121210;
+  border-color: rgba(18, 18, 16, 0.3);
+  background-color: #efeee8;
+  background-image:
+    linear-gradient(rgba(18, 18, 16, 0.085) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 18, 16, 0.085) 1px, transparent 1px),
+    radial-gradient(circle at 82% 24%, rgba(255, 255, 255, 0.9), transparent 38%);
+  background-size: 38px 38px, 38px 38px, auto;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.62);
+}
+
+.studio-card-brand:hover {
+  border-color: rgba(216, 60, 50, 0.72);
+  background-color: #f4f2ec;
+}
+
+.creative-currents-display {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+}
+
+.creative-currents-tagline {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.creative-currents-body {
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
 }
 
 .studio-card-pulse {
@@ -401,7 +437,7 @@
 }
 
 .creative-currents-mark {
-  filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.22));
+  filter: brightness(0) drop-shadow(0 10px 20px rgba(18, 18, 16, 0.16));
   transform-origin: 50% 58%;
   animation: creativeCurrentsMarkDrift 5.6s ease-in-out infinite;
 }
