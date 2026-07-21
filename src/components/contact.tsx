@@ -139,6 +139,17 @@ const Contact: React.FC = () => {
         OR FIND ME ON
       </p>
 
+      <p className="mb-24 mt-4 font-sans text-sm text-white/55">
+        Contact form and analytics details are explained in the{" "}
+        <a
+          href="/privacy.html"
+          className="underline decoration-white/30 underline-offset-4 transition-colors hover:text-white"
+        >
+          privacy notice
+        </a>
+        .
+      </p>
+
       {/* Move trigger div closer to bottom */}
       <div
         ref={bannerTriggerRef}

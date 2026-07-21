@@ -5,120 +5,7 @@ import {
   trackPortfolioClick,
   trackPortfolioDropdownOpen,
 } from "../utils/analytics";
-
-interface Project {
-  title: string;
-  description: string;
-  outcome: string;
-  link: string;
-  gradient: string;
-  accentColor: string;
-  tag: string;
-  desktopVideo?: string;
-  mobileVideo?: string;
-  poster?: string;
-  isDropdown?: boolean;
-  dropdownItems?: Array<{ name: string; link: string }>;
-}
-
-const projects: Project[] = [
-  {
-    title: "Elijah Hourrides",
-    description:
-      "A fashion editorial portfolio with full-on runway attitude — full-bleed film, bold type, and motion that struts down the page. Front-row energy, no ticket required.",
-    outcome:
-      "Eight years of hair artistry, styled into a portfolio built to book the next show.",
-    link: "https://www.elijahxx.com",
-    gradient:
-      "radial-gradient(ellipse at 40% 30%, #0a0a0a 0%, #1a0a0f 40%, #4c0519 100%)",
-    accentColor: "#e11d48",
-    tag: "Editorial",
-    desktopVideo: "/videos/elijah-desktop.webm",
-    mobileVideo: "/videos/elijah-mobile.webm",
-    poster: "/videos/elijah-poster.webp",
-  },
-  {
-    title: "A5 Rail",
-    description:
-      "Next-level AR/VR training for rail pros. Slick, fast, secure — looks so good you might actually enjoy compliance.",
-    outcome:
-      "Rebuilt from scratch, now serves enterprise rail clients across North America.",
-    link: "https://www.a5rail.com",
-    gradient:
-      "radial-gradient(ellipse at 30% 20%, #1a1a2e 0%, #16213e 40%, #0f3460 100%)",
-    accentColor: "#0f3460",
-    tag: "AR / VR",
-    desktopVideo: "/videos/a5rail-desktop.webm",
-    mobileVideo: "/videos/a5rail-mobile.webm",
-    poster: "/videos/a5rail-poster.webp",
-  },
-  {
-    title: "LastCallIQ",
-    description:
-      "AI-powered inventory management SaaS — built, owned, and actively used by real clients.",
-    outcome:
-      "Currently serving Food & Beverage businesses across Texas.",
-    link: "https://www.lastcalliq.com",
-    gradient:
-      "radial-gradient(ellipse at 40% 60%, #0a1a0a 0%, #1a2e1a 40%, #2d5a3d 100%)",
-    accentColor: "#22c55e",
-    tag: "SaaS",
-    desktopVideo: "/videos/ScreenRecording_03-05-2026 11-43-17_1.webm",
-    mobileVideo: "/videos/ScreenRecording_03-05-2026 11-43-17_1.webm",
-    poster: "/videos/lastcalliq-poster.webp",
-  },
-  {
-    title: "FORME",
-    description:
-      "Regenerative medicine meets pixel-perfect design. Your platelets deserve a website this good.",
-    outcome:
-      "Built to convert from day one — ready to launch and start filling appointments.",
-    link: "https://www.formeprp.com",
-    gradient:
-      "radial-gradient(ellipse at 50% 30%, #0a0a0a 0%, #1a1a1a 40%, #2d1f3d 100%)",
-    accentColor: "#8b5cf6",
-    tag: "Medical",
-    desktopVideo: "/videos/forme-desktop.webm",
-    mobileVideo: "/videos/forme-mobile.webm",
-    poster: "/videos/forme-poster.webp",
-  },
-  {
-    title: "Africa WildVentures",
-    description:
-      "Elephantine performance with cheetah-fast load times. Africa's calling, and it has great UX.",
-    outcome:
-      "Brought a premium African safari brand to life online, driving direct bookings.",
-    link: "https://www.africawildventures.com",
-    gradient:
-      "radial-gradient(ellipse at 70% 80%, #1a120b 0%, #3c2a21 40%, #d4a574 100%)",
-    accentColor: "#d4a574",
-    tag: "Travel",
-    desktopVideo: "/videos/africawild-desktop.webm",
-    mobileVideo: "/videos/africawild-mobile.webm",
-    poster: "/videos/africawild-poster.webp",
-  },
-  {
-    title: "Professional Bios",
-    description:
-      "Impactful, bespoke single-page applications for professionals. Coz business cards are lame.",
-    outcome:
-      "Replaced outdated profiles with pages that land clients and speaking gigs.",
-    link: "#",
-    gradient:
-      "radial-gradient(ellipse at 20% 50%, #0f0f0f 0%, #1c1917 40%, #44403c 100%)",
-    accentColor: "#f59e0b",
-    tag: "Branding",
-    desktopVideo: "/videos/bios-desktop.webm",
-    mobileVideo: "/videos/bios-mobile.webm",
-    poster: "/videos/bios-poster.webp",
-    isDropdown: true,
-    dropdownItems: [
-      { name: "Carly Milo", link: "https://carly-milo.com" },
-      { name: "Chad Hanekom", link: "https://chadhanekom.com" },
-      { name: "Richard Nell", link: "https://richard-nell.vercel.app" },
-    ],
-  },
-];
+import { projects, type Project } from "../content/siteData";
 
 // Browser window chrome component
 const BrowserFrame: React.FC<{
@@ -131,14 +18,33 @@ const BrowserFrame: React.FC<{
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const [posterError, setPosterError] = useState(false);
+  const [shouldLoadMedia, setShouldLoadMedia] = useState(false);
 
   const videoSrc = isMobile ? project.mobileVideo : project.desktopVideo;
+
+  useEffect(() => {
+    const el = frameRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setShouldLoadMedia(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "400px 0px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // Auto-play video when the frame is in view, pause when not
   useEffect(() => {
     const el = frameRef.current;
     const video = videoRef.current;
-    if (!el || !video || !videoSrc) return;
+    if (!el || !video || !videoSrc || !shouldLoadMedia) return;
 
     const obs = new IntersectionObserver(
       ([entry]) => {
@@ -152,12 +58,12 @@ const BrowserFrame: React.FC<{
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, [videoSrc]);
+  }, [videoSrc, shouldLoadMedia]);
 
   const showVideo = videoSrc && videoLoaded && !videoError;
   // Static poster stands in whenever the video can't play — low-power mode,
   // blocked autoplay, slow connections — so a real project frame always shows.
-  const showPoster = !!project.poster && !posterError;
+  const showPoster = shouldLoadMedia && !!project.poster && !posterError;
 
   return (
     <div
@@ -210,13 +116,13 @@ const BrowserFrame: React.FC<{
         )}
 
         {/* Video layer */}
-        {videoSrc && !videoError && (
+        {shouldLoadMedia && videoSrc && !videoError && (
           <video
             ref={videoRef}
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="none"
             onLoadedData={() => setVideoLoaded(true)}
             onError={() => setVideoError(true)}
             className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
@@ -234,7 +140,7 @@ const BrowserFrame: React.FC<{
 
         {/* Decorative overlays only show in pure gradient fallback mode —
             i.e. when neither the video nor a poster image is available. */}
-        {!showVideo && !showPoster && (
+        {shouldLoadMedia && !showVideo && !showPoster && (
           <>
             {/* Noise/grain overlay */}
             <div

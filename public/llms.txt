@@ -1,0 +1,18 @@
+# Dillan Milosevich
+
+> Dillan Milosevich is a software developer in The Woodlands, Texas who builds custom websites, AI automation workflows, and small business software for companies in The Woodlands, Tomball, Spring, Conroe, Magnolia, Houston, and Montgomery County.
+
+## Official pages
+
+- [Portfolio and services](https://www.dillanmilo.com/): About Dillan, service descriptions, selected work, service area, and contact options.
+- [Privacy notice](https://www.dillanmilo.com/privacy.html): Contact-form and website analytics information.
+
+## Selected work
+
+- [Elijah Hourrides](https://www.elijahxx.com/): Fashion editorial portfolio.
+- [A5 Rail](https://www.a5rail.com/): AR and VR training website for rail professionals.
+- [LastCallIQ](https://www.lastcalliq.com/): Inventory management software for food and beverage businesses.
+- [FORME](https://www.formeprp.com/): Regenerative medicine clinic website.
+- [Africa WildVentures](https://www.africawildventures.com/): Safari and adventure booking website.
+
+This file is a concise discovery aid. The canonical website remains the authoritative source.

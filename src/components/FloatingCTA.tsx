@@ -46,7 +46,7 @@ const FloatingCTA: React.FC = () => {
           ? "translate-y-0 opacity-100"
           : "translate-y-20 opacity-0 pointer-events-none"
       }`}
-      aria-label="Navigate to contact section"
+      aria-label="Get in touch — navigate to the contact section"
     >
       <span className="flex items-center gap-1.5 sm:gap-2">
         GET IN TOUCH

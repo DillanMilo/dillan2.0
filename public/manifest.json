@@ -4,9 +4,15 @@
   "description": "Software developer serving The Woodlands, Tomball, Houston, and small businesses with web development, automation, and AI software.",
   "icons": [
     {
-      "src": "/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG",
+      "src": "/brand/dillan-icon-192.png",
       "type": "image/png",
-      "sizes": "1024x1024",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/brand/dillan-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
       "purpose": "any maskable"
     }
   ],

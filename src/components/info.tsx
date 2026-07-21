@@ -7,6 +7,7 @@ import {
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { trackCtaClick } from "../utils/analytics";
+import { serviceAreas, services } from "../content/siteData";
 
 const highlights = [
   { label: "Web Development", icon: "◆" },
@@ -30,8 +31,6 @@ const Info: React.FC = () => {
     offset: ["start end", "end start"],
   });
 
-  // Parallax: the big ghost text drifts up slower than scroll
-  const ghostY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
   // Subtle horizontal drift for the accent line
   const lineWidth = useTransform(scrollYProgress, [0.1, 0.5], ["0%", "100%"]);
   const arcPathLength = useTransform(scrollYProgress, [0.06, 0.56], [0, 1]);
@@ -73,17 +72,6 @@ const Info: React.FC = () => {
           style={{ pathLength: arcPathLength }}
         />
       </motion.svg>
-
-      {/* Ghost parallax text behind everything */}
-      <motion.div
-        style={{ y: ghostY }}
-        className="absolute top-10 left-1/2 -translate-x-1/2 select-none pointer-events-none"
-        aria-hidden="true"
-      >
-        <span className="text-[8rem] sm:text-[14rem] md:text-[20rem] lg:text-[26rem] font-bebas leading-none text-white/[0.02] whitespace-nowrap">
-          MILO
-        </span>
-      </motion.div>
 
       {/* Animated accent line */}
       <motion.div
@@ -215,7 +203,9 @@ const Info: React.FC = () => {
         />
 
         <img
-          src="/brand/creative-currents-wave.png"
+          src="/brand/creative-currents-wave-168.webp"
+          width="168"
+          height="168"
           alt=""
           aria-hidden="true"
           className="creative-currents-mark pointer-events-none absolute right-3 top-3 z-10 h-24 w-24 object-contain sm:right-5 sm:top-4 sm:h-28 sm:w-28"
@@ -250,6 +240,73 @@ const Info: React.FC = () => {
           </span>
         </span>
       </motion.a>
+
+      <section
+        aria-labelledby="services-heading"
+        className="mb-14 w-full max-w-5xl text-left"
+      >
+        <div className="mx-auto mb-8 max-w-3xl text-center">
+          <p className="mb-2 font-mono text-xs uppercase tracking-[0.28em] text-red-400">
+            What I build
+          </p>
+          <h2
+            id="services-heading"
+            className="font-bebas text-4xl text-white sm:text-5xl"
+          >
+            Websites, automation, and software for small businesses
+          </h2>
+          <p className="mt-4 font-sans text-base leading-relaxed text-white/70 sm:text-lg">
+            I design and build practical digital tools for small businesses and
+            independent teams that want clearer customer experiences and less
+            repetitive work.
+          </p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {services.map((service) => (
+            <article
+              key={service.name}
+              className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 sm:p-6"
+            >
+              <h3 className="font-bebas text-2xl text-white sm:text-3xl">
+                {service.name}
+              </h3>
+              <p className="mt-2 font-sans text-sm leading-relaxed text-white/65 sm:text-base">
+                {service.description}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-6 grid gap-4 rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-5 sm:grid-cols-3 sm:p-6">
+          <div>
+            <h3 className="font-bebas text-xl text-white">Who I work with</h3>
+            <p className="mt-1 font-sans text-sm leading-relaxed text-white/65">
+              Small businesses, founders, and professionals who need a website,
+              workflow, or custom tool built around a real operational problem.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-bebas text-xl text-white">Where I work</h3>
+            <p className="mt-1 font-sans text-sm leading-relaxed text-white/65">
+              Serving {serviceAreas.slice(0, -1).join(", ")}, and {serviceAreas[6]}.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-bebas text-xl text-white">How to get started</h3>
+            <p className="mt-1 font-sans text-sm leading-relaxed text-white/65">
+              Share what is slowing you down, what you want to improve, and what a
+              useful outcome would look like.
+            </p>
+            <a
+              href="#contact"
+              className="mt-3 inline-flex font-bebas text-lg tracking-wide text-red-400 hover:text-red-300"
+            >
+              Start a conversation →
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* Highlight pills / cards */}
       <div

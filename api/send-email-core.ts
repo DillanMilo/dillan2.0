@@ -66,7 +66,7 @@ export async function sendContactEmail({
     html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; background-color: #0a0a0a; border-radius: 12px; overflow: hidden; border: 1px solid #1a1a1a;">
           <div style="background-color: #0a0a0a; padding: 32px 40px 24px; text-align: center; border-bottom: 1px solid #1a1a1a;">
-            <img src="https://dillanmilo.com/3B82C20B-8F01-4D2B-8EAF-1B5FD4F9EBCE.PNG" alt="Creative Currents" style="height: 48px; margin-bottom: 8px;" />
+            <img src="https://www.dillanmilo.com/brand/dillan-icon-192.png" alt="Dillan Milosevich" width="48" height="48" style="height: 48px; width: 48px; margin-bottom: 8px;" />
             <p style="color: #555; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin: 0;">New Inquiry</p>
           </div>
 

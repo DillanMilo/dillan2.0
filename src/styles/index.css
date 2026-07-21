@@ -1,6 +1,22 @@
 /* Import Tailwind CSS */
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Bebas Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/bebas-neue-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/fonts/oswald-700-latin.woff2") format("woff2");
+}
+
 /* ✅ Accessibility: Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -17,6 +33,7 @@
 @layer base {
   html, body {
     position: relative;
+    background-color: #000000;
     font-family: "Bebas Neue", sans-serif;
     overflow-x: hidden; /* ✅ Prevents horizontal scrolling */
     max-width: 100vw; /* ✅ Ensures no element exceeds viewport width */
@@ -329,7 +346,7 @@
 
 /* CTA Glow effect */
 .cta-glow {
-  animation: slideInLeft 1s ease-in-out 1.4s forwards, pulseGlowBorder 2.5s ease-in-out 3s infinite;
+  animation: pulseGlowBorder 2.5s ease-in-out 1.2s infinite;
 }
 
 /* Creative Currents callout: a quiet pulse that keeps the studio link discoverable. */

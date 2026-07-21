@@ -1,7 +1,6 @@
 import "./styles/index.css";
 import Navbar from "./components/navbar";
 import Home from "./components/home";
-import SEOBreadcrumbs from "./components/SEOBreadcrumbs";
 import FloatingCTA from "./components/FloatingCTA";
 import { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react"; // Added Vercel Analytics import
@@ -14,15 +13,13 @@ const Contact = lazy(() => import("./components/contact"));
 
 function App() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [sectionOpacities, setSectionOpacities] = useState<Record<string, number>>({});
-  const [isLandscape, setIsLandscape] = useState(false);
+  const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
   const viewedSections = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll("section[id]");
       let foundActive = false;
-      const opacities: Record<string, number> = {};
 
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
@@ -34,19 +31,7 @@ function App() {
           setActiveSection(section.id);
           foundActive = true;
         }
-
-        // Calculate smooth opacity based on how centered the section is
-        const sectionCenter = rect.top + rect.height / 2;
-        const viewCenter = viewH / 2;
-        const distance = Math.abs(sectionCenter - viewCenter);
-        const maxDistance = viewH * 0.8 + rect.height / 2;
-        // Smoothly interpolate: 1.0 when centered, down to 0.5 at edges
-        const t = Math.min(distance / maxDistance, 1);
-        const opacity = 1 - t * 0.5; // ranges from 1.0 to 0.5
-        opacities[section.id] = Math.max(0.5, Math.min(1, opacity));
       });
-
-      setSectionOpacities(opacities);
 
       if (!foundActive) {
         setActiveSection(null);
@@ -60,27 +45,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const handleOrientationChange = () => {
-      setIsLandscape(
-        window.matchMedia(
-          "(orientation: landscape) and (max-width: 1024px) and (max-height: 600px) and (pointer: coarse)"
-        ).matches
-      );
-    };
-
-    handleOrientationChange(); // Check on mount
-    window.addEventListener("resize", handleOrientationChange);
-
-    return () => {
-      window.removeEventListener("resize", handleOrientationChange);
-    };
-  }, []);
-
-  useEffect(() => {
     document.documentElement.lang = "en";
 
     // Add loaded class immediately for faster background loading
     document.body.classList.add("loaded");
+    setAnalyticsEnabled(
+      !["localhost", "127.0.0.1"].includes(window.location.hostname)
+    );
   }, []);
 
   useEffect(() => {
@@ -89,116 +60,48 @@ function App() {
     trackSectionView(activeSection);
   }, [activeSection]);
 
-  // Define breadcrumb items based on active section
-  const getBreadcrumbs = () => {
-    const base = [{ name: "Home", url: "https://www.dillanmilo.com/" }];
-
-    switch (activeSection) {
-      case "info":
-        return [
-          ...base,
-          { name: "About", url: "https://www.dillanmilo.com/#info" },
-        ];
-      case "work":
-        return [
-          ...base,
-          { name: "Portfolio", url: "https://www.dillanmilo.com/#work" },
-        ];
-      case "contact":
-        return [
-          ...base,
-          { name: "Contact", url: "https://www.dillanmilo.com/#contact" },
-        ];
-      default:
-        return base;
-    }
-  };
-
   return (
     <div className="min-h-screen text-white">
-      {/* ✅ Mobile Landscape Overlay (Hides SPA when in landscape mode) */}
-      {isLandscape && (
-        <div className="fixed inset-0 bg-black flex items-center justify-center text-red-600 text-center z-50 opacity-0 animate-fadeIn">
-          <p className="text-2xl md:text-3xl font-bebas tracking-wide">
-            No no, turn your phone upright for the best experience ;)
-          </p>
-        </div>
-      )}
-
-      {/* ✅ Main Content (Hidden in Mobile Landscape Mode) */}
-      {!isLandscape && (
-        <>
-          <SEOBreadcrumbs items={getBreadcrumbs()} />
-          <Navbar />
-          <FloatingCTA />
-          {/* Skip link for keyboard navigation */}
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-red-600 focus:text-white focus:rounded"
-          >
-            Skip to main content
-          </a>
-          <div id="main-content" />
-          <section
-            id="home"
-            aria-label="Home - Introduction"
-            className="transition-opacity duration-1000 ease-out"
-            style={{ opacity: sectionOpacities["home"] ?? 1 }}
-          >
-            <Home />
-          </section>
-          <Suspense
-            fallback={
-              <div className="h-screen flex items-center justify-center text-white">
-                Loading...
-              </div>
-            }
-          >
-            <section
-              id="info"
-              aria-label="About Dillan Milosevich"
-              className="transition-opacity duration-1000 ease-out"
-              style={{ opacity: sectionOpacities["info"] ?? 1 }}
-            >
-              <Info />
-            </section>
-          </Suspense>
-          <Suspense
-            fallback={
-              <div className="h-screen flex items-center justify-center text-white">
-                Loading...
-              </div>
-            }
-          >
-            <section
-              id="work"
-              aria-label="Portfolio Projects"
-              className="transition-opacity duration-1000 ease-out"
-              style={{ opacity: sectionOpacities["work"] ?? 1 }}
-            >
-              <Work />
-            </section>
-          </Suspense>
-          <Suspense
-            fallback={
-              <div className="h-screen flex items-center justify-center text-white">
-                Loading...
-              </div>
-            }
-          >
-            <section
-              id="contact"
-              aria-label="Contact and Social Links"
-              className="transition-opacity duration-1000 ease-out"
-              style={{ opacity: sectionOpacities["contact"] ?? 1 }}
-            >
-              <Contact />
-            </section>
-          </Suspense>
-        </>
-      )}
+      <Navbar />
+      <FloatingCTA />
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-red-600 focus:text-white focus:rounded"
+      >
+        Skip to main content
+      </a>
+      <section
+        id="home"
+        aria-label="Home - Introduction"
+      >
+        <Home />
+      </section>
+      <Suspense fallback={<div className="h-screen" aria-hidden="true" />}>
+        <section
+          id="info"
+          aria-label="About Dillan Milosevich"
+        >
+          <Info />
+        </section>
+      </Suspense>
+      <Suspense fallback={<div className="h-screen" aria-hidden="true" />}>
+        <section
+          id="work"
+          aria-label="Portfolio Projects"
+        >
+          <Work />
+        </section>
+      </Suspense>
+      <Suspense fallback={<div className="h-screen" aria-hidden="true" />}>
+        <section
+          id="contact"
+          aria-label="Contact and Social Links"
+        >
+          <Contact />
+        </section>
+      </Suspense>
       {/* Vercel Analytics Component - Added at the end so it renders on every page */}
-      <Analytics />
+      {analyticsEnabled && <Analytics />}
     </div>
   );
 }

@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.dillanmilo.com/</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-07-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -11,5 +11,11 @@
       <image:title>Dillan Milosevich - Web Developer in The Woodlands TX</image:title>
       <image:caption>Custom websites, AI automation, workflow automation, and small business software for The Woodlands, Tomball, Houston, and Montgomery County.</image:caption>
     </image:image>
+  </url>
+  <url>
+    <loc>https://www.dillanmilo.com/privacy.html</loc>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
 </urlset>
