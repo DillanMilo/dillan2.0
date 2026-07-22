@@ -248,6 +248,31 @@
   .animate-expandText { animation: expandText 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; transform-origin: center; }
   .animate-slideInLeftToCenter { animation: slideInLeftToCenter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
   .animate-slideInRightToCenter { animation: slideInRightToCenter 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+  @keyframes navbarDelayedEntrance {
+    0% {
+      visibility: hidden;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(5rem);
+    }
+    0.01% {
+      visibility: visible;
+      pointer-events: auto;
+      opacity: 0;
+      transform: translateX(5rem);
+    }
+    100% {
+      visibility: visible;
+      pointer-events: auto;
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .nav-delayed-enter {
+    animation: navbarDelayedEntrance 1s ease-out 3s both;
+  }
   
   /* ✅ Hide Scrollbars While Keeping Scroll Functionality */
   .no-scrollbar {
