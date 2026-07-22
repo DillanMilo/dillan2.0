@@ -425,7 +425,7 @@ const Work: React.FC = () => {
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, []);
+  }, [isMobile]);
 
   const toggleDropdown = (index: number, projectTitle: string) => {
     const willOpen = openDropdown !== index;
@@ -452,8 +452,6 @@ const Work: React.FC = () => {
       ref={containerRef}
       className="relative py-24 lg:py-32"
     >
-      <h2 className="sr-only">Portfolio & Projects</h2>
-
       {/* Section header */}
       <div
         className={`text-center mb-20 lg:mb-28 transition-all duration-700 ${
@@ -462,10 +460,13 @@ const Work: React.FC = () => {
             : "opacity-0 translate-y-6"
         }`}
       >
-        <p className="text-sm text-white font-bebas tracking-[0.3em] uppercase mb-3">
-          Selected Work
+        <p className="text-sm text-red-500 font-bebas tracking-[0.35em] uppercase mb-3">
+          Selected projects
         </p>
-        <div className="w-10 h-[1px] bg-red-600 mx-auto" />
+        <h2 className="text-7xl lg:text-9xl font-bebas text-white leading-none tracking-wide">
+          Work
+        </h2>
+        <div className="w-12 h-[1px] bg-red-600 mx-auto mt-5" />
       </div>
 
       {/* Project cards */}
@@ -527,8 +528,6 @@ const MobileWork: React.FC<{
 
   return (
     <div ref={containerRef} className="py-16 px-5">
-      <h2 className="sr-only">Portfolio & Projects</h2>
-
       {/* Section header */}
       <div
         className={`text-center mb-12 transition-all duration-700 ${
@@ -537,10 +536,13 @@ const MobileWork: React.FC<{
             : "opacity-0 translate-y-6"
         }`}
       >
-        <p className="text-xs text-white font-bebas tracking-[0.3em] uppercase mb-2">
-          Selected Work
+        <p className="text-xs text-red-500 font-bebas tracking-[0.35em] uppercase mb-2">
+          Selected projects
         </p>
-        <div className="w-8 h-[1px] bg-red-600 mx-auto" />
+        <h2 className="text-6xl font-bebas text-white leading-none tracking-wide">
+          Work
+        </h2>
+        <div className="w-10 h-[1px] bg-red-600 mx-auto mt-4" />
       </div>
 
       {/* Stacked cards */}

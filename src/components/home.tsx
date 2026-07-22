@@ -11,7 +11,7 @@ const Home: React.FC = () => {
     >
       {/* ✅ Mobile Overlay Background (Only for Mobile) - Optimized loading */}
       <div
-        className="absolute inset-0 bg-cover bg-center md:hidden"
+        className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn md:hidden"
         role="img"
         aria-label="Dillan Milosevich portfolio hero background"
         style={{
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
 
       {/* ✅ Desktop Overlay Background (Only for Desktop) - Optimized loading */}
       <div
-        className="absolute inset-0 bg-cover bg-center hidden md:block"
+        className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn hidden md:block"
         role="img"
         aria-label="Dillan Milosevich portfolio hero background"
         style={{
@@ -40,7 +40,7 @@ const Home: React.FC = () => {
       {/* Content */}
       <div className="relative z-10 text-left mt-0 md:mt-0">
         <h1
-          className="text-4xl md:text-5xl lg:text-6xl text-white font-bebas mb-10 md:mb-14"
+          className="text-4xl md:text-5xl lg:text-6xl text-white font-bebas opacity-0 animate-fadeIn mb-10 md:mb-14"
         >
           Heya, my name is
           <span className="sr-only">
@@ -57,7 +57,8 @@ const Home: React.FC = () => {
           {"Dillan".split("").map((letter, index) => (
             <span
               key={index}
-              className="inline-block"
+              className="inline-block opacity-0 animate-slideUp"
+              style={{ animationDelay: `${index * 100 + 100}ms` }}
             >
               {letter}
             </span>
@@ -66,7 +67,8 @@ const Home: React.FC = () => {
 
         {/* Description */}
         <p
-          className="text-xl md:text-2xl mb-30 lg:text-3xl text-gray-300 font-bebas tracking-wide mt-5 md:mt-8 max-w-lg"
+          className="text-xl md:text-2xl mb-30 lg:text-3xl text-gray-300 font-bebas tracking-wide opacity-0 animate-slideInLeft mt-5 md:mt-8 max-w-lg"
+          style={{ animationDelay: "800ms" }}
         >
           I design and build websites & software that work as well as they look.
         </p>
@@ -75,7 +77,8 @@ const Home: React.FC = () => {
 
       {/* Intro Description */}
       <p
-        className="absolute bottom-25 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md"
+        className="absolute bottom-25 md:bottom-10 right-5 md:right-10 text-right text-xl md:text-2xl lg:text-3xl text-white font-bebas max-w-xs md:max-w-md opacity-0 animate-slideInRight"
+        style={{ animationDelay: "1000ms" }}
       >
         I also create AI-powered solutions and automation workflows that help
         small businesses plug leaks, fix bottlenecks, and save (sometimes
@@ -83,19 +86,24 @@ const Home: React.FC = () => {
       </p>
 
       {/* CTA Button - Bottom of page, loads last */}
-      <button
-        onClick={() => {
-          trackCtaClick("lets_work_together", "hero", "contact");
-          const contactSection = document.getElementById("contact");
-          if (contactSection) {
-            contactSection.scrollIntoView({ behavior: "smooth" });
-          }
-        }}
-        className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-5 md:left-10 lg:left-20 px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bebas text-base sm:text-lg md:text-2xl tracking-wider rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/30 z-10 cta-glow"
-        aria-label="Let's work together — navigate to the contact section"
+      <div
+        className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-5 md:left-10 lg:left-20 z-10 opacity-0 animate-fadeIn"
+        style={{ animationDelay: "1200ms" }}
       >
-        LET'S WORK TOGETHER
-      </button>
+        <button
+          onClick={() => {
+            trackCtaClick("lets_work_together", "hero", "contact");
+            const contactSection = document.getElementById("contact");
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }}
+          className="px-5 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-transparent border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-white font-bebas text-base sm:text-lg md:text-2xl tracking-wider rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-red-500/30 cta-glow"
+          aria-label="Let's work together — navigate to the contact section"
+        >
+          LET'S WORK TOGETHER
+        </button>
+      </div>
     </main>
   );
 };
