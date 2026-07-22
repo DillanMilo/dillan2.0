@@ -3,6 +3,21 @@ import { trackNavigationClick } from "../utils/analytics";
 
 const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
+    const timer = window.setTimeout(() => setIsVisible(true), 3000);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   // Custom smooth scroll function with adjustable duration (default is 1500ms)
   const smoothScrollTo = (targetY: number, duration: number = 1500) => {
@@ -82,7 +97,12 @@ const Navbar: React.FC = () => {
   return (
     <nav
       aria-label="Main navigation"
-      className="fixed top-2 right-3 sm:top-4 sm:right-5 z-50 flex justify-end transform transition-all duration-1000 ease-out"
+      aria-hidden={!isVisible}
+      className={`fixed top-2 right-3 sm:top-4 sm:right-5 z-50 flex justify-end transform transition-all duration-1000 ease-out ${
+        isVisible
+          ? "visible translate-x-0 opacity-100"
+          : "invisible pointer-events-none translate-x-20 opacity-0"
+      }`}
     >
       <ul className="flex gap-3 sm:gap-4 md:gap-5">
         {["info", "work", "contact"].map((section) => (
