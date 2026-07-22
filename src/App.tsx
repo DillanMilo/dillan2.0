@@ -3,7 +3,7 @@ import Navbar from "./components/navbar";
 import Home from "./components/home";
 import FloatingCTA from "./components/FloatingCTA";
 import { useEffect, useRef, useState, lazy, Suspense } from "react";
-import { Analytics } from "@vercel/analytics/react"; // Added Vercel Analytics import
+import { inject as injectVercelAnalytics } from "@vercel/analytics";
 import { trackSectionView } from "./utils/analytics";
 
 // Lazy load non-critical components
@@ -13,7 +13,6 @@ const Contact = lazy(() => import("./components/contact"));
 
 function App() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
   const viewedSections = useRef<Set<string>>(new Set());
 
   useEffect(() => {
@@ -49,9 +48,10 @@ function App() {
 
     // Add loaded class immediately for faster background loading
     document.body.classList.add("loaded");
-    setAnalyticsEnabled(
-      !["localhost", "127.0.0.1"].includes(window.location.hostname)
-    );
+
+    if (!["localhost", "127.0.0.1"].includes(window.location.hostname)) {
+      injectVercelAnalytics({ mode: "production" });
+    }
   }, []);
 
   useEffect(() => {
@@ -100,8 +100,6 @@ function App() {
           <Contact />
         </section>
       </Suspense>
-      {/* Vercel Analytics Component - Added at the end so it renders on every page */}
-      {analyticsEnabled && <Analytics />}
     </div>
   );
 }
