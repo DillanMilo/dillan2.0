@@ -271,7 +271,7 @@
   }
 
   .nav-delayed-enter {
-    animation: navbarDelayedEntrance 1s ease-out 3s both;
+    animation: navbarDelayedEntrance 1s ease-out 2s both;
   }
   
   /* ✅ Hide Scrollbars While Keeping Scroll Functionality */
