@@ -2,7 +2,7 @@ import "./styles/index.css";
 import Navbar from "./components/navbar";
 import Home from "./components/home";
 import FloatingCTA from "./components/FloatingCTA";
-import { useEffect, useRef, useState, lazy, Suspense } from "react";
+import { useEffect, useRef, lazy, Suspense } from "react";
 import { inject as injectVercelAnalytics } from "@vercel/analytics";
 import { trackSectionView } from "./utils/analytics";
 
@@ -12,28 +12,27 @@ const Work = lazy(() => import("./components/work"));
 const Contact = lazy(() => import("./components/contact"));
 
 function App() {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
   const viewedSections = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll("section[id]");
-      let foundActive = false;
+      let activeSection: string | null = null;
 
-      sections.forEach((section) => {
+      for (const section of sections) {
         const rect = section.getBoundingClientRect();
         const viewH = window.innerHeight;
         const dimmingThreshold = viewH * 0.8;
 
-        // Track active section for breadcrumbs
-        if (!foundActive && rect.top < dimmingThreshold && rect.bottom > 200) {
-          setActiveSection(section.id);
-          foundActive = true;
+        if (rect.top < dimmingThreshold && rect.bottom > 200) {
+          activeSection = section.id;
+          break;
         }
-      });
+      }
 
-      if (!foundActive) {
-        setActiveSection(null);
+      if (activeSection && !viewedSections.current.has(activeSection)) {
+        viewedSections.current.add(activeSection);
+        trackSectionView(activeSection);
       }
     };
 
@@ -53,12 +52,6 @@ function App() {
       injectVercelAnalytics({ mode: "production" });
     }
   }, []);
-
-  useEffect(() => {
-    if (!activeSection || viewedSections.current.has(activeSection)) return;
-    viewedSections.current.add(activeSection);
-    trackSectionView(activeSection);
-  }, [activeSection]);
 
   return (
     <div className="min-h-screen text-white">
