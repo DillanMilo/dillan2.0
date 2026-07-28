@@ -7,6 +7,17 @@
 - [Portfolio and services](https://www.dillanmilo.com/): About Dillan, service descriptions, selected work, service area, and contact options.
 - [Privacy notice](https://www.dillanmilo.com/privacy.html): Contact-form and website analytics information.
 
+## Services
+
+- Custom Website Development: Responsive websites and web experiences designed to look distinctive, load quickly, and make the next step clear.
+- AI Automation Solutions: AI-powered tools and automation workflows that reduce repetitive work, surface bottlenecks, and support day-to-day operations.
+- Small Business Software: Custom dashboards, internal tools, and web applications shaped around how a small business actually works.
+- Website Optimization: Performance, accessibility, usability, and technical SEO improvements for websites that need to work harder.
+
+## Audience and service area
+
+Dillan works with small businesses, founders, independent teams, and professionals. He serves The Woodlands, Tomball, Spring, Conroe, Magnolia, Houston, and Montgomery County, Texas.
+
 ## Selected work
 
 - [Elijah Hourrides](https://www.elijahxx.com/): Fashion editorial portfolio.
@@ -14,5 +25,10 @@
 - [LastCallIQ](https://www.lastcalliq.com/): Inventory management software for food and beverage businesses.
 - [FORME](https://www.formeprp.com/): Regenerative medicine clinic website.
 - [Africa WildVentures](https://www.africawildventures.com/): Safari and adventure booking website.
+
+## Contact
+
+- Email: dillan@creativecurrents.io
+- Phone: +1-281-210-8139
 
 This file is a concise discovery aid. The canonical website remains the authoritative source.

@@ -59,6 +59,31 @@ function structuredDataHtmlPlugin(): Plugin {
   const personId = `${siteUrl}#person`
   const organizationId = `${siteUrl}#organization`
   const websiteId = `${siteUrl}#website`
+  const serviceAreaEntities = serviceAreas.map((name) => ({
+    '@type': name === 'Montgomery County' ? 'AdministrativeArea' : 'City',
+    name,
+  }))
+  const serviceEntities = services.map((service) => ({
+    '@type': 'Service',
+    '@id': `${siteUrl}#service-${service.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '')}`,
+    name: service.name,
+    alternateName: service.shortName,
+    serviceType: service.shortName,
+    description: service.description,
+    url: `${siteUrl}#info`,
+    provider: { '@id': organizationId },
+    areaServed: serviceAreaEntities,
+    audience: {
+      '@type': 'BusinessAudience',
+      audienceType: 'Small businesses, founders, and independent teams',
+    },
+  }))
+  const serviceReferences = serviceEntities.map((service) => ({
+    '@id': service['@id'],
+  }))
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -76,6 +101,13 @@ function structuredDataHtmlPlugin(): Plugin {
           'https://github.com/DillanMilo',
         ],
         worksFor: { '@id': organizationId },
+        knowsAbout: serviceReferences,
+        hasOccupation: {
+          '@type': 'Occupation',
+          name: 'Software Developer',
+          occupationLocation: { '@type': 'State', name: 'Texas' },
+          skills: services.map((service) => service.shortName),
+        },
       },
       {
         '@type': 'WebSite',
@@ -85,6 +117,7 @@ function structuredDataHtmlPlugin(): Plugin {
         description:
           'Custom web development, AI automation, workflow automation, and small business software in The Woodlands, Tomball, Houston, and Montgomery County.',
         publisher: { '@id': organizationId },
+        about: [{ '@id': personId }, { '@id': organizationId }],
         inLanguage: 'en-US',
       },
       {
@@ -96,6 +129,11 @@ function structuredDataHtmlPlugin(): Plugin {
           'Custom websites, AI automation, and small business software by Dillan Milosevich, serving The Woodlands, Tomball, Houston, and Montgomery County.',
         isPartOf: { '@id': websiteId },
         about: [{ '@id': personId }, { '@id': organizationId }],
+        mainEntity: [{ '@id': personId }, { '@id': organizationId }],
+        mentions: [
+          ...serviceReferences,
+          { '@id': `${siteUrl}#projects` },
+        ],
         primaryImageOfPage: {
           '@type': 'ImageObject',
           url: `${siteUrl}og-image.png`,
@@ -117,10 +155,15 @@ function structuredDataHtmlPlugin(): Plugin {
         founder: { '@id': personId },
         telephone: '+1-281-210-8139',
         email: 'dillan@creativecurrents.io',
-        areaServed: serviceAreas.map((name) => ({
-          '@type': name === 'Montgomery County' ? 'AdministrativeArea' : 'City',
-          name,
-        })),
+        areaServed: serviceAreaEntities,
+        knowsAbout: serviceReferences,
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'project inquiries',
+          telephone: '+1-281-210-8139',
+          email: 'dillan@creativecurrents.io',
+          availableLanguage: 'English',
+        },
         sameAs: [
           'https://www.linkedin.com/in/dillan-milosevich-9a817891/',
           'https://twitter.com/dillanx1x',
@@ -129,18 +172,13 @@ function structuredDataHtmlPlugin(): Plugin {
         hasOfferCatalog: {
           '@type': 'OfferCatalog',
           name: 'Software development services',
-          itemListElement: services.map((service) => ({
+          itemListElement: serviceEntities.map((service) => ({
             '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: service.name,
-              description: service.description,
-              provider: { '@id': organizationId },
-              areaServed: { '@type': 'State', name: 'Texas' },
-            },
+            itemOffered: { '@id': service['@id'] },
           })),
         },
       },
+      ...serviceEntities,
       {
         '@type': 'ItemList',
         '@id': `${siteUrl}#projects`,
