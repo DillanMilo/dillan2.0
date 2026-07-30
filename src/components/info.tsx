@@ -7,7 +7,7 @@ import {
 } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { trackCtaClick } from "../utils/analytics";
-import { serviceAreas, services } from "../content/siteData";
+import { services } from "../content/siteData";
 
 const highlights = [
   { label: "Web Development", icon: "◆" },
@@ -278,34 +278,6 @@ const Info: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-6 grid gap-4 rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-5 sm:grid-cols-3 sm:p-6">
-          <div>
-            <h3 className="font-bebas text-xl text-white">Who I work with</h3>
-            <p className="mt-1 font-sans text-sm leading-relaxed text-white/65">
-              Small businesses, founders, and professionals who need a website,
-              workflow, or custom tool built around a real operational problem.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-bebas text-xl text-white">Where I work</h3>
-            <p className="mt-1 font-sans text-sm leading-relaxed text-white/65">
-              Serving {serviceAreas.slice(0, -1).join(", ")}, and {serviceAreas[6]}.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-bebas text-xl text-white">How to get started</h3>
-            <p className="mt-1 font-sans text-sm leading-relaxed text-white/65">
-              Share what is slowing you down, what you want to improve, and what a
-              useful outcome would look like.
-            </p>
-            <a
-              href="#contact"
-              className="mt-3 inline-flex font-bebas text-lg tracking-wide text-red-400 hover:text-red-300"
-            >
-              Start a conversation →
-            </a>
-          </div>
-        </div>
       </section>
 
       {/* Highlight pills / cards */}
