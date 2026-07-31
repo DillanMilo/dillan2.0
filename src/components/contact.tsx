@@ -55,17 +55,14 @@ const Contact: React.FC = () => {
 
     const rect = contact.getBoundingClientRect();
     const viewportHeight = window.innerHeight;
-    const scrollableContactHeight = Math.max(
-      contact.offsetHeight - viewportHeight,
-      1
-    );
 
-    // Use the hero's exact fade curve in both directions: reverse it while
-    // contact enters, then play it forward as the user continues to the footer.
+    // Reverse the hero's fade curve while contact enters. Once the section
+    // reaches the top, lock the photograph at full clarity for the remainder
+    // of the page; scrolling upward naturally reverses the entrance again.
     const transitionProgress =
       rect.top >= 0
         ? 1 - Math.min(Math.max((viewportHeight - rect.top) / viewportHeight, 0), 1)
-        : Math.min(Math.max(-rect.top / scrollableContactHeight, 0), 1);
+        : 0;
 
     const opacity = interpolateScrollValue(
       transitionProgress,
