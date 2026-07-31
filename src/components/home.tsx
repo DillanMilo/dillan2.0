@@ -1,37 +1,108 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import {
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from "framer-motion";
 import { trackCtaClick } from "../utils/analytics";
+import { interpolateScrollValue } from "../utils/scrollEffects";
 
 // import CountdownTimer from "./CountdownTimer";
 
 const Home: React.FC = () => {
+  const heroRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Let the photograph soften into the site's darker background as the hero
+  // leaves the viewport. Motion values update outside React's render cycle,
+  // keeping the transition smooth and fully reversible on scroll-up.
+  const updateHeroBackground = (progress: number) => {
+    const hero = heroRef.current;
+    if (!hero) return;
+
+    const opacity = interpolateScrollValue(
+      progress,
+      [0, 0.04, 0.62, 0.9],
+      [1, 0.96, 0.28, 0]
+    );
+    const blur = interpolateScrollValue(
+      progress,
+      [0, 0.04, 0.62, 0.9],
+      [0, 1, 14, 22]
+    );
+    const scale = interpolateScrollValue(progress, [0, 0.9], [1, 1.08]);
+
+    hero.style.setProperty("--hero-image-opacity", opacity.toString());
+    hero.style.setProperty("--hero-image-blur", `${blur}px`);
+    hero.style.setProperty("--hero-image-scale", scale.toString());
+  };
+
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    if (!prefersReducedMotion) updateHeroBackground(progress);
+  });
+
+  useEffect(() => {
+    updateHeroBackground(prefersReducedMotion ? 0 : scrollYProgress.get());
+  }, [prefersReducedMotion, scrollYProgress]);
+
   return (
     <main
+      ref={heroRef}
       id="main-content"
-      className="relative h-screen w-full flex flex-col items-start justify-center px-5 md:px-10 lg:px-20 text-white overflow-x-hidden"
+      className="relative h-screen w-full flex flex-col items-start justify-center px-5 md:px-10 lg:px-20 text-white overflow-hidden"
+      style={
+        {
+          "--hero-image-opacity": 1,
+          "--hero-image-blur": "0px",
+          "--hero-image-scale": 1,
+        } as React.CSSProperties
+      }
     >
       {/* ✅ Mobile Overlay Background (Only for Mobile) - Optimized loading */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn md:hidden"
+        className="absolute inset-0 overflow-hidden opacity-0 animate-fadeIn md:hidden"
         role="img"
         aria-label="Dillan Milosevich portfolio hero background"
-        style={{
-          // Use webp version for better performance
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/IMG_2177-optimized.webp)`,
-          animationDelay: "300ms",
-        }}
-      ></div>
+        style={{ animationDelay: "300ms" }}
+      >
+        <div
+          aria-hidden="true"
+          data-hero-background
+          className="absolute inset-[-5%] bg-cover bg-center will-change-[transform,filter,opacity]"
+          style={{
+            opacity: "var(--hero-image-opacity)",
+            filter: "blur(var(--hero-image-blur))",
+            transform: "scale(var(--hero-image-scale))",
+            // Use webp version for better performance
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/IMG_2177-optimized.webp)`,
+          }}
+        />
+      </div>
 
       {/* ✅ Desktop Overlay Background (Only for Desktop) - Optimized loading */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-0 animate-fadeIn hidden md:block"
+        className="absolute inset-0 overflow-hidden opacity-0 animate-fadeIn hidden md:block"
         role="img"
         aria-label="Dillan Milosevich portfolio hero background"
-        style={{
-          // Use webp version for better performance
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/IMG_2919-1920.webp)`,
-          animationDelay: "300ms",
-        }}
-      ></div>
+        style={{ animationDelay: "300ms" }}
+      >
+        <div
+          aria-hidden="true"
+          data-hero-background
+          className="absolute inset-[-5%] bg-cover bg-center will-change-[transform,filter,opacity]"
+          style={{
+            opacity: "var(--hero-image-opacity)",
+            filter: "blur(var(--hero-image-blur))",
+            transform: "scale(var(--hero-image-scale))",
+            // Use webp version for better performance
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/IMG_2919-1920.webp)`,
+          }}
+        />
+      </div>
 
       {/* Countdown Timer — commented out while available for work
       <CountdownTimer targetDate={new Date("2026-04-06")} />

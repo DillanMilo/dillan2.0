@@ -1,10 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
+import {
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from "framer-motion";
 import ContactForm from "./ContactForm";
 import {
   trackContactFormOpen,
   trackContactLinkClick,
   trackSocialLinkClick,
 } from "../utils/analytics";
+import { interpolateScrollValue } from "../utils/scrollEffects";
 
 const rotatingWords = [
   "Design",
@@ -39,6 +45,67 @@ const Contact: React.FC = () => {
   const [showBanner, setShowBanner] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const bannerTriggerRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollY } = useScroll();
+
+  const updateContactBackground = () => {
+    const contact = contactRef.current;
+    if (!contact) return;
+
+    const rect = contact.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const scrollableContactHeight = Math.max(
+      contact.offsetHeight - viewportHeight,
+      1
+    );
+
+    // Use the hero's exact fade curve in both directions: reverse it while
+    // contact enters, then play it forward as the user continues to the footer.
+    const transitionProgress =
+      rect.top >= 0
+        ? 1 - Math.min(Math.max((viewportHeight - rect.top) / viewportHeight, 0), 1)
+        : Math.min(Math.max(-rect.top / scrollableContactHeight, 0), 1);
+
+    const opacity = interpolateScrollValue(
+      transitionProgress,
+      [0, 0.04, 0.62, 0.9],
+      [1, 0.96, 0.28, 0]
+    );
+    const blur = interpolateScrollValue(
+      transitionProgress,
+      [0, 0.04, 0.62, 0.9],
+      [0, 1, 14, 22]
+    );
+    const scale = interpolateScrollValue(
+      transitionProgress,
+      [0, 0.9],
+      [1, 1.08]
+    );
+
+    contact.style.setProperty("--contact-image-opacity", opacity.toString());
+    contact.style.setProperty("--contact-image-blur", `${blur}px`);
+    contact.style.setProperty("--contact-image-scale", scale.toString());
+  };
+
+  useMotionValueEvent(scrollY, "change", () => {
+    if (!prefersReducedMotion) updateContactBackground();
+  });
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      const contact = contactRef.current;
+      contact?.style.setProperty("--contact-image-opacity", "1");
+      contact?.style.setProperty("--contact-image-blur", "0px");
+      contact?.style.setProperty("--contact-image-scale", "1");
+      return;
+    }
+
+    updateContactBackground();
+    window.addEventListener("resize", updateContactBackground);
+
+    return () => window.removeEventListener("resize", updateContactBackground);
+  }, [prefersReducedMotion]);
 
   // Rotate words every 1.5 seconds
   useEffect(() => {
@@ -78,10 +145,29 @@ const Contact: React.FC = () => {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col justify-start items-center text-center pt-6 md:pt-10 contact-background overflow-y-auto pb-32"
+      ref={contactRef}
+      className="relative isolate min-h-screen flex flex-col justify-start items-center text-center pt-6 md:pt-10 overflow-hidden pb-32"
+      style={
+        {
+          "--contact-image-opacity": 0,
+          "--contact-image-blur": "22px",
+          "--contact-image-scale": 1.08,
+        } as React.CSSProperties
+      }
     >
+      <div
+        aria-hidden="true"
+        data-contact-background
+        className="contact-background pointer-events-none absolute inset-[-5%] z-0 will-change-[transform,filter,opacity]"
+        style={{
+          opacity: "var(--contact-image-opacity)",
+          filter: "blur(var(--contact-image-blur))",
+          transform: "scale(var(--contact-image-scale))",
+        }}
+      />
+
       {/* Caption - Adjusted for Mobile */}
-      <div className="mt-20 sm:mt-14 md:mt-20">
+      <div className="relative z-10 mt-20 sm:mt-14 md:mt-20">
         <h2 className="text-5xl sm:text-5xl md:text-6xl font-bebas tracking-wide animate-fadeIn">
           Let's Connect and Chat About
         </h2>
@@ -135,11 +221,11 @@ const Contact: React.FC = () => {
       </div>
 
       {/* Divider text */}
-      <p className="text-white/60 font-bebas text-lg tracking-wider mt-24 md:mt-10 mb-4 animate-fadeIn" style={{ animationDelay: "500ms" }}>
+      <p className="relative z-10 text-white/60 font-bebas text-lg tracking-wider mt-24 md:mt-10 mb-4 animate-fadeIn" style={{ animationDelay: "500ms" }}>
         OR FIND ME ON
       </p>
 
-      <p className="mb-24 mt-4 font-sans text-sm text-white/55">
+      <p className="relative z-10 mb-24 mt-4 font-sans text-sm text-white/55">
         Contact form and analytics details are explained in the{" "}
         <a
           href="/privacy.html"
@@ -159,7 +245,7 @@ const Contact: React.FC = () => {
 
       {/* Updated banner for both mobile and desktop */}
       <div
-        className={`absolute bottom-16 md:bottom-0 left-0 w-full bg-red-600 transition-all duration-1000
+        className={`absolute bottom-16 md:bottom-0 left-0 z-10 w-full bg-red-600 transition-all duration-1000
           ${showBanner ? "animate-slideInBanner" : "translate-x-[-100%]"}`}
       >
         <div className="flex overflow-x-auto whitespace-nowrap py-3 px-2 md:px-4 justify-between md:justify-evenly max-w-full md:max-w-screen-xl mx-auto">

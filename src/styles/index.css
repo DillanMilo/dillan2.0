@@ -121,7 +121,7 @@
 
 /* ✅ Adjust Background Image for Mobile - Only for `8xq1yhiw09q41.webp` */
 @media (max-width: 768px) {
-  #contact {
+  .contact-background {
     background-color: #000000 !important;
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
                 url("/8xq1yhiw09q41.webp") !important;
@@ -528,7 +528,7 @@
     margin-top: 5rem !important;
   }
   /* add public/8xq1yhiw09q41.webp as background image */
-  #contact {
+  .contact-background {
     background-color: #000000 !important;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
                 url("/8xq1yhiw09q41.webp") !important;
@@ -541,7 +541,7 @@
 
 /* ----- NEW: Adjust Tablets in Landscape Mode ----- */
 @media (min-width: 1025px) and (orientation: landscape) {
-  #contact {
+  .contact-background {
     background-color: #000000 !important;
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
                 url("/8xq1yhiw09q41.webp") !important;

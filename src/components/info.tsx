@@ -47,7 +47,7 @@ const Info: React.FC = () => {
       <motion.svg
         aria-hidden="true"
         viewBox="0 0 260 720"
-        className="pointer-events-none absolute -left-16 top-0 hidden h-[48rem] w-[18rem] md:block lg:-left-10 lg:h-[54rem] lg:w-[21rem]"
+        className="pointer-events-none absolute -left-16 top-8 h-[36rem] w-[13rem] sm:top-4 sm:h-[42rem] sm:w-[15rem] md:top-0 md:h-[48rem] md:w-[18rem] lg:-left-10 lg:h-[54rem] lg:w-[21rem]"
         style={{ opacity: arcOpacity, y: arcY }}
       >
         <filter id="info-pencil-roughen">
