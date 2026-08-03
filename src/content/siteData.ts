@@ -157,9 +157,8 @@ export const projects: Project[] = [
     poster: "/videos/bios-poster.webp",
     isDropdown: true,
     dropdownItems: [
-      { name: "Carly Milo", link: "https://carly-milo.com" },
-      { name: "Chad Hanekom", link: "https://chadhanekom.com" },
-      { name: "Richard Nell", link: "https://richard-nell.vercel.app" },
+      { name: "Carly Milosevich", link: "https://carly-milo.com" },
+      { name: "Chad Hanukom", link: "https://chadhanekom.com" },
     ],
   },
 ];
