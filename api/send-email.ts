@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { isAllowedOrigin, verifyTurnstile } from './contact-security';
-import { sendContactEmail } from './send-email-core';
+import { isAllowedOrigin, verifyTurnstile } from './contact-security.js';
+import { sendContactEmail } from './send-email-core.js';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const origin = typeof req.headers.origin === 'string' ? req.headers.origin : undefined;
