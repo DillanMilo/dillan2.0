@@ -3,6 +3,7 @@ import type { IncomingMessage, ServerResponse } from 'node:http'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import compression from 'vite-plugin-compression'
+import { verifyTurnstile } from './api/contact-security'
 import { projects, serviceAreas, services, siteUrl } from './src/content/siteData'
 
 function sendJson(res: ServerResponse, status: number, body: unknown) {
@@ -13,9 +14,13 @@ function sendJson(res: ServerResponse, status: number, body: unknown) {
 
 async function readJson(req: IncomingMessage) {
   const chunks: Buffer[] = []
+  let size = 0
 
   for await (const chunk of req) {
-    chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk))
+    const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)
+    size += buffer.length
+    if (size > 12_000) throw new Error('Request body too large')
+    chunks.push(buffer)
   }
 
   const rawBody = Buffer.concat(chunks).toString('utf8')
@@ -27,7 +32,10 @@ function localContactApiPlugin(): Plugin {
     name: 'local-contact-api',
     configureServer(server) {
       server.middlewares.use('/api/send-email', async (req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', '*')
+        const origin = req.headers.origin
+        if (origin === 'http://localhost:5173' || origin === 'http://127.0.0.1:5173') {
+          res.setHeader('Access-Control-Allow-Origin', origin)
+        }
         res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
         res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
 
@@ -42,9 +50,26 @@ function localContactApiPlugin(): Plugin {
           return
         }
 
+        if (req.headers['content-type']?.toLowerCase().startsWith('application/json') !== true) {
+          sendJson(res, 415, { error: 'Content-Type must be application/json' })
+          return
+        }
+
         try {
+          const body = await readJson(req) as Record<string, unknown>
+          if (typeof body.website === 'string' && body.website.length > 0) {
+            sendJson(res, 200, { success: true })
+            return
+          }
+
+          const verification = await verifyTurnstile(body.turnstileToken, req.socket.remoteAddress)
+          if (!verification.ok) {
+            sendJson(res, verification.reason === 'invalid' ? 403 : 503, { error: 'Human verification failed' })
+            return
+          }
+
           const { sendContactEmail } = await server.ssrLoadModule('/api/send-email-core.ts') as typeof import('./api/send-email-core')
-          const result = await sendContactEmail(await readJson(req))
+          const result = await sendContactEmail(body)
           sendJson(res, result.status, result.body)
         } catch (error) {
           console.error('Local contact API error:', error)

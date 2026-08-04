@@ -7,6 +7,64 @@ import {
   trackContactFormValidationError,
 } from "../utils/analytics";
 
+const TURNSTILE_SCRIPT_ID = "cloudflare-turnstile-script";
+const TURNSTILE_TEST_SITE_KEY = "1x00000000000000000000AA";
+const TURNSTILE_ACTION = "contact_form";
+
+interface TurnstileApi {
+  render: (
+    container: HTMLElement,
+    options: {
+      sitekey: string;
+      action: string;
+      theme: "dark";
+      size: "flexible";
+      callback: (token: string) => void;
+      "expired-callback": () => void;
+      "error-callback": () => void;
+    },
+  ) => string;
+  remove: (widgetId: string) => void;
+  reset: (widgetId: string) => void;
+}
+
+declare global {
+  interface Window {
+    turnstile?: TurnstileApi;
+  }
+}
+
+function loadTurnstile(): Promise<TurnstileApi> {
+  if (window.turnstile) return Promise.resolve(window.turnstile);
+
+  return new Promise((resolve, reject) => {
+    const finish = () => {
+      if (window.turnstile) resolve(window.turnstile);
+      else reject(new Error("Turnstile did not initialize"));
+    };
+
+    const existingScript = document.getElementById(TURNSTILE_SCRIPT_ID) as HTMLScriptElement | null;
+    if (existingScript) {
+      existingScript.addEventListener("load", finish, { once: true });
+      existingScript.addEventListener("error", () => reject(new Error("Turnstile failed to load")), {
+        once: true,
+      });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.id = TURNSTILE_SCRIPT_ID;
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    script.async = true;
+    script.defer = true;
+    script.addEventListener("load", finish, { once: true });
+    script.addEventListener("error", () => reject(new Error("Turnstile failed to load")), {
+      once: true,
+    });
+    document.head.appendChild(script);
+  });
+}
+
 interface FormData {
   name: string;
   email: string;
@@ -31,8 +89,15 @@ const ContactForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [isVisible, setIsVisible] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [verificationError, setVerificationError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
+  const turnstileContainerRef = useRef<HTMLDivElement>(null);
+  const turnstileWidgetId = useRef<string | null>(null);
   const hasStartedForm = useRef(false);
+  const turnstileSiteKey =
+    import.meta.env.VITE_TURNSTILE_SITE_KEY ||
+    (import.meta.env.DEV ? TURNSTILE_TEST_SITE_KEY : "");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -52,6 +117,60 @@ const ContactForm: React.FC = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!turnstileSiteKey) {
+      setVerificationError("MESSAGE FORM IS TEMPORARILY UNAVAILABLE.");
+      return;
+    }
+
+    let active = true;
+
+    loadTurnstile()
+      .then((turnstile) => {
+        if (!active || !turnstileContainerRef.current || turnstileWidgetId.current) return;
+
+        turnstileWidgetId.current = turnstile.render(turnstileContainerRef.current, {
+          sitekey: turnstileSiteKey,
+          action: TURNSTILE_ACTION,
+          theme: "dark",
+          size: "flexible",
+          callback: (token) => {
+            if (!active) return;
+            setTurnstileToken(token);
+            setVerificationError("");
+          },
+          "expired-callback": () => {
+            if (!active) return;
+            setTurnstileToken("");
+            setVerificationError("VERIFICATION EXPIRED. PLEASE TRY AGAIN.");
+          },
+          "error-callback": () => {
+            if (!active) return;
+            setTurnstileToken("");
+            setVerificationError("HUMAN VERIFICATION FAILED. PLEASE RETRY.");
+          },
+        });
+      })
+      .catch(() => {
+        if (active) setVerificationError("HUMAN VERIFICATION COULD NOT LOAD.");
+      });
+
+    return () => {
+      active = false;
+      if (turnstileWidgetId.current && window.turnstile) {
+        window.turnstile.remove(turnstileWidgetId.current);
+        turnstileWidgetId.current = null;
+      }
+    };
+  }, [turnstileSiteKey]);
+
+  const resetTurnstile = () => {
+    setTurnstileToken("");
+    if (turnstileWidgetId.current && window.turnstile) {
+      window.turnstile.reset(turnstileWidgetId.current);
+    }
+  };
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
@@ -99,6 +218,11 @@ const ContactForm: React.FC = () => {
 
     if (!validateForm()) return;
 
+    if (!turnstileToken) {
+      setVerificationError("PLEASE COMPLETE HUMAN VERIFICATION.");
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
@@ -125,6 +249,7 @@ const ContactForm: React.FC = () => {
           email: formData.email,
           message: formData.message,
           website: formData.website,
+          turnstileToken,
         }),
       });
 
@@ -141,6 +266,7 @@ const ContactForm: React.FC = () => {
       setSubmitStatus("error");
       trackContactFormError("network_error");
     } finally {
+      resetTurnstile();
       setIsSubmitting(false);
     }
   };
@@ -231,13 +357,24 @@ const ContactForm: React.FC = () => {
         )}
       </div>
 
+      <div className="mt-6">
+        <div ref={turnstileContainerRef} className="min-h-[65px] w-full" />
+        {verificationError && (
+          <p className="mt-2 text-center text-red-400 text-sm font-bebas tracking-wider">
+            {verificationError}
+          </p>
+        )}
+      </div>
+
       {/* Submit Button */}
       <button
         type="submit"
-        disabled={isSubmitting}
+        disabled={isSubmitting || !turnstileToken}
         className={`w-full mt-6 px-6 py-4 font-bebas text-xl tracking-wider transition-all duration-300 ${isSubmitting
             ? "bg-gray-600 cursor-not-allowed"
-            : "bg-red-600 hover:bg-red-700 hover:scale-[1.02] hover:shadow-lg hover:shadow-red-600/30"
+            : !turnstileToken
+              ? "bg-gray-600 cursor-not-allowed"
+              : "bg-red-600 hover:bg-red-700 hover:scale-[1.02] hover:shadow-lg hover:shadow-red-600/30"
           } text-white`}
         aria-label="Send message"
       >

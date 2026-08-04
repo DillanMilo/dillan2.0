@@ -1,10 +1,9 @@
 import { Resend } from "resend";
 
 interface ContactRequestBody {
-  name?: string;
-  email?: string;
-  message?: string;
-  website?: string;
+  name?: unknown;
+  email?: unknown;
+  message?: unknown;
 }
 
 interface ContactResponse {
@@ -25,44 +24,53 @@ export async function sendContactEmail({
   name,
   email,
   message,
-  website,
 }: ContactRequestBody): Promise<ContactResponse> {
-  if (website) {
-    return { status: 200, body: { success: true } };
-  }
-
-  if (!name || !email || !message) {
+  if (typeof name !== "string" || typeof email !== "string" || typeof message !== "string") {
     return {
       status: 400,
       body: { error: "Missing required fields: name, email, and message are required" },
     };
   }
 
+  const normalizedName = name.trim();
+  const normalizedEmail = email.trim().toLowerCase();
+  const normalizedMessage = message.trim();
+
+  if (!normalizedName || !normalizedEmail || normalizedMessage.length < 10) {
+    return { status: 400, body: { error: "Invalid contact form fields" } };
+  }
+
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
+  if (!emailRegex.test(normalizedEmail)) {
     return { status: 400, body: { error: "Invalid email format" } };
   }
 
-  if (name.length > 200) {
+  if (normalizedName.length > 200) {
     return { status: 400, body: { error: "Name must be 200 characters or fewer" } };
   }
-  if (email.length > 320) {
+  if (normalizedEmail.length > 320) {
     return { status: 400, body: { error: "Email must be 320 characters or fewer" } };
   }
-  if (message.length > 5000) {
+  if (normalizedMessage.length > 5000) {
     return { status: 400, body: { error: "Message must be 5000 characters or fewer" } };
   }
 
+  if (!process.env.RESEND_API_KEY) {
+    console.error("RESEND_API_KEY is not configured.");
+    return { status: 503, body: { error: "Email service unavailable" } };
+  }
+
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const safeName = sanitizeHtml(name);
-  const safeEmail = sanitizeHtml(email);
-  const safeMessage = sanitizeHtml(message);
+  const safeName = sanitizeHtml(normalizedName);
+  const safeEmail = sanitizeHtml(normalizedEmail);
+  const safeMessage = sanitizeHtml(normalizedMessage);
 
   const { data, error } = await resend.emails.send({
     from: "Dillan Milo <contact@dillanmilo.com>",
     to: "dillan@creativecurrents.io",
-    replyTo: email,
+    replyTo: normalizedEmail,
     subject: `CC Inquiry — ${safeName}`,
+    tags: [{ name: "source", value: "website-contact" }],
     html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; background-color: #0a0a0a; border-radius: 12px; overflow: hidden; border: 1px solid #1a1a1a;">
           <div style="background-color: #0a0a0a; padding: 32px 40px 24px; text-align: center; border-bottom: 1px solid #1a1a1a;">
