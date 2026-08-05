@@ -4,7 +4,9 @@ import {
   useReducedMotion,
   useScroll,
 } from "framer-motion";
+import ContactForm from "./ContactForm";
 import {
+  trackContactFormOpen,
   trackContactLinkClick,
   trackSocialLinkClick,
 } from "../utils/analytics";
@@ -37,12 +39,11 @@ const socialLinks = [
 ] as const;
 
 const contactLinkNames = new Set(["Email", "Call"]);
-const directEmailLink =
-  "mailto:dillan@creativecurrents.io?subject=Project%20inquiry%20for%20Dillan";
 
 const Contact: React.FC = () => {
   const [visibleIndex, setVisibleIndex] = useState(0);
   const [showBanner, setShowBanner] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const bannerTriggerRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -187,19 +188,33 @@ const Contact: React.FC = () => {
         </div>
       </div>
 
-      {/* Direct email CTA while the hosted contact form is disabled. */}
+      {/* Contact Form Toggle */}
       <div className="w-full px-5 md:px-10 mt-32 md:mt-12 z-10 flex flex-col items-center">
-        <a
-          href={directEmailLink}
-          onClick={() => trackContactLinkClick("email", "primary_contact_cta")}
-          className="group relative px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bebas text-2xl md:text-3xl tracking-wider rounded-full transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/40 overflow-hidden"
-        >
-          <span className="relative z-10">CONTACT ME</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-red-700 via-red-500 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.3),transparent_70%)]" />
+        {!showForm ? (
+          <button
+            onClick={() => {
+              trackContactFormOpen();
+              setShowForm(true);
+            }}
+            className="group relative px-10 py-5 bg-red-600 hover:bg-red-700 text-white font-bebas text-2xl md:text-3xl tracking-wider rounded-full transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-600/40 overflow-hidden"
+          >
+            <span className="relative z-10">GET IN TOUCH</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-red-700 via-red-500 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.3),transparent_70%)]" />
+            </div>
+          </button>
+        ) : (
+          <div className="w-full max-w-md animate-formReveal">
+            <button
+              onClick={() => setShowForm(false)}
+              className="mb-6 text-white/60 hover:text-white font-bebas text-lg tracking-wider transition-colors duration-300 flex items-center gap-2 mx-auto"
+            >
+              <span className="transform rotate-180">&#10148;</span> BACK
+            </button>
+            <ContactForm />
           </div>
-        </a>
+        )}
       </div>
 
       {/* Divider text */}
@@ -208,7 +223,7 @@ const Contact: React.FC = () => {
       </p>
 
       <p className="relative z-10 mb-24 mt-4 font-sans text-sm text-white/55">
-        Contact and analytics details are explained in the{" "}
+        Contact form and analytics details are explained in the{" "}
         <a
           href="/privacy.html"
           className="underline decoration-white/30 underline-offset-4 transition-colors hover:text-white"
