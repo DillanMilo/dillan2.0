@@ -55,7 +55,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ?.trim();
     const verification = await verifyTurnstile(body.turnstileToken, remoteIp);
 
-    if (!verification.ok) {
+    if (verification.ok === false) {
       const status = verification.reason === 'not-configured' || verification.reason === 'unavailable' ? 503 : 403;
       return res.status(status).json({ error: 'Human verification failed' });
     }
