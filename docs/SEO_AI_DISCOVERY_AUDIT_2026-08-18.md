@@ -7,18 +7,18 @@
 - Audit date: 2026-08-18, America/Chicago
 - Audit mode: Full
 - Evidence inspected: repository, live HTML, redirects, robots, sitemap, llms.txt, GA4, attempted Search Console, internal links, media, prior audit, growth profile
-- Access limitations: Creative Currents Google account has no access to the exact URL-prefix or domain Search Console property; PageSpeed API was rate-limited; no field Core Web Vitals data was available
+- Access limitations: The newly verified Search Console property is still processing data; PageSpeed API was rate-limited; no field Core Web Vitals data was available
 - Guidance reference: canonical SEO and AI Optimization Audit references last reviewed 2026-07-20; no crawler-policy change was implemented
 
 ## Executive summary
 
-Overall readiness is **Strong**. The canonical host, HTTPS convergence, metadata, initial HTML, crawl controls, compact sitemap, factual `llms.txt`, structured data, internal links, analytics wiring, privacy page, and real 404 behavior are healthy. The highest-risk operational gap is Search Console ownership/access: neither the exact URL-prefix nor domain property is available to the signed-in Creative Currents account. GA4 is receiving data but shows no visible key events in the current cards, so measurement and outcome interpretation remain weak. No supported SEO code change was required in this run.
+Overall readiness is **Strong**. The canonical host, HTTPS convergence, metadata, initial HTML, crawl controls, compact sitemap, factual `llms.txt`, structured data, internal links, analytics wiring, privacy page, and real 404 behavior are healthy. Search Console ownership for the exact URL-prefix property is verified under `dillan@creativecurrents.io`, and its Overview is accessible while Google processes initial data. GA4 property `527258687` shows a processed `generate_lead`, now configured and read back as the primary contact-funnel key event. No supported SEO code or UI change was required beyond the static ownership-verification file.
 
 ## Scorecard
 
 | Category | Score | Confidence | Summary |
 |---|---:|---|---|
-| Crawlability and indexability | 4/5 | High | Canonical redirects, robots, sitemap, and 404 behavior pass; Search Console cannot be verified. |
+| Crawlability and indexability | 5/5 | High | Canonical redirects, robots, sitemap, 404 behavior, and exact URL-prefix Search Console ownership pass. |
 | Rendering and initial HTML | 5/5 | High | Prerendered HTML contains primary copy, H1, links, and JSON-LD. |
 | Metadata and canonicalization | 5/5 | High | Unique homepage/privacy metadata and self-consistent canonicals. |
 | Site architecture and semantics | 4/5 | Medium | Compact one-page architecture is intentional and crawlable. |
@@ -27,14 +27,14 @@ Overall readiness is **Strong**. The canonical host, HTTPS convergence, metadata
 | Trust, authorship, and evidence | 4/5 | High | Personal identity, portfolio evidence, contact details, and privacy notice are present. |
 | AI crawler and discovery readiness | 4/5 | Medium | OAI-SearchBot and PerplexityBot are allowed and `llms.txt` is factual; model-training policy remains unspecified. |
 | Performance, media, and accessibility | N/A | Low | No field data; PageSpeed API was rate-limited. |
-| Measurement and monitoring | 2/5 | High | GA4 receives data; Search Console access and key-event visibility are unresolved. |
+| Measurement and monitoring | 4/5 | High | Search Console access is verified and GA4 `generate_lead` is configured; Search Console data and a longer conversion baseline still need time to accumulate. |
 
 ## Priority findings
 
 | ID | Priority | Surface | Finding | Evidence | Impact | Recommendation | Validation |
 |---|---|---|---|---|---|---|---|
-| DM-001 | P1 | Search Console | Creative Currents account cannot access either `https://www.dillanmilo.com/` or `sc-domain:dillanmilo.com`. | Live signed-in Search Console read-back. | Indexing, query, page, enhancement, and release monitoring cannot be managed from the working account. | Grant the Creative Currents account access or verify the appropriate property. | Open the exact property and confirm Overview/Pages/Sitemaps are available. |
-| DM-002 | P2 | GA4 | GA4 receives data but visible cards show zero key events. | GA4 Favorites `dillanmilo.com`: 3 active users, 10 events, 0 key events in the visible current card. | Qualified enquiry performance cannot be distinguished from general engagement. | Verify `generate_lead` and contact-form success are configured as key events after testing the real form flow. | GA4 DebugView/Realtime plus successful test enquiry, then Admin key-event read-back. |
+| DM-001 | Resolved | Search Console | Exact URL-prefix ownership was missing for `https://www.dillanmilo.com/`. | Google HTML-file verification returned `Ownership verified`; the Overview is accessible under `dillan@creativecurrents.io`. | Indexing and search-performance monitoring can now be managed from the working identity. | Retain the verification file permanently and allow initial reports to process. | Exact-property Overview, Pages, and Sitemaps navigation are available. |
+| DM-002 | Resolved | GA4 | The genuine lead event had not been configured as a key event. | Property `527258687` Recent events showed `generate_lead` from `dillanmilo.com`; its key-event control changed from off to on. | Completed enquiries can be separated from diagnostic funnel engagement. | Keep only `generate_lead` starred among contact-funnel events. | Admin Key events lists `generate_lead`; the four diagnostic contact events remain unstarred. |
 | DM-003 | P3 | Crawler policy | Search/retrieval crawlers are allowed, while model-training crawler policy is not explicitly separated. | `public/robots.txt`. | Business intent regarding model training is undocumented. | Keep current behavior unless Dillan wants a deliberate search-versus-training policy. | Recheck current provider docs before any robots change. |
 
 ## What is already working
@@ -50,7 +50,7 @@ Overall readiness is **Strong**. The canonical host, HTTPS convergence, metadata
 
 ## Changes implemented
 
-No SEO/AEO/GEO source-code or UI change was required. Created the required project workflow Markdown and this reproducible audit artifact. For the exact `https://www.dillanmilo.com/` Search Console property, downloaded Google's authoritative 53-byte HTML verification file and added it unchanged at `public/googlef00330ae270640c3.html`; production deployment and ownership verification remain pending.
+No SEO/AEO/GEO source-code or UI change was required. Created the required project workflow Markdown and this reproducible audit artifact. For the exact `https://www.dillanmilo.com/` Search Console property, downloaded Google's authoritative 53-byte HTML verification file and added it unchanged at `public/googlef00330ae270640c3.html`, then deployed and verified ownership. In the Dillanmilo GA4 property only, marked the processed `generate_lead` event as the contact funnel's key event; no event parameters or other Analytics settings changed.
 
 ## Validation
 
@@ -58,20 +58,19 @@ No SEO/AEO/GEO source-code or UI change was required. Created the required proje
 - SSR build and prerender: passed; 53,382 characters rendered into `dist/index.html`.
 - Full ESLint run: passed.
 - Local production preview: homepage, privacy, robots, sitemap, and llms.txt returned HTTP 200 with expected content.
-- Search Console verification artifact: the downloaded file, `public/googlef00330ae270640c3.html`, built `dist/googlef00330ae270640c3.html`, and local preview response were byte-identical (53 bytes; SHA-256 `5124fd4fe58e71b48a4184f7e02d863d5742d79389da1f6c424558f40f50dea4`); `http://127.0.0.1:4173/googlef00330ae270640c3.html` returned HTTP 200. This is implementation evidence only, not an ownership claim.
+- Search Console verification artifact: the downloaded file, `public/googlef00330ae270640c3.html`, built `dist/googlef00330ae270640c3.html`, local preview response, and production response were byte-identical (53 bytes; SHA-256 `5124fd4fe58e71b48a4184f7e02d863d5742d79389da1f6c424558f40f50dea4`); both local and `https://www.dillanmilo.com/googlef00330ae270640c3.html` returned HTTP 200.
+- Search Console authoritative read-back: `Ownership verified`, method `HTML file`; the Overview loaded at `resource_id=https://www.dillanmilo.com/` with account `dillan@creativecurrents.io` and the exact property selected.
 - Generated homepage retained the canonical, primary content, and JSON-LD.
 - Production contact-form QA passed on 2026-08-18: Turnstile cleared normally, the form displayed `MESSAGE SENT! I'LL BE IN TOUCH SOON.`, and Gmail received the exact test inquiry from `contact@dillanmilo.com` to the Creative Currents inbox.
-- GA4 Realtime showed `contact_form_open`, `contact_form_start`, and eleven total event names during the successful test. The source emits `contact_form_submit`, `generate_lead`, and `contact_form_success` only around the successful request path; the processed GA4 insight card had not yet populated a `generate_lead` value at verification time.
-- Recommended key-event definition: mark only `generate_lead` as the primary commercial key event. Keep `contact_form_open`, `contact_form_start`, `contact_form_submit`, and `contact_form_success` as diagnostic funnel events to avoid double-counting one enquiry.
-- Search Console access remains blocked for `dillan@creativecurrents.io`; neither the URL-prefix nor domain property is available in the signed-in account. The owner account and intended Full vs Restricted role could not be recovered safely.
+- GA4 Realtime recorded the contact funnel during the successful test, and Admin Recent events later showed `generate_lead` from the `dillanmilo.com` stream in property `527258687`.
+- GA4 authoritative read-back: `generate_lead` is starred and listed under Key events. `contact_form_open`, `contact_form_start`, `contact_form_submit`, and `contact_form_success` remain unstarred diagnostic events, avoiding multiple key-event counts for one enquiry. GA4's disabled reserved `purchase` key event shows no stream data and was not modified.
 
 ## Remaining opportunities
 
-1. Deploy the exact Search Console HTML file, validate the production URL byte-for-byte, and complete ownership verification for `https://www.dillanmilo.com/`.
-2. Test the production contact form and configure genuine lead events as key events.
-3. Establish a field/lab performance baseline when tooling is available.
-4. Decide whether to separate model-training crawler policy from search/retrieval access.
-5. Keep the intentionally compact site; do not manufacture thin service or city pages.
+1. Allow the newly verified Search Console property to process initial performance and indexing data, then establish a monitoring baseline.
+2. Establish a field/lab performance baseline when tooling is available.
+3. Decide whether to separate model-training crawler policy from search/retrieval access.
+4. Keep the intentionally compact site; do not manufacture thin service or city pages.
 
 ## Weekly monitoring plan
 
