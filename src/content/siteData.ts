@@ -51,7 +51,7 @@ export interface Project {
   mobileVideo?: string;
   poster?: string;
   isDropdown?: boolean;
-  dropdownItems?: Array<{ name: string; link: string }>;
+  dropdownItems?: Array<{ name: string; link: string; caption?: string }>;
 }
 
 export const projects: Project[] = [
@@ -152,13 +152,18 @@ export const projects: Project[] = [
       "radial-gradient(ellipse at 20% 50%, #0f0f0f 0%, #1c1917 40%, #44403c 100%)",
     accentColor: "#f59e0b",
     tag: "Branding",
-    desktopVideo: "/videos/bios-desktop.webm",
-    mobileVideo: "/videos/bios-mobile.webm",
-    poster: "/videos/bios-poster.webp",
+    desktopVideo: "/videos/mark-allen-desktop.webm",
+    mobileVideo: "/videos/mark-allen-mobile.webm",
+    poster: "/videos/mark-allen-poster.webp",
     isDropdown: true,
     dropdownItems: [
       { name: "Carly Milosevich", link: "https://carly-milo.com" },
-      { name: "Chad Hanukom", link: "https://chadhanekom.com" },
+      {
+        name: "Mark Allen",
+        link: "https://forgewithmark.com",
+        caption:
+          "Where real ideas get pressure-tested, sharpened, and forged into one clear next move.",
+      },
     ],
   },
 ];

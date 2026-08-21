@@ -366,12 +366,19 @@ const DesktopProjectCard: React.FC<{
                             "dropdown"
                           )
                         }
-                        className="group/link flex items-center gap-2 text-white/60 hover:text-red-400 transition-colors duration-300 py-1"
+                        className="group/link flex items-start gap-2 text-white/60 hover:text-red-400 transition-colors duration-300 py-1"
                       >
-                        <span className="text-lg font-bebas tracking-wide">
-                          {item.name}
+                        <span className="flex flex-col">
+                          <span className="text-lg font-bebas tracking-wide">
+                            {item.name}
+                          </span>
+                          {item.caption && (
+                            <span className="text-xs font-sans tracking-normal text-white/35">
+                              {item.caption}
+                            </span>
+                          )}
                         </span>
-                        <ArrowUpRight className="w-3.5 h-3.5 opacity-0 -translate-y-0.5 translate-x-[-2px] group-hover/link:opacity-100 group-hover/link:translate-y-0 group-hover/link:translate-x-0 transition-all duration-300" />
+                        <ArrowUpRight className="w-3.5 h-3.5 mt-1 opacity-0 -translate-y-0.5 translate-x-[-2px] group-hover/link:opacity-100 group-hover/link:translate-y-0 group-hover/link:translate-x-0 transition-all duration-300" />
                       </a>
                     ))}
                   </div>
@@ -609,10 +616,19 @@ const MobileWork: React.FC<{
                               "dropdown"
                             )
                           }
-                          className="flex items-center gap-2 text-white/50 text-sm font-bebas tracking-wide py-0.5"
+                          className="flex items-start gap-2 text-white/50 text-sm py-0.5"
                         >
-                          {item.name}
-                          <ArrowUpRight className="w-3 h-3" />
+                          <span className="flex flex-col">
+                            <span className="font-bebas tracking-wide">
+                              {item.name}
+                            </span>
+                            {item.caption && (
+                              <span className="text-[11px] font-sans leading-snug tracking-normal text-white/35">
+                                {item.caption}
+                              </span>
+                            )}
+                          </span>
+                          <ArrowUpRight className="w-3 h-3 mt-0.5" />
                         </a>
                       ))}
                     </div>
