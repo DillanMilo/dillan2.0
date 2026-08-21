@@ -73,6 +73,23 @@ export const projects: Project[] = [
     poster: "/videos/elijah-poster.webp",
   },
   {
+    title: "The Forge Session",
+    description:
+      "A business idea working session dressed like a brand experience — bold, direct, and built to turn “maybe someday” into one clear next move.",
+    outcome:
+      "Turned Mark Allen’s operator expertise into a focused Chicago brand built to book Forge Sessions and speaking engagements.",
+    link: "https://forgewithmark.com",
+    schemaUrl: "https://forgewithmark.com",
+    schemaType: "CreativeWork",
+    gradient:
+      "radial-gradient(ellipse at 70% 35%, #2f66f3 0%, #0d244f 36%, #091016 78%)",
+    accentColor: "#2f66f3",
+    tag: "Brand Strategy",
+    desktopVideo: "/videos/mark-allen-desktop.webm",
+    mobileVideo: "/videos/mark-allen-mobile.webm",
+    poster: "/videos/mark-allen-poster.webp",
+  },
+  {
     title: "A5 Rail",
     description:
       "Next-level AR/VR training for rail pros. Slick, fast, secure — looks so good you might actually enjoy compliance.",
@@ -121,23 +138,6 @@ export const projects: Project[] = [
     desktopVideo: "/videos/forme-desktop.webm",
     mobileVideo: "/videos/forme-mobile.webm",
     poster: "/videos/forme-poster.webp",
-  },
-  {
-    title: "The Forge Session",
-    description:
-      "A business idea working session dressed like a brand experience — bold, direct, and built to turn “maybe someday” into one clear next move.",
-    outcome:
-      "Turned Mark Allen’s operator expertise into a focused Chicago brand built to book Forge Sessions and speaking engagements.",
-    link: "https://forgewithmark.com",
-    schemaUrl: "https://forgewithmark.com",
-    schemaType: "CreativeWork",
-    gradient:
-      "radial-gradient(ellipse at 70% 35%, #2f66f3 0%, #0d244f 36%, #091016 78%)",
-    accentColor: "#2f66f3",
-    tag: "Brand Strategy",
-    desktopVideo: "/videos/mark-allen-desktop.webm",
-    mobileVideo: "/videos/mark-allen-mobile.webm",
-    poster: "/videos/mark-allen-poster.webp",
   },
   {
     title: "Africa WildVentures",
