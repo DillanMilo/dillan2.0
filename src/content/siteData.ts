@@ -51,7 +51,7 @@ export interface Project {
   mobileVideo?: string;
   poster?: string;
   isDropdown?: boolean;
-  dropdownItems?: Array<{ name: string; link: string; caption?: string }>;
+  dropdownItems?: Array<{ name: string; link: string }>;
 }
 
 export const projects: Project[] = [
@@ -123,6 +123,23 @@ export const projects: Project[] = [
     poster: "/videos/forme-poster.webp",
   },
   {
+    title: "The Forge Session",
+    description:
+      "A business idea working session dressed like a brand experience — bold, direct, and built to turn “maybe someday” into one clear next move.",
+    outcome:
+      "Turned Mark Allen’s operator expertise into a focused Chicago brand built to book Forge Sessions and speaking engagements.",
+    link: "https://forgewithmark.com",
+    schemaUrl: "https://forgewithmark.com",
+    schemaType: "CreativeWork",
+    gradient:
+      "radial-gradient(ellipse at 70% 35%, #2f66f3 0%, #0d244f 36%, #091016 78%)",
+    accentColor: "#2f66f3",
+    tag: "Brand Strategy",
+    desktopVideo: "/videos/mark-allen-desktop.webm",
+    mobileVideo: "/videos/mark-allen-mobile.webm",
+    poster: "/videos/mark-allen-poster.webp",
+  },
+  {
     title: "Africa WildVentures",
     description:
       "Elephantine performance with cheetah-fast load times. Africa's calling, and it has great UX.",
@@ -152,18 +169,13 @@ export const projects: Project[] = [
       "radial-gradient(ellipse at 20% 50%, #0f0f0f 0%, #1c1917 40%, #44403c 100%)",
     accentColor: "#f59e0b",
     tag: "Branding",
-    desktopVideo: "/videos/mark-allen-desktop.webm",
-    mobileVideo: "/videos/mark-allen-mobile.webm",
-    poster: "/videos/mark-allen-poster.webp",
+    desktopVideo: "/videos/bios-desktop.webm",
+    mobileVideo: "/videos/bios-mobile.webm",
+    poster: "/videos/bios-poster.webp",
     isDropdown: true,
     dropdownItems: [
       { name: "Carly Milosevich", link: "https://carly-milo.com" },
-      {
-        name: "Mark Allen",
-        link: "https://forgewithmark.com",
-        caption:
-          "Where real ideas get pressure-tested, sharpened, and forged into one clear next move.",
-      },
+      { name: "Chad Hanekom", link: "https://chadhanekom.com" },
     ],
   },
 ];
