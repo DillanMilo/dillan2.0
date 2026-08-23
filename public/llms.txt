@@ -11,7 +11,7 @@
 
 - Custom Website Development: Responsive websites and web experiences designed to look distinctive, load quickly, and make the next step clear.
 - AI Automation Solutions: AI-powered tools and automation workflows that reduce repetitive work, surface bottlenecks, and support day-to-day operations.
-- Small Business Software: Custom dashboards, internal tools, and web applications shaped around how a small business actually works.
+- Small Business Software: Custom dashboards, internal tools, web applications, and mobile apps shaped around how a small business actually works.
 - Website Optimization: Performance, accessibility, usability, and technical SEO improvements for websites that need to work harder.
 
 ## Audience and service area
@@ -21,7 +21,7 @@ Dillan works with small businesses, founders, independent teams, and professiona
 ## Selected work
 
 - [Elijah Hourrides](https://www.elijahxx.com/): Fashion editorial portfolio.
-- [A5 Rail](https://www.a5rail.com/): AR and VR training website for rail professionals.
+- [A5 Rail](https://www.a5rail.com/): Rail technology and AR/VR training for rail professionals.
 - [LastCallIQ](https://www.lastcalliq.com/): Inventory management software for food and beverage businesses.
 - [FORME](https://www.formeprp.com/): Regenerative medicine clinic website.
 - [Africa WildVentures](https://www.africawildventures.com/): Safari and adventure booking website.

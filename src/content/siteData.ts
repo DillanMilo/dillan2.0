@@ -27,7 +27,7 @@ export const services = [
     name: "Small Business Software",
     shortName: "Business Software",
     description:
-      "Custom dashboards, internal tools, and web applications shaped around how a small business actually works.",
+      "Custom dashboards, internal tools, web applications, and mobile apps shaped around how a small business actually works.",
   },
   {
     name: "Website Optimization",
@@ -92,7 +92,7 @@ export const projects: Project[] = [
   {
     title: "A5 Rail",
     description:
-      "Next-level AR/VR training for rail pros. Slick, fast, secure — looks so good you might actually enjoy compliance.",
+      "Rail technology with next-level AR/VR training for rail pros. Slick, fast, secure — looks so good you might actually enjoy compliance.",
     outcome:
       "Rebuilt from scratch, now serves enterprise rail clients across North America.",
     link: "https://www.a5rail.com",
