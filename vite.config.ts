@@ -166,7 +166,7 @@ function structuredDataHtmlPlugin(): Plugin {
           height: 630,
         },
         inLanguage: 'en-US',
-        dateModified: '2026-07-20',
+        dateModified: '2026-08-21',
       },
       {
         '@type': 'ProfessionalService',
