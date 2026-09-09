@@ -16,6 +16,7 @@ const rotatingWords = [
   "Design",
   "AI",
   "Web Development",
+  "App Development",
   "Functionality",
   "Automation",
   "UI",

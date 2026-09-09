@@ -18,6 +18,12 @@ export const services = [
       "Responsive websites and web experiences designed to look distinctive, load quickly, and make the next step clear.",
   },
   {
+    name: "Business App Development",
+    shortName: "App Development",
+    description:
+      "Custom web and mobile apps built around your business, helping your team work smarter and your customers stay connected.",
+  },
+  {
     name: "AI Automation Solutions",
     shortName: "AI & Automation",
     description:
@@ -134,7 +140,7 @@ export const projects: Project[] = [
     gradient:
       "radial-gradient(ellipse at 50% 30%, #0a0a0a 0%, #1a1a1a 40%, #2d1f3d 100%)",
     accentColor: "#8b5cf6",
-    tag: "Medical",
+    tag: "Health",
     desktopVideo: "/videos/forme-desktop.webm",
     mobileVideo: "/videos/forme-mobile.webm",
     poster: "/videos/forme-poster.webp",

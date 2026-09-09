@@ -115,7 +115,7 @@ const Home: React.FC = () => {
         >
           Heya, my name is
           <span className="sr-only">
-            {" "}Dillan Milosevich, a web developer and automation software
+            {" "}Dillan Milosevich, a web, app, and automation software
             builder in The Woodlands, Texas
           </span>
         </h1>
@@ -141,7 +141,8 @@ const Home: React.FC = () => {
           className="text-xl md:text-2xl mb-30 lg:text-3xl text-gray-300 font-bebas tracking-wide opacity-0 animate-slideInLeft mt-5 md:mt-8 max-w-lg"
           style={{ animationDelay: "800ms" }}
         >
-          I design and build websites & software that work as well as they look.
+          I design and build websites, apps, automations, and software for small businesses
+          that work as well as they look.
         </p>
 
       </div>

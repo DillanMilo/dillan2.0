@@ -11,6 +11,7 @@ import { services } from "../content/siteData";
 
 const highlights = [
   { label: "Web Development", icon: "◆" },
+  { label: "App Development", icon: "◆" },
   { label: "AI & Automation", icon: "◆" },
   { label: "UI / UX", icon: "◆" },
   { label: "Small Business Software", icon: "◆" },
@@ -153,7 +154,7 @@ const Info: React.FC = () => {
           className="text-white/80 text-[1.3rem] sm:text-[1.5rem] md:text-[1.8rem] font-bebas leading-relaxed"
         >
           Beyond design and code, I specialize in building custom AI
-          tools, automation workflows, and small business software that spot where
+          tools, business apps, automation workflows, and small business software that spot where
           your business is bleeding time or money, then patch it up — quietly
           making you more efficient while you're busy doing your thing.
         </motion.p>
@@ -253,7 +254,7 @@ const Info: React.FC = () => {
             id="services-heading"
             className="font-bebas text-4xl text-white sm:text-5xl"
           >
-            Websites, automation, and software for small businesses
+            Websites, apps, automations, and software for small businesses
           </h2>
           <p className="mt-4 font-sans text-base leading-relaxed text-white/70 sm:text-lg">
             I design and build practical digital tools for small businesses and

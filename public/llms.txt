@@ -1,6 +1,6 @@
 # Dillan Milosevich
 
-> Dillan Milosevich is a software developer in The Woodlands, Texas who builds custom websites, AI automation workflows, and small business software for companies in The Woodlands, Tomball, Spring, Conroe, Magnolia, Houston, and Montgomery County.
+> Dillan Milosevich is a software developer in The Woodlands, Texas who builds custom websites, apps, AI automation workflows, and small business software for companies in The Woodlands, Tomball, Spring, Conroe, Magnolia, Houston, and Montgomery County.
 
 ## Official pages
 
@@ -10,6 +10,7 @@
 ## Services
 
 - Custom Website Development: Responsive websites and web experiences designed to look distinctive, load quickly, and make the next step clear.
+- Business App Development: Custom web and mobile apps built around your business, helping your team work smarter and your customers stay connected.
 - AI Automation Solutions: AI-powered tools and automation workflows that reduce repetitive work, surface bottlenecks, and support day-to-day operations.
 - Small Business Software: Custom dashboards, internal tools, web applications, and mobile apps shaped around how a small business actually works.
 - Website Optimization: Performance, accessibility, usability, and technical SEO improvements for websites that need to work harder.
