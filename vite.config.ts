@@ -149,9 +149,9 @@ function structuredDataHtmlPlugin(): Plugin {
         '@type': 'WebPage',
         '@id': `${siteUrl}#webpage`,
         url: siteUrl,
-        name: 'Dillan Milosevich | Web Developer in The Woodlands TX',
+        name: 'Software, Apps & Websites | Dillan Milosevich, The Woodlands TX',
         description:
-          'Custom websites, AI automation, and small business software by Dillan Milosevich, serving The Woodlands, Tomball, Houston, and Montgomery County.',
+          'Custom software, apps and websites for small businesses, plus SEO and conversion work. By Dillan Milosevich, serving The Woodlands, Tomball and Houston.',
         isPartOf: { '@id': websiteId },
         about: [{ '@id': personId }, { '@id': organizationId }],
         mainEntity: [{ '@id': personId }, { '@id': organizationId }],
