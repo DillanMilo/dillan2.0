@@ -79,6 +79,23 @@ export const projects: Project[] = [
     poster: "/videos/elijah-poster.webp",
   },
   {
+    title: "Manna Bakery",
+    description:
+      "A Tomball bakery and café that feels like a sanctuary, with a site warm enough you can almost smell the cinnamon rolls.",
+    outcome:
+      "Launched in July. Two months later, Manna's average Google position climbed from 8.6 to 6.1.",
+    link: "https://mannabread.com",
+    schemaUrl: "https://mannabread.com",
+    schemaType: "CreativeWork",
+    gradient:
+      "radial-gradient(ellipse at 40% 30%, #3D5247 0%, #263329 50%, #141a16 100%)",
+    accentColor: "#C9A84C",
+    tag: "Bakery & Café",
+    desktopVideo: "/videos/manna-desktop.webm",
+    mobileVideo: "/videos/manna-mobile.webm",
+    poster: "/videos/manna-poster.webp",
+  },
+  {
     title: "The Forge Session",
     description:
       "A business idea working session dressed like a brand experience — bold, direct, and built to turn “maybe someday” into one clear next move.",
